@@ -1,0 +1,32 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true
+    },
+    "extends": "eslint-config-airbnb",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "max-len":[
+            "error",
+            60,
+            2,
+            { "ignoreComments": true}
+        ],
+        "comma-dangle": [
+            "error", 
+            "always"
+        ]
+    }
+}
