@@ -13,6 +13,11 @@
 
 	},
 	{
+		"name": "api.courses",
+		"endpoint": "/api/v1.0/courses",
+		"async": true
+	},
+	{
 		"name" : "foo",
 		"endpoint" :"/foo",
 		"async":true
@@ -23,6 +28,9 @@
 		},
 		"foo" : {
 			"content" : "Hello Fecademy!"
+		},
+		"api.courses":{
+			"title": "second"
 		}
 	}
 }
