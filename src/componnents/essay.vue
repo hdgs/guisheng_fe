@@ -1,7 +1,7 @@
 <!-- Vue.component('my-component',{ -->
   <template>
-    <ul>
-      <li v-for = "item in items">
+    <ul id="app1">
+      <li v-for = "item in items" >
        {{"属性"}}:{{ item.sub_category }}
        {{ item.main_category }}
        <br>
@@ -23,17 +23,16 @@
 
   export default {
   	mounted () {
-  		var p =Request
+  		Request
      .get('/api/v1.0/courses')
-     .then( (res) => {
-       console.log(res)
-     })
-     console.log(p)
-    //  .end((err, res) => {
-    //    console.log(err);
-    //     this.items = JSON.parse(res.text);
-    //  	}
-    // )
+    //  .then( (res) => {
+    //    console.log(res)
+    //  })
+     .end((err, res) => {
+       console.log(res.text);
+        this.items = JSON.parse(res.text);
+     	}
+    )
    },
    data (){
      return {
@@ -47,17 +46,15 @@
     	height: 100%;
   	body {
   		display: flex;
-  		align-items: center;
   		justify-content: center;
   		height: 100%;
   		background:pink;
   	}
   }
-
-  #app2 {
-  	color: blue;
-  	margin-top: -100px;
+  #app1 {
+  	color: green;
   	max-width: 600px;
+    align-items: flex-start;
   	font-family: Source Sans Pro, Helvetica, sans-serif;
   	text-align: center;
   }
