@@ -1,43 +1,44 @@
-<!-- Vue.component('my-component',{ -->
+c<!-- Vue.component('my-component',{ -->
   <template>
-    <ul id="app1">
-      <li v-for = "item in items" >
-       {{"属性"}}:{{ item.sub_category }}
-       {{ item.main_category }}
-       <br>
-       {{"点赞人数"}}:{{item.likes}}
-       <br>
-       {{"课程名称"}}:{{item.title}}
-       <br>
-       {{"类别"}}:{{item.credit_category}}
-       <br>
-       {{"任课教师"}}:{{item.teacher}}
-       <br><br><br><br>
-
-      </li>
-    </ul>
+    <div>
+      <div v-show="isLoading">
+        加载中
+      </div>
+      <courseInfo ref="courseInfo"></courseInfo>
+      <courseComment ref="comment"></courseComment>
+    </div>
   </template>
 
   <script>
-  import Request from 'superagent'
+  import part1 from './part1'
+  import part2 from './part2'
+  import 'whatwg-fetch';
 
   export default {
+    data() {
+      return {
+        isLoading:true
+      }
+    },
   	mounted () {
-  		Request
-     .get('/api/v1.0/courses')
-    //  .then( (res) => {
-    //    console.log(res)
-    //  })
-     .end((err, res) => {
-       console.log(res.text);
-        this.items = JSON.parse(res.text);
-     	}
-    )
-   },
-   data (){
-     return {
-       items:[]  }
- 		}
+  		let promise1 = fetch("/api/v1.0/courses/313/").then( (res) => {
+        return res.json()
+      })
+      let promise2 = fetch("/api/v1.0/courses/313/comments/?page=1&per_page=10")
+      .then( (res) => {
+        return res.json()
+      })
+      Promise.all([promise1, promise2]).then( values => {
+        console.log(this.$refs.courseInfo.obj)
+        this.$refs.courseInfo.list= values[1]
+        this.$refs.comment.obj = values[0]
+        this.isLoading = false
+      })
+    },
+    components:{
+      "courseInfo":part1,
+      "courseComment":part2
+    }
   }
   </script>
 

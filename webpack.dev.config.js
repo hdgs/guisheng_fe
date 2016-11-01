@@ -5,7 +5,9 @@ const autoprefixer = require('autoprefixer');
 
 module.exports = {
 	entry: {
-		'main.js': ['./src/main.js', 'webpack-hot-middleware/client']
+		'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
+		'essay.js': ['./src/essay.js', 'webpack-hot-middleware/client'],
+		'whatwg-fetch': ['whatwg-fetch', 'webpack-hot-middleware/client']
 	},
 	output: {
 		path: '/',
@@ -23,9 +25,9 @@ module.exports = {
 				loader: 'babel',
 				exclude: /node_modules/
 			},
-			{ 
-				test: /\.(html|tpl)$/, 
-				loader: 'html-loader' 
+			{
+				test: /\.(html|tpl)$/,
+				loader: 'html-loader'
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
@@ -35,7 +37,7 @@ module.exports = {
 				}
 			}
 	    ]
-	},	
+	},
 	devtool: '#eval-source-map',
   	resolve: {
 	    extensions: ['', '.js', '.scss','.vue'],

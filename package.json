@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "superagent": "^2.3.0",
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "whatwg-fetch": "^1.0.0"
   }
 }
