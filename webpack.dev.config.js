@@ -6,8 +6,8 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
 	entry: {
 		'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
-		'essay.js': ['./src/essay.js', 'webpack-hot-middleware/client'],
-		'whatwg-fetch': ['whatwg-fetch', 'webpack-hot-middleware/client']
+		'second.js': ['./src/second.js', 'webpack-hot-middleware/client'],
+		vendor: [ "superagent","vue","whatwg-fetch"]
 	},
 	output: {
 		path: '/',
@@ -46,5 +46,6 @@ module.exports = {
 	    new webpack.optimize.OccurenceOrderPlugin(),
 	    new webpack.HotModuleReplacementPlugin(),
 	    new webpack.NoErrorsPlugin(),
+	    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
   	]
 };

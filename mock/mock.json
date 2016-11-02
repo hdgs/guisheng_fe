@@ -1,26 +1,49 @@
 {
 	"routes": [{
 		"name" : "home",
-		"endpoint": "/",
-		"template": "index",
+		"endpoint": "/feed",
+		"template": "home",
 		"async": false
-	},
-	{
-		"name" : "essay",
-		"endpoint" :"/essay",
-		"template":"essay",
-		"async":false
-
 	},
 	{
 		"name": "api.courses",
 		"endpoint": "/api/v1.0/courses",
-		"async": true
+		"async": false
 	},
 	{
-		"name": "api.course",
-		"endpoint": "/api/v1.0/courses/313/",
-		"async": true
+		"name": "everydaypic",
+		"endpoint": "/everyDayPic",
+		"async": false
+	},
+	{
+		"name": "pics",
+		"endpoint": "/pics",
+		"async": false
+	},
+	{
+		"name": "news",
+		"endpoint": "/news",
+		"async": false
+	},
+	{
+		"name":"article",
+		"endpoint":"/article",
+		"async":false
+	},
+	{
+		"name":"comments",
+		"endpoint":"/comments",
+		"async":false
+	},
+	{
+		"name":"interaction",
+		"endpoint":"/interaction",
+		"async":false
+	},
+	{
+		"name":"light",
+		"endpoint":"/light",
+		"async":false
 	},
 	{
 		"name": "api.comment",
@@ -28,19 +51,75 @@
 		"async": true
 	},
 	{
-		"name" : "foo",
-		"endpoint" :"/foo",
-		"async":true
+		"name" : "second",
+		"endpoint" :"/second",
+		"async":false
 	}],
 	"data":{
-		"home" : {
-			"content" : "Hello Fecademy!"
+		"home" : [
+			{
+				"type":0, 
+     			"id":1,
+     			"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg", 
+     			"title":"题目1",
+     			"author":"作者1",
+     			"view_count":"2",
+     			"tag":[1,2],
+     			"description":"这篇文章很好看"
+			},
+			{
+				"type":1,  
+     			"id":2,
+     			"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg", 
+     			"title":"题目2",
+     			"author":"作者2",
+     			"view_count":"3",
+     			"tag":["hah"],
+     			"description":"这篇文章也很好看"
+			}
+		],
+		"everydaypic" : {
+			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg"
 		},
-		"foo" : {
-			"content" : "Hello Fecademy!"
+		"pics":{
+			"title": "这里会返回一串html页面展示为图片二级页面"
 		},
-		"api.courses":{
-			"title": "second"
+		"news":{
+   			"title":"这是一个新闻二级页面",
+   			"author":"新闻作者1",
+   			"time":"2016.11.1",
+   			"body":"文章主题，返回一个html字符串"  
+		},
+		"article":{
+			"title":"水墨文章题目",
+   			"author":"水墨文章作者",
+   			"time":"2016.11.2",
+   			"body":"水墨文章主题，返回为一个html字符串",   
+  			"music":{
+         		"title":"歌曲名",
+        		"img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+         		"music_url":"返回一个音乐的URL"   
+    		}
+		},
+		"comments":[
+  			{
+     		"id":2, 
+     		"img_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ4ZvpzkEtnZjkD-3CosNDWBKiZ4HY1FUMaq57dPvElvxqvo_lB&reload=on",  
+    		"message":"这篇文章真棒",  
+     		"comments":[], 
+     		"like_count":45 
+  			}
+		],
+		"interaction":{
+   			"title":"互动标题",
+   			"author":"互动作者",
+   			"time":"2016-11-2",
+   			"body":"互动文章主体返回一个html字符串"   
+		},
+		"like":{
+   			"article_id":"32",
+   			"type":"0",
+   			"like":"3" 
 		}
 	}
 }
