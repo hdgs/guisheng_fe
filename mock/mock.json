@@ -1,14 +1,25 @@
 {
 	"routes": [{
 		"name" : "home",
-		"endpoint": "/feed",
-		"template": "home",
+		"endpoint": "/",
+		"template": "index",
 		"async": false
+	},
+	{
+		"name" : "hom",
+		"endpoint": "/feed",
+		"async": true
 	},
 	{
 		"name": "api.courses",
 		"endpoint": "/api/v1.0/courses",
-		"async": false
+		"async": true
+	},
+	{
+		"name":"profile",
+		"endpoint":"/profile",
+		"template":"profile",
+		"async":false
 	},
 	{
 		"name": "everydaypic",
@@ -56,11 +67,11 @@
 		"async":false
 	}],
 	"data":{
-		"home" : [
+		"hom" : [
 			{
-				"type":0, 
+				"kind":0, 
      			"id":1,
-     			"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg", 
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
      			"title":"题目1",
      			"author":"作者1",
      			"view_count":"2",
@@ -68,9 +79,9 @@
      			"description":"这篇文章很好看"
 			},
 			{
-				"type":1,  
+				"kind":1,  
      			"id":2,
-     			"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg", 
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
      			"title":"题目2",
      			"author":"作者2",
      			"view_count":"3",
@@ -79,7 +90,19 @@
 			}
 		],
 		"everydaypic" : {
-			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg"
+			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+			"temperature":"37.5",
+   			"date":"2016.11.8",
+   			"place":"武汉"
+		},
+		"profile":{
+    		"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+    		"name":"hahaha",
+    		"weibo":"huhuhu",        
+    		"introduction":"这是一个个人简介",  
+    		"works":"这是个人作品",      
+    		"collection":"这是个人收藏",
+    		"suggestion":"这里有一些个人简介"
 		},
 		"pics":{
 			"title": "这里会返回一串html页面展示为图片二级页面"

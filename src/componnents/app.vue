@@ -1,11 +1,19 @@
 <template>
   	<div id="xxx">
-  		<p>{{ message}}</p>
+  		<div  v-for = "item in list">
+        <img v-bind:src = "item.img_url" alt="图片">
+        <div>题目：{{item.title}}</div> 
+        <div>作者：{{item.author}}</div> 
+        <div>浏览量：{{item.view_count}}</div>
+        <div>描述：{{item.description}}</div>
+        <br><br>
+      </div>
   	</div>
 </template>
 
 <script>
 import Request from 'superagent'
+import 'whatwg-fetch'
 
 export default {
 	mounted () {
@@ -27,17 +35,15 @@ export default {
     // }).then( (value) => {
     //     vm.data = value
     // })
-		Request
-   .get('/foo')
-   .end((err, res) => {
-    console.log(this)
-   	 setTimeout( () => {this.message = res.body.content}, 2000)
-   	}
-   );
+    fetch('/feed').then((res)=>{
+      return res.json()
+    }).then((value)=>{
+      this.list = value
+    })
 	},
 	data (){
 		return {
-			message: "hahahha"
+			list:[]
 }
 	}
 }
@@ -48,8 +54,8 @@ html {
   	height: 100%;
 	body {
 		display: flex;
-    align-items:center;
-		justify-content: center;
+    /*align-items:center;
+		justify-content: center;*/
 		height: 100%;
 		background:grey;
 	}
