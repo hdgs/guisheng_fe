@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from './components/app'
-import List from './components/list';
+import App from './components/main/main'
+import List from './components/main/list';
 Vue.use(VueRouter)
 const Index = Vue.extend({
 	name:"Index",

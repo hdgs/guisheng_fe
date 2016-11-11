@@ -20,24 +20,6 @@ import 'whatwg-fetch'
 
 export default {
 	mounted () {
-    // const getUserId = new Proimse( (resolve, reject) => {
-    //     Request
-    //     .get('/userId')
-    //     .end((err, res) => {
-    //       resolve(res.body.userId)
-    //     }
-    //   }
-    // )
-    //
-    // getUserId.then( (value) => {
-    //     Request
-    //     .get('/userInfo/' + value)
-    //     .end((err, res) => {
-    //       resolve(res.body.userInfo)
-    //     }
-    // }).then( (value) => {
-    //     vm.data = value
-    // })
     fetch('/everydayPic').then((res)=>{
       return res.json()
     }).then(value=>{
