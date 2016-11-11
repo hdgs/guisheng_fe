@@ -24,7 +24,7 @@
 	{
 		"name": "everydaypic",
 		"endpoint": "/everyDayPic",
-		"async": false
+		"async": true
 	},
 	{
 		"name": "pics",
@@ -77,6 +77,46 @@
      			"view_count":"2",
      			"tag":[1,2],
      			"description":"这篇文章很好看"
+			},
+			{
+				"kind":1,  
+     			"id":2,
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
+     			"title":"题目2",
+     			"author":"作者2",
+     			"view_count":"3",
+     			"tag":["hah"],
+     			"description":"这篇文章也很好看"
+			},
+			{
+				"kind":1,  
+     			"id":2,
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
+     			"title":"题目2",
+     			"author":"作者2",
+     			"view_count":"3",
+     			"tag":["hah"],
+     			"description":"这篇文章也很好看"
+			},
+			{
+				"kind":1,  
+     			"id":2,
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
+     			"title":"题目2",
+     			"author":"作者2",
+     			"view_count":"3",
+     			"tag":["hah"],
+     			"description":"这篇文章也很好看"
+			},
+			{
+				"kind":1,  
+     			"id":2,
+     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
+     			"title":"题目2",
+     			"author":"作者2",
+     			"view_count":"3",
+     			"tag":["hah"],
+     			"description":"这篇文章也很好看"
 			},
 			{
 				"kind":1,  

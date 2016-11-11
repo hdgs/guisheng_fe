@@ -1,13 +1,16 @@
 <template>
   	<div id="xxx">
-  		<div  v-for = "item in list">
-        <img v-bind:src = "item.img_url" alt="图片">
-        <div>题目：{{item.title}}</div> 
-        <div>作者：{{item.author}}</div> 
-        <div>浏览量：{{item.view_count}}</div>
-        <div>描述：{{item.description}}</div>
-        <br><br>
-      </div>
+    <div>
+      <router-link to="/">首页</router-link>
+      <router-link to="/news">新闻</router-link>
+      <router-link to="/pics">图片</router-link>
+      <router-link to="/article">水墨</router-link>
+      <router-link to="/interaction">互动</router-link>
+    </div>
+    <div v-show ="onShow" >
+      <img v-bind:src="pic_value.img_url" alt="每日一图">
+    </div>
+    <router-view></router-view>
   	</div>
 </template>
 
@@ -35,16 +38,18 @@ export default {
     // }).then( (value) => {
     //     vm.data = value
     // })
-    fetch('/feed').then((res)=>{
+    fetch('/everydayPic').then((res)=>{
       return res.json()
-    }).then((value)=>{
-      this.list = value
+    }).then(value=>{
+      this.pic_value = value
     })
 	},
 	data (){
 		return {
-			list:[]
-}
+			list:[],
+      pic_value:{},
+      onShow :true
+    }
 	}
 }
 </script>
@@ -61,7 +66,7 @@ html {
 	}
 }
 
-#app2 {
+#app {
 	color: #000;
 	max-width: 600px;
 	font-family: Source Sans Pro, Helvetica, sans-serif;
