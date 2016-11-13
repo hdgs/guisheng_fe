@@ -7,13 +7,14 @@
 	},
 	{
 		"name" : "hom",
-		"endpoint": "/feed",
+		"endpoint": "/api/v1.0/feed",
 		"async": true
 	},
 	{
-		"name": "api.courses",
-		"endpoint": "/api/v1.0/courses",
-		"async": true
+		"name" : "second",
+		"endpoint" : "/second",
+		"template" : "second",
+		"async" :false
 	},
 	{
 		"name":"profile",
@@ -23,50 +24,33 @@
 	},
 	{
 		"name": "everydaypic",
-		"endpoint": "/everyDayPic",
+		"endpoint": "/api/v1.0/everyDayPic",
 		"async": true
 	},
 	{
-		"name": "pics",
-		"endpoint": "/pics",
-		"async": false
-	},
-	{
-		"name": "news",
-		"endpoint": "/news",
-		"async": false
-	},
-	{
 		"name":"article",
-		"endpoint":"/article",
-		"async":false
+		"endpoint":"/api/v1.0/article",
+		"async":true
 	},
 	{
 		"name":"comments",
-		"endpoint":"/comments",
-		"async":false
+		"endpoint":"/api/v1.0/comments",
+		"async":true
 	},
 	{
-		"name":"interaction",
-		"endpoint":"/interaction",
-		"async":false
+		"name":"returnComment",
+		"endpoint":"/api/v1.0/comments/return",
+		"async":true
 	},
 	{
 		"name":"light",
 		"endpoint":"/light",
 		"async":false
-	},
-	{
-		"name": "api.comment",
-		"endpoint": "/api/v1.0/courses/313/comments/?page=1&per_page=10",
-		"async": true
-	},
-	{
-		"name" : "second",
-		"endpoint" :"/second",
-		"async":false
 	}],
 	"data":{
+		"returnComment":{	
+			"status":"成功啦"
+		},
 		"hom" : [
 			{
 				"kind":0, 
@@ -167,8 +151,22 @@
 		"comments":[
   			{
      		"id":2, 
-     		"img_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ4ZvpzkEtnZjkD-3CosNDWBKiZ4HY1FUMaq57dPvElvxqvo_lB&reload=on",  
+     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
     		"message":"这篇文章真棒",  
+     		"comments":[], 
+     		"like_count":45 
+  			},
+  			{
+     		"id":3, 
+     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
+    		"message":"这篇文章更棒",  
+     		"comments":[], 
+     		"like_count":45 
+  			},
+  			{
+     		"id":3, 
+     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
+    		"message":"这篇文章最棒",  
      		"comments":[], 
      		"like_count":45 
   			}

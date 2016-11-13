@@ -20,7 +20,7 @@ import 'whatwg-fetch'
 
 export default {
 	mounted () {
-    fetch('/everydayPic').then((res)=>{
+    fetch('/api/v1.0/everyDayPic').then((res) => {
       return res.json()
     }).then(value=>{
       this.pic_value = value
