@@ -1,11 +1,17 @@
 <template>
   <div id="xxx">
+  <br><br><br>
+    <input type="text" placeholder="请输入评论" v-model = "message">
+    <button v-on:click = "submit">提交</button>
     <div v-for = "comment in obj" class="comment">
       <p>{{comment.id}}</p>
-      <input type="text" placeholder="请输入评论" v-model = "message">
-      <button v-on:click = "submit">提交</button>
       <br> 
       <img v-bind:src = "comment.img_url" alt="图片">
+      <br><br>
+      <button v-on:click = "change">评论</button>
+      <br><br>
+      <input type="text" v-show = "onShow" v-model = "msg">
+      <button v-show = "onShow" v-on:click = "submit">提交</button>
       <p>{{comment.message}}</p>
       <div>点赞数：{{comment.like_count}}</div>
       <br><br><br>
@@ -18,7 +24,8 @@
     data() {
       return {
         obj:[],
-        message:""
+        message:"",
+        onShow:false
       }
     },
     methods:{
@@ -31,14 +38,21 @@
   },
       body: JSON.stringify({
     article_id:this.comment_id, 
-     message:this.message 
+     message:this.message,
+     msg:this.msg  
   })
     })
     .then( res => {
       return res.json()
     }).then( value => {
-      console.log("value.status")
+      console.log(value.status)
     })
+      },
+      change:function(e){
+        if(this.onShow)
+          this.onShow = false
+        else
+          this.onShow = true
       }
       
     }
