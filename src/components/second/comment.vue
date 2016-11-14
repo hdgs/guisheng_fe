@@ -8,9 +8,8 @@
       <br> 
       <img v-bind:src = "comment.img_url" alt="图片">
       <br><br>
-      <button v-on:click = "change">评论</button>
+      <button v-on:click = "change(comment.id)">评论</button>
       <br><br>
-      <input type="text" v-show = "onShow" v-model = "msg">
       <button v-show = "onShow" v-on:click = "submit">提交</button>
       <p>{{comment.message}}</p>
       <div>点赞数：{{comment.like_count}}</div>
@@ -25,34 +24,40 @@
       return {
         obj:[],
         message:"",
-        onShow:false
+        onShow:false,
+        currentCommentId:-1,
+        articleInfo:{
+          id:0,
+          kind:0
+        }  
       }
     },
     methods:{
       submit:function(e){
-      fetch('/api/v1.0/comments/return', {
+        console.log(this.articleInfo)
+      fetch('/api/v1.0/comments', {
       method: 'POST',
       headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   },
       body: JSON.stringify({
-    article_id:this.comment_id, 
-     message:this.message,
-     msg:this.msg  
+        comment_id:this.currentCommentId,
+        article_id:this.articleInfo.id,
+        kind:this.articleInfo.kind, 
+        message:this.message 
   })
     })
     .then( res => {
       return res.json()
     }).then( value => {
       console.log(value.status)
+      console.log(this.currentCommentId,"+",this.message)
     })
       },
-      change:function(e){
-        if(this.onShow)
-          this.onShow = false
-        else
-          this.onShow = true
+      change:function(commentId){
+        this.currentCommentId = commentId
+        document.querySelector("input").focus()
       }
       
     }

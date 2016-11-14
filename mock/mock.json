@@ -35,7 +35,7 @@
 	},
 	{
 		"name":"article",
-		"endpoint":"/api/v1.0/article/:id",
+		"endpoint":"/api/v1.0/article/",
 		"async":true
 	},
 	{
@@ -45,7 +45,8 @@
 	},
 	{
 		"name":"returnComment",
-		"endpoint":"/api/v1.0/comments/return",
+		"method":"post",
+		"endpoint":"/api/v1.0/comments",
 		"async":true
 	},
 	{
@@ -134,6 +135,8 @@
    			"body":"文章主题，返回一个html字符串"  
 		},
 		"article":{
+			"id":0,
+			"kind":0,
 			"title":"水墨文章题目",
    			"author":"水墨文章作者",
    			"time":"2016.11.2",
