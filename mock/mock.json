@@ -6,8 +6,14 @@
 		"async": false
 	},
 	{
-		"name" : "hom",
+		"name" : "api.feed",
 		"endpoint": "/api/v1.0/feed",
+		"queryKey": {
+			"category":"kind",
+			"pagination":"page",
+			"count":"count",
+			"sort":"sort"
+		},		
 		"async": true
 	},
 	{
@@ -29,7 +35,7 @@
 	},
 	{
 		"name":"article",
-		"endpoint":"/api/v1.0/article",
+		"endpoint":"/api/v1.0/article/:id",
 		"async":true
 	},
 	{
@@ -51,68 +57,58 @@
 		"returnComment":{	
 			"status":"成功啦"
 		},
-		"hom" : [
-			{
+		"api.feed" : {
+			"0":{
 				"kind":0, 
      			"id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目1",
+     			"title":"我是主页哈哈哈哈",
      			"author":"作者1",
      			"view_count":"2",
      			"tag":[1,2],
      			"description":"这篇文章很好看"
 			},
-			{
-				"kind":1,  
-     			"id":2,
+			"1":{
+				"kind":1, 
+     			"id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目2",
-     			"author":"作者2",
-     			"view_count":"3",
-     			"tag":["hah"],
-     			"description":"这篇文章也很好看"
+     			"title":"我是新闻哈哈哈",
+     			"author":"作者1",
+     			"view_count":"2",
+     			"tag":[1,2],
+     			"description":"这篇文章很好看"
 			},
-			{
-				"kind":1,  
-     			"id":2,
+			"2":{
+				"kind":2, 
+     			"id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目2",
-     			"author":"作者2",
-     			"view_count":"3",
-     			"tag":["hah"],
-     			"description":"这篇文章也很好看"
+     			"title":"我是图片哈哈哈",
+     			"author":"作者1",
+     			"view_count":"2",
+     			"tag":[1,2],
+     			"description":"这篇文章很好看"
 			},
-			{
-				"kind":1,  
-     			"id":2,
+			"3":{
+				"kind":3, 
+     			"id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目2",
-     			"author":"作者2",
-     			"view_count":"3",
-     			"tag":["hah"],
-     			"description":"这篇文章也很好看"
+     			"title":"我是水墨哈哈哈",
+     			"author":"作者1",
+     			"view_count":"2",
+     			"tag":[1,2],
+     			"description":"这篇文章很好看"
 			},
-			{
-				"kind":1,  
-     			"id":2,
+			"4":{
+				"kind":4, 
+     			"id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目2",
-     			"author":"作者2",
-     			"view_count":"3",
-     			"tag":["hah"],
-     			"description":"这篇文章也很好看"
-			},
-			{
-				"kind":1,  
-     			"id":2,
-     			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"题目2",
-     			"author":"作者2",
-     			"view_count":"3",
-     			"tag":["hah"],
-     			"description":"这篇文章也很好看"
+     			"title":"我是互动哈哈哈",
+     			"author":"作者1",
+     			"view_count":"2",
+     			"tag":[1,2],
+     			"description":"这篇文章很好看"
 			}
-		],
+		},
 		"everydaypic" : {
 			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
 			"temperature":"37.5",
