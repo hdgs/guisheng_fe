@@ -1,5 +1,6 @@
   <template>
     <div id = "xxx">
+    <div v-dbclick="onClick">hahahhah</div>
       <div class="banner">
         <div class="container" v-finger:swipeMove="onSwipe" v-bind:style="styleObject">
            <img src="http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg" alt="">
@@ -28,7 +29,8 @@
     },
     data() {
       return {
-        x:0
+        x:0,
+        foo:0
       }
     },
   	mounted () {
@@ -55,6 +57,9 @@
       onSwipe(e){
         console.log("on swipe", e.direction, e.distanceX)
         this.x = e.distanceX
+      },
+      onClick(){
+        console.log("on db click")
       }
     }
   }

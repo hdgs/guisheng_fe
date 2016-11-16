@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-scroll = "onScroll">
     <div  v-for = "item in list">
       <img v-bind:src = "item.img_url" alt="图片">
       <div>题目：{{item.title}}</div> 
@@ -15,6 +15,7 @@
   import consts from '../../common/consts' 
   import url from '../../common/url' 
   import 'whatwg-fetch'
+  import scrollDirective from '../../directives/scroll'
 
   export default {
     data() {
@@ -24,8 +25,10 @@
         isScroll:false
       }
     },
+    directives: {
+      scroll: scrollDirective
+    },
   	mounted () {
-      window.addEventListener("scroll",this.onScroll)
       this.request()
     },
     methods:{
@@ -33,15 +36,11 @@
         if(this.isScroll){
           return
         }
-        if (document.body.scrollHeight < 1000 ){
-          return
-        }
-        if(document.body.scrollHeight - window.scrollY <= document.body.clientHeight) {
+        
           this.isScroll = true
-          console.log("hah")
-            this.currentPage += 1
-            this.request()
-        }
+          this.currentPage += 1
+          this.request()
+        
       },
       request(){
         let params = {
