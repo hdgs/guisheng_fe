@@ -65,7 +65,7 @@
   }
   </script>
 
-  <style lang='sass'>
+  <style lang='sass' module>
   .banner{
     width: 500px;
     height: 200px;

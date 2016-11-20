@@ -10,7 +10,6 @@ let scrollCallback = function() {
 
 export default {
     bind: function(el, binding, vnode) {
-    	console.log(this)
         window.addEventListener("scroll", scrollCallback.bind({}, binding.value))
     },
 

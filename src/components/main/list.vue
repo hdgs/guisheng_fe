@@ -1,5 +1,5 @@
 <template>
-  <div v-scroll = "onScroll">
+  <div v-scroll = "onScroll" :class="$style.app" >
     <div  v-for = "item in list">
       <img v-bind:src = "item.img_url" alt="图片">
       <div>题目：{{item.title}}</div> 
@@ -62,7 +62,7 @@
   }
 </script>
 
-<style lang='sass'>
+<style lang='sass' module>
   html {
     	height: 100%;
   	body {
@@ -72,7 +72,7 @@
   		background:pink;
   	}
   }
-  #app {
+  .app {
   	color: green;
   	max-width: 600px;
     align-items: flex-start;

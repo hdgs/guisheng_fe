@@ -18,6 +18,6 @@
   } 
 </script>
 
-<style>
+<style style = "sass" module>
 	
 </style>

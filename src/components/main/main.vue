@@ -1,5 +1,5 @@
 <template>
-  	<div id="xxx">
+  	<div id="xxx" :class = "$style.app">
     <div>
       <router-link to="/">首页</router-link>
       <router-link to="/news">新闻</router-link>
@@ -36,7 +36,7 @@ export default {
 }
 </script>
 
-<style lang='sass'>
+<style lang='sass' module>
 html {
   	height: 100%;
 	body {
@@ -48,8 +48,8 @@ html {
 	}
 }
 
-#app {
-	color: #000;
+.app {
+	color: blue;
 	max-width: 600px;
 	font-family: Source Sans Pro, Helvetica, sans-serif;
 	text-align: center;

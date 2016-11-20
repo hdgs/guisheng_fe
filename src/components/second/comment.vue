@@ -1,5 +1,5 @@
 <template>
-  <div id="xxx">
+  <div id="xxx" :class="$style.container">
   <br><br><br>
     <input type="text" placeholder="请输入评论" v-model = "message">
     <button v-on:click = "submit">提交</button>
@@ -64,11 +64,15 @@
   } 
 </script>
 
-<style lang = "sass">
+<style lang = "sass" module>
     .comment{
       border:solid 1px yellow;
       margin-top: 20px;
       padding: 30px;
+      width: 100%;
     }
-
+    .container{
+      width: 100%;
+      overflow: hidden;
+    }
 </style>

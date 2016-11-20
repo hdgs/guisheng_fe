@@ -23,6 +23,12 @@
 		"async" :false
 	},
 	{
+		"name" : "pictures",
+		"endpoint" : "/pictures",
+		"template" : "pictures",
+		"async" :false
+	},
+	{
 		"name":"profile",
 		"endpoint":"/profile",
 		"template":"profile",
@@ -31,6 +37,11 @@
 	{
 		"name": "everydaypic",
 		"endpoint": "/api/v1.0/everyDayPic",
+		"async": true
+	},
+	{
+		"name": "banner",
+		"endpoint": "/api/v1.0/banner/",
 		"async": true
 	},
 	{
@@ -110,6 +121,7 @@
      			"description":"这篇文章很好看"
 			}
 		},
+		
 		"everydaypic" : {
 			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
 			"temperature":"37.5",
@@ -169,6 +181,15 @@
      		"comments":[], 
      		"like_count":45 
   			}
+		],
+		"banner":[
+			{
+				"pic_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg"
+			},{
+				"pic_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg"
+			},{
+				"pic_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg"
+			}
 		],
 		"interaction":{
    			"title":"互动标题",

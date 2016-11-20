@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "vue": "^2.0.5",
+    "vue-finger": "^0.1.0",
     "whatwg-fetch": "^1.0.0"
   }
 }

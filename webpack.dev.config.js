@@ -7,6 +7,7 @@ module.exports = {
 	entry: {
 		'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
 		'second.js': ['./src/second.js', 'webpack-hot-middleware/client'],
+		'pictures.js':['./src/pictures.js','webpack-hot-middleware/client'],
 		vendor: [ "superagent","vue","whatwg-fetch"]
 	},
 	output: {
@@ -18,7 +19,13 @@ module.exports = {
 	    loaders: [
 			{
 				test: /\.vue$/,
-				loader: 'vue'
+				loader: 'vue',
+				options:{
+					cssModules: {
+        				localIdentName: '[name]-[local]-[hash:base64:5]',
+        				camelCase: true
+    				}
+				}
 			},
 			{
 				test: /\.js$/,
