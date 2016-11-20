@@ -2,7 +2,7 @@
     <div id = "xxx" v-width = "changeWidth">
       <div :class="$style.banner" >
         <div :class="$style.container" v-finger:swipeMove = "onSwipe" v-finger:swipe = "afterSwipe" v-bind:style = "styleObject" v-transitionEnd = "changeState">
-          <img v-bind:src="img.pic_url" v-bind:style = "imgWidth" alt="picture" v-for = "img in pics">
+          <img v-bind:src="img.pic_url"  v-bind:style = "imgWidth" alt="picture" v-for = "img in pics">
         </div>
       </div>
       <picComments ref = "picComments"></picComments>
@@ -78,7 +78,7 @@
       afterSwipe(e){
         if(!this.switchAble(e.direction))
           return
-        if(Math.abs(e.distanceX) > this.picWidth/2){
+        if(Math.abs(e.distanceX) > this.picWidth/5){
           if(e.direction == 'Left'){
             this.i++
             this.x = -this.picWidth * this.i
@@ -115,6 +115,8 @@
     overflow: hidden;
   }
   .container{
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
     height: 200px;
     float: left;
   }
