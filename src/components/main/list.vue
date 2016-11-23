@@ -69,7 +69,6 @@
   		display: flex;
   		justify-content: center;
   		height: 100%;
-  		background:pink;
   	}
   }
   .app {

@@ -1,0 +1,12 @@
+@import './color.scss';
+html,body{
+	margin:0;
+	padding:0;
+	background-color: $grey;
+}
+input{
+	outline: none;
+}
+a{
+	text-decoration: none;
+}

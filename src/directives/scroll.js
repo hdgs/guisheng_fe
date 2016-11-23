@@ -1,19 +1,19 @@
-let scrollCallback = function() {
-	console.log(this)
+let scrollCallback = function(callback) {
     if (document.body.scrollHeight < 1000) {
         return
     }
     if (document.body.scrollHeight - window.scrollY - 100 <= document.body.clientHeight) {
-        Array.prototype.slice.call(arguments)[0]()
+        callback()
     }
 }
 
+let callBackWarpped // 新变量 保存引用
 export default {
     bind: function(el, binding, vnode) {
-        window.addEventListener("scroll", scrollCallback.bind({}, binding.value))
+        callBackWarpped =  scrollCallback.bind({}, binding.value)
+        window.addEventListener("scroll", callBackWarpped)
     },
-
     unbind: function() {
-        window.removeEventListener("scroll", scrollCallback)
+        window.removeEventListener("scroll", callBackWarpped)
     }
 }
