@@ -124,9 +124,9 @@
 		
 		"everydaypic" : {
 			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
-			"temperature":"37.5",
-   			"date":"2016.11.8",
-   			"place":"武汉"
+			"climate":"小雨",
+   			"date":"11/10",
+   			"climate_url":"/../img/climate.svg"
 		},
 		"profile":{
     		"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",

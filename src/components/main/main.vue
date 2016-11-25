@@ -17,8 +17,18 @@
         <router-link to="/interaction">互动</router-link>
       </div>    
     </div>
-    <div v-show ="onShow" >
-      <img v-bind:src="pic_value.img_url" alt="每日一图">
+    <div v-show ="onShow" :class = "$style.container">
+    <div :class = "$style.bg_pic">
+      <img v-bind:src="pic.img_url" alt="每日一图" >
+    </div>
+    <div :class = "$style.bottom">
+      <div :class = "$style.tittle">#每日一图#</div>
+      <div :class = "$style.des">
+        <div :class="$style.climate_img"><img v-bind:src="pic.climate_url" alt="climate icon"></div>
+        <div :class="$style.description">{{pic.climate}}</div>
+        <div :class="$style.date">{{pic.date}}</div>
+      </div>
+    </div>
     </div>
     <router-view></router-view>
   	</div>
@@ -33,13 +43,13 @@ export default {
     fetch('/api/v1.0/everyDayPic').then((res) => {
       return res.json()
     }).then(value=>{
-      this.pic_value = value
+      this.pic = value
     })
 	},
 	data (){
 		return {
 			list:[],
-      pic_value:{},
+      pic:{},
       onShow :true
     }
 	}
@@ -49,17 +59,17 @@ export default {
 <style lang='sass' module>
 @import '../../scss/color.scss';
 .app {
-	max-width: 600px;
 	font-family: Source Sans Pro, Helvetica, sans-serif;
-	text-align: center;
 }
 .top{
   composes: space from 'sass-loader!../../scss/utility.scss';
-  height: 94px;
-  line-height: 94px;
+  height: 47px;
+  line-height: 47px;
 }
 .tab{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
+  width: 20%;
+  text-align: center;
   a{
     font-size: 18px;
     color: $black;
@@ -68,6 +78,56 @@ export default {
   a:hover{
     color: $green;
   }
+}
+.container{
+  position: relative;
+}
+.bg_pic{
+  width: 100%;
+  img{
+    width: 100%;
+    display: block;
+  }
+}
+.bottom{
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(212, 147, 33, 0.8);
+  width: 100%;
+  color: $white;
+  height: 30px;
+  composes: space from 'sass-loader!../../scss/utility.scss';
+}
+.common{
+  line-height: 30px;
+  height: 30px;
+  font-size: 14px;
+  composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+.tittle{
+  width: 30%;
+  padding-left:33px;
+  text-align: left;
+  composes: common;
+  box-sizing: border-box;
+}
+.des{
+  width: 70%;
+  text-align: right;
+  padding-right: 31px;
+  box-sizing: border-box;
+  composes: common;
+}
+.climate_img{
+  composes: common;
+  margin-right: 9px;
+}
+.description{
+  composes: common;
+  margin-right: 38px;
+}
+.date{
+  composes: common;
 }
 
 </style>

@@ -1,12 +1,7 @@
 <template>
   <div v-scroll = "onScroll" :class="$style.app" >
     <div  v-for = "item in list">
-      <img v-bind:src = "item.img_url" alt="图片">
-      <div>题目：{{item.title}}</div> 
-      <div>作者：{{item.author}}</div> 
-      <div>浏览量：{{item.view_count}}</div>
-      <div>描述：{{item.description}}</div>
-      <br><br>
+      <item :item = "item"></item>
     </div>
   </div>
 </template>
@@ -15,6 +10,7 @@
   import consts from '../../common/consts' 
   import url from '../../common/url' 
   import 'whatwg-fetch'
+  import Item from './item'
   import scrollDirective from '../../directives/scroll'
 
   export default {
@@ -30,6 +26,9 @@
     },
   	mounted () {
       this.request()
+    },
+    components:{
+      "item":Item,
     },
     methods:{
       onScroll(){
@@ -63,22 +62,10 @@
 </script>
 
 <style lang='sass' module>
-  html {
-    	height: 100%;
-  	body {
-  		display: flex;
-  		justify-content: center;
-  		height: 100%;
-  	}
-  }
   .app {
   	color: green;
-  	max-width: 600px;
     align-items: flex-start;
   	font-family: Source Sans Pro, Helvetica, sans-serif;
   	text-align: center;
-  }
-  p{
-  	color:green;
   }
 </style>
