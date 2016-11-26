@@ -1,9 +1,8 @@
 <template>
   <div :class="$style.item" >
-    <img v-bind:src = "item.img_url" alt="图片" :class="$style.img" v-show = "item.img_url.length">
-    <div :class = "$style.container" v-bind:style = "styleObject">
-      <div :class = "$style.title">{{item.title}}</div> 
-      <div :class = "$style.description">{{item.description}}</div>
+    <img v-bind:src = "item.img_url" alt="图片" :class="imgStyle" v-show = "item.img_url.length">
+    <div :class = "$style.title">{{item.title}}</div> 
+      <div :class = "$style.description" v-show ="item.kind != 2" v-bind:style = "styleObject">{{item.description}}</div>
       <div :class="$style.bottom">
         <div :class = "$style.author">by {{item.author}}</div>
         <div :class = "$style.views">{{item.views}}</div>
@@ -20,10 +19,13 @@
     computed:{
       styleObject:function(){
           return {
-          width :this.item.img_url.length?'50%':'100%',
+          width :(!this.item.img_url.length||this.item.kind==2)?'100%':'50%',
           marginRight:this.item.img_url.length? '7%':'0'
         }
-      }
+      },
+      imgStyle:function(){
+          return (!this.item.img_url.length||this.item.kind==2)?this.$style.imgs:this.$style.img
+        }
     }
   }
 </script>
@@ -56,11 +58,10 @@
   width: 40%;
   margin-right: 3%;
   float: right;
+  max-height: 90px;
 }
-.container{
-  /*width: 50%;
-  margin-right: 7%;*/
-  float:left;
+.imgs{
+  width: 100%;
 }
 .common{
   color: #999999;
@@ -70,6 +71,7 @@
 .bottom{
   overflow: hidden;
   padding-bottom: 10px;
+  padding-top: 10px;
   composes: space from 'sass-loader!../../scss/utility.scss';
 }
 .author{

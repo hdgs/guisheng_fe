@@ -9,7 +9,7 @@ let scrollCallback = function(callback) {
 
 let callBackWarpped // 新变量 保存引用
 export default {
-    bind: function(el, binding, vnode) {
+    inserted: function(el, binding, vnode) {
         callBackWarpped =  scrollCallback.bind({}, binding.value)
         window.addEventListener("scroll", callBackWarpped)
     },
