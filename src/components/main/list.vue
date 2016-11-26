@@ -1,6 +1,6 @@
 <template>
   <div v-scroll = "onScroll" :class="$style.app" >
-    <div  v-for = "item in list">
+    <div  v-for = "item in list" :class = "$style.list">
       <item :item = "item"></item>
     </div>
   </div>
@@ -62,10 +62,11 @@
 </script>
 
 <style lang='sass' module>
-  .app {
-  	color: green;
-    align-items: flex-start;
-  	font-family: Source Sans Pro, Helvetica, sans-serif;
-  	text-align: center;
-  }
+.app {
+  align-items: flex-start;
+	font-family: 黑体-简, Helvetica, sans-serif;
+}
+.list{
+  margin-top: 20px;
+}
 </style>

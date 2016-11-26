@@ -11,7 +11,6 @@
 		"queryKey": {
 			"category":"kind",
 			"pagination":"page",
-			"count":"count",
 			"sort":"sort"
 		},		
 		"async": true
@@ -70,54 +69,63 @@
 			"status":"成功啦"
 		},
 		"api.feed" : {
-			"0":{
+			"0":[{
 				"kind":0, 
-     			"id":1,
+     			"article_id":1,
+     			"img_url":"", 
+     			"title":"这是主页的一篇文章",
+     			"author":"汪曾祺",
+     			"views":"201",
+     			"tag":"#人物#",
+     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+			},{
+				"kind":0, 
+     			"article_id":2,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"我是主页哈哈哈哈",
-     			"author":"作者1",
-     			"view_count":"2",
-     			"tag":[1,2],
-     			"description":"这篇文章很好看"
-			},
+     			"title":"这是主页的一篇文章",
+     			"author":"汪曾祺",
+     			"views":"201",
+     			"tag":"#人物#",
+     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+			}],
 			"1":{
 				"kind":1, 
-     			"id":1,
+     			"article_id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"我是新闻哈哈哈",
+     			"title":"这是新闻的一篇文章",
      			"author":"作者1",
-     			"view_count":"2",
-     			"tag":[1,2],
+     			"views":"2",
+     			"tag":"#景色#",
      			"description":"这篇文章很好看"
 			},
 			"2":{
 				"kind":2, 
-     			"id":1,
+     			"article_id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"我是图片哈哈哈",
+     			"title":"这是图片的一篇文章",
      			"author":"作者1",
-     			"view_count":"2",
-     			"tag":[1,2],
+     			"views":"2",
+     			"tag":"#人物#",
      			"description":"这篇文章很好看"
 			},
 			"3":{
 				"kind":3, 
-     			"id":1,
+     			"article_id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"我是水墨哈哈哈",
+     			"title":"这是水墨的一篇文章",
      			"author":"作者1",
-     			"view_count":"2",
-     			"tag":[1,2],
+     			"views":"2",
+     			"tag":"#人物#",
      			"description":"这篇文章很好看"
 			},
 			"4":{
 				"kind":4, 
-     			"id":1,
+     			"article_id":1,
      			"img_url":"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg", 
-     			"title":"我是互动哈哈哈",
+     			"title":"这是互动的一篇文章",
      			"author":"作者1",
-     			"view_count":"2",
-     			"tag":[1,2],
+     			"views":"2",
+     			"tag":"#人物#",
      			"description":"这篇文章很好看"
 			}
 		},

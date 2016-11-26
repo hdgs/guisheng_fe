@@ -2,24 +2,24 @@
   	<div id="xxx" :class = "$style.app">
     <div :class = "$style.top">
       <div :class = "$style.tab">
-        <router-link to="/">首页</router-link>
+        <router-link to="/" :class="$style.link">首页</router-link>
       </div>
       <div :class = "$style.tab">
-        <router-link to="/news">新闻</router-link>
+        <router-link to="/news" :class="$style.link">新闻</router-link>
       </div>
       <div :class = "$style.tab">
-        <router-link to="/pics">图片</router-link>
+        <router-link to="/pics" :class="$style.link">图片</router-link>
       </div>
       <div :class = "$style.tab">
-        <router-link to="/article">水墨</router-link>
+        <router-link to="/article" :class="$style.link">水墨</router-link>
       </div>
       <div :class = "$style.tab">
-        <router-link to="/interaction">互动</router-link>
+        <router-link to="/interaction" :class="$style.link">互动</router-link>
       </div>    
     </div>
     <div v-show ="onShow" :class = "$style.container">
     <div :class = "$style.bg_pic">
-      <img v-bind:src="pic.img_url" alt="每日一图" >
+      <img v-bind:src="pic.img_url" :class = "$style.pic" alt="每日一图" >
     </div>
     <div :class = "$style.bottom">
       <div :class = "$style.tittle">#每日一图#</div>
@@ -70,24 +70,24 @@ export default {
   composes: horizon from 'sass-loader!../../scss/utility.scss';
   width: 20%;
   text-align: center;
-  a{
-    font-size: 18px;
-    color: $black;
-    margin:4.7% 14px;
-  }
-  a:hover{
-    color: $green;
-  }
+}
+.link{
+  font-size: 18px;
+  color: $black;
+  margin:4.7% 14px;
+}
+.link:hover{
+  color: $green;
 }
 .container{
   position: relative;
 }
 .bg_pic{
   width: 100%;
-  img{
-    width: 100%;
-    display: block;
-  }
+}
+.pic{
+  width: 100%;
+  display: block;
 }
 .bottom{
   position: absolute;
