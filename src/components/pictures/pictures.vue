@@ -1,7 +1,8 @@
   <template>
     <div id = "xxx" v-width = "changeWidth">
+    <div v-finger:pintch = "onPintch" v-bind:style = "onScale"><img src="http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg" :class = "$style.testImg"></div>
       <div :class="$style.banner" >
-        <div :class="$style.container" v-finger:swipeMove = "onSwipe" v-finger:swipe = "afterSwipe" v-bind:style = "styleObject" v-transitionEnd = "changeState">
+        <div :class="$style.container"  v-finger:swipeMove = "onSwipe" v-finger:swipe = "afterSwipe" v-bind:style = "styleObject" v-transitionEnd = "changeState">
           <img v-bind:src="img.pic_url"  v-bind:style = "imgWidth" alt="picture" v-for = "img in pics">
         </div>
       </div>
@@ -30,6 +31,11 @@
       return{
         width: this.picWidth + 'px'
       }
+    },
+    onScale:function(){
+      return{
+        transform: 'scale(' + this.customscale + ')'
+      }
     }
     },
     data() {
@@ -40,6 +46,7 @@
         picWidth: 500,
         i:0,
         isSwitching:false,
+        customscale:1.0,
 
       }
     },
@@ -74,6 +81,10 @@
         if(!this.switchAble(e.direction))
           return
         this.x += e.deltaX
+      },
+      onPintch(e){
+            console.log(e.customscale)
+        this.customscale = e.customscale
       },
       afterSwipe(e){
         if(!this.switchAble(e.direction))
@@ -123,5 +134,10 @@
   .banner img{
     height: 200px;
     /*float: left;*/
+  }
+  .testImg{
+    width: 100%;
+    height: 500px;
+    position: fixed;
   }
   </style>
