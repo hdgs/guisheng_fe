@@ -1,10 +1,30 @@
   <template>
-    <div id = "xxx" v-width = "changeWidth">
-    <div v-finger:pintch = "onPintch" v-bind:style = "onScale"><img src="http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg" :class = "$style.testImg"></div>
+    <div id = "xxx" v-width = "changeWidth" >
       <div :class="$style.banner" >
-        <div :class="$style.container"  v-finger:swipeMove = "onSwipe" v-finger:swipe = "afterSwipe" v-bind:style = "styleObject" v-transitionEnd = "changeState">
-          <img v-bind:src="img.pic_url"  v-bind:style = "imgWidth" alt="picture" v-for = "img in pics">
+        <div 
+        :class="$style.container"  
+        v-finger:swipeMove = "onSwipe" 
+        v-finger:swipe = "afterSwipe" 
+        v-bind:style = "styleObject" 
+        v-transitionEnd = "changeState" >
+          <img 
+          alt="picture" 
+          v-bind:src="img.pic_url"  
+          v-bind:style = "imgWidth" 
+          v-for = "img in pics" 
+          v-finger:tab = "showMask.bind({}, img.pic_url)" >
         </div>
+      </div>
+        <div  
+        v-show = "ifTab"  
+        :class = "$style.mask" 
+        >
+        <p v-finger:tab = "hideMask" :class = "$style.hideMaskBtn">关闭</p>
+        <img v-bind:src="tappedImgSrc"
+         v-finger:pintch = "onPintch" 
+        v-bind:style = "onScale"  
+        :class = "$style.testImg"
+        v-finger:swipeMove = "imgSwipe" >
       </div>
       <picComments ref = "picComments"></picComments>
     </div>
@@ -34,20 +54,22 @@
     },
     onScale:function(){
       return{
-        transform: 'scale(' + this.customscale + ')'
+        transform: 'translateX(' + this.ix + 'px) scale(' + this.customscale + ') translateY(-50%)'
       }
     }
     },
     data() {
       return {
         x:0,
+        ix:0,
         foo:0,
         pics:[],
         picWidth: 500,
         i:0,
-        isSwitching:false,
-        customscale:1.0,
-
+        isSwitching: false,
+        customscale: 1.0,
+        ifTab:false,
+        tappedImgSrc:"",
       }
     },
     mounted () {
@@ -82,6 +104,13 @@
           return
         this.x += e.deltaX
       },
+      imgSwipe(e){
+        // if((this.ix < 0||this.ix > this.picWidth))
+          this.ix += e.deltaX * this.customscale
+        // if(this.customscale == 1)
+        //   this.ix = 0
+         
+      },
       onPintch(e){
             console.log(e.customscale)
         this.customscale = e.customscale
@@ -89,7 +118,8 @@
       afterSwipe(e){
         if(!this.switchAble(e.direction))
           return
-        if(Math.abs(e.distanceX) > this.picWidth/5){
+        if(Math.abs(e.distanceX) > this.picWidth/4){
+
           if(e.direction == 'Left'){
             this.i++
             this.x = -this.picWidth * this.i
@@ -108,6 +138,14 @@
       },
       changeWidth(e){
         this.picWidth = e
+      },
+      showMask(url, e){
+        this.ifTab = true
+        this.tappedImgSrc = url
+      },
+      hideMask(){
+        if(this.ifTab)
+          this.ifTab = false
       }
     }
   }
@@ -133,11 +171,25 @@
   }
   .banner img{
     height: 200px;
-    /*float: left;*/
   }
   .testImg{
     width: 100%;
-    height: 500px;
+    top:50%;
+    transform-origin: 50% 0;
+    -webkit-transform-origin: 50% 0;
+    position: absolute;
+  }
+  .hideMaskBtn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+  }
+  .mask{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
     position: fixed;
+    top: 0px;
   }
   </style>
