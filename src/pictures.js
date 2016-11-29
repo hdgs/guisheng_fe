@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Picture from './components/pictures/pictures'
-import vueFinger from 'vue-finger'
+import vueFinger from 'vue-finger/index.js'
 
 
 Vue.use(vueFinger)

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Second from './components/second/second'
-import vueFinger from 'vue-finger'
-
+vueFinger = require('vue-finger')
 Vue.use(vueFinger)
 
 Vue.directive('dbclick', {

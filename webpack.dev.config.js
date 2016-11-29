@@ -16,6 +16,7 @@ module.exports = {
 		filename: '[name]'
 	},
 	module: {
+		resolveLoader: { root: path.join(__dirname, "node_modules") },
 	    loaders: [
 			{
 				test: /\.vue$/,
@@ -30,6 +31,9 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: 'babel',
+				include: [
+        	path.resolve(__dirname, "src"),
+      	],
 				exclude: /node_modules/
 			},
 			{

@@ -5,58 +5,58 @@
         :class="$style.container"  
         v-finger:swipeMove = "onSwipe" 
         v-finger:swipe = "afterSwipe" 
-        v-bind:style = "styleObject" 
+        v-finger:tap = "showMask"
+        v-bind:style = "{transition: isSwitching?'1s':'none',
+        transform: 'translateX(' + x + 'px)',
+        width:picWidth * pics.length + 'px'}" 
         v-transitionEnd = "changeState" >
           <img 
           alt="picture" 
           v-bind:src="img.pic_url"  
           v-bind:style = "imgWidth" 
           v-for = "img in pics" 
-          v-finger:tab = "showMask.bind({}, img.pic_url)" >
+           >
         </div>
       </div>
         <div  
         v-show = "ifTab"  
         :class = "$style.mask" 
         >
-        <p v-finger:tab = "hideMask" :class = "$style.hideMaskBtn">关闭</p>
+        <p v-finger:tap = "hideMask" :class = "$style.hideMaskBtn"></p>
         <img v-bind:src="tappedImgSrc"
          v-finger:pintch = "onPintch" 
-        v-bind:style = "onScale"  
+        v-bind:style = "imgTransform"  
         :class = "$style.testImg"
-        v-finger:swipeMove = "imgSwipe" >
+        v-finger:swipeMove = "imgSwipe">
       </div>
       <picComments ref = "picComments"></picComments>
     </div>
   </template> 
 
   <script>
+  import CssToMatrix from 'css-to-matrix'
   import 'whatwg-fetch'
   import comments from '../second/comment'
   import transitionEndDirective from '../../directives/transition'
   import widthDirective from '../../directives/width'
 
+  let cssToMatrix = new CssToMatrix
   export default {
-    computed: {
-    // a computed getter
-   styleObject: function () {
-      // `this` points to the vm instance
-      return {
-        transition: this.isSwitching?'1s':'none',
-        transform: 'translateX(' + this.x + 'px)',
-        width :this.picWidth * this.pics.length + 'px'
-      }
-    },
-    imgWidth:function(){
-      return{
-        width: this.picWidth + 'px'
-      }
-    },
-    onScale:function(){
-      return{
-        transform: 'translateX(' + this.ix + 'px) scale(' + this.customscale + ') translateY(-50%)'
-      }
-    }
+    computed:{
+        imgWidth: function(){
+          return {
+            width: this.picWidth + 'px'
+          }
+        },
+        imgTransform: function() {
+          let matrixStr = cssToMatrix
+            .scale3d(this.customscale, this.customscale, 1.0)
+            .translate3d(this.ix, 0, 0)
+            .getMatrixCSS()
+          return {
+            transform: "perspective(500px) " + matrixStr
+          }
+        }
     },
     data() {
       return {
@@ -105,14 +105,14 @@
         this.x += e.deltaX
       },
       imgSwipe(e){
+        console.log("swipeMove!!")
         // if((this.ix < 0||this.ix > this.picWidth))
-          this.ix += e.deltaX * this.customscale
+          this.ix += e.deltaX 
         // if(this.customscale == 1)
         //   this.ix = 0
          
       },
       onPintch(e){
-            console.log(e.customscale)
         this.customscale = e.customscale
       },
       afterSwipe(e){
@@ -139,9 +139,9 @@
       changeWidth(e){
         this.picWidth = e
       },
-      showMask(url, e){
+      showMask(e,index){
         this.ifTab = true
-        this.tappedImgSrc = url
+        this.tappedImgSrc = this.pics[index].pic_url
       },
       hideMask(){
         if(this.ifTab)
@@ -168,16 +168,14 @@
     -webkit-backface-visibility: hidden;
     height: 200px;
     float: left;
+    overflow:hidden;
   }
   .banner img{
     height: 200px;
   }
   .testImg{
     width: 100%;
-    top:50%;
-    transform-origin: 50% 0;
-    -webkit-transform-origin: 50% 0;
-    position: absolute;
+    transform-origin: center;
   }
   .hideMaskBtn{
     position: absolute;
@@ -191,5 +189,6 @@
     background: rgba(0,0,0,0.5);
     position: fixed;
     top: 0px;
+    overflow:hidden
   }
   </style>
