@@ -5,36 +5,46 @@
         :class="$style.container"  
         v-finger:swipeMove = "onSwipe" 
         v-finger:swipe = "afterSwipe" 
+        v-finger:tap = "showMask" 
         v-bind:style = "styleObject" 
-        v-transitionEnd = "changeState" >
+        v-transitionEnd = "changeState"
+        >
           <img 
           alt="picture" 
           v-bind:src="img.pic_url"  
           v-bind:style = "imgWidth" 
           v-for = "img in pics" 
-          v-finger:tab = "showMask.bind({}, img.pic_url)" >
+           >
         </div>
       </div>
         <div  
         v-show = "ifTab"  
         :class = "$style.mask" 
         >
-        <p v-finger:tab = "hideMask" :class = "$style.hideMaskBtn">关闭</p>
+        <p v-finger:tap = "hideMask" :class = "$style.hideMaskBtn">
+          "first" {{ this.picWidth / 2 + Math.abs(this.ix) }} 
+          "second:" {{ this.picWidth * this.customscale / 2 }}
+        </p>
         <img v-bind:src="tappedImgSrc"
          v-finger:pintch = "onPintch" 
-        v-bind:style = "onScale"  
+        v-bind:style = "imgTransform"  
         :class = "$style.testImg"
-        v-finger:swipeMove = "imgSwipe" >
+        v-finger:swipeMove = "imgSwipe" 
+        v-radio = "initImgRadio">
       </div>
       <picComments ref = "picComments"></picComments>
     </div>
   </template> 
 
   <script>
+  import CssToMatrix from 'css-to-matrix'
   import 'whatwg-fetch'
   import comments from '../second/comment'
   import transitionEndDirective from '../../directives/transition'
   import widthDirective from '../../directives/width'
+  import radioDirective from '../../directives/getradio'
+
+  let cssToMatrix = new CssToMatrix
 
   export default {
     computed: {
@@ -52,11 +62,15 @@
         width: this.picWidth + 'px'
       }
     },
-    onScale:function(){
-      return{
-        transform: 'translateX(' + this.ix + 'px) scale(' + this.customscale + ') translateY(-50%)'
-      }
-    }
+    imgTransform: function() {
+          let matrixStr = cssToMatrix
+            .scale3d(this.customscale, this.customscale, 1.0)
+            .translate3d(this.ix, 0, 0)
+            .getMatrixCSS()
+          return {
+            transform: "perspective(500px) " + matrixStr
+          }
+        }
     },
     data() {
       return {
@@ -69,7 +83,9 @@
         isSwitching: false,
         customscale: 1.0,
         ifTab:false,
+        imgRadioArr:[],
         tappedImgSrc:"",
+        picHight:400
       }
     },
     mounted () {
@@ -90,7 +106,8 @@
     },
     directives: {
       transitionEnd: transitionEndDirective,
-      width : widthDirective
+      width : widthDirective,
+      radio:radioDirective
     },
     methods:{
       switchAble(direction){
@@ -105,15 +122,16 @@
         this.x += e.deltaX
       },
       imgSwipe(e){
-        // if((this.ix < 0||this.ix > this.picWidth))
-          this.ix += e.deltaX * this.customscale
-        // if(this.customscale == 1)
-        //   this.ix = 0
-         
+         if(this.picWidth / 2 + Math.abs(this.ix + e.deltaX) < (this.picWidth * this.customscale) / 2){
+          this.ix += e.deltaX
+
+         } 
       },
       onPintch(e){
-            console.log(e.customscale)
-        this.customscale = e.customscale
+        if(((this.picWidth / 2 + Math.abs(this.ix)) < (this.picWidth * (this.customscale + e.customscale) / 2)) && (this.customscale+e.customscale) > 0)
+          {   
+            this.customscale += e.customscale
+        }
       },
       afterSwipe(e){
         if(!this.switchAble(e.direction))
@@ -139,13 +157,17 @@
       changeWidth(e){
         this.picWidth = e
       },
-      showMask(url, e){
+      showMask(e, index){
         this.ifTab = true
-        this.tappedImgSrc = url
+        this.tappedImgSrc = this.pics[index].pic_url
+        this.picHight = this.picWidth /this.imgRadioArr[index]
       },
       hideMask(){
         if(this.ifTab)
           this.ifTab = false
+      },
+      initImgRadio(radio, index){
+        this.imgRadioArr[index] = radio
       }
     }
   }
@@ -174,16 +196,15 @@
   }
   .testImg{
     width: 100%;
-    top:50%;
-    transform-origin: 50% 0;
-    -webkit-transform-origin: 50% 0;
-    position: absolute;
+    display: inline-block;
+    vertical-align: middle;
   }
   .hideMaskBtn{
     position: absolute;
     right: 0;
     top: 0;
     color: #fff;
+    z-index: 99;
   }
   .mask{
     width: 100%;
@@ -191,5 +212,13 @@
     background: rgba(0,0,0,0.5);
     position: fixed;
     top: 0px;
+    overflow: hidden;
+  }
+  .mask:after{
+    content: " ";
+    height:100%;
+    width:0;
+    display:inline-block;
+    vertical-align:middle;
   }
   </style>
