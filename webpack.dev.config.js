@@ -15,18 +15,20 @@ module.exports = {
 		publicPath: 'http://localhost:3000/dist/',
 		filename: '[name]'
 	},
+	vue: {
+  cssModules: {
+    // overwrite local ident name
+    localIdentName: '[path][name]---[local]---[hash:base64:5]',
+    // enable camelCase
+    camelCase: true
+  }
+},
 	module: {
 		resolveLoader: { root: path.join(__dirname, "node_modules") },
 	    loaders: [
 			{
 				test: /\.vue$/,
-				loader: 'vue',
-				options:{
-					cssModules: {
-        				localIdentName: '[name]-[local]-[hash:base64:5]',
-        				camelCase: true
-    				}
-				}
+				loader: 'vue'
 			},
 			{
 				test: /\.js$/,
