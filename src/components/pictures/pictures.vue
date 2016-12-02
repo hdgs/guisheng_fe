@@ -14,23 +14,20 @@
           v-bind:src="img.pic_url"  
           v-bind:style = "imgWidth" 
           v-for = "img in pics" 
-           >
+          v-radio = "initImgRadio">
         </div>
       </div>
         <div  
         v-show = "ifTab"  
         :class = "$style.mask" 
         >
-        <p v-finger:tap = "hideMask" :class = "$style.hideMaskBtn">
-          "first" {{ this.picWidth / 2 + Math.abs(this.ix) }} 
-          "second:" {{ this.picWidth * this.customscale / 2 }}
-        </p>
+        <p v-finger:tap = "hideMask" :class = "$style.hideMaskBtn">关闭</p>
         <img v-bind:src="tappedImgSrc"
          v-finger:pintch = "onPintch" 
-        v-bind:style = "imgTransform"  
+        v-bind:style = "imgTransform"
+        v-finger:doubleTap = "imgScale"  
         :class = "$style.testImg"
-        v-finger:swipeMove = "imgSwipe" 
-        v-radio = "initImgRadio">
+        v-finger:swipeMove = "imgSwipe">
       </div>
       <picComments ref = "picComments"></picComments>
     </div>
@@ -65,7 +62,7 @@
     imgTransform: function() {
           let matrixStr = cssToMatrix
             .scale3d(this.customscale, this.customscale, 1.0)
-            .translate3d(this.ix, 0, 0)
+            .translate3d(this.ix,this.iy, 0)
             .getMatrixCSS()
           return {
             transform: "perspective(500px) " + matrixStr
@@ -76,16 +73,17 @@
       return {
         x:0,
         ix:0,
+        iy:0,
         foo:0,
         pics:[],
         picWidth: 500,
+        screenHeight:400,
         i:0,
         isSwitching: false,
         customscale: 1.0,
         ifTab:false,
         imgRadioArr:[],
-        tappedImgSrc:"",
-        picHight:400
+        tappedImgSrc:""
       }
     },
     mounted () {
@@ -124,12 +122,20 @@
       imgSwipe(e){
          if(this.picWidth / 2 + Math.abs(this.ix + e.deltaX) < (this.picWidth * this.customscale) / 2){
           this.ix += e.deltaX
-
-         } 
+         }
+         console.log(document.body.clientHeight,window.screen.height, window.screen.availHeight)
+          var picHeight = this.picWidth / this.imgRadioArr[this.i]
+         if((this.screenHeight < this.customscale * picHeight) && (this.screenHeight / 2 + Math.abs(this.iy + e.deltaY) - 40 * this.customscale < picHeight * this.customscale/2)){
+          this.iy += e.deltaY
+         }
+          
       },
       onPintch(e){
         if(((this.picWidth / 2 + Math.abs(this.ix)) < (this.picWidth * (this.customscale + e.customscale) / 2)) && (this.customscale+e.customscale) > 0)
-          {   
+          { 
+            var picHeight = this.picWidth / this.imgRadioArr[this.i] 
+            if(((this.customscale+e.customscale) * picHeight < this.screenHeight) || Math.abs(this.iy)- picHeight * this.customscale / 2 < this.screenHeight / 2 ) 
+              this.iy = 0
             this.customscale += e.customscale
         }
       },
@@ -154,8 +160,9 @@
       changeState(){
         this.isSwitching = false
       },
-      changeWidth(e){
+      changeWidth(e,l){
         this.picWidth = e
+        this.screenHeight = l
       },
       showMask(e, index){
         this.ifTab = true
@@ -163,11 +170,25 @@
         this.picHight = this.picWidth /this.imgRadioArr[index]
       },
       hideMask(){
+        this.customscale = 1.0
+        this.ix = 0
+        this.iy = 0
         if(this.ifTab)
           this.ifTab = false
       },
       initImgRadio(radio, index){
         this.imgRadioArr[index] = radio
+        console.log(radio,index)
+      },
+      imgScale(){
+        if(this.customscale > 1.0){
+          this.customscale = 1.0
+          this.iy = 0
+          this.ix = 0
+          return
+        }else{
+          this.customscale = 2.0
+        }
       }
     }
   }
