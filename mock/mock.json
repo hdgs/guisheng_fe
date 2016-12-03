@@ -196,7 +196,7 @@
 			"title":"水墨文章题目",
    			"author":"水墨文章作者",
    			"time":"2016.11.2",
-   			"body":"水墨文章主题，返回为一个html字符串",   
+   			"body":"文字<p>水墨文章主题，返回为一个html字符串</p>",   
   			"music":{
          		"title":"歌曲名",
         		"img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",

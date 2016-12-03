@@ -81,15 +81,6 @@
     height: 200px;
     float: left;
   }
-  html {
-    	height: 100%;
-  	body {
-  		display: flex;
-  		justify-content: center;
-  		height: 100%;
-  		background:pink;
-  	}
-  }
   #app {
   	color: green;
   	max-width: 600px;
