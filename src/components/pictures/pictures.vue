@@ -17,17 +17,17 @@
           v-radio = "initImgRadio">
         </div>
       </div>
+      <div :class = "$style.imgDescription">{{tappedImgDescription}}</div>
         <div  
         v-show = "ifTab"  
-        :class = "$style.mask" 
-        >
+        :class = "$style.mask">
         <p v-finger:tap = "hideMask" :class = "$style.hideMaskBtn">关闭</p>
         <img v-bind:src="tappedImgSrc"
-         v-finger:pintch = "onPintch" 
+        v-finger:pintch = "onPintch" 
         v-bind:style = "imgTransform"
-        v-finger:doubleTap = "imgScale"  
-        :class = "$style.testImg"
-        v-finger:swipeMove = "imgSwipe">
+        v-finger:doubleTap = "imgScale"
+        v-finger:swipeMove = "imgSwipe"
+        :class = "$style.testbox"> 
       </div>
       <picComments ref = "picComments"></picComments>
     </div>
@@ -83,7 +83,8 @@
         customscale: 1.0,
         ifTab:false,
         imgRadioArr:[],
-        tappedImgSrc:""
+        tappedImgSrc:"",
+        tappedImgDescription:""
       }
     },
     mounted () {
@@ -128,7 +129,6 @@
          if((this.screenHeight < this.customscale * picHeight) && (this.screenHeight / 2 + Math.abs(this.iy + e.deltaY) - 40 * this.customscale < picHeight * this.customscale/2)){
           this.iy += e.deltaY
          }
-          
       },
       onPintch(e){
         if(((this.picWidth / 2 + Math.abs(this.ix)) < (this.picWidth * (this.customscale + e.customscale) / 2)) && (this.customscale+e.customscale) > 0)
@@ -156,6 +156,7 @@
           this.x = -this.picWidth * this.i
         }
         this.isSwitching = true
+        this.tappedImgDescription = this.pics[this.i].description
       },
       changeState(){
         this.isSwitching = false
@@ -178,7 +179,7 @@
       },
       initImgRadio(radio, index){
         this.imgRadioArr[index] = radio
-        console.log(radio,index)
+        this.tappedImgDescription = this.pics[this.i].description
       },
       imgScale(){
         if(this.customscale > 1.0){
@@ -215,7 +216,7 @@
   .banner img{
     height: 200px;
   }
-  .testImg{
+  .testbox{
     width: 100%;
     display: inline-block;
     vertical-align: middle;
@@ -234,6 +235,9 @@
     position: fixed;
     top: 0px;
     overflow: hidden;
+  }
+  .imgDescription{
+    text-align: center;
   }
   .mask:after{
     content: " ";

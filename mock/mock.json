@@ -228,19 +228,26 @@
 		],
 		"banner":[
 			{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg",
+				"description":"这是图片一的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
+				"description":"这是图片二的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg",
+				"description":"这是图片三的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg",
+				"description":"这是图片四的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg",
+				"description":"这是图片五的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg",
+				"description":"这是图片六的描述"
 			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg"
+				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg",
+				"description":"这是图片七的描述"
 			}
 		],
 		"interaction":{
