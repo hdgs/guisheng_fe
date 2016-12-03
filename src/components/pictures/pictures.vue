@@ -17,7 +17,7 @@
           v-radio = "initImgRadio">
         </div>
       </div>
-      <div :class = "$style.imgDescription">{{tappedImgDescription}}</div>
+      <div :class = "$style.imgDescription">{{tappedImgDescription}}{{i+1}}/{{pics.length}}</div>
         <div  
         v-show = "ifTab"  
         :class = "$style.mask">
@@ -157,6 +157,7 @@
         }
         this.isSwitching = true
         this.tappedImgDescription = this.pics[this.i].description
+        console.log(this.pics.length,this.i)
       },
       changeState(){
         this.isSwitching = false
