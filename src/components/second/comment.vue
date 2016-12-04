@@ -60,7 +60,7 @@ import Focus from '../../directives/focus'
     }).then( value => {
       console.log(value.status)
       console.log(this.currentCommentId,"+",this.message)
-      this.message = " "
+      this.message = ""
       this.commentHolder = "请输入评论"
     })
       },
@@ -95,6 +95,7 @@ import Focus from '../../directives/focus'
     .button{
       background-color: yellow;
       border:0;
+      outline:none;
     }
     .commentbox{
       position: fixed;
