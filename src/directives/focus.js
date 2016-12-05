@@ -6,7 +6,6 @@ export default {
     	//el.removeEventListener("blur",binding.value)
     },
     update:function(el, binding){
-    	console.log(binding.value, binding.oldValue)
     	if (binding.value !== binding.oldValue && binding.value == true)
     		el.focus()
     }

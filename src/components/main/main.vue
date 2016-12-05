@@ -78,6 +78,7 @@ export default {
 }
 .link:hover{
   color: $green;
+  border-top: 2px green solid;
 }
 .container{
   position: relative;

@@ -1,11 +1,11 @@
 <template>
-    <div id="header">
+    <div id="header" v-hide="onclick">
         <div :class="$style.top">
             <div :class="$style.logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWp6qP896yw1kaurHnm4adRE_yft9FE2wsBUxgTM6wIXD5Xrr" alt="华大桂声" :class="$style.img"></div>
             <div :class="$style.profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWp6qP896yw1kaurHnm4adRE_yft9FE2wsBUxgTM6wIXD5Xrr" alt="个人中心" :class="$style.img"></div>
             <div :class="$style.search"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQNa0liXFy417a3AvGXk01LImjZELR-cIHSpgD-Yo-GvL-GCkd7" alt="搜索" v-on:click="showSearch" :class="$style.img"></div>
         </div>
-        <div :class="$style.mask" v-show="onclick">
+        <div :class="$style.mask" v-show="onclick"  >
             <div :class="$style.searchBox">
                 <input type="text" :class="$style.input" v-model="content">
                 <div :class="$style.button" v-on:click="postContent">搜索</div>
@@ -18,6 +18,8 @@
     </div>
 </template>
 <script>
+import Hidden from '../directives/hidden'
+
 export default {
     data() {
             return {
@@ -25,6 +27,9 @@ export default {
                 content: "",
                 tagList: []
             }
+        },
+        directives: {
+            hide: Hidden
         },
         methods: {
             getTag(e) {
@@ -37,10 +42,11 @@ export default {
                     }).then(value => {
                         this.tagList = value
                     })
-                if (this.onclick)
+                if (this.onclick) {
                     this.onclick = false
-                else
+                } else {
                     this.onclick = true
+                }
             },
             postContent() {
                 fetch('/api/v1.0/feed', {
@@ -64,7 +70,7 @@ export default {
         }
 }
 </script>
-<style lang = "sass" module>
+<style lang ="sass" module>
 @import '../scss/color.scss';
 .top {
     position: relative;

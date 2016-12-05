@@ -24,6 +24,7 @@ import Focus from '../../directives/focus'
 export default {
     data() {
             return {
+                show:false,
                 focusFlag: false,
                 obj: [],
                 message: "",

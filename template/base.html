@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-	<title>base</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>base</title>
 </head>
+
 <body>
-	<!-- <div id="head"></div> -->
-	{% include 'header.html' %}
-	{% block msg %}{% endblock %}
-<script src = "/dist/vendor.bundle.js"></script>
-{% block script %}{% endblock %}
+    {% include 'header.html' %} {% block msg %}{% endblock %}
+    <script src="/dist/vendor.bundle.js"></script>
+    {% block script %}{% endblock %}
 </body>
+
 </html>
