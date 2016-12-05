@@ -14,6 +14,6 @@ Vue.use(vueFinger)
 // })
 
 new Vue({
-  el: '#app2',
-  render: h => h(Picture)
+    el: '#app2',
+    render: h => h(Picture)
 })

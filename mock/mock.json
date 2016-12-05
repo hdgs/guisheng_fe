@@ -49,6 +49,11 @@
 		"async":true
 	},
 	{
+		"name":"hot_tag",
+		"endpoint":"/api/v1.0/hottag/",
+		"async":true
+	},
+	{
 		"name":"comments",
 		"endpoint":"/api/v1.0/comments",
 		"async":true
@@ -60,6 +65,12 @@
 		"async":true
 	},
 	{
+		"name":"returnContent",
+		"method":"post",
+		"endpoint":"/api/v1.0/feed",
+		"async":true
+	},
+	{
 		"name":"light",
 		"endpoint":"/light",
 		"async":false
@@ -67,6 +78,9 @@
 	"data":{
 		"returnComment":{	
 			"status":"成功啦"
+		},
+		"returnContent":{
+			"status":"post 发送成功！"
 		},
 		"api.feed" : {
 			"0":[{
@@ -165,7 +179,9 @@
      			"description":"这篇文章很好看"
 			}
 		},
-		
+		"hot_tag":[
+			"#影评#","#桂子山#","#水墨校园#"	
+		],
 		"everydaypic" : {
 			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
 			"climate":"小雨",
