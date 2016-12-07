@@ -5,13 +5,13 @@
             <div :class="$style.profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWp6qP896yw1kaurHnm4adRE_yft9FE2wsBUxgTM6wIXD5Xrr" alt="个人中心" :class="$style.img"></div>
             <div :class="$style.search"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQNa0liXFy417a3AvGXk01LImjZELR-cIHSpgD-Yo-GvL-GCkd7" alt="搜索" v-on:click="showSearch" :class="$style.img"></div>
         </div>
-        <div :class="$style.mask" v-show="onclick"  >
-            <div :class="$style.searchBox">
+        <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
+            <div :class="$style.searchBox" v-on:click="Search">
                 <input type="text" :class="$style.input" v-model="content">
                 <div :class="$style.button" v-on:click="postContent">搜索</div>
             </div>
             <div :class="$style.title_s">热门搜索</div>
-            <div :class="$style.tagList">
+            <div :class="$style.tagList" v-on:click="Search">
                 <div :class="$style.tag" v-for="tag in tagList" v-on:click="getTag(tag)">{{tag}}</div>
             </div>
         </div>
@@ -35,7 +35,10 @@ export default {
             getTag(e) {
                 this.content = e.slice(1, e.length - 1)
             },
-            showSearch() {
+            Search(e){
+                e.stopPropagation()
+            },
+            showSearch(e) {
                 fetch("/api/v1.0/hottag/")
                     .then((res) => {
                         return res.json()
@@ -44,6 +47,7 @@ export default {
                     })
                 if (this.onclick) {
                     this.onclick = false
+                    this.content = ""
                 } else {
                     this.onclick = true
                 }

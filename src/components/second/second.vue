@@ -1,12 +1,5 @@
 <template>
     <div id="xxx">
-        <div v-dbclick="onClick">hahahhah</div>
-        <div class="banner">
-            <div class="container" v-finger:swipeMove="onSwipe" v-bind:style="styleObject">
-                <img src="http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg" alt="">
-                <img src="http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg" alt="">
-            </div>
-        </div>
         <articleInfo ref="articleInfo"></articleInfo>
         <articleComments ref="articleComments"></articleComments>
     </div>
@@ -53,44 +46,16 @@ export default {
         "articleComments": comments
     },
     methods: {
-        onSwipe(e) {
-            console.log("on swipe", e.direction, e.distanceX)
-            this.x = e.distanceX
-        },
-        onClick() {
-            console.log("on db click")
-        }
+
     }
 }
 </script>
 <style lang='sass' module>
-.banner {
-    width: 500px;
-    height: 200px;
-    overflow: hidden;
-}
-
-.container {
-    width: 1000px;
-    height: 200px;
-    float: left;
-}
-
-.banner img {
-    width: 500px;
-    height: 200px;
-    float: left;
-}
-
 #app {
     color: green;
     max-width: 600px;
     align-items: flex-start;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: center;
-}
-
-p {
-    color: green;
 }
 </style>

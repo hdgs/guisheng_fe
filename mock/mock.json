@@ -183,7 +183,7 @@
 			"#影评#","#桂子山#","#水墨校园#"	
 		],
 		"everydaypic" : {
-			"img_url" : "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+			"img_url" : "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
 			"climate":"小雨",
    			"date":"11/10",
    			"climate_url":"/../img/climate.svg"
@@ -217,6 +217,11 @@
          		"title":"歌曲名",
         		"img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
          		"music_url":"返回一个音乐的URL"   
+    		},
+    		"film":{
+    			"film_url":"https://movie.douban.com/subject/26683290/?from=showing",
+    			"film_img_url":"http://img.zcool.cn/community/03320dd554c75c700000158fce17209.jpg",
+    			"score":"8.7"
     		}
 		},
 		"comments":[

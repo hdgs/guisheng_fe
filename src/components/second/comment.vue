@@ -30,7 +30,7 @@ export default {
                 message: "",
                 onShow: false,
                 currentCommentId: -1,
-                commentHolder: "请输入评论",
+                commentHolder: "写评论",
                 articleInfo: {
                     id: 0,
                     kind: 0
@@ -63,7 +63,7 @@ export default {
                         console.log(value.status)
                         console.log(this.currentCommentId, "+", this.message)
                         this.message = ""
-                        this.commentHolder = "请输入评论"
+                        this.commentHolder = "写评论"
                     })
             },
             change: function (commentId) {
@@ -72,7 +72,7 @@ export default {
                 this.commentHolder = "回复" + commentId
             },
             changeHolder: function () {
-                this.commentHolder = "请输入评论"
+                this.commentHolder = "写评论"
                 this.focusFlag = false
             }
         }

@@ -10,7 +10,6 @@
         <div :class = "$style.tag">{{item.tag}}</div> 
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -19,7 +18,7 @@
     computed:{
       styleObject:function(){
           return {
-          width :(!this.item.img_url.length||this.item.kind==2)?'100%':'50%',
+          width :(!this.item.img_url.length||this.item.kind==2)?'94%':'50%',
           marginRight:this.item.img_url.length? '7%':'0'
         }
       },

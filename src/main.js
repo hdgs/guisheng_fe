@@ -40,7 +40,6 @@ App.router = router
 const app = new Vue(App)
 
 router.beforeEach((to, from, next) => {
-console.log(to.path, app)
   if(to.path === '/'){
   	app.onShow = true
   }else{

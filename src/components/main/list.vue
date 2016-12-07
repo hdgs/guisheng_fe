@@ -67,6 +67,6 @@
 	font-family: 黑体-简, Helvetica, sans-serif;
 }
 .list{
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>

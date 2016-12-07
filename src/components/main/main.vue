@@ -78,10 +78,15 @@ export default {
 }
 .link:hover{
   color: $green;
-  border-top: 2px green solid;
+  display: block;
+  margin-top: -5px;
+}
+.tab:hover{
+  border-top: 4px $green solid;
 }
 .container{
   position: relative;
+  margin-bottom: 20px;
 }
 .bg_pic{
   width: 100%;
