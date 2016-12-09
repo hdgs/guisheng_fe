@@ -25,7 +25,7 @@
       <div :class = "$style.tittle">#每日一图#</div>
       <div :class = "$style.des">
         <div :class="$style.climate_img"><img v-bind:src="pic.climate_url" alt="climate icon"></div>
-        <div :class="$style.description">{{pic.climate}}</div>
+        <div :class="$style.description">{{pic.climate}}  ·  </div>
         <div :class="$style.date">{{pic.date}}</div>
       </div>
     </div>
@@ -77,9 +77,9 @@ export default {
   margin:4.7% 14px;
 }
 .link:hover{
-  color: $green;
   display: block;
   margin-top: -5px;
+  font-weight:bold;
 }
 .tab:hover{
   border-top: 4px $green solid;
@@ -112,7 +112,7 @@ export default {
 }
 .tittle{
   width: 30%;
-  padding-left:33px;
+  padding-left:15px;
   text-align: left;
   composes: common;
   box-sizing: border-box;
@@ -120,17 +120,16 @@ export default {
 .des{
   width: 70%;
   text-align: right;
-  padding-right: 31px;
+  padding-right: 15px;
   box-sizing: border-box;
   composes: common;
 }
 .climate_img{
   composes: common;
-  margin-right: 9px;
+  margin-right: 4.5px;
 }
 .description{
   composes: common;
-  margin-right: 38px;
 }
 .date{
   composes: common;

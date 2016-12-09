@@ -1,12 +1,14 @@
 <template>
   <div :class="$style.item" >
-    <img v-bind:src = "item.img_url" alt="图片" :class="imgStyle" v-show = "item.img_url.length">
-    <div :class = "$style.title">{{item.title}}</div> 
+  <div :class="imgStyle">
+    <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" v-show = "item.img_url.length">
+  </div>
+    <div :class = "$style.title" v-bind:style = "titleWidth">{{item.title}}</div> 
       <div :class = "$style.description" v-show ="item.kind != 2" v-bind:style = "styleObject">{{item.description}}</div>
       <div :class="$style.bottom">
         <div :class = "$style.author">by {{item.author}}</div>
-        <div :class = "$style.views">{{item.views}}</div>
-        <div :class = "$style.views_img"><img src="../../img/view.png" :class="$style.view_img" alt="view"></div>
+        <div :class = "$style.views" v-show ="item.kind != 1">{{item.views}}</div>
+        <div :class = "$style.views_img" v-show ="item.kind != 1"><img src="../../img/view.png" :class="$style.view_img" alt="view" ></div>
         <div :class = "$style.tag">{{item.tag}}</div> 
       </div>
     </div>
@@ -18,13 +20,21 @@
     computed:{
       styleObject:function(){
           return {
-          width :(!this.item.img_url.length||this.item.kind==2)?'94%':'50%',
-          marginRight:this.item.img_url.length? '7%':'0'
+          width :(!this.item.img_url.length||this.item.kind==2)?'94%':'45%',
+          marginRight:this.item.img_url.length? '7%':'0',
+          margin: (!this.item.description)? '0':'15px 15px 0 15px',
+        }
+      },
+      titleWidth:function(){
+        return{
+          width :(this.item.kind == 1)? '45%':((this.item.kind == 2)?'100%':'50%'),
+          marginBottom :(this.item.kind == 1) ? '24px':'0px' 
         }
       },
       imgStyle:function(){
           return (!this.item.img_url.length||this.item.kind==2)?this.$style.imgs:this.$style.img
-        }
+        },
+        itemStyle:function(){}
     }
   }
 </script>
@@ -34,11 +44,15 @@
   width: 100%;
   background-color: #fff;
   margin-bottom: 10px;
-  padding-top: 15px;
   overflow: hidden;
   box-shadow: 0px 3px 1px rgba(7,0,2,0.11);
 }
 .title{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin-top: 14px;
   margin-left: 15px;
   font-size: 21px;
   font-weight: bold;
@@ -46,7 +60,6 @@
 }
 .description{
   font-size: 14px;
-  margin: 15px;
   font-weight: 100;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -54,13 +67,16 @@
   overflow: hidden;
 }
 .img{
-  width: 40%;
-  margin-right: 3%;
+  width: 49%;
+  height: 100%;
   float: right;
-  max-height: 90px;
 }
 .imgs{
   width: 100%;
+}
+.imgbox{
+  width: 100%;
+  display: block;
 }
 .common{
   color: #999999;
@@ -81,7 +97,7 @@
 }
 .tag{
   float: right;
-  margin-right: 15.5px;
+  margin-right: 17px;
   composes: common; 
 }
 .views_img{

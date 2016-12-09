@@ -1,9 +1,9 @@
 <template>
     <div id="header" v-hide="onclick">
         <div :class="$style.top">
-            <div :class="$style.logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWp6qP896yw1kaurHnm4adRE_yft9FE2wsBUxgTM6wIXD5Xrr" alt="华大桂声" :class="$style.img"></div>
-            <div :class="$style.profile"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWp6qP896yw1kaurHnm4adRE_yft9FE2wsBUxgTM6wIXD5Xrr" alt="个人中心" :class="$style.img"></div>
-            <div :class="$style.search"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQNa0liXFy417a3AvGXk01LImjZELR-cIHSpgD-Yo-GvL-GCkd7" alt="搜索" v-on:click="showSearch" :class="$style.img"></div>
+            <div :class="$style.logo">华大桂声</div>
+            <div :class="$style.profile"><img src="../img/user.svg" alt="个人中心" :class="$style.img"></div>
+            <div :class="$style.search"><img src="../img/search.svg" alt="搜索" v-on:click="showSearch" :class="$style.img"></div>
         </div>
         <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
             <div :class="$style.searchBox" v-on:click="Search">
@@ -91,6 +91,9 @@ export default {
 .logo {
     margin-left: 12.5px;
     float: left;
+    font-family: "Adobe 黑体 Std";
+    color: $orange;
+    font-size: 25px;
     composes: common;
     composes: horizon from 'sass-loader!../scss/utility.scss';
 }
@@ -111,7 +114,7 @@ export default {
 
 .img {
     vertical-align: middle;
-    width: 20px;
+    width: 19px;
 }
 
 .mask {
