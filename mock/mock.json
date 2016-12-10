@@ -137,6 +137,15 @@
      			"views":"201",
      			"tag":"#人物#",
      			"description":""
+			},{
+				"kind":3, 
+     			"article_id":1,
+     			"img_url":"http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg", 
+     			"title":"这是水墨的一篇文章",
+     			"author":"作者1",
+     			"views":"2",
+     			"tag":"#人物#",
+     			"description":"这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
 			}],
 			"1":{
 				"kind":1, 
@@ -156,7 +165,7 @@
      			"author":"作者1",
      			"views":"2",
      			"tag":"#人物#",
-     			"description":"这篇文章很好看"
+     			"description":""
 			},
 			"3":{
 				"kind":3, 
@@ -209,10 +218,12 @@
 		"article":{
 			"id":0,
 			"kind":0,
-			"title":"水墨文章题目",
-   			"author":"水墨文章作者",
-   			"time":"2016.11.2",
-   			"body":"文字<p>水墨文章主题，返回为一个html字符串</p>",   
+			"title":"这是一篇影评",
+   			"author":"这是作者昵称",
+   			"img_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+   			"time":"16-10-18",
+   			"body":"<p>上个月出专辑时，科恩大概已经坦然，看他在《You Want It Darker》里说了那么多次：Hineni, hineni. I'm ready, my lord.</p><p>我爷爷临终也这么说。</p><p>中午临时到东南三环的十里河拿护照，来北京好几年来，头一次来这里，看到了只在站台上看到过的双井站，出地铁口寒冷眩晕的日光，没有一棵树，聒噪拥挤，烦躁极了。</p><p>回程一路，循环着《In My Secret Life》靠在地铁上睡着了，梦里晕眩，节拍，似乎还想到了周梦蝶。那一句：昨夜，我又梦见我赤裸裸地趺坐在负雪的山峰上。</p><p>在安贞门站的时候，被旁人挤醒，后来几站刷APP，看到科恩最后几天里留下的话：</p><p>I don’t know how many other things I’ll be able to get to, because at this particular stage I experience deep fatigue. . . . . . . Spiritual things, baruch Hashem have fallen into place, for which I am deeply grateful.（The New Yorker《LEONARD COHEN: A FINAL INTERVIEW》2016.11.11）</p><p>以上超链接里有科恩最后时光的录音。</p><p>最后采访他的记者写道：</p><p>There is probably no more touring ahead.</p>",
+   			"editor":"一只小桂",   
   			"music":{
          		"title":"歌曲名",
         		"img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",

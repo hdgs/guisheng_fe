@@ -69,20 +69,21 @@ export default {
 .tab{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
   width: 20%;
+  padding-top: -4px;
+  border-top: 4px $grey solid;
   text-align: center;
 }
 .link{
   font-size: 18px;
   color: $black;
-  margin:4.7% 14px;
+  display: block;
+  margin-top: -4px;
 }
 .link:hover{
-  display: block;
-  margin-top: -5px;
   font-weight:bold;
 }
 .tab:hover{
-  border-top: 4px $green solid;
+  border-top-color: $green;
 }
 .container{
   position: relative;

@@ -1,10 +1,10 @@
 <template>
-  <div :class="$style.item" >
-  <div :class="imgStyle">
-    <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" v-show = "item.img_url.length">
+  <div :class="$style.item" v-bind:style = "itemHeight">
+  <div :class="imgStyle" v-show = "item.img_url.length">
+    <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" >
   </div>
     <div :class = "$style.title" v-bind:style = "titleWidth">{{item.title}}</div> 
-      <div :class = "$style.description" v-show ="item.kind != 2" v-bind:style = "styleObject">{{item.description}}</div>
+      <div :class = "$style.description" v-show ="item.description" v-bind:style = "styleObject">{{item.description}}</div>
       <div :class="$style.bottom">
         <div :class = "$style.author">by {{item.author}}</div>
         <div :class = "$style.views" v-show ="item.kind != 1">{{item.views}}</div>
@@ -20,7 +20,6 @@
     computed:{
       styleObject:function(){
           return {
-          width :(!this.item.img_url.length||this.item.kind==2)?'94%':'45%',
           marginRight:this.item.img_url.length? '7%':'0',
           margin: (!this.item.description)? '0':'15px 15px 0 15px',
         }
@@ -32,9 +31,13 @@
         }
       },
       imgStyle:function(){
-          return (!this.item.img_url.length||this.item.kind==2)?this.$style.imgs:this.$style.img
+          return (this.item.kind == 1)?this.$style.img:((this.item.kind == 2)? this.$style.imgs:this.$style.imgs_s)
         },
-        itemStyle:function(){}
+      itemHeight:function(){
+        return{
+          height: (this.item.kind == 1)? '135px':''
+        }
+      }
     }
   }
 </script>
@@ -73,8 +76,16 @@
 }
 .imgs{
   width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+.imgs_s{
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 .imgbox{
+  height: 100%;
   width: 100%;
   display: block;
 }

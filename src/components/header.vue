@@ -1,9 +1,15 @@
 <template>
     <div id="header" v-hide="onclick">
         <div :class="$style.top">
-            <div :class="$style.logo">华大桂声</div>
-            <div :class="$style.profile"><img src="../img/user.svg" alt="个人中心" :class="$style.img"></div>
-            <div :class="$style.search"><img src="../img/search.svg" alt="搜索" v-on:click="showSearch" :class="$style.img"></div>
+            <div :class="$style.logo"><img src="../img/logo.png" alt="华大桂声" :class="$style.logoImg"></div>
+            <div :class="$style.profile">
+                <svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>
+            </div>
+            <div :class="$style.search" v-on:click="showSearch">
+                <svg viewBox="0 0 200 200" :class="$style.img">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search"></use>
+                </svg>
+            </div>
         </div>
         <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
             <div :class="$style.searchBox" v-on:click="Search">
@@ -35,7 +41,7 @@ export default {
             getTag(e) {
                 this.content = e.slice(1, e.length - 1)
             },
-            Search(e){
+            Search(e) {
                 e.stopPropagation()
             },
             showSearch(e) {
@@ -114,7 +120,11 @@ export default {
 
 .img {
     vertical-align: middle;
-    width: 19px;
+    width: 29px;
+}
+.logoImg {
+    vertical-align: middle;
+    height: 24px;
 }
 
 .mask {

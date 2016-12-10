@@ -1,7 +1,7 @@
 <template>
     <div id="xxx">
         <articleInfo ref="articleInfo"></articleInfo>
-        <articleComments ref="articleComments"></articleComments>
+        <!-- <articleComments ref="articleComments"></articleComments> -->
     </div>
 </template>
 <script>
@@ -34,11 +34,11 @@ export default {
         })
         Promise.all([promise1, promise2]).then(values => {
             this.$refs.articleInfo.article = values[0]
-            this.$refs.articleComments.articleInfo = {
-                id: values[0].id,
-                kind: values[0].kind
-            }
-            this.$refs.articleComments.obj = values[1]
+            // this.$refs.articleComments.articleInfo = {
+            //     id: values[0].id,
+            //     kind: values[0].kind
+            // }
+            // this.$refs.articleComments.obj = values[1]
         })
     },
     components: {
