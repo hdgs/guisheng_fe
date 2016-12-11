@@ -120,7 +120,7 @@ export default {
 
 .img {
     vertical-align: middle;
-    width: 29px;
+    width: 19px;
 }
 .logoImg {
     vertical-align: middle;

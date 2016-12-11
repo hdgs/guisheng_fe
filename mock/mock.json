@@ -16,6 +16,26 @@
 		"async": true
 	},
 	{
+		"name": "api.recommend_articles",
+		"endpoint": "/api/v1.0/articles",
+		"async" : true
+	},
+	{
+		"name": "api.recommend_photos",
+		"endpoint": "/api/v1.0/photos",
+		"async" : true
+	},
+	{
+		"name": "api.recommend_news",
+		"endpoint": "/api/v1.0/news",
+		"async" : true
+	},
+	{
+		"name": "api.recommend_interactions",
+		"endpoint": "/api/v1.0/interactions",
+		"async" : true
+	},
+	{
 		"name" : "second",
 		"endpoint" : "/second",
 		"template" : "second",
@@ -217,7 +237,7 @@
 		},
 		"article":{
 			"id":0,
-			"kind":0,
+			"kind":1,
 			"title":"这是一篇影评",
    			"author":"这是作者昵称",
    			"img_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
