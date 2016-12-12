@@ -10,7 +10,7 @@
         </div>
         <div :class="$style.title">{{article.title}}</div>
         <div :class = "$style.box">
-            <div :class="$style.imgBox"><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
+            <div :class="$style.imgBox" ><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
             <div :class="$style.msgBox">
                 <div>{{article.author}}</div>
                 <div :class="$style.time">{{article.time}}</div>
@@ -20,6 +20,29 @@
         <div v-html="article.body" :class = "$style.essay"></div>
         <div :class = "$style.eBox"><div :class = "$style.editor">[责任编辑:{{article.editor}}]</div></div>
         <div :class = "$style.line"></div>
+        <div :class="$style.lightBox">
+            <div :class = "$style.light">
+                <div :class = "$style.lightImg"><img src="" alt="" :class = "$style.img"></div>
+                <div :class = "$style.lightWordBox">
+                    <div :class = "$style.count">好棒</div>
+                    <div :class = "$style.word">1129</div>
+                </div>
+            </div>
+            <div :class = "$style.light">
+                <div :class = "$style.lightImg"><img src="" alt="" :class = "$style.img"></div>
+                <div :class = "$style.lightWordBox">
+                    <div :class = "$style.count">懵圈</div>
+                    <div :class = "$style.word">154</div>
+                </div>
+            </div>
+            <div :class = "$style.light">
+                <div :class = "$style.lightImg"><img src="" alt="" :class = "$style.img"></div>
+                <div :class = "$style.lightWordBox">
+                    <div :class = "$style.count">什么鬼</div>
+                    <div :class = "$style.word">34</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -27,6 +50,8 @@ export default {
     data() {
             return {
                 article: {
+                    "id":0,
+                    "kind" :0,
                     "film": {
                         "film_url": "",
                         "film_img_url": "",
