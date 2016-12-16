@@ -1,349 +1,328 @@
 {
-	"routes": [{
-		"name" : "home",
-		"endpoint": "/",
-		"template": "index",
-		"async": false
-	},
-	{
-		"name" : "api.feed",
-		"endpoint": "/api/v1.0/feed",
-		"queryKey": {
-			"category":"kind",
-			"pagination":"page",
-			"sort":"sort"
-		},		
-		"async": true
-	},
-	{
-		"name": "api.recommend_articles",
-		"endpoint": "/api/v1.0/articles",
-		"async" : true
-	},
-	{
-		"name": "api.recommend_photos",
-		"endpoint": "/api/v1.0/photos",
-		"async" : true
-	},
-	{
-		"name": "api.recommend_news",
-		"endpoint": "/api/v1.0/news",
-		"async" : true
-	},
-	{
-		"name": "api.recommend_interactions",
-		"endpoint": "/api/v1.0/interactions",
-		"async" : true
-	},
-	{
-		"name" : "second",
-		"endpoint" : "/second",
-		"template" : "second",
-		"async" :false
-	},
-	{
-		"name" : "pictures",
-		"endpoint" : "/pictures",
-		"template" : "pictures",
-		"async" :false
-	},
-	{
-		"name":"profile",
-		"endpoint":"/profile",
-		"template":"profile",
-		"async":false
-	},
-	{
-		"name": "everydaypic",
-		"endpoint": "/api/v1.0/everyDayPic",
-		"async": true
-	},
-	{
-		"name": "banner",
-		"endpoint": "/api/v1.0/banner/",
-		"async": true
-	},
-	{
-		"name":"article",
-		"endpoint":"/api/v1.0/article/",
-		"async":true
-	},
-	{
-		"name":"hot_tag",
-		"endpoint":"/api/v1.0/hottag/",
-		"async":true
-	},
-	{
-		"name":"comments",
-		"endpoint":"/api/v1.0/comments",
-		"async":true
-	},
-	{
-		"name":"returnComment",
-		"method":"post",
-		"endpoint":"/api/v1.0/comments",
-		"async":true
-	},
-	{
-		"name":"returnContent",
-		"method":"post",
-		"endpoint":"/api/v1.0/feed",
-		"async":true
-	},
-	{
-		"name":"light",
-		"endpoint":"/light",
-		"async":false
-	}],
-	"data":{
-		"api.recommend_news":[
-			{
-				"kind":0, 
-     			"article_id":1,
-     			"img_url":"", 
-     			"title":"这是主页的一篇文章",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-			},
-			{
-				"kind":0, 
-     			"article_id":1,
-     			"img_url":"", 
-     			"title":"这是主页的一篇文章",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-			},
-			{
-				"kind":0, 
-     			"article_id":1,
-     			"img_url":"", 
-     			"title":"这是主页的一篇文章",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-			}
-		],
-		"returnComment":{	
-			"status":"成功啦"
-		},
-		"returnContent":{
-			"status":"post 发送成功！"
-		},
-		"api.feed" : {
-			"0":[{
-				"kind":0, 
-     			"article_id":1,
-     			"img_url":"", 
-     			"title":"这是主页的一篇文章",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-			},{
-				"kind":1, 
-     			"article_id":2,
-     			"img_url":"http://img02.tooopen.com/images/20150908/tooopen_sy_141775123415.jpg ", 
-     			"title":"这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":""
-			},{
-				"kind":1, 
-     			"article_id":3,
-     			"img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg", 
-     			"title":"这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":""
-			},{
-				"kind":0, 
-     			"article_id":1,
-     			"img_url":"", 
-     			"title":"这是主页的一篇文章",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-			},{
-				"kind":1, 
-     			"article_id":2,
-     			"img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg", 
-     			"title":"这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":""
-			},{
-				"kind":1, 
-     			"article_id":3,
-     			"img_url":"http://img02.tooopen.com/images/20150908/tooopen_sy_141775123415.jpg", 
-     			"title":"这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
-     			"author":"汪曾祺",
-     			"views":"201",
-     			"tag":"#人物#",
-     			"description":""
-			},{
-				"kind":3, 
-     			"article_id":1,
-     			"img_url":"http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg", 
-     			"title":"这是水墨的一篇文章",
-     			"author":"作者1",
-     			"views":"2",
-     			"tag":"#人物#",
-     			"description":"这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
-			}],
-			"1":{
-				"kind":1, 
-     			"article_id":1,
-     			"img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg", 
-     			"title":"这是新闻的一篇文章这是新闻的一篇文章这是新闻的一篇文章这是新闻的一篇文章",
-     			"author":"作者1",
-     			"views":"2",
-     			"tag":"#景色#",
-     			"description":""
-			},
-			"2":{
-				"kind":2, 
-     			"article_id":1,
-     			"img_url":"https://www.fotor.com/images2/features/photo_effects/e_bw.jpg", 
-     			"title":"这是图片的一篇文章",
-     			"author":"作者1",
-     			"views":"2",
-     			"tag":"#人物#",
-     			"description":""
-			},
-			"3":{
-				"kind":3, 
-     			"article_id":1,
-     			"img_url":"http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg", 
-     			"title":"这是水墨的一篇文章",
-     			"author":"作者1",
-     			"views":"2",
-     			"tag":"#人物#",
-     			"description":"这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
-			},
-			"4":{
-				"kind":4, 
-     			"article_id":1,
-     			"img_url":"http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg", 
-     			"title":"这是互动的一篇文章",
-     			"author":"作者1",
-     			"views":"2",
-     			"tag":"#人物#",
-     			"description":"这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
-			}
-		},
-		"hot_tag":[
-			"#影评#","#桂子山#","#水墨校园#"	
-		],
-		"everydaypic" : {
-			"img_url" : "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
-			"climate":"小雨",
-   			"date":"11/10",
-   			"climate_url":"/../img/climate.svg"
-		},
-		"profile":{
-    		"img_url":"http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
-    		"name":"hahaha",
-    		"weibo":"huhuhu",        
-    		"introduction":"这是一个个人简介",  
-    		"works":"这是个人作品",      
-    		"collection":"这是个人收藏",
-    		"suggestion":"这里有一些个人简介"
-		},
-		"pics":{
-			"title": "这里会返回一串html页面展示为图片二级页面"
-		},
-		"news":{
-   			"title":"这是一个新闻二级页面",
-   			"author":"新闻作者1",
-   			"time":"2016.11.1",
-   			"body":"文章主题，返回一个html字符串"  
-		},
-		"article":{
-			"id":0,
-			"kind":1,
-			"title":"这是一篇影评",
-   			"author":"这是作者昵称",
-   			"img_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
-   			"time":"16-10-18",
-   			"body":"<p>上个月出专辑时，科恩大概已经坦然，看他在《You Want It Darker》里说了那么多次：Hineni, hineni. I'm ready, my lord.</p><p>我爷爷临终也这么说。</p><p>中午临时到东南三环的十里河拿护照，来北京好几年来，头一次来这里，看到了只在站台上看到过的双井站，出地铁口寒冷眩晕的日光，没有一棵树，聒噪拥挤，烦躁极了。</p><p>回程一路，循环着《In My Secret Life》靠在地铁上睡着了，梦里晕眩，节拍，似乎还想到了周梦蝶。那一句：昨夜，我又梦见我赤裸裸地趺坐在负雪的山峰上。</p><p>在安贞门站的时候，被旁人挤醒，后来几站刷APP，看到科恩最后几天里留下的话：</p><p>I don’t know how many other things I’ll be able to get to, because at this particular stage I experience deep fatigue. . . . . . . Spiritual things, baruch Hashem have fallen into place, for which I am deeply grateful.（The New Yorker《LEONARD COHEN: A FINAL INTERVIEW》2016.11.11）</p><p>以上超链接里有科恩最后时光的录音。</p><p>最后采访他的记者写道：</p><p>There is probably no more touring ahead.</p>",
-   			"editor":"一只小桂",   
-  			"music":{
-         		"title":"歌曲名",
-        		"img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
-         		"music_url":"返回一个音乐的URL"   
-    		},
-    		"film":{
-    			"film_url":"https://movie.douban.com/subject/26683290/?from=showing",
-    			"film_img_url":"https://i.ytimg.com/vi/p9YUxx_A2V4/maxresdefault.jpg",
-    			"score":"8.7"
-    		}
-		},
-		"comments":[
-  			{
-     		"id":2, 
-     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
-    		"message":"这篇文章真棒",  
-     		"comments":[], 
-     		"like_count":45 
-  			},
-  			{
-     		"id":3, 
-     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
-    		"message":"这篇文章更棒",  
-     		"comments":[], 
-     		"like_count":45 
-  			},
-  			{
-     		"id":3, 
-     		"img_url":"http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",  
-    		"message":"这篇文章最棒",  
-     		"comments":[], 
-     		"like_count":45 
-  			}
-		],
-		"banner":[
-			{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg",
-				"description":"这是图片一的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
-				"description":"这是图片二的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg",
-				"description":"这是图片三的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg",
-				"description":"这是图片四的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg",
-				"description":"这是图片五的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg",
-				"description":"这是图片六的描述"
-			},{
-				"pic_url":"http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg",
-				"description":"这是图片七的描述"
-			}
-		],
-		"interaction":{
-   			"title":"互动标题",
-   			"author":"互动作者",
-   			"time":"2016-11-2",
-   			"body":"互动文章主体返回一个html字符串"   
-		},
-		"like":{
-   			"article_id":"32",
-   			"type":"0",
-   			"like":"3" 
-		}
-	}
+    "routes": [{
+        "name": "home",
+        "endpoint": "/",
+        "template": "index",
+        "async": false
+    }, {
+        "name": "api.feed",
+        "endpoint": "/api/v1.0/feed",
+        "queryKey": {
+            "category": "kind",
+            "pagination": "page",
+            "sort": "sort"
+        },
+        "async": true
+    }, {
+        "name": "api.recommend_articles",
+        "endpoint": "/api/v1.0/articles",
+        "async": true
+    }, {
+        "name": "api.recommend_photos",
+        "endpoint": "/api/v1.0/photos",
+        "async": true
+    }, {
+        "name": "api.recommend_news",
+        "endpoint": "/api/v1.0/news",
+        "async": true
+    }, {
+        "name": "api.recommend_interactions",
+        "endpoint": "/api/v1.0/interactions",
+        "async": true
+    }, {
+        "name": "second",
+        "endpoint": "/second",
+        "template": "second",
+        "async": false
+    }, {
+        "name": "pictures",
+        "endpoint": "/pictures",
+        "template": "pictures",
+        "async": false
+    }, {
+        "name": "profile",
+        "endpoint": "/profile",
+        "template": "profile",
+        "async": false
+    }, {
+        "name": "everydaypic",
+        "endpoint": "/api/v1.0/everyDayPic",
+        "async": true
+    }, {
+        "name": "banner",
+        "endpoint": "/api/v1.0/banner/",
+        "async": true
+    }, {
+        "name": "article",
+        "endpoint": "/api/v1.0/article/",
+        "async": true
+    }, {
+        "name": "hot_tag",
+        "endpoint": "/api/v1.0/hottag/",
+        "async": true
+    }, {
+        "name": "comments",
+        "endpoint": "/api/v1.0/comments",
+        "async": true
+    }, {
+        "name": "returnComment",
+        "method": "post",
+        "endpoint": "/api/v1.0/comments",
+        "async": true
+    }, {
+        "name": "returnContent",
+        "method": "post",
+        "endpoint": "/api/v1.0/feed",
+        "async": true
+    }, {
+        "name": "light",
+        "method": "post",
+        "endpoint": "/api/v1.0/light/",
+        "async": true
+    }],
+    "data": {
+        "light": {
+            
+        },
+        "api.recommend_news": [{
+            "kind": 0,
+            "article_id": 1,
+            "img_url": "",
+            "title": "这是主页的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "#人物#",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }, {
+            "kind": 0,
+            "article_id": 1,
+            "img_url": "",
+            "title": "这是主页的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "#人物#",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }, {
+            "kind": 0,
+            "article_id": 1,
+            "img_url": "",
+            "title": "这是主页的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "#人物#",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }],
+        "returnComment": {
+            "status": "成功啦"
+        },
+        "returnContent": {
+            "status": "post 发送成功！"
+        },
+        "api.feed": {
+            "0": [{
+                "kind": 0,
+                "article_id": 1,
+                "img_url": "",
+                "title": "这是主页的一篇文章",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+            }, {
+                "kind": 1,
+                "article_id": 2,
+                "img_url": "http://img02.tooopen.com/images/20150908/tooopen_sy_141775123415.jpg ",
+                "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": ""
+            }, {
+                "kind": 1,
+                "article_id": 3,
+                "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+                "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": ""
+            }, {
+                "kind": 0,
+                "article_id": 1,
+                "img_url": "",
+                "title": "这是主页的一篇文章",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+            }, {
+                "kind": 1,
+                "article_id": 2,
+                "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+                "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": ""
+            }, {
+                "kind": 1,
+                "article_id": 3,
+                "img_url": "http://img02.tooopen.com/images/20150908/tooopen_sy_141775123415.jpg",
+                "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+                "author": "汪曾祺",
+                "views": "201",
+                "tag": "#人物#",
+                "description": ""
+            }, {
+                "kind": 3,
+                "article_id": 1,
+                "img_url": "http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg",
+                "title": "这是水墨的一篇文章",
+                "author": "作者1",
+                "views": "2",
+                "tag": "#人物#",
+                "description": "这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
+            }],
+            "1": {
+                "kind": 1,
+                "article_id": 1,
+                "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+                "title": "这是新闻的一篇文章这是新闻的一篇文章这是新闻的一篇文章这是新闻的一篇文章",
+                "author": "作者1",
+                "views": "2",
+                "tag": "#景色#",
+                "description": ""
+            },
+            "2": {
+                "kind": 2,
+                "article_id": 1,
+                "img_url": "https://www.fotor.com/images2/features/photo_effects/e_bw.jpg",
+                "title": "这是图片的一篇文章",
+                "author": "作者1",
+                "views": "2",
+                "tag": "#人物#",
+                "description": ""
+            },
+            "3": {
+                "kind": 3,
+                "article_id": 1,
+                "img_url": "http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg",
+                "title": "这是水墨的一篇文章",
+                "author": "作者1",
+                "views": "2",
+                "tag": "#人物#",
+                "description": "这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
+            },
+            "4": {
+                "kind": 4,
+                "article_id": 1,
+                "img_url": "http://img02.tooopen.com/images/20151229/tooopen_sy_153049663495.jpg",
+                "title": "这是互动的一篇文章",
+                "author": "作者1",
+                "views": "2",
+                "tag": "#人物#",
+                "description": "这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看这篇文章很好看"
+            }
+        },
+        "hot_tag": [
+            "#影评#", "#桂子山#", "#水墨校园#"
+        ],
+        "everydaypic": {
+            "img_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
+            "climate": "小雨",
+            "date": "11/10",
+            "climate_url": "/../img/climate.svg"
+        },
+        "profile": {
+            "img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+            "name": "hahaha",
+            "weibo": "huhuhu",
+            "introduction": "这是一个个人简介",
+            "works": "这是个人作品",
+            "collection": "这是个人收藏",
+            "suggestion": "这里有一些个人简介"
+        },
+        "pics": {
+            "title": "这里会返回一串html页面展示为图片二级页面"
+        },
+        "news": {
+            "title": "这是一个新闻二级页面",
+            "author": "新闻作者1",
+            "time": "2016.11.1",
+            "body": "文章主题，返回一个html字符串"
+        },
+        "article": {
+            "id": 0,
+            "kind": 1,
+            "title": "这是一篇影评",
+            "author": "这是作者昵称",
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+            "time": "16-10-18",
+            "body": "<p>上个月出专辑时，科恩大概已经坦然，看他在《You Want It Darker》里说了那么多次：Hineni, hineni. I'm ready, my lord.</p><p>我爷爷临终也这么说。</p><p>中午临时到东南三环的十里河拿护照，来北京好几年来，头一次来这里，看到了只在站台上看到过的双井站，出地铁口寒冷眩晕的日光，没有一棵树，聒噪拥挤，烦躁极了。</p><p>回程一路，循环着《In My Secret Life》靠在地铁上睡着了，梦里晕眩，节拍，似乎还想到了周梦蝶。那一句：昨夜，我又梦见我赤裸裸地趺坐在负雪的山峰上。</p><p>在安贞门站的时候，被旁人挤醒，后来几站刷APP，看到科恩最后几天里留下的话：</p><p>I don’t know how many other things I’ll be able to get to, because at this particular stage I experience deep fatigue. . . . . . . Spiritual things, baruch Hashem have fallen into place, for which I am deeply grateful.（The New Yorker《LEONARD COHEN: A FINAL INTERVIEW》2016.11.11）</p><p>以上超链接里有科恩最后时光的录音。</p><p>最后采访他的记者写道：</p><p>There is probably no more touring ahead.</p>",
+            "editor": "一只小桂",
+            "music": {
+                "title": "歌曲名",
+                "img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
+                "music_url": "返回一个音乐的URL"
+            },
+            "film": {
+                "film_url": "https://movie.douban.com/subject/26683290/?from=showing",
+                "film_img_url": "https://i.ytimg.com/vi/p9YUxx_A2V4/maxresdefault.jpg",
+                "score": "8.7"
+            },
+            "like_degree": [1129,154,43]
+        },
+        "comments": [{
+            "id": 2,
+            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
+            "message": "这篇文章真棒",
+            "comments": [],
+            "like_count": 45
+        }, {
+            "id": 3,
+            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
+            "message": "这篇文章更棒",
+            "comments": [],
+            "like_count": 45
+        }, {
+            "id": 3,
+            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
+            "message": "这篇文章最棒",
+            "comments": [],
+            "like_count": 45
+        }],
+        "banner": [{
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg",
+            "description": "这是图片一的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
+            "description": "这是图片二的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg",
+            "description": "这是图片三的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg",
+            "description": "这是图片四的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg",
+            "description": "这是图片五的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg",
+            "description": "这是图片六的描述"
+        }, {
+            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg",
+            "description": "这是图片七的描述"
+        }],
+        "interaction": {
+            "title": "互动标题",
+            "author": "互动作者",
+            "time": "2016-11-2",
+            "body": "互动文章主体返回一个html字符串"
+        },
+        "like": {
+            "article_id": "32",
+            "type": "0",
+            "like": "3"
+        }
+    }
 }

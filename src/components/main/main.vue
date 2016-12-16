@@ -69,7 +69,6 @@ export default {
 .tab{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
   width: 20%;
-  padding-top: -4px;
   border-top: 4px $grey solid;
   text-align: center;
 }
