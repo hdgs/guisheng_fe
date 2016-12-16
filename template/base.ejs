@@ -9,9 +9,9 @@
 
 <body>
     {% include 'header.html' %} {% block msg %}{% endblock %}    
-    
-        <script src="http://localhost:3000/dist/vendor.bundle.js"></script>
-    
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+        <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
     {% block script %}{% endblock %}
 </body>
 

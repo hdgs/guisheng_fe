@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block msg %}
+<div id = "app1">
+
+</div>
+{% endblock %}
+{% block script %}
+<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+<script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+<% } %>
+{% endblock %}
