@@ -7,15 +7,15 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
   entry: {
-    'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
-    'second.js': ['./src/second.js', 'webpack-hot-middleware/client'],
-    'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client'],
-    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
+    'main': ['./src/main.js', 'webpack-hot-middleware/client'],
+    'second': ['./src/second.js', 'webpack-hot-middleware/client'],
+    'pictures': ['./src/pictures.js', 'webpack-hot-middleware/client'],
+    vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
-    path: path.join(__dirname, ""),
-    publicPath: 'http://localhost:3000/dist/',
-    filename: '[name]'
+    path: path.join(__dirname, "static"),
+    publicPath: '/static/',
+    filename: '[name].[chunkhash].js'
   },
   vue: {
     cssModules: {
@@ -70,26 +70,26 @@ module.exports = {
       filename: 'template/index.html',
       inject:false,
       template: './template/index.ejs',
-      chunks: ['main.js']
+      chunks: ['main']
     }),
     new HtmlWebpackPlugin({
     	alwaysWriteToDisk: true,
-      filename: 'template/index.html',
+      filename: 'template/pictures.html',
       inject:false,
       template: './template/pictures.ejs',
-      chunks: ['pictures.js']
+      chunks: ['pictures']
     }),
     new HtmlWebpackPlugin({
     	alwaysWriteToDisk: true,
       filename: 'template/second.html',
       inject:false,
       template: './template/second.ejs',
-      chunks: ['second.js']
+      chunks: ['second']
     }),
     new HtmlWebpackHarddiskPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js")
   ]
 };
