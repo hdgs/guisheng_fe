@@ -10,7 +10,7 @@ module.exports = {
     'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
     'second.js': ['./src/second.js', 'webpack-hot-middleware/client'],
     'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client'],
-    vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
+    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
     path: path.join(__dirname, ""),
