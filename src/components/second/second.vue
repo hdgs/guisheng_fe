@@ -1,7 +1,7 @@
 <template>
     <div id="xxx">
         <articleInfo ref="articleInfo"></articleInfo>
-        <!-- <articleComments ref="articleComments"></articleComments> -->
+        <articleComments ref="articleComments"></articleComments>
         <div :class = "$style.recommend">
             <div :class = "$style.title">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
@@ -39,7 +39,6 @@ export default {
         let promise2 = fetch("/api/v1.0/comments").then((res) => {
             return res.json()
         })
-        // let promise3 = fetch()
 
         Promise.all([promise1, promise2]).then(values => {
             this.$refs.articleInfo.article = values[0]
@@ -47,14 +46,14 @@ export default {
             fetch("/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind]).then((res) => {
                     return res.json()
                 }).then((res) => {
-                    console.log("haha")
                     this.list = res
                 })
-                // this.$refs.articleComments.articleInfo = {
-                //     id: values[0].id,
-                //     kind: values[0].kind
-                // }
-                // this.$refs.articleComments.obj = values[1]
+                this.$refs.articleComments.articleInfo = {
+                    id: values[0].id,
+                    kind: values[0].kind,
+                    likes: values[0].likes
+                }
+                this.$refs.articleComments.obj = values[1]
         })
     },
     components: {

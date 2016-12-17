@@ -74,7 +74,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
     	alwaysWriteToDisk: true,
-      filename: 'template/index.html',
+      filename: 'template/pictures.html',
       inject:false,
       template: './template/pictures.ejs',
       chunks: ['pictures.js']
