@@ -1,5 +1,6 @@
 <template>
-    <div id="xxx" :class="$style.container" v-on:click = "closeComment">
+    <div id="xxx" :class="$style.container" >
+    <div :class = "$style.mask" v-show = "showComment" v-on:click = "closeComment"></div>
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
             <textarea v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="showComment" v-on:click="activeComment"></textarea>
@@ -99,7 +100,6 @@ export default {
                 if(this.showComment) this.showComment = false
             },
             activeComment: function (e) {
-                e.stopPropagation();
                 if (!this.showComment) this.showComment = true
             },
             ClickChangeColor: function () {
@@ -146,7 +146,16 @@ export default {
         }
 }
 </script>
-<style lang="sass" module>
+<style lang ="sass" module>
+.mask{
+    position: fixed;
+    /*height: 100%;*/
+    width: 100%;
+    background-color: rgba(229, 233, 233, 0.85);
+    z-index: 3;
+    bottom: 75px;
+    top:54px;
+}
 .comment {
     border: solid 1px yellow;
     margin-top: 20px;
