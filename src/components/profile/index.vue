@@ -1,0 +1,98 @@
+<template>
+    <div :class="$style.profile">
+        <div :class="$style.info">
+        	<div :class="$style.top">
+                <div :class = "$style.back">
+                    <svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use></svg>
+                </div>
+                <span :class="$style.name">我是作者昵称</span>
+        	</div>
+        	<div :class="$style.avatar">
+        		<img :class="$style.avatarimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw">
+        		<div :class="$style.sign">
+        			<span>认证作者</span>
+        			<svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use></svg>
+        		</div>
+        	</div>
+        	<div :class="$style.intro">个人介绍：这是作者的个人介绍。这个人好懒啊，他什么也没写但还是要凑字数。也许两行不够介绍，那就三行……</div>
+        </div>
+    </div>
+</template>
+<script>
+import 'whatwg-fetch'
+export default {
+    data() {
+        return {
+            foo:1
+        }
+    }
+}
+</script>
+<style lang='sass' module>
+@import '../../scss/color.scss';
+$topHeight:50px;
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.profile{
+	width: 100%;
+	height: 100%;
+	background-color: $white;
+}
+.info{
+	width: 100%;
+	background-color: $black;
+}
+.top{
+	width: 100%;
+	height: $topHeight;
+	font-size: 0;
+	color:white;
+}
+.back{
+	display: inline-block;
+	width: 60px;
+	height:100%;
+	padding-left: 18px;
+	box-sizing: border-box;
+	vertical-align: top;
+}
+.img{
+    width: 20px;
+   	fill: $orange;
+    height: 100%;
+    vertical-align: middle;
+}
+.name{
+	width: calc(100% - 50px);
+	line-height: $topHeight;
+	color:$orange;
+	font-size: 17px;
+	box-sizing: border-box;
+}
+.intro{
+	width: 100%;
+	padding: 0 24px;
+	font-size: 14px;
+	line-height: 20px;
+	color:$white;
+	height: 80px;
+	box-sizing: border-box;
+}
+.avatar{
+	width: 100%;
+	height: 130px;
+	padding-top:18px;
+	text-align: center;
+}
+.avatarimg{
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+}
+.sign{
+	margin-top: 15px;
+	text-indent: 20px;
+}
+</style>

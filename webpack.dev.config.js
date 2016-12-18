@@ -7,10 +7,11 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
   entry: {
-    'main.js': ['./src/main.js', 'webpack-hot-middleware/client'],
-    'second.js': ['./src/second.js', 'webpack-hot-middleware/client'],
-    'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client'],
-    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
+    'main.js': ['./src/main.js', 'webpack-hot-middleware/client', "./src/header.js"],
+    'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
+    'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
+    'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
+    vendor: ["vue", "whatwg-fetch", "./src/style.js"]
   },
   output: {
     path: path.join(__dirname, ""),
@@ -85,6 +86,13 @@ module.exports = {
       inject:false,
       template: './template/second.ejs',
       chunks: ['second.js']
+    }),
+    new HtmlWebpackPlugin({
+      alwaysWriteToDisk: true,
+      filename: 'template/profile.html',
+      inject:false,
+      template: './template/profile.ejs',
+      chunks: ['profile.js']
     }),
     new HtmlWebpackHarddiskPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

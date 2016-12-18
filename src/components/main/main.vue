@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import Request from 'superagent'
 import 'whatwg-fetch'
 
 export default {
