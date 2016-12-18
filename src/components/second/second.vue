@@ -1,11 +1,12 @@
 <template>
     <div id="xxx">
-        <articleInfo ref="articleInfo"></articleInfo>
+        <articleInfo ref="articleInfo" ></articleInfo>
         <articleComments ref="articleComments"></articleComments>
         <div :class = "$style.recommend">
-            <div :class = "$style.title">相关推荐</div>
+            <div :class = "$style.title"  v-on:click = "closeComment">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
         </div>
+        <div :class = "$style.occupy"></div>
     </div>
 </template>
 <script>
@@ -27,6 +28,7 @@ export default {
     },
     data() {
         return {
+            closeCom:false,
             x: 0,
             foo: 0,
             list: []
@@ -62,7 +64,10 @@ export default {
         "item": Item
     },
     methods: {
-
+        closeComment:function(){
+            console.log("this.closeCom",this.closeCom)
+            if(!this.closeCom) this.closeCom = true
+        }
     }
 }
 </script>
@@ -82,5 +87,9 @@ export default {
 }
 .recommend{
     background-color: $grey;
+}
+.occupy{
+    height: 50px;
+    width: 100%;
 }
 </style>

@@ -28,7 +28,8 @@
       },
       titleWidth:function(){
         return{
-          width :(this.item.kind == 1)? '45%':((this.item.kind == 2)?'100%':'50%'),
+          width :(this.item.kind == 1)? '45%':'100%',
+          // ((this.item.kind == 2)?'100%':'60%')
           marginBottom :(this.item.kind == 1) ? '24px':'0px' 
         }
       },
