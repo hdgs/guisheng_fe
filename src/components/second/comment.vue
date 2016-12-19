@@ -3,7 +3,7 @@
     <div :class = "$style.mask" v-show = "showComment" v-on:click = "closeComment"></div>
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <textarea v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="showComment" v-on:click="activeComment"></textarea>
+            <div v-iHtml = "changeMessage" tabIndex = "-1" v-clear = "clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable = "true"></div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -46,12 +46,16 @@
 <script>
 import Blur from '../../directives/blur'
 import Focus from '../../directives/focus'
+import IHtml from '../../directives/innerHtml'
+import Clear from '../../directives/clearHtml'
 export default {
     data() {
             return {
                 showComment: false,
                 closeComment : true,
                 show: false,
+                clear:false,
+                submitted:false,
                 colorChange: false,
                 focusFlag: false,
                 obj: [],
@@ -75,14 +79,16 @@ export default {
             Comment: function () {
                 return {
                     width: this.showComment ? '78.1%' : '40%',
-                    height: this.showComment ? '50px' : '30px',
-                    lineHeight: this.showComment ? '25px' : ''
+                    height: this.showComment ? '' : '30px',
+                    lineHeight: this.showComment ? '25px' : '',
+                    float:this.showComment?'left':''
                 }
             },
             commentBox: function () {
                 return {
-                    height: this.showComment ? '75px' : '50px',
-                    lineHeight: this.showComment ? '75px' : '50px'
+                    height: this.showComment ? '' : '50px',
+                    lineHeight: this.showComment ? '' : '50px',
+                    padding: this.showComment? '12.5px 0':''
                 }
             },
             commit: function () {
@@ -93,9 +99,15 @@ export default {
         },
         directives: {
             focus: Focus,
-            blur: Blur
+            blur: Blur,
+            iHtml:IHtml,
+            clear:Clear
         },
         methods: {
+            changeMessage:function(e){
+                this.clear = false
+                this.message = e
+            },
             closeComment:function(){
                 if(this.showComment) this.showComment = false
             },
@@ -131,6 +143,7 @@ export default {
                         this.message = ""
                         this.commentHolder = "写评论..."
                         this.showComment = false
+                        this.clear = true
                         this.articleInfo.likes++
                     })
             },
@@ -149,12 +162,11 @@ export default {
 <style lang ="sass" module>
 .mask{
     position: fixed;
-    /*height: 100%;*/
     width: 100%;
     background-color: rgba(229, 233, 233, 0.85);
-    z-index: 3;
-    bottom: 75px;
-    top:54px;
+    z-index: 2;
+    bottom: 50px;
+    top:0;
 }
 .comment {
     border: solid 1px yellow;
@@ -183,22 +195,22 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 3;
     /*height: 50px;*/
     /*line-height: 50px;*/
     background-color: #333;
 }
 
 .input {
-    /*height: 30px;*/
     background-color: #333;
     outline: none;
-    /*width: 40%;*/
     vertical-align: middle;
     border-radius: 4px;
     border: #fff 1px solid;
     padding: 2px 7px;
     margin-left: 10px;
     color: #fff;
+    box-sizing: border-box;
 }
 
 .imgsBox {
@@ -235,7 +247,7 @@ export default {
     padding: 1px 2px;
     top: 8px;
     vertical-align: middle;
-    right: 13px;
+    right: 20%;
     border-radius: 3px;
     text-align: center;
     color: #fff;
@@ -248,9 +260,9 @@ export default {
 }
 
 .commitBox {
-    float: right;
+    position: absolute;
+    right: 19px;
     line-height: 1;
-    margin-top: 36px;
-    margin-right: 19px;
+    bottom: 16.5px;
 }
 </style>

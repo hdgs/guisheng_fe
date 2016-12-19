@@ -83,6 +83,7 @@ export default {
 <style lang ="sass" module>
 @import '../scss/color.scss';
 .top {
+    z-index: 3;
     position: relative;
     background-color: $white;
     height: 54px;
