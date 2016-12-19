@@ -3,7 +3,7 @@
     <div :class = "$style.mask" v-show = "showComment" v-on:click = "closeComment"></div>
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml = "changeMessage" tabIndex = "-1" v-clear = "clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable = "true"></div>
+            <div v-iHtml = "changeMessage" tabIndex = "-1" v-clear = "clear" :class="$style.input" v-bind:style = "Comment" v-show="showComment" contenteditable = "true"></div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
