@@ -8,19 +8,21 @@
                 <span :class="$style.name">我是作者昵称</span>
         	</div>
         	<div :class="$style.avatar">
-        		<img :class="$style.avatarimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw">
-        		<div :class="$style.sign">
-        			<span>认证作者</span>
-        			<svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use></svg>
+        		<div :class="$style.avatarbox">
+	        		<img :class="$style.avatarimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw">
+	        		<div :class="$style.sign">
+	        			<span>认证作者</span>
+	        			<svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use></svg>
+	        		</div>
         		</div>
         	</div>
         	<div :class="$style.intro">个人介绍：这是作者的个人介绍。这个人好懒啊，他什么也没写但还是要凑字数。也许两行不够介绍，那就三行……</div>
         </div>
         <div :class="$style.list">
         	<div :class="$style.col">
-    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use></svg>
+    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#weibo"></use></svg>
         		<div :class="$style.text">
-        			<a>我的作品</a>
+        			<a>微博名称</a>
         			<a :class="$style.arrow">></a>
         		</div>
         	</div>
@@ -32,16 +34,30 @@
         		</div>
         	</div>
         	<div :class="$style.col">
-    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use></svg>
+    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#collection"></use></svg>
         		<div :class="$style.text">
-        			<a>我的作品</a>
+        			<a>我的收藏</a>
         			<a :class="$style.arrow">></a>
         		</div>
         	</div>
         	<div :class="$style.col">
     			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use></svg>
         		<div :class="$style.text">
-        			<a>我的作品</a>
+        			<a>他的作品</a>
+        			<a :class="$style.arrow">></a>
+        		</div>
+        	</div>
+        	<div :class="$style.col">
+    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#feedback"></use></svg>
+        		<div :class="$style.text">
+        			<a>意见反馈</a>
+        			<a :class="$style.arrow">></a>
+        		</div>
+        	</div>
+        	<div :class="$style.col">
+    			<svg viewBox="0 0 200 200" :class="$style.largeimg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modify"></use></svg>
+        		<div :class="$style.text">
+        			<a>修改信息</a>
         			<a :class="$style.arrow">></a>
         		</div>
         	</div>
@@ -113,9 +129,16 @@ html,body{
 }
 .avatar{
 	width: 100%;
-	height: 130px;
-	padding-top:18px;
+	height: 150px;
+	position: relative;
+}
+.avatarbox{
+	width: 200px;
 	text-align: center;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 .avatarimg{
 	width: 72px;
@@ -123,7 +146,7 @@ html,body{
 	border-radius: 50%;
 }
 .sign{
-	margin-top: 15px;
+	margin-top: 18px;
 	text-indent: 20px;
 	color: $orange;
 }
@@ -160,10 +183,17 @@ html,body{
 	color: #8a8a8a;
 }
 .signout{
-	width: 180px;
-	height: 36px;
+	display: block;
+	width: 190px;
+	height: 40px;
 	box-sizing: border-box;
 	border: 1px $orange solid;
 	background-color: $white;
+	margin:0 auto;
+	border-radius: 3%;
+	color:#fbb848;
+	font-size: 16px;
+	margin-top: 26px;
 }
+
 </style>
