@@ -1,7 +1,6 @@
 <template>
     <div id="xxx" :class="$style.picSecond" v-width="changeWidth">
         <div :class="$style.numBox">
-            <!-- <div :class="$style.back"> -->
             <svg viewBox="0 0 200 200" :class="$style.img">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
             </svg>
@@ -217,25 +216,19 @@ export default {
 @import '../../scss/color.scss';
 .picSecond {
     background-color: $white;
+    height: 90%;
 }
 
 .banner {
     width: 100%;
-    /*height: 240px;*/
     overflow: hidden;
 }
 
 .container {
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
-    /*height: 240px;*/
     float: left;
 }
-
-.banner img {
-    /*height: 240px;*/
-}
-
 .testbox {
     width: 100%;
     display: inline-block;
@@ -307,7 +300,7 @@ export default {
 .time {
     float: right;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
-    color: $grey_l;
+    color: #999;
     font-size: 12px;
 }
 
@@ -340,6 +333,7 @@ export default {
   float: right;
   margin-right: 4.5px;
   composes: common; 
+  fill: #999;
 }
 .view_img{
   width: 13px;

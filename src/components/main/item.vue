@@ -118,6 +118,7 @@
   float: right;
   margin-right: 4.5px;
   composes: common; 
+  fill:#999;
 }
 .view_img{
   width: 13px;
