@@ -49,8 +49,8 @@
         "endpoint": "/api/v1.0/everyDayPic",
         "async": true
     }, {
-        "name": "banner",
-        "endpoint": "/api/v1.0/banner/",
+        "name": "pics",
+        "endpoint": "/api/v1.0/pics",
         "async": true
     }, {
         "name": "article",
@@ -82,7 +82,7 @@
     }],
     "data": {
         "light": {
-            
+
         },
         "api.recommend_news": [{
             "kind": 0,
@@ -254,7 +254,7 @@
         "article": {
             "id": 0,
             "kind": 1,
-            "likes":12,
+            "commentCount": 12,
             "title": "这是一篇影评",
             "author": "这是作者昵称",
             "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
@@ -271,7 +271,7 @@
                 "film_img_url": "https://i.ytimg.com/vi/p9YUxx_A2V4/maxresdefault.jpg",
                 "score": "8.7"
             },
-            "like_degree": [1129,154,43]
+            "like_degree": [1129, 154, 43]
         },
         "comments": [{
             "id": 2,
@@ -292,28 +292,49 @@
             "comments": [],
             "like_count": 45
         }],
-        "banner": [{
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg",
-            "description": "这是图片一的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg",
-            "description": "这是图片二的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg",
-            "description": "这是图片三的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg",
-            "description": "这是图片四的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg",
-            "description": "这是图片五的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg",
-            "description": "这是图片六的描述"
-        }, {
-            "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg",
-            "description": "这是图片七的描述"
-        }],
+        "pics": {
+            "id":2,
+            "kind":2,
+            "title":"这是图集名称",
+            "author":"Mococo",
+            "commentCount":12,
+            "likes":233,
+            "views":201,
+            "time":"16-12-03",
+            "imgDescription":[{
+                    "description": "这是一段关于本图集内容的简介，内容原则上不应过多。 "
+                },{
+                    "description": "这是图片二的描述"
+                },{
+                    "description": "这是图片三的描述"
+                },{
+                    "description": "这是图片四的描述"
+                },{
+                    "description": "这是图片五的描述"
+                },{
+                    "description": "这是图片六的描述"
+                },{
+                    "description": "这是图片七的描述"
+                }
+            ],
+            "imgUrl":[{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg"
+                },{
+                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg"
+                }
+            ]
+        },
+
         "interaction": {
             "title": "互动标题",
             "author": "互动作者",

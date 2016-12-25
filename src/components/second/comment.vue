@@ -10,18 +10,24 @@
                 </svg>
             </div>
             <div :class="$style.imgsBox" v-show="!showComment">
-                <div :class="$style.imgBox1">
-                    <div :class="$style.commentCount">{{articleInfo.likes}}</div>
+                <div :class="$style.imgBox1" v-bind:style="BoxWidth">
+                    <div :class="$style.commentCount">{{articleInfo.commentCount}}</div>
                     <svg viewBox="0 0 200 200" :class="$style.img">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comment"></use>
                     </svg>
                 </div>
-                <div :class="$style.imgBox">
+                <div :class="$style.imgBox1" v-show = "articleInfo.kind == 2" v-bind:style="BoxWidth">
+                    <div :class="$style.likesCount">{{articleInfo.likes}}</div>
+                    <svg viewBox="0 0 200 200" :class="$style.img">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
+                    </svg>
+                </div>
+                <div :class="$style.imgBox" v-bind:style="BoxWidth">
                     <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="ClickChangeColor" v-bind:style="changeColor">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#collection_o" :class="$style.svg"></use>
                     </svg>
                 </div>
-                <div :class="$style.imgBox">
+                <div :class="$style.imgBox" v-bind:style="BoxWidth">
                     <svg viewBox="0 0 200 200" :class="$style.img">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#share"></use>
                     </svg>
@@ -66,11 +72,16 @@ export default {
                 articleInfo: {
                     id: 0,
                     kind: 0,
-                    likes: 0
+                    commentCount: 0
                 }
             }
         },
         computed: {
+            BoxWidth:function(){
+                return{
+                    width:this.articleInfo.kind == 2? '25%':'33.3%'
+                }
+            },
             changeColor: function () {
                 return {
                     fill: this.colorChange ? 'orange' : '#fff'
@@ -144,7 +155,7 @@ export default {
                         this.commentHolder = "写评论..."
                         this.showComment = false
                         this.clear = true
-                        this.articleInfo.likes++
+                        this.articleInfo.commentCount++
                     })
             },
             change: function (commentId) {
@@ -215,19 +226,17 @@ export default {
 
 .imgsBox {
     float: right;
-    width: 50%;
+    width: 57%;
     composes: space from 'sass-loader!../../scss/utility.scss';
 }
 
 .imgBox {
-    width: 33.3%;
     text-align: center;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
 
 .imgBox1 {
     position: relative;
-    width: 33.3%;
     text-align: center;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
@@ -240,15 +249,26 @@ export default {
 }
 
 .commentCount {
-    line-height: 13px;
+    line-height: 16px;
     position: absolute;
-    width: 16px;
-    height: 11px;
-    padding: 1px 2px;
-    top: 8px;
+    padding: 1px 3px;
+    top: 6px;
     vertical-align: middle;
     right: 20%;
-    border-radius: 3px;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    background-color: #ec6941;
+    font-size: 10px;
+}
+.likesCount {
+    line-height: 16px;
+    position: absolute;
+    padding:1px 3px;
+    top: 6px;
+    vertical-align: middle;
+    right: -1%;
+    border-radius: 4px;
     text-align: center;
     color: #fff;
     background-color: #ec6941;

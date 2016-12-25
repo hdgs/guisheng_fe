@@ -1,17 +1,40 @@
 <template>
-    <div id="xxx" v-width="changeWidth">
-        <div :class="$style.banner">
+    <div id="xxx" :class="$style.picSecond" v-width="changeWidth">
+        <div :class="$style.numBox">
+            <!-- <div :class="$style.back"> -->
+            <svg viewBox="0 0 200 200" :class="$style.img">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
+            </svg>
+            <div :class="$style.num">{{(i+1) + "/" + pics.length}}</div>
+        </div>
+        <div :class="$style.banner" v-bind:style="imgHeight">
             <div :class="$style.container" v-finger:swipeMove="onSwipe" v-finger:swipe="afterSwipe" v-finger:tap="showMask" v-bind:style="styleObject" v-transitionEnd="changeState">
                 <img alt="picture" v-bind:src="img.pic_url" v-bind:style="imgWidth" v-for="img in pics" v-radio="initImgRadio">
             </div>
         </div>
-        <div :class="$style.imgDescription">{{tappedImgDescription}}{{i+1}}/{{pics.length}}</div>
+        <div :class="$style.titleBox">
+            <div :class="$style.title">{{picInfo.title}}</div>
+            <div :class="$style.time">{{picInfo.time}}</div>
+        </div>
+        <div :class="$style.sline"></div>
+        <div :class="$style.imgDescription">
+            <div>{{tappedImgDescription}}</div>
+        </div>
+        <div :class="$style.bottom">
+            <div :class="$style.author">by {{picInfo.author}}</div>
+            <div :class="$style.views">{{picInfo.views}}</div>
+            <div :class="$style.views_img">
+                <svg viewBox="0 0 200 200" :class="$style.view_img">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use>
+                </svg>
+            </div>
+            <div :class="$style.tag">#图集#</div>
+        </div>
         <div v-show="ifTab" :class="$style.mask">
             <p v-finger:tap="hideMask" :class="$style.hideMaskBtn">关闭</p>
             <img v-bind:src="tappedImgSrc" v-finger:pintch="onPintch" v-bind:style="imgTransform" v-finger:doubleTap="imgScale" v-finger:swipeMove="imgSwipe" :class="$style.testbox">
         </div>
         <picComments ref="picComments"></picComments>
-    </div>
 </template>
 <script>
 import CssToMatrix from 'css-to-matrix'
@@ -31,12 +54,19 @@ export default {
             return {
                 transition: this.isSwitching ? '1s' : 'none',
                 transform: 'translateX(' + this.x + 'px)',
-                width: this.picWidth * this.pics.length + 'px'
+                width: this.picWidth * this.pics.length + 'px',
+                height:this.picHeight + 'px'
             }
         },
         imgWidth: function () {
             return {
-                width: this.picWidth + 'px'
+                width: this.picWidth + 'px',
+                height:this.picHeight + 'px'
+            }
+        },
+        imgHeight:function(){
+            return{
+                height:this.picHeight + 'px'
             }
         },
         imgTransform: function () {
@@ -55,6 +85,7 @@ export default {
             ix: 0,
             iy: 0,
             foo: 0,
+            picHeight:240,
             pics: [],
             picWidth: 500,
             screenHeight: 400,
@@ -64,20 +95,28 @@ export default {
             ifTab: false,
             imgRadioArr: [],
             tappedImgSrc: "",
-            tappedImgDescription: ""
+            tappedImgDescription: "",
+            picInfo: {}
         }
     },
     mounted() {
-        let promise1 = fetch("/api/v1.0/banner/").then((res) => {
+        let promise1 = fetch("/api/v1.0/pics").then((res) => {
             return res.json()
         })
         let promise2 = fetch("/api/v1.0/comments").then((res) => {
             return res.json()
         })
         Promise.all([promise1, promise2]).then(values => {
-            this.pics = values[0]
-            console.log(this.pics)
+            this.pics = values[0].imgUrl
+            this.descriptionImg = values[0].imgDescription
+            this.picInfo = values[0]
             this.$refs.picComments.obj = values[1]
+            this.$refs.picComments.articleInfo = {
+                    id: values[0].id,
+                    kind: values[0].kind,
+                    commentCount: values[0].commentCount,
+                    likes:values[0].likes
+                }
         })
     },
     components: {
@@ -134,8 +173,7 @@ export default {
                 this.x = -this.picWidth * this.i
             }
             this.isSwitching = true
-            this.tappedImgDescription = this.pics[this.i].description
-            console.log(this.pics.length, this.i)
+            this.tappedImgDescription = this.descriptionImg[this.i].description
         },
         changeState() {
             this.isSwitching = false
@@ -158,7 +196,9 @@ export default {
         },
         initImgRadio(radio, index) {
             this.imgRadioArr[index] = radio
-            this.tappedImgDescription = this.pics[this.i].description
+            this.picHeight = this.picWidth *0.75
+            console.log(this.picHeight)
+            this.tappedImgDescription = this.descriptionImg[this.i].description
         },
         imgScale() {
             if (this.customscale > 1.0) {
@@ -174,29 +214,26 @@ export default {
 }
 </script>
 <style lang='sass' module>
-html {
-    width: 100%;
-}
-
-body {
-    margin: 0;
+@import '../../scss/color.scss';
+.picSecond {
+    background-color: $white;
 }
 
 .banner {
     width: 100%;
-    height: 200px;
+    /*height: 240px;*/
     overflow: hidden;
 }
 
 .container {
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden;
-    height: 200px;
+    /*height: 240px;*/
     float: left;
 }
 
 .banner img {
-    height: 200px;
+    /*height: 240px;*/
 }
 
 .testbox {
@@ -207,8 +244,8 @@ body {
 
 .hideMaskBtn {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 10px;
+    top: 54px;
     color: #fff;
     z-index: 99;
 }
@@ -223,7 +260,8 @@ body {
 }
 
 .imgDescription {
-    text-align: center;
+    margin: 15px 10%;
+    font-size: 12.5px;
 }
 
 .mask:after {
@@ -233,4 +271,83 @@ body {
     display: inline-block;
     vertical-align: middle;
 }
+
+.numBox {
+    height: 40px;
+    line-height: 40px;
+    background-color: $black;
+    color: $white;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+}
+
+.img {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    width: 19px;
+    padding-left: 18px;
+    fill: $orange;
+}
+
+.num {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    text-align: center;
+    width: 85%;
+    font-size: 15px;
+}
+
+.titleBox {
+    margin: 15px 10%;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+}
+
+.title {
+    font-size: 15px;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+
+.time {
+    float: right;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    color: $grey_l;
+    font-size: 12px;
+}
+
+.sline {
+    height: 1px;
+    margin: 15px 10%;
+    background-color: $grey_l;
+}
+.bottom{
+  overflow: hidden;
+  padding: 0 10% 15px;
+  composes: space from 'sass-loader!../../scss/utility.scss';
+}
+.common{
+  color: #999999;
+  font-size: 12px;
+  composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+.author{
+  width: 30%;
+  float: left;
+  composes: common; 
+}
+.tag{
+  float: right;
+  margin-right: 17px;
+  composes: common; 
+}
+.views_img{
+  float: right;
+  margin-right: 4.5px;
+  composes: common; 
+}
+.view_img{
+  width: 13px;
+}
+.views{
+  float: right;
+  margin-right: 15px;
+  composes: common; 
+}
+
 </style>

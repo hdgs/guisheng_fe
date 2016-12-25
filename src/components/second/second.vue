@@ -53,7 +53,7 @@ export default {
                 this.$refs.articleComments.articleInfo = {
                     id: values[0].id,
                     kind: values[0].kind,
-                    likes: values[0].likes
+                    commentCount: values[0].commentCount
                 }
                 this.$refs.articleComments.obj = values[1]
         })
