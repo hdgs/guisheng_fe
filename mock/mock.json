@@ -275,20 +275,28 @@
         },
         "comments": [{
             "id": 2,
-            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
-            "message": "这篇文章真棒",
+            "name":"七宝",
+            "likes":434,
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+            "message": "这是一条作者评论，普通用户的头像无法点击，只有认证作者的头像可以点击。",
+            "time":"08:30",
+            "like_count": 45
+        }, {
+            "id": 3,
+            "name":"七宝",
+            "likes":21,
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+            "message": "这是一条用户评论，普通用户的头像无法点击，只有认证作者的头像可以点击。",
+            "time":"昨天 08:30",
             "comments": [],
             "like_count": 45
         }, {
             "id": 3,
-            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
-            "message": "这篇文章更棒",
-            "comments": [],
-            "like_count": 45
-        }, {
-            "id": 3,
-            "img_url": "http://www.360shuoshuo.com/d/file/tpss/3221e4feb0252e6790b92a563857eeed.jpg",
-            "message": "这篇文章最棒",
+            "name":"七宝",
+            "likes":3,
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+            "time":"09-27",
+            "message": "日期超过前天时，评论时间只显示月日。",
             "comments": [],
             "like_count": 45
         }],

@@ -294,12 +294,12 @@ export default {
 }
 .curNum{
     composes: horizon from 'sass-loader!../../scss/utility.scss';
-    font-size: 18px;
+    font-size: 20px;
     color: $orange;
 }
 .totalNum{
     composes: horizon from 'sass-loader!../../scss/utility.scss';
-    font-size: 14px;
+    font-size: 15px;
     color: #999;
 }
 .numBox {

@@ -1,9 +1,9 @@
 <template>
-    <div id="xxx" :class="$style.container" >
-    <div :class = "$style.mask" v-show = "showComment" v-on:click = "closeComment"></div>
+    <div id="xxx" :class="$style.container">
+        <div :class="$style.mask" v-show="showComment" v-on:click="closeComment"></div>
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml = "changeMessage" tabIndex = "-1" v-clear = "clear" :class="$style.input" v-bind:style = "Comment" v-show="showComment" contenteditable = "true"></div>
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true"></div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -16,7 +16,7 @@
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comment"></use>
                     </svg>
                 </div>
-                <div :class="$style.imgBox1" v-show = "articleInfo.kind == 2" v-bind:style="BoxWidth">
+                <div :class="$style.imgBox1" v-show="articleInfo.kind == 2" v-bind:style="BoxWidth">
                     <div :class="$style.likesCount">{{articleInfo.likes}}</div>
                     <svg viewBox="0 0 200 200" :class="$style.img">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
@@ -35,18 +35,34 @@
             </div>
             <!-- <button v-on:click="submit" :class="$style.button">提交</button> -->
         </div>
-        <!-- <div v-for="comment in obj" class="comment">
-            <p>{{comment.id}}</p>
-            <br>
-            <img v-bind:src="comment.img_url" alt="图片">
-            <br>
-            <br>
-            <button v-on:click="change(comment.id)" :class="$style.button">评论</button>
-            <br>
-            <br>
-            <p>{{comment.message}}</p>
-            <div>点赞数：{{comment.like_count}}</div>
-        </div> -->
+        <div :class="$style.commentPage">
+            <div :class="$style.titleBox">
+                <svg viewBox="0 0 200 200" :class="$style.imgBack">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
+                </svg>
+                <div :class="$style.commentTitle">评论区</div>
+            </div>
+            <div :class="$style.comment" v-for="comment in obj">
+                <img v-bind:src="comment.img_url" alt="头像" :class="$style.authorImg">
+                <svg viewBox="0 0 200 200" :class="$style.sign">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
+                </svg>
+                <div :class="$style.info">
+                    <div :class="$style.nameBox">
+                        <div :class="$style.name">{{comment.name}}</div>
+                        <div :class="$style.commentLike">
+                            <div :class = "$style.likeComments" v-on:click = "addCommentLike(comment.id)">{{comment.likes}}</div>
+                            <svg viewBox="0 0 200 200" :class="$style.imgLikes">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div :class="$style.content">{{comment.message}}</div>
+                    <div :class="$style.time">{{comment.time}}</div>
+                </div>
+            </div>
+            <div :class="$style.sline"></div>
+        </div>
     </div>
 </template>
 <script>
@@ -58,10 +74,10 @@ export default {
     data() {
             return {
                 showComment: false,
-                closeComment : true,
+                closeComment: true,
                 show: false,
-                clear:false,
-                submitted:false,
+                clear: false,
+                submitted: false,
                 colorChange: false,
                 focusFlag: false,
                 obj: [],
@@ -77,9 +93,9 @@ export default {
             }
         },
         computed: {
-            BoxWidth:function(){
-                return{
-                    width:this.articleInfo.kind == 2? '25%':'33.3%'
+            BoxWidth: function () {
+                return {
+                    width: this.articleInfo.kind == 2 ? '25%' : '33.3%'
                 }
             },
             changeColor: function () {
@@ -92,14 +108,14 @@ export default {
                     width: this.showComment ? '78.1%' : '40%',
                     height: this.showComment ? '' : '30px',
                     lineHeight: this.showComment ? '25px' : '',
-                    float:this.showComment?'left':''
+                    float: this.showComment ? 'left' : ''
                 }
             },
             commentBox: function () {
                 return {
                     height: this.showComment ? '' : '50px',
                     lineHeight: this.showComment ? '' : '50px',
-                    padding: this.showComment? '12.5px 0':''
+                    padding: this.showComment ? '12.5px 0' : ''
                 }
             },
             commit: function () {
@@ -111,16 +127,16 @@ export default {
         directives: {
             focus: Focus,
             blur: Blur,
-            iHtml:IHtml,
-            clear:Clear
+            iHtml: IHtml,
+            clear: Clear
         },
         methods: {
-            changeMessage:function(e){
+            changeMessage: function (e) {
                 this.clear = false
                 this.message = e
             },
-            closeComment:function(){
-                if(this.showComment) this.showComment = false
+            closeComment: function () {
+                if (this.showComment) this.showComment = false
             },
             activeComment: function (e) {
                 if (!this.showComment) this.showComment = true
@@ -131,7 +147,7 @@ export default {
             },
             submit: function (e) {
                 e.stopPropagation();
-                if(!this.message) return
+                if (!this.message) return
                 console.log(this.articleInfo)
                 fetch('/api/v1.0/comments', {
                         method: 'POST',
@@ -171,44 +187,39 @@ export default {
 }
 </script>
 <style lang ="sass" module>
-.mask{
+@import '../../scss/color.scss';
+.mask {
     position: fixed;
     width: 100%;
     background-color: rgba(229, 233, 233, 0.85);
     z-index: 2;
     bottom: 50px;
-    top:0;
+    top: 0;
 }
+
 .comment {
-    border: solid 1px yellow;
-    margin-top: 20px;
-    padding: 30px;
+    border-top: solid 1px $grey_l;
+    padding: 15px;
     width: 100%;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+}
+
+.sline {
+    height: 1px;
+    width: 100%;
+    background-color: $grey_l;
 }
 
 .container {
     width: 100%;
     overflow: hidden;
-    /*img {
-        width: 100%;
-    }*/
 }
-
-
-/*.button {
-    background-color: yellow;
-    border: 0;
-    outline: none;
-}*/
-
 .commentbox {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 3;
-    /*height: 50px;*/
-    /*line-height: 50px;*/
+    z-index: 5;
     background-color: #333;
 }
 
@@ -217,10 +228,10 @@ export default {
     outline: none;
     vertical-align: middle;
     border-radius: 4px;
-    border: #fff 1px solid;
+    border: $white 1px solid;
     padding: 2px 7px;
     margin-left: 10px;
-    color: #fff;
+    color: $white;
     box-sizing: border-box;
 }
 
@@ -257,21 +268,22 @@ export default {
     right: 20%;
     border-radius: 4px;
     text-align: center;
-    color: #fff;
-    background-color: #ec6941;
+    color: $white;
+    background-color: $orange_count;
     font-size: 10px;
 }
+
 .likesCount {
     line-height: 16px;
     position: absolute;
-    padding:1px 3px;
+    padding: 1px 3px;
     top: 6px;
     vertical-align: middle;
     right: -1%;
     border-radius: 4px;
     text-align: center;
-    color: #fff;
-    background-color: #ec6941;
+    color: $white;
+    background-color: $orange_count;
     font-size: 10px;
 }
 
@@ -284,5 +296,95 @@ export default {
     right: 19px;
     line-height: 1;
     bottom: 16.5px;
+}
+
+.commentPage {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: $white;
+    z-index: 4;
+}
+
+.imgBack {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    width: 19px;
+    padding-left: 18px;
+    fill: $orange;
+}
+
+.commentTitle {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    text-align: center;
+    width: 80%;
+    font-size: 17px;
+}
+
+.titleBox {
+    height: 52px;
+    width: 100%;
+    line-height: 52px;
+    color: $black;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+}
+
+.authorImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.sign {
+    fill: $orange;
+    width: 13px;
+    margin-left: -10px;
+}
+
+.info {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 13px;
+    width: 75%;
+    margin-left: 10px;
+}
+.nameBox{
+    composes: space from 'sass-loader!../../scss/utility.scss';
+}
+.name {
+    color: $orange;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    composes: space from 'sass-loader!../../scss/utility.scss';
+    font-size: 13px;
+}
+.commentLike{
+    float: right;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+.imgLikes{
+    fill: $black_t;
+    width: 15px;
+    height: 14px;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+.likeComments{
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    color: $black_t;
+    font-size: 13px;
+    margin-right: 10px;
+}
+.content{
+    padding: 15px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: $black;
+}
+.time{
+    margin-top: 15px;
+    color: $black_t;
+    font-size: 13px;
 }
 </style>
