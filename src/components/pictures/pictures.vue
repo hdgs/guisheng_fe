@@ -1,21 +1,25 @@
 <template>
     <div id="xxx" :class="$style.picSecond" v-width="changeWidth">
-        <div :class="$style.numBox">
+        <div :class="$style.titleBox">
             <svg viewBox="0 0 200 200" :class="$style.img">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
             </svg>
-            <div :class="$style.num">{{(i+1) + "/" + pics.length}}</div>
+            <div :class="$style.title">{{picInfo.title}}</div>
+        </div>
+         <div :class="$style.numBox">
+            <div :class="$style.time">{{picInfo.time}}</div>
+            <div :class="$style.picNum">
+                <div :class = "$style.curNum">{{i+1}}</div>
+                <div :class = "$style.totalNum">/{{pics.length}}</div>
+            </div>
         </div>
         <div :class="$style.banner" v-bind:style="imgHeight">
             <div :class="$style.container" v-finger:swipeMove="onSwipe" v-finger:swipe="afterSwipe" v-finger:tap="showMask" v-bind:style="styleObject" v-transitionEnd="changeState">
                 <img alt="picture" v-bind:src="img.pic_url" v-bind:style="imgWidth" v-for="img in pics" v-radio="initImgRadio">
             </div>
         </div>
-        <div :class="$style.titleBox">
-            <div :class="$style.title">{{picInfo.title}}</div>
-            <div :class="$style.time">{{picInfo.time}}</div>
-        </div>
-        <div :class="$style.sline"></div>
+       
+       
         <div :class="$style.imgDescription">
             <div>{{tappedImgDescription}}</div>
         </div>
@@ -29,6 +33,8 @@
             </div>
             <div :class="$style.tag">#图集#</div>
         </div>
+        <div :class="$style.sline"></div>
+        <div :class = "$style.editor">[责任编辑：{{picInfo.editor}}]</div>
         <div v-show="ifTab" :class="$style.mask">
             <p v-finger:tap="hideMask" :class="$style.hideMaskBtn">关闭</p>
             <img v-bind:src="tappedImgSrc" v-finger:pintch="onPintch" v-bind:style="imgTransform" v-finger:doubleTap="imgScale" v-finger:swipeMove="imgSwipe" :class="$style.testbox">
@@ -253,8 +259,9 @@ export default {
 }
 
 .imgDescription {
-    margin: 15px 10%;
-    font-size: 12.5px;
+    margin: 30px 10%;
+    color: $black;
+    font-size: 15px;
 }
 
 .mask:after {
@@ -265,7 +272,7 @@ export default {
     vertical-align: middle;
 }
 
-.numBox {
+.titleBox {
     height: 40px;
     line-height: 40px;
     background-color: $black;
@@ -280,28 +287,37 @@ export default {
     fill: $orange;
 }
 
-.num {
+.picNum {
     composes: horizon from 'sass-loader!../../scss/utility.scss';
-    text-align: center;
-    width: 85%;
-    font-size: 15px;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+    float: right;
 }
-
-.titleBox {
-    margin: 15px 10%;
+.curNum{
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    font-size: 18px;
+    color: $orange;
+}
+.totalNum{
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    font-size: 14px;
+    color: #999;
+}
+.numBox {
+    margin: 40px 10% 15px;
     composes: space from 'sass-loader!../../scss/utility.scss';
 }
 
 .title {
-    font-size: 15px;
+    text-align: center;
+    width: 80%;
+    font-size: 17px;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
 
 .time {
-    float: right;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
     color: #999;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .sline {
@@ -311,12 +327,12 @@ export default {
 }
 .bottom{
   overflow: hidden;
-  padding: 0 10% 15px;
+  padding: 0 10% 5px;
   composes: space from 'sass-loader!../../scss/utility.scss';
 }
 .common{
   color: #999999;
-  font-size: 12px;
+  font-size: 14px;
   composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
 .author{
@@ -343,5 +359,10 @@ export default {
   margin-right: 15px;
   composes: common; 
 }
-
+.editor{
+    margin:20px 10%;
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+}
 </style>
