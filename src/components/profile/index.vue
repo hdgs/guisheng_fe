@@ -87,6 +87,7 @@
                 <div :class="$style.commentTitle">我的作品</div>
             </div>
             <item :item="item" v-for="item in list"></item>
+            <div :class = "$style.tip">  Σ( ° △ °|||)已经没有了</div>
         </div>
     </div>
 </template>
@@ -273,6 +274,7 @@ body {
     position: absolute;
     width: 100%;
     top: 0;
+    bottom: 0;
     background-color: $grey;
     z-index: 4;
 }
@@ -298,5 +300,11 @@ body {
     color: $black;
     background-color: $white;
     composes: space from 'sass-loader!../../scss/utility.scss';
+}
+.tip{
+    text-align: center;
+    font-size: 17px;
+    color: $black_t;
+    padding: 15px;
 }
 </style>
