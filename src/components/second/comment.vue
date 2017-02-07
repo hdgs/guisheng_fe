@@ -1,9 +1,10 @@
 <template>
     <div id="xxx" :class="$style.container">
-        <div :class="$style.mask" v-show="showComment" v-on:click="closeComment"></div>
+        <!-- <div :class="$style.mask" v-show="showComment" ></div> -->
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true"></div>
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true">{{preMessage}}</div>
+            
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -12,7 +13,7 @@
             <div :class="$style.imgsBox" v-show="!showComment">
                 <div :class="$style.imgBox1" v-bind:style="BoxWidth">
                     <div :class="$style.commentCount">{{articleInfo.commentCount}}</div>
-                    <svg viewBox="0 0 200 200" :class="$style.img">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="activeComment">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#comment"></use>
                     </svg>
                 </div>
@@ -35,24 +36,24 @@
             </div>
             <!-- <button v-on:click="submit" :class="$style.button">提交</button> -->
         </div>
-        <div :class="$style.commentPage">
+        <div :class="$style.commentPage" v-show="showComment">
             <div :class="$style.titleBox">
-                <svg viewBox="0 0 200 200" :class="$style.imgBack">
+                <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <div :class="$style.comment" v-for="comment in obj">
+            <div :class="$style.comment" v-for="comment in obj" v-on:click = "commentOthers(comment)">
                 <img v-bind:src="comment.img_url" alt="头像" :class="$style.authorImg">
-                <svg viewBox="0 0 200 200" :class="$style.sign">
+                <svg viewBox="0 0 200 200" :class="$style.sign" v-show="comment.user_role == 1">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
                 </svg>
                 <div :class="$style.info">
                     <div :class="$style.nameBox">
                         <div :class="$style.name">{{comment.name}}</div>
                         <div :class="$style.commentLike">
-                            <div :class = "$style.likeComments" v-on:click = "addCommentLike(comment.id)">{{comment.likes}}</div>
-                            <svg viewBox="0 0 200 200" :class="$style.imgLikes">
+                            <div :class="$style.likeComments" v-bind:style="changeWordColor">{{comment.likes}}</div>
+                            <svg viewBox="0 0 200 200" :class="$style.imgLikes" v-bind:style="changeLikeColor" v-on:click="addCommentLike(comment)">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
                             </svg>
                         </div>
@@ -80,8 +81,12 @@ export default {
                 submitted: false,
                 colorChange: false,
                 focusFlag: false,
-                obj: [],
+                curi: 0,
+                obj: [{
+                    greatComment: false
+                }],
                 message: "",
+                preMessage: "",
                 onShow: false,
                 currentCommentId: -1,
                 commentHolder: "写评论...",
@@ -93,6 +98,16 @@ export default {
             }
         },
         computed: {
+            changeWordColor: function () {
+                return {
+                    color: this.greatComment ? 'orange' : '',
+                }
+            },
+            changeLikeColor: function () {
+                return {
+                    fill: this.greatComment ? 'orange' : ''
+                }
+            },
             BoxWidth: function () {
                 return {
                     width: this.articleInfo.kind == 2 ? '25%' : '33.3%'
@@ -131,8 +146,15 @@ export default {
             clear: Clear
         },
         methods: {
+            commentOthers: function(comment){
+                console.log(comment,this.message)
+                this.preMessage = "@" + comment.name + ":"
+                console.log(this.preMessage)
+
+            },
             changeMessage: function (e) {
                 this.clear = false
+                console.log(e)
                 this.message = e
             },
             closeComment: function () {
@@ -159,6 +181,7 @@ export default {
                             comment_id: this.currentCommentId,
                             article_id: this.articleInfo.id,
                             kind: this.articleInfo.kind,
+                            // user_id: 
                             message: this.message
                         })
                     })
@@ -182,6 +205,16 @@ export default {
             changeHolder: function () {
                 this.commentHolder = "写评论..."
                 this.focusFlag = false
+            },
+            addCommentLike: function (comment) {
+                var index = this.obj.indexOf(comment)
+                console.log(index)
+
+                // if (this.greatComment[index]) return
+                this.obj[index].likes++
+                //     this.curi = index
+                // this.greatComment[this.curi] = true
+                // console.log(this.curi, this.greatComment[this.curi], "0", this.greatComment[0], this.greatComment[1], this.greatComment[2])
             }
         }
 }
@@ -202,6 +235,7 @@ export default {
     padding: 15px;
     width: 100%;
     composes: space from 'sass-loader!../../scss/utility.scss';
+    position: relative;
 }
 
 .sline {
@@ -214,6 +248,7 @@ export default {
     width: 100%;
     overflow: hidden;
 }
+
 .commentbox {
     position: fixed;
     bottom: 0;
@@ -299,7 +334,7 @@ export default {
 }
 
 .commentPage {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     background-color: $white;
@@ -342,6 +377,8 @@ export default {
     fill: $orange;
     width: 13px;
     margin-left: -10px;
+    position: absolute;
+    top: 42px;
 }
 
 .info {
@@ -351,38 +388,45 @@ export default {
     width: 75%;
     margin-left: 10px;
 }
-.nameBox{
+
+.nameBox {
     composes: space from 'sass-loader!../../scss/utility.scss';
 }
+
 .name {
     color: $orange;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
     composes: space from 'sass-loader!../../scss/utility.scss';
     font-size: 13px;
 }
-.commentLike{
+
+.commentLike {
     float: right;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
-.imgLikes{
+
+.imgLikes {
     fill: $black_t;
     width: 15px;
     height: 14px;
     composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
-.likeComments{
+
+.likeComments {
     composes: horizon from 'sass-loader!../../scss/utility.scss';
     color: $black_t;
     font-size: 13px;
     margin-right: 10px;
 }
-.content{
+
+.content {
     padding: 15px 0;
     font-size: 13px;
     line-height: 1.5;
     color: $black;
 }
-.time{
+
+.time {
     margin-top: 15px;
     color: $black_t;
     font-size: 13px;

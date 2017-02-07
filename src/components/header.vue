@@ -160,7 +160,7 @@ export default {
     font-size: 16px;
     background-color: $orange_button;
     color: $white;
-    padding: 7.5px 16px;
+    padding: 4.5px 16px;
     composes: horizon from 'sass-loader!../scss/utility.scss';
 }
 

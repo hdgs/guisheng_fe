@@ -66,7 +66,6 @@
 }
 .description{
   font-size: 14px;
-  font-weight: 100;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;

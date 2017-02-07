@@ -1,12 +1,29 @@
 <template>
     <div id="xxx" :class="$style.container">
-        <div :class="$style.film" v-show="article.film.film_url.length">
+        <!-- <div :class="$style.film" v-show="article.film.film_url.length">
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
                     <div :class="$style.score">豆瓣评分：{{article.film.score}} > </div>
                 </div>
             </a>
+        </div> -->
+        <div v-show="article.music.music_url.length" :class="$style.musicBox">
+            <img v-bind:src="article.music.img_url" alt="" :class="$style.music_pis">
+            <div :class = "$style.music_mask"></div>
+            <!-- <embed src="http://music.163.com/#/m/song?id=5054921"> -->
+            <a href="http://music.163.com/#/m/song?id=5054921" >
+                <!-- <svg viewBox="0 0 200 200" :class="$style.stop">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stop"></use>
+                </svg> -->
+                <svg viewBox="0 0 200 200" :class="$style.stop">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#play"></use>
+                </svg>
+            </a>
+            <div :class="$style.music_info">
+                <div :class="$style.Mtitle">{{article.music.title}}</div>
+                <div :class="$style.singer">{{article.music.singer}}</div>
+            </div>
         </div>
         <div :class="$style.title">{{article.title}}</div>
         <div :class="$style.box">
@@ -23,7 +40,7 @@
         <div :class="$style.line"></div>
         <div :class="$style.lightBox">
             <div :class="$style.light" v-on:click="like(index)" v-for="(item, index) in article.like_degree">
-                <div :class="$style.lightImg"><img v-bind:src="Imgs[index]" alt="" :class="$style.img"></div>
+                <div :class="$style.lightImg"><img v-bind:src="Imgs[index]" :class="$style.img"></div>
                 <div :class="(change == index)? $style.lightWordBox_hover:$style.lightWordBox">
                     <div :class="$style.word">{{words[index]}}</div>
                     <div :class="$style.count">{{item}}</div>
@@ -40,11 +57,11 @@ import radioDirective from '../../directives/getradio'
 export default {
     data() {
             return {
-                likes:0,
-                flag : 0,
+                likes: 0,
+                flag: 0,
                 change: -1,
-                words:["好棒","懵圈","什么鬼"],
-                Imgs:["http://uncovercalifornia.com/sites/default/files/fav_1.png","http://1.bp.blogspot.com/_7uD3j6SER8I/TAP06Np7QMI/AAAAAAAAACA/QTpgP0tfuow/S1600-R/apple-logo.png","http://www.clker.com/cliparts/a/b/b/e/13364301771789444757ShadedRainbowFlowersvg.svg.hi.png"],
+                words: ["不错耶", "好喜欢", "什么鬼"],
+                Imgs: ["../../img/great.png", "../../img/likeit.png", "../../img/what.png"],
                 article: {
                     "id": 0,
                     "kind": 0,
@@ -52,13 +69,19 @@ export default {
                         "film_url": "",
                         "film_img_url": "",
                         "score": ""
+                    },
+                    "music": {
+                        "title": "",
+                        "img_url": "",
+                        "music_url": "",
+                        "singer": ""
                     }
                 }
             }
         },
         methods: {
             like(index) {
-                if(this.flag) return
+                if (this.flag) return
                 fetch('/api/v1.0/light/', {
                         method: 'POST',
                         headers: {
@@ -75,15 +98,31 @@ export default {
                         return res.json()
                     }).then(value => {
                         this.article.like_degree[index]++
-                        this.flag = 1
+                            this.flag = 1
                         this.change = index
                     })
             }
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../../scss/color.scss';
+.music_mask{
+    background-color:rgba(51,51,51,0.35);
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    width: 50%;
+    height: 100px;
+    left:0;
+    position:absolute;
+}
+.stop {
+    fill: orange;
+    position: absolute;
+    width: 50px;
+    left: 20%;
+    top: 75px;
+}
+
 .container {
     background-color: $white;
 }
@@ -95,6 +134,10 @@ export default {
 
 .film {
     position: relative;
+}
+
+.musicBox {
+    composes: space from 'sass-loader!../../scss/utility.scss';
 }
 
 .scoreMask {
@@ -129,6 +172,34 @@ export default {
 
 .img {
     width: 100%;
+}
+
+.music_pis {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    width: 50%;
+    height: 100px;
+    position: relative;
+}
+
+.music_info {
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    height: 100px;
+    border-bottom: $grey_l 1px solid;
+    border-top: $grey_l 1px solid;
+    width: 50%;
+    font-size: 14px;
+    font-family: '华文黑体';
+}
+
+.Mtitle {
+    color: black;
+    margin-left: 11px;
+}
+
+.singer {
+    margin-left: 11px;
+    margin-top: 57.5px;
+    color: $black_t;
 }
 
 .box {
@@ -212,12 +283,13 @@ export default {
 }
 
 .word {
-    margin-top: 13.5px;
+    margin-top: 10.5px;
 }
 
-.count {
+
+/*.count {
     margin-top: 7.5px;
-}
+}*/
 
 .ad {
     width: 100%;
