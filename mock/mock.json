@@ -84,11 +84,32 @@
         "endpoint": "/api/v1.0/light/",
         "async": true
     },{
+        "name":"suggestionSubmit",
+        "method":"post",
+        "endpoint":"/api/v1.0/profile/suggestion/",
+        "async":true
+    },{
         "name":"profileWork",
         "endpoint":"/api/v1.0/profile/works",
         "async":true
+    },{
+        "name":"profileCollection",
+        "endpoint":"/api/v1.0/profile/collection",
+        "async":true
     }],
     "data": {
+        "suggestionSubmit":{
+            "response":"成功"
+        },
+        "profileCollection":[{
+             "article_id":1,
+            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title":"这是水墨的一篇文章",
+            "author":"汪曾祺",
+            "views":"201",
+            "tag":"人物",
+            "description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }],
         "profileWork":[{
              "article_id":1,
             "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
