@@ -4,7 +4,6 @@
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
             <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true">{{preMessage}}</div>
-            
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -19,7 +18,7 @@
                 </div>
                 <div :class="$style.imgBox1" v-show="articleInfo.kind == 2" v-bind:style="BoxWidth">
                     <div :class="$style.likesCount">{{articleInfo.likes}}</div>
-                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click = "likePicture">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="likePicture">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
                     </svg>
                 </div>
@@ -43,7 +42,7 @@
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <div :class="$style.comment" v-for="comment in obj" v-on:click = "commentOthers(comment)">
+            <div :class="$style.comment" v-for="comment in obj" v-on:click="commentOthers(comment)">
                 <img v-bind:src="comment.img_url" alt="头像" :class="$style.authorImg">
                 <svg viewBox="0 0 200 200" :class="$style.sign" v-show="comment.user_role == 1">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
@@ -84,8 +83,12 @@ export default {
                 curi: 0,
                 obj: [{
                     greatComment: false
+                },{
+                    greatComment:false
+                },{
+                    greatComment:false
                 }],
-                liked:false,
+                liked: false,
                 message: "",
                 preMessage: "",
                 onShow: false,
@@ -101,7 +104,7 @@ export default {
         computed: {
             changeWordColor: function () {
                 return {
-                    color: this.greatComment ? 'orange' : '',
+                    color: this.obj[this.curi].greatComment ? 'orange' : '',
                 }
             },
             changeLikeColor: function () {
@@ -147,23 +150,23 @@ export default {
             clear: Clear
         },
         methods: {
-            likePicture(){
-                if(this.liked) return
-                fetch("/api/v1.0/like/picture",{
-                    method:'POST',
-                    headers:{
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
+            likePicture() {
+                if (this.liked) return
+                fetch("/api/v1.0/like/picture", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body:JSON.stringify({
-                        picture_id:this.articleInfo.id
+                    body: JSON.stringify({
+                        picture_id: this.articleInfo.id
                     })
                 })
                 this.articleInfo.likes++
-                this.liked = true
+                    this.liked = true
             },
-            commentOthers: function(comment){
-                console.log(comment,this.message)
+            commentOthers: function (comment) {
+                console.log(comment, this.message)
                 this.preMessage = "@" + comment.name + ":"
                 console.log(this.preMessage)
 
@@ -183,19 +186,18 @@ export default {
                 if (this.colorChange) {
                     this.colorChange = false
 
-                }
-                else this.colorChange = true
-                    console.log
-                var apiName = this.colorChange?"/api/v1.0/collect_delete/":"/api/v1.0/collect/"
-                fetch(apiName,{
-                    method:'POST',
-                    headers:{
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'
+                } else this.colorChange = true
+                console.log
+                var apiName = this.colorChange ? "/api/v1.0/collect_delete/" : "/api/v1.0/collect/"
+                fetch(apiName, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body:JSON.stringify({
-                        kind:this.articleInfo.kind,
-                        article_id:this.articleInfo.id
+                    body: JSON.stringify({
+                        kind: this.articleInfo.kind,
+                        article_id: this.articleInfo.id
                     })
                 })
             },
@@ -240,17 +242,28 @@ export default {
             addCommentLike: function (comment) {
                 var index = this.obj.indexOf(comment)
                 console.log(index)
-
-                // if (this.greatComment[index]) return
+                fetch("/api/v1.0/like/comment", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            comment_id: this.currentCommentId
+                        })
+                    })
+                    if (this.obj[index].greatComment) return
+                        console.log(this.comment)
                 this.obj[index].likes++
-                //     this.curi = index
-                // this.greatComment[this.curi] = true
-                // console.log(this.curi, this.greatComment[this.curi], "0", this.greatComment[0], this.greatComment[1], this.greatComment[2])
+                this.obj[index].greatComment = true
+                        this.curi = index
+                    // this.greatComment[this.curi] = true
+                    console.log(this.curi, this.obj[0].greatComment, this.obj[1].greatComment, this.obj[2].greatComment)
             }
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../../scss/color.scss';
 .mask {
     position: fixed;
