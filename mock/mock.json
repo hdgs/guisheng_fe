@@ -79,6 +79,12 @@
         "endpoint": "/api/v1.0/feed",
         "async": true
     }, {
+        "name": "editInfo",
+        "method": "put",
+        "endpoint": "/api/v1.0/profile/edit",
+        "async": true
+    }, 
+    {
         "name": "light",
         "method": "post",
         "endpoint": "/api/v1.0/light/",
@@ -96,10 +102,32 @@
         "name":"profileCollection",
         "endpoint":"/api/v1.0/profile/collection",
         "async":true
+    },{
+        "name":"collect",
+        "method":"post",
+        "endpoint":"/api/v1.0/collect",
+        "async":true
+    },{
+        "name":"collect_delete",
+        "method":"post",
+        "endpoint":"/api/v1.0/collect_delete",
+        "async":true
+    },{
+        "name":"likePicture",
+        "method":"post",
+        "endpoint":"/api/v1.0/like/picture",
+        "async":true
     }],
     "data": {
         "suggestionSubmit":{
             "response":"成功"
+        },
+        "editInfo":{
+            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "name":"七宝",
+            "user_role":0, 
+            "weibo":"七宝",  
+            "introduction":"个人信息介绍"
         },
         "profileCollection":[{
              "article_id":1,
@@ -291,12 +319,13 @@
             "img_url": "http://pics.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg",
             "name": "hahaha",
             "weibo": "这是作者的微博昵称",
-            "introduction": "个人介绍：这是作者的个人介绍。这个人好懒啊，他什么也没写但还是要凑字数。也许两行不够介绍，那就三行……",
+            "introduction": "这是作者的个人介绍。这个人好懒啊，他什么也没写但还是要凑字数。也许两行不够介绍，那就三行……",
             "works": "这是个人作品",
             "collection": "这是个人收藏",
             "suggestion": "这里有一些个人简介",
             "bg_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
-            "user_role":0
+            "user_role":1,
+            "role":0
         },
         "pics": {
             "title": "这里会返回一串html页面展示为图片二级页面"

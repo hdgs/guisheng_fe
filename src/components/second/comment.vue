@@ -19,7 +19,7 @@
                 </div>
                 <div :class="$style.imgBox1" v-show="articleInfo.kind == 2" v-bind:style="BoxWidth">
                     <div :class="$style.likesCount">{{articleInfo.likes}}</div>
-                    <svg viewBox="0 0 200 200" :class="$style.img">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click = "likePicture">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
                     </svg>
                 </div>
@@ -85,6 +85,7 @@ export default {
                 obj: [{
                     greatComment: false
                 }],
+                liked:false,
                 message: "",
                 preMessage: "",
                 onShow: false,
@@ -146,6 +147,21 @@ export default {
             clear: Clear
         },
         methods: {
+            likePicture(){
+                if(this.liked) return
+                fetch("/api/v1.0/like/picture",{
+                    method:'POST',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        picture_id:this.articleInfo.id
+                    })
+                })
+                this.articleInfo.likes++
+                this.liked = true
+            },
             commentOthers: function(comment){
                 console.log(comment,this.message)
                 this.preMessage = "@" + comment.name + ":"
@@ -164,8 +180,24 @@ export default {
                 if (!this.showComment) this.showComment = true
             },
             ClickChangeColor: function () {
-                if (this.colorChange) this.colorChange = false
+                if (this.colorChange) {
+                    this.colorChange = false
+
+                }
                 else this.colorChange = true
+                    console.log
+                var apiName = this.colorChange?"/api/v1.0/collect_delete/":"/api/v1.0/collect/"
+                fetch(apiName,{
+                    method:'POST',
+                    headers:{
+                        'Accept':'application/json',
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        kind:this.articleInfo.kind,
+                        article_id:this.articleInfo.id
+                    })
+                })
             },
             submit: function (e) {
                 e.stopPropagation();
@@ -181,7 +213,6 @@ export default {
                             comment_id: this.currentCommentId,
                             article_id: this.articleInfo.id,
                             kind: this.articleInfo.kind,
-                            // user_id: 
                             message: this.message
                         })
                     })

@@ -1,13 +1,13 @@
 <template>
     <div id="xxx" :class="$style.container">
-        <!-- <div :class="$style.film" v-show="article.film.film_url.length">
+        <div :class="$style.film" v-show="article.film.film_url.length">
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
                     <div :class="$style.score">豆瓣评分：{{article.film.score}} > </div>
                 </div>
             </a>
-        </div> -->
+        </div>
         <div v-show="article.music.music_url.length" :class="$style.musicBox">
             <img v-bind:src="article.music.img_url" alt="" :class="$style.music_pis">
             <div :class = "$style.music_mask"></div>

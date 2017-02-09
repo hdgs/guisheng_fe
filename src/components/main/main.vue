@@ -43,6 +43,7 @@ export default {
       return res.json()
     }).then(value=>{
       this.pic = value
+      // console.log(this.$router)
     })
 	},
 	data (){

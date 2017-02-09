@@ -12,7 +12,7 @@
             <div :class="$style.avatar">
                 <div :class="$style.avatarbox">
                     <img :class="$style.avatarimg" v-bind:src="profile.img_url">
-                    <div :class="$style.sign" v-show="!profile.user_role">
+                    <div :class="$style.sign" v-show="!profile.role">
                         <span>认证作者</span>
                         <svg viewBox="0 0 200 200" :class="$style.img">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
@@ -20,10 +20,10 @@
                     </div>
                 </div>
             </div>
-            <div :class="$style.intro">{{profile.introduction}}</div>
+            <div :class="$style.intro">个人介绍：{{profile.introduction}}</div>
         </div>
         <div :class="$style.list">
-            <div :class="$style.col" v-show="!profile.user_role">
+            <div :class="$style.col" v-show="!profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#weibo"></use>
                 </svg>
@@ -41,7 +41,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col">
+            <div :class="$style.col" v-show = "profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#collection"></use>
                 </svg>
@@ -50,16 +50,16 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="showMyWorks">
+            <div :class="$style.col" v-on:click="showMyWorks" v-show = "profile.user_role && !profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use>
                 </svg>
-                <div :class="$style.text" >
+                <div :class="$style.text">
                     <a>他的作品</a>
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click = "showMySuggest">
+            <div :class="$style.col" v-on:click="showMySuggest" v-show = "profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#feedback"></use>
                 </svg>
@@ -68,7 +68,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col">
+            <div :class="$style.col" v-on:click="messageChange" v-show = "profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modify"></use>
                 </svg>
@@ -78,14 +78,14 @@
                 </div>
             </div>
         </div>
-        <button :class="$style.signout" v-on:click = "showReturn">登出</button>
-        <div v-show = "returnIt" :class = "$style.suggestMask">
-                <div :class = "$style.returnCard">
-                    <div :class= "$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
-                    <div :class= "$style.returnButton">退出</div>
-                    <div :class= "$style.returnButton" v-on:click = "quit">取消</div>
-                </div>
+        <button :class="$style.signout" v-on:click="showReturn" v-show = "profile.role == profile.user_role">登出</button>
+        <div v-show="returnIt" :class="$style.suggestMask">
+            <div :class="$style.returnCard">
+                <div :class="$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
+                <div :class="$style.returnButton">退出</div>
+                <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
+        </div>
         <div v-show="showWorks" :class="$style.commentPage">
             <div :class="$style.titleBox">
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
@@ -94,7 +94,7 @@
                 <div :class="$style.commentTitle">{{this.title}}</div>
             </div>
             <item :item="item" v-for="item in list"></item>
-            <div :class = "$style.tip">  Σ( ° △ °|||)已经没有了</div>
+            <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
         </div>
         <div v-show="showSuggest" :class="$style.suggestPage">
             <div :class="$style.titleBox">
@@ -103,29 +103,53 @@
                 </svg>
                 <div :class="$style.commentTitle">意见反馈</div>
             </div>
-            <div :class = "$style.line"></div>
-            <div :class = "$style.title_s">您的意见：</div>
-            <textarea type="text" :class = "$style.input" placeholder="输入您的反馈详情" v-model = "suggest"></textarea>
-            <div :class = "$style.title_s">联系方式：</div>
-            <textarea type="text" :class = "$style.inputInfo" placeholder="手机号码/QQ/邮箱" v-model = "suggestInfo"></textarea>
-            <button :class="$style.signout" v-on:click = "submitSuggest">提交</button>
-            <div v-show = "showSuccess" :class = "$style.suggestMask">
-                <div :class = "$style.successCard">提交成功啦 ~</div>
+            <div :class="$style.line"></div>
+            <div :class="$style.title_s">您的意见：</div>
+            <textarea type="text" :class="$style.input" placeholder="输入您的反馈详情" v-model="suggest"></textarea>
+            <div :class="$style.title_s">联系方式：</div>
+            <textarea type="text" :class="$style.inputInfo" placeholder="手机号码/QQ/邮箱" v-model="suggestInfo"></textarea>
+            <button :class="$style.signout" v-on:click="submitSuggest">提交</button>
+            <div v-show="showSuccess" :class="$style.suggestMask">
+                <div :class="$style.successCard">提交成功啦 ~</div>
             </div>
         </div>
-
-        <div v-show = "changeMessage" :class="$style.suggestPage">
+        <div v-show="changeMessage" :class="$style.suggestPage">
             <div :class="$style.titleBox">
-                <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#right"></use>
-                </svg>
-                <div :class="$style.commentTitle">个人信息</div>
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wrong"></use>
                 </svg>
+                <div :class="$style.commentTitle">个人信息</div>
+                <svg viewBox="0 0 200 200" :class="$style.imgRight" v-on:click="submitChange">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#right"></use>
+                </svg>
+            </div>
+            <div :class="$style.changeAvatar">
+                <div :class="$style.avatarbox">
+                    <img :class="$style.avatarimgchange" v-bind:src="profile.img_url">
+                     <div :class="$style.camera">
+                        <svg viewBox="0 0 200 200" :class="$style.imgCamera" v-on:click = "submitChange">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#camera"></use>
+                        </svg>
+                    </div>
+                    <div :class="$style.changeButton">修改头像</div>
+                </div>
+            </div>
+            <div :class="$style.changeInfo">
+                    <span :class="$style.nameF">昵称：</span>
+                    <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.name}}</span>
+                    <textarea type="text" v-show = "editChange" v-model="newName" :class = "$style.newName" autofocus rows="1" v-bind:placeholder="profile.name"></textarea>
+            </div>
+            <div :class="$style.changeInfo">
+                    <span :class="$style.nameF" v-on:click = "editName">简介：</span>
+                     <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.introduction}}</span>
+                      <textarea type="text" v-show = "editChange" v-model="newIntroduction" :class = "$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
+            </div>
+            <div :class="$style.changeInfo" v-show = "!profile.user_role">
+                    <span :class="$style.nameF" v-on:click = "editName">微博：</span>
+                     <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.weibo}}</span>
+                      <textarea type="text" v-show = "editChange" v-model="newWeibo" :class = "$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo"></textarea>
             </div>
         </div>
-
     </div>
 </template>
 <script>
@@ -138,12 +162,17 @@ export default {
                 profile: {},
                 showWorks: false,
                 list: [],
-                title:"",
-                showSuggest:false,
-                showSuccess:false,
-                suggest:"",
-                suggestInfo:"",
-                returnIt:false
+                title: "",
+                showSuggest: false,
+                showSuccess: false,
+                suggest: "",
+                suggestInfo: "",
+                returnIt: false,
+                changeMessage: false,
+                editChange:false,
+                newName:"",
+                newIntroduction:"",
+                newWeibo:""
             }
         },
         components: {
@@ -155,55 +184,89 @@ export default {
             }).then(value => {
                 console.log(value)
                 this.profile = value
+                
             })
         },
         methods: {
-            showReturn(){
+            messageChange() {
+                this.changeMessage = true
+            },
+            showReturn() {
                 this.returnIt = true
+            },
+            editName(){
+                this.editChange = true
+            },
+            submitChange(){
+                if(!this.editChange) return
+                fetch('/api/v1.0/profile/edit/', {
+                        method: 'PUT',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: this.newName? this.newName: this.profile.name,
+                            introduction: this.newIntroduction? this.newIntroduction: this.profile.introduction,
+                            weibo: this.newWeibo? this.newWeibo:this.profile.weibo
+                        })
+                    })
+                    .then(res => {
+                        return res.json()
+                    }).then(value => {
+                        console.log(value, this.showSuccess)
+                        this.profile = value
+                        this.changeMessage = false
+                        this.editChange = false
+                    })
             },
             showMyWorks() {
                 this.showWorks = true
-                fetch('/api/v1.0/profile/works').then( res => {
+                fetch('/api/v1.0/profile/works').then(res => {
                     return res.json()
-                }).then( value => {
+                }).then(value => {
                     this.list = value
                     console.log(value)
                     this.title = "我的作品"
                 })
             },
-            quit(){
+            quit() {
                 this.returnIt = false
             },
-            showCollection(){
+            showCollection() {
                 this.showWorks = true
-                fetch('/api/v1.0/profile/collection').then( res => {
+                fetch('/api/v1.0/profile/collection').then(res => {
                     return res.json()
-                }).then( value => {
+                }).then(value => {
                     this.list = value
                     console.log(value)
                     this.title = "我的收藏"
                 })
             },
             closeComment() {
-                if(this.showWorks)
+                if (this.showWorks)
                     this.showWorks = false
-                if(this.showSuggest){
+                if (this.showSuggest) {
                     this.showSuggest = false
                     this.suggestion = ""
                     this.suggestInfo = ""
                 }
+                if (this.changeMessage){
+                    this.changeMessage = false
+                    this.editChange = false
+                }
             },
-            showMySuggest(){
+            showMySuggest() {
                 this.showSuggest = true
             },
-            closeIt(){
+            closeIt() {
                 this.showSuggest = false
                 this.showSuccess = false
                 console.log(this.showSuccess)
             },
-            submitSuggest(){
-                console.log(this.suggestInfo,this.suggest)
-                if(!this.suggest|| !this.suggestInfo) return
+            submitSuggest() {
+                console.log(this.suggestInfo, this.suggest)
+                if (!this.suggest || !this.suggestInfo) return
                 fetch('/api/v1.0/profile/suggestion/', {
                         method: 'POST',
                         headers: {
@@ -218,16 +281,16 @@ export default {
                     .then(res => {
                         return res.json()
                     }).then(value => {
-                        console.log(value,this.showSuccess)
+                        console.log(value, this.showSuccess)
                         this.showSuccess = true
                         this.suggestion = ""
                         console.log(this.showSuccess)
                         this.suggestInfo = ""
-                        setTimeout( () => {
+                        setTimeout(() => {
                             this.showSuggest = false
                             this.showSuccess = false
                             console.log(this.showSuccess)
-                        },2000)
+                        }, 2000)
 
                     })
             }
@@ -242,42 +305,82 @@ body {
     width: 100%;
     height: 100%;
 }
-textarea{
+.newName{
+    font-size: 15px;
+}
+textarea {
     outline: none;
+    width: 100%;
     border: none;
 }
-.returnCard{
+
+.changeInfo {
+    border-bottom: 0.5px solid $grey;
+    padding: 15px 20px;
+    font-size: 15px;
+}
+
+.changeButton {
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: $black_t;
+}
+.nameF{
+    color:$black_t;
+}
+.changeAvatar {
+    height: 215px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    border-top: 0.5px $grey solid;
+    border-bottom: 0.5px $grey solid;
+}
+
+.imgRight {
+    width: 24px;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    fill: $orange;
+}
+
+.returnCard {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 250px;
     height: 90px;
     background-color: $white;
-    color:$black;
+    color: $black;
     padding: 15px;
     border-radius: 2px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
-.returnButton{
+
+.returnButton {
     float: right;
     margin-left: 25px;
     color: $orange;
     cursor: pointer;
     margin-top: 16px;
 }
-.line{
+
+.line {
     width: 100%;
     height: 0.5px;
     background-color: $grey;
 }
-.suggestMask{
+
+.suggestMask {
     position: fixed;
     top: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgba(51,51,51,0.85);
+    background-color: rgba(51, 51, 51, 0.85);
 }
-.successCard{
+
+.successCard {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -286,29 +389,33 @@ textarea{
     background-color: $white;
     line-height: 63px;
     text-align: center;
-    color:$orange;
+    color: $orange;
     border-radius: 2px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
-.title_s{
+
+.title_s {
     font-size: 15px;
     margin-left: 15px;
     margin-top: 15px;
     color: $orange;
 }
-.input{
+
+.input {
     width: 100%;
     height: 110px;
     font-size: 15px;
     padding: 15px;
     border-bottom: 0.50px solid $grey;
 }
-.inputInfo{
+
+.inputInfo {
     width: 100%;
     font-size: 15px;
     padding: 15px;
     border-bottom: 0.50px solid $grey;
 }
+
 .profile {
     width: 100%;
     height: 100%;
@@ -359,6 +466,7 @@ textarea{
     color: $white;
     height: 80px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .avatar {
@@ -382,6 +490,27 @@ textarea{
     border-radius: 50%;
 }
 
+.avatarimgchange {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+}
+.camera{
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%);
+    width:100px;
+    height: 50px;
+    border-radius: 0 0 50px 50px;
+    background: rgba(227,144,26,0.55);
+}
+.imgCamera{
+    width: 20px;
+    fill: $white;
+    height: 100%;
+}
 .sign {
     margin-top: 18px;
     text-indent: 20px;
@@ -482,7 +611,8 @@ textarea{
     background-color: $white;
     composes: space from 'sass-loader!../../scss/utility.scss';
 }
-.tip{
+
+.tip {
     text-align: center;
     font-size: 17px;
     color: $black_t;

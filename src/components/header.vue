@@ -1,8 +1,9 @@
 <template>
     <div id="header" v-hide="onclick">
         <div :class="$style.top">
+            <!-- <router-link to="/profile" >新闻</router-link> -->
             <div :class="$style.logo"><img src="../img/logo.png" alt="华大桂声" :class="$style.logoImg"></div>
-            <div :class="$style.profile">
+            <div :class="$style.profile" v-on:click="showProfile">
                 <svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>
             </div>
             <div :class="$style.search" v-on:click="showSearch">
@@ -57,6 +58,11 @@ export default {
                 } else {
                     this.onclick = true
                 }
+            },
+            showProfile(){
+                
+                // console.log(this.$router.path)
+                console.log(this)
             },
             postContent() {
                 fetch('/api/v1.0/feed', {
