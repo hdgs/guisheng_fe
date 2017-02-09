@@ -114,14 +114,17 @@
             </div>
         </div>
 
-        <!-- <div v-show = "changeMessage" :class="$style.suggestPage">
+        <div v-show = "changeMessage" :class="$style.suggestPage">
             <div :class="$style.titleBox">
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#right"></use>
                 </svg>
                 <div :class="$style.commentTitle">个人信息</div>
+                <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#wrong"></use>
+                </svg>
             </div>
-        </div> -->
+        </div>
 
     </div>
 </template>
