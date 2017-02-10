@@ -41,7 +41,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-show = "profile.role == profile.user_role">
+            <div :class="$style.col" v-show="profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#collection"></use>
                 </svg>
@@ -50,7 +50,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="showMyWorks" v-show = "profile.user_role && !profile.role">
+            <div :class="$style.col" v-on:click="showMyWorks" v-show="profile.user_role && !profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use>
                 </svg>
@@ -59,7 +59,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="showMySuggest" v-show = "profile.role == profile.user_role">
+            <div :class="$style.col" v-on:click="showMySuggest" v-show="profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#feedback"></use>
                 </svg>
@@ -68,7 +68,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="messageChange" v-show = "profile.role == profile.user_role">
+            <div :class="$style.col" v-on:click="messageChange" v-show="profile.role == profile.user_role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modify"></use>
                 </svg>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <button :class="$style.signout" v-on:click="showReturn" v-show = "profile.role == profile.user_role">登出</button>
+        <button :class="$style.signout" v-on:click="showReturn" v-show="profile.role == profile.user_role">登出</button>
         <div v-show="returnIt" :class="$style.suggestMask">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
@@ -126,28 +126,30 @@
             <div :class="$style.changeAvatar">
                 <div :class="$style.avatarbox">
                     <img :class="$style.avatarimgchange" v-bind:src="profile.img_url">
-                     <div :class="$style.camera">
-                        <svg viewBox="0 0 200 200" :class="$style.imgCamera" v-on:click = "submitChange">
+                    <div :class="$style.camera">
+                        <svg viewBox="0 0 200 200" :class="$style.imgCamera">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#camera"></use>
                         </svg>
                     </div>
-                    <div :class="$style.changeButton">修改头像</div>
+                    <div :class="$style.changeButton">修改头像
+                        <input type="file"  :class = "$style.uploadFile">
+                    </div>
                 </div>
             </div>
             <div :class="$style.changeInfo">
-                    <span :class="$style.nameF">昵称：</span>
-                    <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.name}}</span>
-                    <textarea type="text" v-show = "editChange" v-model="newName" :class = "$style.newName" autofocus rows="1" v-bind:placeholder="profile.name"></textarea>
+                <span :class="$style.nameF">昵称：</span>
+                <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.name}}</span>
+                <textarea type="text" v-show="editChange" v-model="newName" :class="$style.newName" autofocus rows="1" v-bind:placeholder="profile.name"></textarea>
             </div>
             <div :class="$style.changeInfo">
-                    <span :class="$style.nameF" v-on:click = "editName">简介：</span>
-                     <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.introduction}}</span>
-                      <textarea type="text" v-show = "editChange" v-model="newIntroduction" :class = "$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
+                <span :class="$style.nameF" v-on:click="editName">简介：</span>
+                <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.introduction}}</span>
+                <textarea type="text" v-show="editChange" v-model="newIntroduction" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
             </div>
-            <div :class="$style.changeInfo" v-show = "!profile.user_role">
-                    <span :class="$style.nameF" v-on:click = "editName">微博：</span>
-                     <span :class = "$style.changeName" v-show = "!editChange" v-on:click = "editName">{{profile.weibo}}</span>
-                      <textarea type="text" v-show = "editChange" v-model="newWeibo" :class = "$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo"></textarea>
+            <div :class="$style.changeInfo" v-show="!profile.user_role">
+                <span :class="$style.nameF" v-on:click="editName">微博：</span>
+                <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.weibo}}</span>
+                <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo"></textarea>
             </div>
         </div>
     </div>
@@ -169,10 +171,10 @@ export default {
                 suggestInfo: "",
                 returnIt: false,
                 changeMessage: false,
-                editChange:false,
-                newName:"",
-                newIntroduction:"",
-                newWeibo:""
+                editChange: false,
+                newName: "",
+                newIntroduction: "",
+                newWeibo: ""
             }
         },
         components: {
@@ -184,7 +186,7 @@ export default {
             }).then(value => {
                 console.log(value)
                 this.profile = value
-                
+
             })
         },
         methods: {
@@ -194,11 +196,11 @@ export default {
             showReturn() {
                 this.returnIt = true
             },
-            editName(){
+            editName() {
                 this.editChange = true
             },
-            submitChange(){
-                if(!this.editChange) return
+            submitChange() {
+                if (!this.editChange) return
                 fetch('/api/v1.0/profile/edit/', {
                         method: 'PUT',
                         headers: {
@@ -206,9 +208,9 @@ export default {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            name: this.newName? this.newName: this.profile.name,
-                            introduction: this.newIntroduction? this.newIntroduction: this.profile.introduction,
-                            weibo: this.newWeibo? this.newWeibo:this.profile.weibo
+                            name: this.newName ? this.newName : this.profile.name,
+                            introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
+                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo
                         })
                     })
                     .then(res => {
@@ -251,7 +253,7 @@ export default {
                     this.suggestion = ""
                     this.suggestInfo = ""
                 }
-                if (this.changeMessage){
+                if (this.changeMessage) {
                     this.changeMessage = false
                     this.editChange = false
                 }
@@ -305,9 +307,20 @@ body {
     width: 100%;
     height: 100%;
 }
-.newName{
+
+.newName {
     font-size: 15px;
 }
+
+.uploadFile{
+    opacity:0;
+    filter:alpha(opacity=0);
+    font-size:100px;
+    position:absolute;
+    top:0;
+    right:0;
+}
+
 textarea {
     outline: none;
     width: 100%;
@@ -327,9 +340,11 @@ textarea {
     font-size: 15px;
     color: $black_t;
 }
-.nameF{
-    color:$black_t;
+
+.nameF {
+    color: $black_t;
 }
+
 .changeAvatar {
     height: 215px;
     width: 100%;
@@ -496,21 +511,25 @@ textarea {
     border-radius: 50%;
     position: relative;
 }
-.camera{
+
+.camera {
     position: absolute;
-    top:40%;
+    overflow: hidden;
+    top: 40%;
     left: 50%;
     transform: translate(-50%);
-    width:100px;
+    width: 100px;
     height: 50px;
     border-radius: 0 0 50px 50px;
-    background: rgba(227,144,26,0.55);
+    background: rgba(227, 144, 26, 0.55);
 }
-.imgCamera{
+
+.imgCamera {
     width: 20px;
     fill: $white;
     height: 100%;
 }
+
 .sign {
     margin-top: 18px;
     text-indent: 20px;

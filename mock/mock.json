@@ -329,7 +329,7 @@
             "collection": "这是个人收藏",
             "suggestion": "这里有一些个人简介",
             "bg_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
-            "user_role":1,
+            "user_role":0,
             "role":0
         },
         "pics": {
