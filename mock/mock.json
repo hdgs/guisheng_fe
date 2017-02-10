@@ -362,7 +362,8 @@
                 "film_img_url": "https://i.ytimg.com/vi/p9YUxx_A2V4/maxresdefault.jpg",
                 "score": "8.7"
             },
-            "like_degree": [1129, 154, 43]
+            "like_degree": [1129, 154, 43],
+            "user_role":-1
         },
         "comments": [{
             "id": 2,

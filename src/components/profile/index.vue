@@ -125,15 +125,15 @@
             </div>
             <div :class="$style.changeAvatar">
                 <div :class="$style.avatarbox">
-                    <img :class="$style.avatarimgchange" v-bind:src="profile.img_url">
+                    <img :class="$style.avatarimgchange" v-bind:src="changedImg">
                     <div :class="$style.camera">
                         <svg viewBox="0 0 200 200" :class="$style.imgCamera">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#camera"></use>
                         </svg>
                     </div>
-                    <div :class="$style.changeButton">修改头像
-                        <input type="file"  :class = "$style.uploadFile">
-                    </div>
+                    <form :class="$style.changeButton" @submit.prevent="submitForm">修改头像
+                        <input type="file" id="file" :class="$style.uploadFile" v-file="getName" v-on:change="getName" v-bind:value = "this.inputValue">
+                    </form>
                 </div>
             </div>
             <div :class="$style.changeInfo">
@@ -149,7 +149,7 @@
             <div :class="$style.changeInfo" v-show="!profile.user_role">
                 <span :class="$style.nameF" v-on:click="editName">微博：</span>
                 <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.weibo}}</span>
-                <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo"></textarea>
+                <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo ? profile.weibo:'请输入您的微博地址'"></textarea>
             </div>
         </div>
     </div>
@@ -157,6 +157,7 @@
 <script>
 import 'whatwg-fetch'
 import Item from '../main/item'
+import fileValue from '../../directives/getValue'
 export default {
     data() {
             return {
@@ -174,8 +175,14 @@ export default {
                 editChange: false,
                 newName: "",
                 newIntroduction: "",
-                newWeibo: ""
+                newWeibo: "",
+                changedImg: "",
+                inputValue: "",
+                formData:""
             }
+        },
+        directives: {
+            file: fileValue
         },
         components: {
             "item": Item,
@@ -186,12 +193,24 @@ export default {
             }).then(value => {
                 console.log(value)
                 this.profile = value
-
+                this.changedImg = this.profile.img_url
             })
         },
         methods: {
             messageChange() {
                 this.changeMessage = true
+                console.log(this.changeImg)
+            },
+            submitForm(e){
+                this.formData = new FormData(event.target)
+            },
+            getName(e) {
+                console.log("e",e)
+                this.inputValue = e.value
+                console.log("this.inputValue",this.inputValue)
+                this.changeImg = this.inputValue
+                console.log("changeImg",this.changeImg)
+
             },
             showReturn() {
                 this.returnIt = true
@@ -210,7 +229,8 @@ export default {
                         body: JSON.stringify({
                             name: this.newName ? this.newName : this.profile.name,
                             introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo
+                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
+                            img_url:this.formData? this.formData : this.profile.img_url
                         })
                     })
                     .then(res => {
@@ -312,13 +332,13 @@ body {
     font-size: 15px;
 }
 
-.uploadFile{
-    opacity:0;
-    filter:alpha(opacity=0);
-    font-size:100px;
-    position:absolute;
-    top:0;
-    right:0;
+.uploadFile {
+    opacity: 0;
+    filter: alpha(opacity=0);
+    font-size: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 textarea {
@@ -328,7 +348,7 @@ textarea {
 }
 
 .changeInfo {
-    border-bottom: 0.5px solid $grey;
+    border-top: 0.5px solid $grey;
     padding: 15px 20px;
     font-size: 15px;
 }
@@ -351,7 +371,6 @@ textarea {
     text-align: center;
     position: relative;
     border-top: 0.5px $grey solid;
-    border-bottom: 0.5px $grey solid;
 }
 
 .imgRight {
@@ -506,8 +525,8 @@ textarea {
 }
 
 .avatarimgchange {
-    width: 100px;
-    height: 100px;
+    width: 104px;
+    height: 94px;
     border-radius: 50%;
     position: relative;
 }
@@ -515,19 +534,17 @@ textarea {
 .camera {
     position: absolute;
     overflow: hidden;
-    top: 40%;
+    top: 68%;
     left: 50%;
-    transform: translate(-50%);
-    width: 100px;
-    height: 50px;
-    border-radius: 0 0 50px 50px;
-    background: rgba(227, 144, 26, 0.55);
+    transform: translate(-50%,-50%);
 }
 
 .imgCamera {
-    width: 20px;
-    fill: $white;
+    width: 100px;
     height: 100%;
+    fill: $orange;
+    fill-rule: evenodd;
+    opacity: 0.8; 
 }
 
 .sign {
