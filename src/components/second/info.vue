@@ -11,12 +11,11 @@
         <div v-show="article.music.music_url.length" :class="$style.musicBox">
             <img v-bind:src="article.music.img_url" alt="" :class="$style.music_pis">
             <div :class = "$style.music_mask"></div>
-            <!-- <embed src="http://music.163.com/#/m/song?id=5054921"> -->
-            <a href="http://music.163.com/#/m/song?id=5054921" >
-                <!-- <svg viewBox="0 0 200 200" :class="$style.stop">
+            <audio src="https://cdn.gomix.com/6f5b042d-533c-4dc6-9069-85376ee73137%2FElvis%20Costello%20-%20She.mp3" controls="controls" id = "audio" :class = "$style.audio"></audio>
+                <svg viewBox="0 0 200 200" :class="$style.stop" v-show = "musicPlay" v-on:click = "play">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stop"></use>
-                </svg> -->
-                <svg viewBox="0 0 200 200" :class="$style.stop">
+                </svg>
+                <svg viewBox="0 0 200 200" :class="$style.stop" v-on:click = "play" v-show = "!musicPlay">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#play"></use>
                 </svg>
             </a>
@@ -59,6 +58,7 @@ export default {
             return {
                 likes: 0,
                 flag: 0,
+                musicPlay:false,
                 change: -1,
                 words: ["不错耶", "好喜欢", "什么鬼"],
                 Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
@@ -102,6 +102,18 @@ export default {
                         this.change = index
                     })
             },
+            play(){
+                var audio = document.getElementById("audio")
+                if(!this.musicPlay){
+                    audio.play()
+                    this.musicPlay = true
+                }
+                else{
+                    audio.pause()
+                    this.musicPlay = false
+                }
+                
+            },
             toAutherProfile(){
                 window.location = "/profile"
             }
@@ -124,6 +136,10 @@ export default {
     width: 50px;
     left: 20%;
     top: 75px;
+}
+
+.audio{
+    display: none;
 }
 
 .container {

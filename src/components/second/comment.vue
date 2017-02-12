@@ -1,6 +1,5 @@
 <template>
     <div id="xxx" :class="$style.container">
-        <!-- <div :class="$style.mask" v-show="showComment" ></div> -->
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
             <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true">{{preMessage}}</div>
@@ -28,7 +27,7 @@
                     </svg>
                 </div>
                 <div :class="$style.imgBox" v-bind:style="BoxWidth">
-                    <svg viewBox="0 0 200 200" :class="$style.img">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="shShare">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#share"></use>
                     </svg>
                 </div>
@@ -49,8 +48,20 @@
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <comment :comment = "comment" v-for="comment in obj" v-on:click="commentOthers(comment)"></comment>
+            <comment :comment="comment" v-for="comment in obj" v-on:click="commentOthers(comment)"></comment>
             <div :class="$style.sline"></div>
+        </div>
+        <div v-show="showShare" :class="$style.sharePage">
+            <div class="bdsharebuttonbox" data-tag="share_1">
+                <a class="bds_mshare" data-cmd="mshare"></a>
+                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                <a class="bds_tsina" data-cmd="tsina"></a>
+                <a class="bds_baidu" data-cmd="baidu"></a>
+                <a class="bds_renren" data-cmd="renren"></a>
+                <a class="bds_tqq" data-cmd="tqq"></a>
+                <a class="bds_more" data-cmd="more">更多</a>
+                <a class="bds_count" data-cmd="count"></a>
+            </div>
         </div>
     </div>
 </template>
@@ -74,6 +85,7 @@ export default {
                 showTips: false,
                 obj: [],
                 liked: false,
+                showShare: false,
                 message: "",
                 preMessage: "",
                 onShow: false,
@@ -139,6 +151,12 @@ export default {
             clear: Clear
         },
         methods: {
+            shShare(){
+                if(this.showShare)
+                    this.showShare = false
+                else
+                    this.showShare = true
+            },
             likePicture() {
                 if (this.liked) return
                 fetch("/api/v1.0/like/picture", {
@@ -242,33 +260,47 @@ export default {
             changeHolder: function () {
                 this.commentHolder = "写评论..."
                 this.focusFlag = false
-            },
-            addCommentLike: function (comment) {
-                // if (this.obj[index].greatComment) return
-                var index = this.obj.indexOf(comment)
-                console.log(index)
-                fetch("/api/v1.0/like/comment", {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        comment_id: this.currentCommentId
-                    })
-                })
-                console.log(this.comment)
-                this.obj[index].likes++
-                    this.obj[index].greatComment = true
-                this.curi = index
-                    // this.greatComment[this.curi] = true
-                console.log(this.curi, this.obj[0].greatComment, this.obj[1].greatComment, this.obj[2].greatComment)
             }
         }
 }
+window._bd_share_config = {
+        common: {
+            bdText: '自定义分享内容',
+            bdDesc: '自定义分享摘要',
+            bdUrl: '自定义分享url地址',
+            bdPic: '自定义分享图片'
+        },
+        share: [{
+            "bdSize": 100
+        }],
+        slide : [{     
+            bdImg : 0,
+            bdPos : "bottom",
+            bdTop : 200
+        }],
+        image: [{
+            viewType: 'list',
+            viewPos: 'top',
+            viewColor: 'black',
+            viewSize: '16',
+            viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren','    evernotecn']
+        }],
+        selectShare: [{
+            "bdselectMiniList": ['qzone', 'tqq', 'kaixin001', 'bdxc', 'tqf']
+        }]
+    }
 </script>
-<style lang="sass" module>
+<style lang ="sass" module>
 @import '../../scss/color.scss';
+.sharePage {
+    top: 54px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position:absolute;
+    background: yellow;
+}
+
 .mask {
     position: fixed;
     width: 100%;
@@ -419,6 +451,7 @@ export default {
     bottom: 0;
     background-color: $white;
     z-index: 4;
+    width: 100%;
 }
 
 .imgBack {
