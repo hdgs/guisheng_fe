@@ -49,25 +49,7 @@
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <div :class="$style.comment" v-for="comment in obj" v-on:click="commentOthers(comment)">
-                <img v-bind:src="comment.img_url" alt="头像" :class="$style.authorImg">
-                <svg viewBox="0 0 200 200" :class="$style.sign" v-show="comment.user_role == 1">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
-                </svg>
-                <div :class="$style.info">
-                    <div :class="$style.nameBox">
-                        <div :class="$style.name">{{comment.name}}</div>
-                        <div :class="$style.commentLike">
-                            <div :class="$style.likeComments" v-bind:style="changeWordColor">{{comment.likes}}</div>
-                            <svg viewBox="0 0 200 200" :class="$style.imgLikes" v-bind:style="changeLikeColor" v-on:click="addCommentLike(comment)">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#likes"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <div :class="$style.content">{{comment.message}}</div>
-                    <div :class="$style.time">{{comment.time}}</div>
-                </div>
-            </div>
+            <comment :comment = "comment" v-for="comment in obj" v-on:click="commentOthers(comment)"></comment>
             <div :class="$style.sline"></div>
         </div>
     </div>
@@ -77,6 +59,7 @@ import Blur from '../../directives/blur'
 import Focus from '../../directives/focus'
 import IHtml from '../../directives/innerHtml'
 import Clear from '../../directives/clearHtml'
+import CommentBox from './commentBox'
 export default {
     data() {
             return {
@@ -89,13 +72,7 @@ export default {
                 focusFlag: false,
                 curi: 0,
                 showTips: false,
-                obj: [{
-                    greatComment: false
-                }, {
-                    greatComment: false
-                }, {
-                    greatComment: false
-                }],
+                obj: [],
                 liked: false,
                 message: "",
                 preMessage: "",
@@ -106,9 +83,12 @@ export default {
                     id: 0,
                     kind: 0,
                     commentCount: 0,
-                    user_role:-1
+                    user_role: -1
                 }
             }
+        },
+        components: {
+            "comment": CommentBox,
         },
         computed: {
             changeWordColor: function () {
@@ -287,7 +267,7 @@ export default {
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../../scss/color.scss';
 .mask {
     position: fixed;

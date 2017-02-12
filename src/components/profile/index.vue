@@ -3,7 +3,7 @@
         <div :class="$style.info">
             <div :class="$style.top">
                 <div :class="$style.back">
-                    <svg viewBox="0 0 200 200" :class="$style.img">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click = "returnBack">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
                     </svg>
                 </div>
@@ -131,9 +131,9 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#camera"></use>
                         </svg>
                     </div>
-                    <form :class="$style.changeButton" @submit.prevent="submitForm">修改头像
-                        <input type="file" id="file" :class="$style.uploadFile" v-file="getName" v-on:change="getName" v-bind:value = "this.inputValue">
-                    </form>
+                    <div :class="$style.changeButton">修改头像
+                        <input type="file" id="file" :class="$style.uploadFile" v-on:change="getName" v-bind:value="this.inputValue" accept="image/*">
+                    </div>
                 </div>
             </div>
             <div :class="$style.changeInfo">
@@ -157,7 +157,6 @@
 <script>
 import 'whatwg-fetch'
 import Item from '../main/item'
-import fileValue from '../../directives/getValue'
 export default {
     data() {
             return {
@@ -178,11 +177,8 @@ export default {
                 newWeibo: "",
                 changedImg: "",
                 inputValue: "",
-                formData:""
+                avatarData: ""
             }
-        },
-        directives: {
-            file: fileValue
         },
         components: {
             "item": Item,
@@ -199,18 +195,29 @@ export default {
         methods: {
             messageChange() {
                 this.changeMessage = true
-                console.log(this.changeImg)
             },
-            submitForm(e){
-                this.formData = new FormData(event.target)
-            },
+            // submitForm(e){
+            //     this.formData = new FormData(event.target)
+            //     console.log(this.formData)
+            // },
             getName(e) {
-                console.log("e",e)
-                this.inputValue = e.value
-                console.log("this.inputValue",this.inputValue)
-                this.changeImg = this.inputValue
-                console.log("changeImg",this.changeImg)
-
+                this.changedImg = URL.createObjectURL(e.target.files[0])
+                console.log(e.target)
+                this.avatarData = new FormData()
+                this.avatarData.append('file', e.target.files[0])
+                console.log("this.avatarData",this.avatarData)
+                fetch('/api/v1.0/profile/editAvatar', {
+                        method: 'POST',
+                        // headers: {
+                        //     'Accept': 'image/*',
+                        //     'Content-Type': 'image/*'
+                        // },
+                        body: this.avatarData
+                    })
+                this.editChange = true
+            },
+            returnBack(){
+                window.location = "/"
             },
             showReturn() {
                 this.returnIt = true
@@ -220,7 +227,8 @@ export default {
             },
             submitChange() {
                 if (!this.editChange) return
-                fetch('/api/v1.0/profile/edit/', {
+
+                let promise1 = fetch('/api/v1.0/profile/edit/', {
                         method: 'PUT',
                         headers: {
                             'Accept': 'application/json',
@@ -229,18 +237,33 @@ export default {
                         body: JSON.stringify({
                             name: this.newName ? this.newName : this.profile.name,
                             introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                            img_url:this.formData? this.formData : this.profile.img_url
+                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo
                         })
                     })
                     .then(res => {
                         return res.json()
-                    }).then(value => {
-                        console.log(value, this.showSuccess)
-                        this.profile = value
-                        this.changeMessage = false
-                        this.editChange = false
                     })
+                    // .then(value => {
+                    //     console.log(value, this.showSuccess)
+                    //     this.profile = value
+                    //     this.changeMessage = false
+                    //     this.editChange = false
+                    // })
+                let promise2 = fetch('/api/v1.0/profile/edit', {
+                        method: 'POST',
+                        // headers: {
+                        //     'Accept': 'image/*',
+                        //     'Content-Type': 'image/*'
+                        // },
+                        body: this.avatarData
+                    }).then(res =>{
+                        return res.blob()
+                    })
+                Promise.all([promise1, promise2]).then(value =>{
+                    this.profile = value
+                    this.changeMessage = false
+                    this.editChange = false
+                })
             },
             showMyWorks() {
                 this.showWorks = true
@@ -536,7 +559,7 @@ textarea {
     overflow: hidden;
     top: 68%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .imgCamera {
@@ -544,7 +567,7 @@ textarea {
     height: 100%;
     fill: $orange;
     fill-rule: evenodd;
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .sign {

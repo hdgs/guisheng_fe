@@ -1,8 +1,9 @@
 <template>
     <div id="header" v-hide="onclick||showTips">
         <div :class="$style.top">
-            <!-- <router-link to="/profile" >新闻</router-link> -->
-            <div :class="$style.logo"><img src="../img/logo.png" alt="华大桂声" :class="$style.logoImg"></div>
+            <div :class="$style.logo">
+            <img src="http://ol8raxkl5.bkt.clouddn.com/logo.png" alt="华大桂声" :class="$style.logoImg" v-on:click = "backToRoot">
+            </div>
             <div :class="$style.profile" v-on:click="showProfile">
                 <svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>
             </div>
@@ -47,6 +48,9 @@ export default {
             hide: Hidden
         },
         methods: {
+            backToRoot(){
+                window.location = "/"
+            },
             getTag(e) {
                 this.content = e.slice(1, e.length - 1)
             },
@@ -71,11 +75,14 @@ export default {
                 }
             },
             showProfile(){
-                
-                // console.log(this.$router.path)
                 console.log(this)
-
-                this.showTips = true
+                console.log("location",window.location)
+                // console.log(this.$auth.check)
+                // if(this.$auth.check()){
+                //     this.showTips = true
+                // }else{
+                    window.location = "/profile"
+                // }
             },
             postContent() {
                 fetch('/api/v1.0/feed', {

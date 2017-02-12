@@ -49,9 +49,6 @@ module.exports = {
       query: {
         name: '[name].[ext]?[hash]'
       }
-    }, {
-      test: /\.scss$/,
-      loaders: ["style", "css", "sass"]
     }]
   },
   devtool: '#eval-source-map',

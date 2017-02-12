@@ -37,6 +37,7 @@
     "postcss-loader": "^0.13.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^2.0.6",
     "vue-loader": "^9.9.0",
     "vue-router": "^2.1.1",
@@ -50,6 +51,7 @@
     "css-to-matrix": "^1.0.0",
     "vue": "^2.0.5",
     "vue-finger": "^0.1.0",
+    "vue-token": "^1.0.2",
     "whatwg-fetch": "^1.0.0"
   }
 }

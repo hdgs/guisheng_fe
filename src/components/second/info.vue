@@ -1,6 +1,6 @@
 <template>
     <div id="xxx" :class="$style.container">
-       <!--  <div :class="$style.film" v-show="article.film.film_url.length">
+      <!--   <div :class="$style.film" v-show="article.film.film_url.length">
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
@@ -27,7 +27,7 @@
         </div>
         <div :class="$style.title">{{article.title}}</div>
         <div :class="$style.box">
-            <div :class="$style.imgBox"><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
+            <div :class="$style.imgBox" v-on:click = "toAutherProfile"><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
             <div :class="$style.msgBox">
                 <div>{{article.author}}</div>
                 <div :class="$style.time">{{article.time}}</div>
@@ -61,7 +61,7 @@ export default {
                 flag: 0,
                 change: -1,
                 words: ["不错耶", "好喜欢", "什么鬼"],
-                Imgs: ["../../img/great.png", "../../img/likeit.png", "../../img/what.png"],
+                Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
                 article: {
                     "id": 0,
                     "kind": 0,
@@ -101,6 +101,9 @@ export default {
                             this.flag = 1
                         this.change = index
                     })
+            },
+            toAutherProfile(){
+                window.location = "/profile"
             }
         }
 }
