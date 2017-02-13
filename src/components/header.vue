@@ -20,7 +20,7 @@
             </div>
             <div :class="$style.title_s">热门搜索</div>
             <div :class="$style.tagList" v-on:click="Search">
-                <div :class="$style.tag" v-for="tag in tagList" v-on:click="getTag(tag)">{{tag}}</div>
+                <div :class="$style.tag" v-for="tag in tagList" v-on:click="getTag(tag)">#{{tag}}#</div>
             </div>
         </div>
         <div v-show="showTips" :class="$style.suggestMask">

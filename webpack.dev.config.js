@@ -6,95 +6,110 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
-  entry: {
-    'main.js': ['./src/main.js', 'webpack-hot-middleware/client', "./src/header.js"],
-    'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
-    'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
-    'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
-    vendor: ["vue", "whatwg-fetch", "./src/style.js"]
-  },
-  output: {
-    path: path.join(__dirname, ""),
-    publicPath: 'http://localhost:3000/dist/',
-    filename: '[name]'
-  },
-  vue: {
-    cssModules: {
-      // overwrite local ident name
-      localIdentName: '[path][name]---[local]---[hash:base64:5]',
-      // enable camelCase
-      camelCase: true
-    }
-  },
-  module: {
-    resolveLoader: {
-      root: path.join(__dirname, "node_modules")
+    entry: {
+        'main.js': ['./src/main.js', 'webpack-hot-middleware/client', "./src/header.js"],
+        'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
+        'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
+        'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
+        'wrong.js': ['./src/wrong.js','webpack-hot-middleware/client',"./src/header.js"],
+        vendor: ["vue", "whatwg-fetch", "./src/style.js"]
     },
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue'
-    }, {
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      include: [
-        path.resolve(__dirname, "src"),
-      ],
-    }, {
-      test: /\.(html|tpl)$/,
-      loader: 'html-loader'
-    }, {
-      test: /\.(png|jpg|gif|svg)$/,
-      loader: 'file?limit=8192',
-      query: {
-        name: '[name].[ext]?[hash]'
-      }
-    }]
-  },
-  devtool: '#eval-source-map',
-  resolve: {
-    extensions: ['', '.js', '.scss', '.vue'],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/base.html',
-      inject:false,
-      template: './template/base.ejs',
-      chunks: ['vendor']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/index.html',
-      inject:false,
-      template: './template/index.ejs',
-      chunks: ['main.js']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/pictures.html',
-      inject:false,
-      template: './template/pictures.ejs',
-      chunks: ['pictures.js']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/second.html',
-      inject:false,
-      template: './template/second.ejs',
-      chunks: ['second.js']
-    }),
-    new HtmlWebpackPlugin({
-      alwaysWriteToDisk: true,
-      filename: 'template/profile.html',
-      inject:false,
-      template: './template/profile.ejs',
-      chunks: ['profile.js']
-    }),
-    new HtmlWebpackHarddiskPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
-  ]
+    output: {
+        path: path.join(__dirname, ""),
+        publicPath: 'http://localhost:3000/dist/',
+        filename: '[name]'
+    },
+    vue: {
+        cssModules: {
+            // overwrite local ident name
+            localIdentName: '[path][name]---[local]---[hash:base64:5]',
+            // enable camelCase
+            camelCase: true
+        }
+    },
+    module: {
+        resolveLoader: {
+            root: path.join(__dirname, "node_modules")
+        },
+        loaders: [{
+            test: /\.vue$/,
+            loader: 'vue'
+        }, {
+            test: /\.js$/,
+            loader: 'babel',
+            exclude: /node_modules/,
+            include: [
+                path.resolve(__dirname, "src"),
+            ],
+        }, {
+            test: /\.(html|tpl)$/,
+            loader: 'html-loader'
+        }, {
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'file?limit=8192',
+            query: {
+                name: '[name].[ext]?[hash]'
+            }
+        },
+        {
+            test: /\.scss$/,
+            loader:'style!css!sass'
+        }]
+    },
+    devtool: '#eval-source-map',
+    resolve: {
+        extensions: ['', '.js', '.scss', '.vue'],
+        // root:[
+        //     path.resolve('/Users/Elegenthus/Desktop/guishing_fe')
+        // ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/base.html',
+            inject: false,
+            template: './template/base.ejs',
+            chunks: ['vendor']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/index.html',
+            inject: false,
+            template: './template/index.ejs',
+            chunks: ['main.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/pictures.html',
+            inject: false,
+            template: './template/pictures.ejs',
+            chunks: ['pictures.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/second.html',
+            inject: false,
+            template: './template/second.ejs',
+            chunks: ['second.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/profile.html',
+            inject: false,
+            template: './template/profile.ejs',
+            chunks: ['profile.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/wrong.html',
+            inject: false,
+            template: './template/wrong.ejs',
+            chunks: ['wrong.js']
+        }),
+        new HtmlWebpackHarddiskPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
+    ]
 };

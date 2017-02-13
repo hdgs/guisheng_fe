@@ -45,7 +45,7 @@ export default {
         Promise.all([promise1, promise2]).then(values => {
             this.$refs.articleInfo.article = values[0]
             console.log("花湖", "/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind],this.$refs.articleInfo.article.user_role)
-            fetch("/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind]).then((res) => {
+            fetch("/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind] + "/recommend").then((res) => {
                     return res.json()
                 }).then((res) => {
                     this.list = res

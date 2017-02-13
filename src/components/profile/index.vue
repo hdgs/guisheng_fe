@@ -196,10 +196,6 @@ export default {
             messageChange() {
                 this.changeMessage = true
             },
-            // submitForm(e){
-            //     this.formData = new FormData(event.target)
-            //     console.log(this.formData)
-            // },
             getName(e) {
                 this.changedImg = URL.createObjectURL(e.target.files[0])
                 console.log(e.target)
@@ -217,7 +213,7 @@ export default {
                 this.editChange = true
             },
             returnBack(){
-                window.location = "/"
+                window.history.back()
             },
             showReturn() {
                 this.returnIt = true

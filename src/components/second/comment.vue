@@ -32,7 +32,6 @@
                     </svg>
                 </div>
             </div>
-            <!-- <button v-on:click="submit" :class="$style.button">提交</button> -->
         </div>
         <div v-show="showTips" :class="$style.suggestMask">
             <div :class="$style.returnCard">

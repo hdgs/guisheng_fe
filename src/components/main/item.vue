@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.item" v-bind:style = "itemHeight">
-  <div :class="imgStyle" v-show = "item.img_url.length">
+  <a v-bind:href="url">
+    <div :class="imgStyle" v-show = "item.img_url.length">
     <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" >
   </div>
     <div :class = "$style.title" v-bind:style = "titleWidth">{{item.title}}</div> 
@@ -11,13 +12,24 @@
         <div :class = "$style.views_img" v-show ="item.kind != 1">
           <svg viewBox="0 0 200 200" :class="$style.view_img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use></svg>
         </div>
-        <div :class = "$style.tag">{{item.tag}}</div> 
+        <div :class = "$style.tag">#{{item.tag}}#</div> 
       </div>
+  </a>
     </div>
 </template>
 
 <script>
+import Map from '../../common/keymap.js'
   export default {
+    data(){
+      return{
+        url:""
+      }
+    },
+     mounted() {
+      this.url = Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id
+      console.log(this.item.article_id, Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id)
+     },
     props:['item'],
     computed:{
       styleObject:function(){
@@ -40,6 +52,11 @@
         return{
           height: (this.item.kind == 1)? '135px':''
         }
+      }
+    },
+    methods:{
+      toSecond(){
+        console.log("item.kind",this.item,"item.article_id",this.item.article_id)
       }
     }
   }

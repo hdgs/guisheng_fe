@@ -48,7 +48,11 @@
         // expected ?page=0&kind=0&count=5
         fetch("/api/v1.0/feed/?" + url.getUrlComponent(params))
         .then( (res) => {
-          return res.json()
+          if (res.ok) {
+                    return res.json()
+                } else {
+                    this.wrong = true
+                }
         }).then( value => {
           this.list = this.list.concat(value)
           if(this.isScroll)
