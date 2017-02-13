@@ -52,7 +52,7 @@ export default {
                 window.location = "/"
             },
             getTag(e) {
-                this.content = e.slice(1, e.length - 1)
+                this.content = e
             },
             Search(e) {
                 e.stopPropagation()

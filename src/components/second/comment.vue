@@ -51,15 +51,21 @@
             <div :class="$style.sline"></div>
         </div>
         <div v-show="showShare" :class="$style.sharePage">
-            <div class="bdsharebuttonbox" data-tag="share_1">
-                <a class="bds_mshare" data-cmd="mshare"></a>
-                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
-                <a class="bds_tsina" data-cmd="tsina"></a>
-                <a class="bds_baidu" data-cmd="baidu"></a>
-                <a class="bds_renren" data-cmd="renren"></a>
-                <a class="bds_tqq" data-cmd="tqq"></a>
-                <a class="bds_more" data-cmd="more">更多</a>
-                <a class="bds_count" data-cmd="count"></a>
+            <div :class = "$style.maskShare"></div>
+            <div :class = "$style.shareBox">
+                <div class="bdsharebuttonbox" data-tag="share_1">
+                    <a class="bds_mshare" data-cmd="mshare" style="margin:12%;"></a>
+                    <a class="bds_evernotecn" data-cmd="evernotecn" style="margin:12%;"></a>
+                    <a class="bds_qzone" data-cmd="qzone" href="#" style="margin:12%;"></a>
+                    <a class="bds_tsina" data-cmd="tsina" style="margin:12%;"></a>
+                    <a class="bds_baidu" data-cmd="baidu" style="margin:12%;"></a>
+                    <a class="bds_sqq" data-cmd="sqq" style="margin:12%;"></a>
+                    <a class="bds_tqq" data-cmd="tqq" style="margin:12%;"></a>
+                    <a class="bds_weixin" data-cmd="weixin" style="margin:12%;"></a>
+                    <a class="bds_fbook" data-cmd="fbook" style="margin:12%;"></a>
+                    <a class="bds_twi" data-cmd="twi" style="margin:12%;"></a>
+                </div>
+                <div :class = "$style.occupy"></div>
             </div>
         </div>
     </div>
@@ -150,8 +156,8 @@ export default {
             clear: Clear
         },
         methods: {
-            shShare(){
-                if(this.showShare)
+            shShare() {
+                if (this.showShare)
                     this.showShare = false
                 else
                     this.showShare = true
@@ -263,43 +269,54 @@ export default {
         }
 }
 window._bd_share_config = {
-        common: {
-            bdText: '自定义分享内容',
-            bdDesc: '自定义分享摘要',
-            bdUrl: '自定义分享url地址',
-            bdPic: '自定义分享图片'
-        },
-        share: [{
-            "bdSize": 100
-        }],
-        slide : [{     
-            bdImg : 0,
-            bdPos : "bottom",
-            bdTop : 200
-        }],
-        image: [{
-            viewType: 'list',
-            viewPos: 'top',
-            viewColor: 'black',
-            viewSize: '16',
-            viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren','    evernotecn']
-        }],
-        selectShare: [{
-            "bdselectMiniList": ['qzone', 'tqq', 'kaixin001', 'bdxc', 'tqf']
-        }]
-    }
+    common: {
+        bdText: '自定义分享内容',
+        bdDesc: '自定义分享摘要',
+        bdUrl: '自定义分享url地址',
+        bdPic: '自定义分享图片'
+    },
+    share: [{
+        "bdSize": 32,
+        // "bdCustomStyle" : ".bds_mshare{margin:10px;}"
+    }],
+    image: [{
+        viewType: 'collection',
+        viewPos: 'bottom',
+        viewColor: 'white',
+        viewSize: '32',
+        viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren', 'evernotecn']
+    }]
+}
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+.maskShare{
+    background: rgba(53,53,53,0.55);
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+    height: 246px;
+}
 .sharePage {
     top: 54px;
     width: 100%;
     bottom: 0;
     left: 0;
-    position:absolute;
-    background: yellow;
+    position: fixed;
 }
 
+.shareBox{
+    top:300px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    background: white;
+}
+.occupy{
+    height: 50px;
+    width: 100%;
+}
 .mask {
     position: fixed;
     width: 100%;
