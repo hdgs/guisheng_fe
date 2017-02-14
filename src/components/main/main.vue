@@ -1,8 +1,5 @@
 <template>
     <div id="xxx" :class="$style.app">
-        <div v-on:click="responseAgain">
-            <wrong v-show="this.wrong"></wrong>
-        </div>
         <div :class="$style.top">
             <div :class="$style.tab">
                 <router-link to="/" :class="$style.link">首页</router-link>
@@ -38,16 +35,11 @@
 </template>
 <script>
 import 'whatwg-fetch'
-import Wrong from '../wrong'
 
 export default {
     mounted() {
             fetch('/api/v1.0/everyDayPic').then((res) => {
-                if (res.ok) {
-                    return res.json()
-                } else {
-                    this.wrong = true
-                }
+                return res.json()
             }).then(value => {
                 this.pic = value
             })
@@ -56,16 +48,7 @@ export default {
             return {
                 list: [],
                 pic: {},
-                onShow: true,
-                wrong: false
-            }
-        },
-        components: {
-            "wrong": Wrong
-        },
-        methods: {
-            responseAgain() {
-                this.wrong = false
+                onShow: true
             }
         }
 }

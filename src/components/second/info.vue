@@ -64,6 +64,7 @@ export default {
                 Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
                 article: {
                     "id": 0,
+                    "author_id":0,
                     "kind": 0,
                     "film": {
                         "film_url": "",
@@ -115,7 +116,7 @@ export default {
                 
             },
             toAutherProfile(){
-                window.location = "/profile"
+                window.location = "/profile/" + this.article.author_id
             }
         }
 }

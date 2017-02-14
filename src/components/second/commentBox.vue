@@ -2,7 +2,7 @@
     <div :class="$style.comment">
         <img v-bind:src="comment.img_url" alt="头像" :class="$style.authorImg"
         v-on:click = "getToTheAutherProfile(comment)">
-        <svg viewBox="0 0 200 200" :class="$style.sign" v-show="comment.user_role == 1">
+        <svg viewBox="0 0 200 200" :class="$style.sign" v-show="!comment.user_role">
             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
         </svg>
         <div :class="$style.info">
@@ -62,6 +62,7 @@ export default {
                 console.log(this.curi, this.greatComment)
             },
             getToTheAutherProfile:function(comment){
+                console.log(comment.user_role)
             	if(comment.user_role) return
             		window.location = "/profile/" + comment.user_id
             }

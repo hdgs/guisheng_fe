@@ -76,11 +76,12 @@ import Focus from '../../directives/focus'
 import IHtml from '../../directives/innerHtml'
 import Clear from '../../directives/clearHtml'
 import CommentBox from './commentBox'
+import Cookie from '../../common/cookie.js'
+
 export default {
     data() {
             return {
                 showComment: false,
-                closeComment: true,
                 show: false,
                 clear: false,
                 submitted: false,
@@ -202,7 +203,7 @@ export default {
             },
             ClickChangeColor: function () {
                 console.log(this.articleInfo)
-                if (this.articleInfo.user_role == -1) {
+                if (!Cookie.getCookie("token")) {
                     this.showTips = true
                     return
                 }
@@ -227,7 +228,7 @@ export default {
             submit: function (e) {
                 e.stopPropagation();
                 if (!this.message) return
-                if (this.articleInfo.user_role == -1) {
+                if (!Cookie.getCookie("token")) {
                     this.showTips = true
                     return
                 }

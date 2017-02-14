@@ -10,6 +10,8 @@
   import 'whatwg-fetch'
   import Item from './item'
   import scrollDirective from '../../directives/scroll'
+  import { bus } from '../../bus.js'
+  import Cookie from '../../common/cookie.js'
 
   export default {
     data() {
@@ -24,6 +26,10 @@
     },
   	mounted () {
       this.request()
+      // Cookie.setCookie("token", "hah", "60")
+    },
+    created() {
+        bus.$on('search', this.addTodo)
     },
     components:{
       "item":Item,
@@ -38,6 +44,10 @@
           this.currentPage += 1
           this.request()
         
+      },
+      addTodo(content){
+        this.list = content
+        console.log(content)
       },
       request(){
         let params = {

@@ -82,7 +82,7 @@
         <div v-show="returnIt" :class="$style.suggestMask">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
-                <div :class="$style.returnButton">退出</div>
+                <div :class="$style.returnButton" v-on:click = "exit">退出</div>
                 <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
         </div>
@@ -157,6 +157,7 @@
 <script>
 import 'whatwg-fetch'
 import Item from '../main/item'
+import Cookie from '../../common/cookie.js'
 export default {
     data() {
             return {
@@ -202,7 +203,7 @@ export default {
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
                 console.log("this.avatarData",this.avatarData)
-                fetch('/api/v1.0/profile/editAvatar', {
+                fetch('/api/v1.0/profile/edit/upload_pic', {
                         method: 'POST',
                         // headers: {
                         //     'Accept': 'image/*',
@@ -220,6 +221,10 @@ export default {
             },
             editName() {
                 this.editChange = true
+            },
+            exit(){
+                Cookie.clearCookie("token")
+                window.location = "/"
             },
             submitChange() {
                 if (!this.editChange) return

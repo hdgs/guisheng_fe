@@ -2,10 +2,12 @@
     <div id="header" v-hide="onclick||showTips">
         <div :class="$style.top">
             <div :class="$style.logo">
-            <img src="http://ol8raxkl5.bkt.clouddn.com/logo.png" alt="华大桂声" :class="$style.logoImg" v-on:click = "backToRoot">
+                <img src="http://ol8raxkl5.bkt.clouddn.com/logo.png" alt="华大桂声" :class="$style.logoImg" v-on:click="backToRoot">
             </div>
             <div :class="$style.profile" v-on:click="showProfile">
-                <svg viewBox="0 0 200 200" :class="$style.img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg>
+                <svg viewBox="0 0 200 200" :class="$style.img">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
+                </svg>
             </div>
             <div :class="$style.search" v-on:click="showSearch">
                 <svg viewBox="0 0 200 200" :class="$style.img">
@@ -27,13 +29,17 @@
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">登录以后才能评论和收藏哦~</div>
                 <div :class="$style.returnButton">我要登录</div>
-                <div :class="$style.returnButton" v-on:click = "quit">取消</div>
+                <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
         </div>
     </div>
 </template>
 <script>
 import Hidden from '../directives/hidden'
+import {
+    bus
+} from '../bus.js'
+import Cookie from '../common/cookie.js'
 
 export default {
     data() {
@@ -48,7 +54,7 @@ export default {
             hide: Hidden
         },
         methods: {
-            backToRoot(){
+            backToRoot() {
                 window.location = "/"
             },
             getTag(e) {
@@ -57,10 +63,14 @@ export default {
             Search(e) {
                 e.stopPropagation()
             },
-            quit(){
+            quit() {
                 this.showTips = false
             },
             showSearch(e) {
+                // Cookie.setCookie("token", "hah", "60")
+                // console.log(Cookie.getCookie("token"))
+                // Cookie.clearCookie("token")
+                // console.log(Cookie.getCookie("token"))
                 fetch("/api/v1.0/hottag/")
                     .then((res) => {
                         return res.json()
@@ -74,15 +84,12 @@ export default {
                     this.onclick = true
                 }
             },
-            showProfile(){
-                console.log(this)
-                console.log("location",window.location)
-                // console.log(this.$auth.check)
-                // if(this.$auth.check()){
-                //     this.showTips = true
-                // }else{
+            showProfile() {
+                if (!Cookie.getCookie("token")) {
+                    this.showTips = true
+                } else {
                     window.location = "/profile"
-                // }
+                }
             },
             postContent() {
                 fetch('/api/v1.0/feed', {
@@ -99,14 +106,17 @@ export default {
                         return res.json()
                     })
                     .then(json => {
-                        console.log(json.status)
+                        console.log(json)
+                        this.onclick = false
                         this.content = ""
+                        window.location = "/"
+                        bus.$emit('search', json)
                     })
             }
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../scss/color.scss';
 .top {
     z-index: 3;
@@ -148,8 +158,6 @@ export default {
     margin-top: 16px;
 }
 
-
-
 .common {
     line-height: 54px;
     height: 54px;
@@ -183,6 +191,7 @@ export default {
     vertical-align: middle;
     width: 19px;
 }
+
 .logoImg {
     vertical-align: middle;
     height: 24px;
