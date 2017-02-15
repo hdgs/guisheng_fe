@@ -26,10 +26,11 @@
     },
   	mounted () {
       this.request()
+       // bus.$on('search', this.addTodo)
       // Cookie.setCookie("token", "hah", "60")
     },
     created() {
-        bus.$on('search', this.addTodo)
+        // bus.$on('search', this.addTodo)
     },
     components:{
       "item":Item,
@@ -45,10 +46,10 @@
           this.request()
         
       },
-      addTodo(content){
-        this.list = content
-        console.log(content)
-      },
+      // addTodo(content){
+      //   this.list = content
+      //   console.log("list",content)
+      // },
       request(){
         let params = {
           page: this.currentPage,

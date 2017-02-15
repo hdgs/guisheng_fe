@@ -11,6 +11,7 @@ module.exports = {
     'second': ['./src/second.js', 'webpack-hot-middleware/client'],
     'pictures': ['./src/pictures.js', 'webpack-hot-middleware/client'],
     'wrong': ['./src/wrong.js','webpack-hot-middleware/client'],
+    'search':['./src/search.js','webpack-hot-middleware/client'],
     vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
@@ -93,6 +94,13 @@ module.exports = {
       inject:false,
       template: './template/wrong.ejs',
       chunks: ['wrong']
+    }),
+    new HtmlWebpackPlugin({
+      alwaysWriteToDisk: true,
+      filename: 'template/search.html',
+      inject:false,
+      template: './template/search.ejs',
+      chunks: ['search']
     }),
     new HtmlWebpackHarddiskPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

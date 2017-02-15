@@ -11,14 +11,14 @@
             </div>
             <div :class="$style.search" v-on:click="showSearch">
                 <svg viewBox="0 0 200 200" :class="$style.img">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#search"></use>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#find"></use>
                 </svg>
             </div>
         </div>
         <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
             <div :class="$style.searchBox" v-on:click="Search">
                 <input type="text" :class="$style.input" v-model="content">
-                <div :class="$style.button" v-on:click="postContent">搜索</div>
+                <div  :class="$style.button" v-on:click="postContent">搜索</div>
             </div>
             <div :class="$style.title_s">热门搜索</div>
             <div :class="$style.tagList" v-on:click="Search">
@@ -53,6 +53,18 @@ export default {
         directives: {
             hide: Hidden
         },
+        mounted(){
+            // console.log(window.location)
+            if(window.location.pathname == '/search'){
+                this.onclick = true
+                fetch("/api/v1.0/hottag/")
+                    .then((res) => {
+                        return res.json()
+                    }).then(value => {
+                        this.tagList = value
+                    })
+            }
+        },
         methods: {
             backToRoot() {
                 window.location = "/"
@@ -67,7 +79,13 @@ export default {
                 this.showTips = false
             },
             showSearch(e) {
-                // Cookie.setCookie("token", "hah", "60")
+                console.log(window.location.pathname)
+                if(window.location.pathname !== '/search'){
+                    window.location = '/search'
+                    this.onclick = true
+                }else{
+                    console.log("hah")
+                }
                 // console.log(Cookie.getCookie("token"))
                 // Cookie.clearCookie("token")
                 // console.log(Cookie.getCookie("token"))
@@ -78,6 +96,8 @@ export default {
                         this.tagList = value
                     })
                 if (this.onclick) {
+                    if(window.location.pathname == '/search')
+                        window.history.back()
                     this.onclick = false
                     this.content = ""
                 } else {
@@ -106,17 +126,16 @@ export default {
                         return res.json()
                     })
                     .then(json => {
-                        console.log(json)
                         this.onclick = false
                         this.content = ""
-                        window.location = "/"
+                        console.log("header",json)
                         bus.$emit('search', json)
                     })
             }
         }
 }
 </script>
-<style lang="sass" module>
+<style lang ="sass" module>
 @import '../scss/color.scss';
 .top {
     z-index: 3;

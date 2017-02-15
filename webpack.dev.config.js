@@ -11,7 +11,8 @@ module.exports = {
         'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
-        'wrong.js': ['./src/wrong.js','webpack-hot-middleware/client',"./src/header.js"],
+        'wrong.js': ['./src/wrong.js', 'webpack-hot-middleware/client', "./src/header.js"],
+        'search.js': ['./src/search.js', 'webpack-hot-middleware/client', "./src/header.js"],
         vendor: ["vue", "whatwg-fetch", "./src/style.js"]
     },
     output: {
@@ -50,10 +51,9 @@ module.exports = {
             query: {
                 name: '[name].[ext]?[hash]'
             }
-        },
-        {
+        }, {
             test: /\.scss$/,
-            loader:'style!css!sass'
+            loader: 'style!css!sass'
         }]
     },
     devtool: '#eval-source-map',
@@ -105,6 +105,13 @@ module.exports = {
             inject: false,
             template: './template/wrong.ejs',
             chunks: ['wrong.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/search.html',
+            inject: false,
+            template: './template/search.ejs',
+            chunks: ['search.js']
         }),
         new HtmlWebpackHarddiskPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),

@@ -23,6 +23,11 @@
         "template":"wrong",
         "async":false
     },{
+        "name":"search",
+        "endpoint":"/search",
+        "template":"search",
+        "async":false
+    },{
         "name": "api.recommend_photos",
         "method": "post",
         "endpoint": "/api/v1.0/pics/recommend",

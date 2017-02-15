@@ -1,6 +1,6 @@
 <template>
     <div id="xxx" :class="$style.container">
-      <!--   <div :class="$style.film" v-show="article.film.film_url.length">
+        <!--   <div :class="$style.film" v-show="article.film.film_url.length">
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
@@ -10,14 +10,14 @@
         </div> -->
         <div v-show="article.music.music_url.length" :class="$style.musicBox">
             <img v-bind:src="article.music.img_url" alt="" :class="$style.music_pis">
-            <div :class = "$style.music_mask"></div>
-            <audio src="https://cdn.gomix.com/6f5b042d-533c-4dc6-9069-85376ee73137%2FElvis%20Costello%20-%20She.mp3" controls="controls" id = "audio" :class = "$style.audio"></audio>
-                <svg viewBox="0 0 200 200" :class="$style.stop" v-show = "musicPlay" v-on:click = "play">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stop"></use>
-                </svg>
-                <svg viewBox="0 0 200 200" :class="$style.stop" v-on:click = "play" v-show = "!musicPlay">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#play"></use>
-                </svg>
+            <div :class="$style.music_mask"></div>
+            <audio src="https://cdn.gomix.com/6f5b042d-533c-4dc6-9069-85376ee73137%2FElvis%20Costello%20-%20She.mp3" controls="controls" id="audio" :class="$style.audio"></audio>
+            <svg viewBox="0 0 200 200" :class="$style.stop" v-show="musicPlay" v-on:click="play">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stop"></use>
+            </svg>
+            <svg viewBox="0 0 200 200" :class="$style.stop" v-on:click="play" v-show="!musicPlay">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#play"></use>
+            </svg>
             </a>
             <div :class="$style.music_info">
                 <div :class="$style.Mtitle">{{article.music.title}}</div>
@@ -26,7 +26,7 @@
         </div>
         <div :class="$style.title">{{article.title}}</div>
         <div :class="$style.box">
-            <div :class="$style.imgBox" v-on:click = "toAutherProfile"><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
+            <div :class="$style.imgBox" v-on:click="toAutherProfile"><img v-bind:src="article.img_url" :class="$style.img" alt="头像"></div>
             <div :class="$style.msgBox">
                 <div>{{article.author}}</div>
                 <div :class="$style.time">{{article.time}}</div>
@@ -40,6 +40,7 @@
         <div :class="$style.lightBox">
             <div :class="$style.light" v-on:click="like(index)" v-for="(item, index) in article.like_degree">
                 <div :class="$style.lightImg"><img v-bind:src="Imgs[index]" :class="$style.img"></div>
+                <div :class="$style.addOne" v-show="change == index">+1</div>
                 <div :class="(change == index)? $style.lightWordBox_hover:$style.lightWordBox">
                     <div :class="$style.word">{{words[index]}}</div>
                     <div :class="$style.count">{{item}}</div>
@@ -58,13 +59,13 @@ export default {
             return {
                 likes: 0,
                 flag: 0,
-                musicPlay:false,
+                musicPlay: false,
                 change: -1,
                 words: ["不错耶", "好喜欢", "什么鬼"],
                 Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
                 article: {
                     "id": 0,
-                    "author_id":0,
+                    "author_id": 0,
                     "kind": 0,
                     "film": {
                         "film_url": "",
@@ -103,19 +104,18 @@ export default {
                         this.change = index
                     })
             },
-            play(){
+            play() {
                 var audio = document.getElementById("audio")
-                if(!this.musicPlay){
+                if (!this.musicPlay) {
                     audio.play()
                     this.musicPlay = true
-                }
-                else{
+                } else {
                     audio.pause()
                     this.musicPlay = false
                 }
-                
+
             },
-            toAutherProfile(){
+            toAutherProfile() {
                 window.location = "/profile/" + this.article.author_id
             }
         }
@@ -123,14 +123,15 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
-.music_mask{
-    background-color:rgba(51,51,51,0.35);
+.music_mask {
+    background-color: rgba(51, 51, 51, 0.35);
     composes: horizon from 'sass-loader!../../scss/utility.scss';
     width: 50%;
     height: 100px;
-    left:0;
-    position:absolute;
+    left: 0;
+    position: absolute;
 }
+
 .stop {
     fill: orange;
     position: absolute;
@@ -139,7 +140,25 @@ export default {
     top: 75px;
 }
 
-.audio{
+.addOne {
+    font-size: 14px;
+    color: $orange;
+    position: absolute;
+    right: 25%;
+    top: 40px;
+    animation: loading 0.5s;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.audio {
     display: none;
 }
 
@@ -274,6 +293,7 @@ export default {
     display: inline-block;
     width: 33.3%;
     text-align: center;
+    position: relative;
 }
 
 .lightImg {
