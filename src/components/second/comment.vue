@@ -47,7 +47,10 @@
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <comment :comment="comment" v-for="comment in obj" v-on:click="commentOthers(comment)"></comment>
+            <div  v-for="comment in obj" v-on:click="commentOthers(comment)">
+                 <comment :comment="comment"></comment>
+            </div>
+           
             <div :class="$style.sline"></div>
         </div>
         <div v-show="showShare" :class="$style.sharePage">

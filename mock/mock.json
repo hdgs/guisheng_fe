@@ -18,6 +18,11 @@
         "endpoint": "/api/v1.0/articles/recommend",
         "async": true
     }, {
+        "name":"login",
+        "method": "post",
+        "endpoint":"/api/v1.0/login/",
+        "async":true
+    },{
         "name":"wrong",
         "endpoint":"/wrong",
         "template":"wrong",
@@ -26,6 +31,11 @@
         "name":"search",
         "endpoint":"/search",
         "template":"search",
+        "async":false
+    },{
+        "name":"landing",
+        "endpoint":"/landing",
+        "template":"landing",
         "async":false
     },{
         "name": "api.recommend_photos",
@@ -140,6 +150,10 @@
         "async":true
     }],
     "data": {
+        "login":{
+            "uid":"34",
+            "token":"xixihha"
+        },
         "api.recommend_photos":[{
             "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
             "title":"这是水墨的一篇文章",

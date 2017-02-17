@@ -12,6 +12,7 @@ module.exports = {
     'pictures': ['./src/pictures.js', 'webpack-hot-middleware/client'],
     'wrong': ['./src/wrong.js','webpack-hot-middleware/client'],
     'search':['./src/search.js','webpack-hot-middleware/client'],
+    'landing':['./src/landing.js','webpack-hot-middleware/client'],
     vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
@@ -101,6 +102,13 @@ module.exports = {
       inject:false,
       template: './template/search.ejs',
       chunks: ['search']
+    }),
+    new HtmlWebpackPlugin({
+      alwaysWriteToDisk: true,
+      filename: 'template/landing.html',
+      inject:false,
+      template: './template/landing.ejs',
+      chunks: ['landing']
     }),
     new HtmlWebpackHarddiskPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

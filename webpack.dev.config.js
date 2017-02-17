@@ -11,6 +11,7 @@ module.exports = {
         'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
+        'landing.js': ['./src/landing.js', 'webpack-hot-middleware/client'],
         'wrong.js': ['./src/wrong.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'search.js': ['./src/search.js', 'webpack-hot-middleware/client', "./src/header.js"],
         vendor: ["vue", "whatwg-fetch", "./src/style.js"]
@@ -98,6 +99,13 @@ module.exports = {
             inject: false,
             template: './template/profile.ejs',
             chunks: ['profile.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/landing.html',
+            inject: false,
+            template: './template/landing.ejs',
+            chunks: ['landing.js']
         }),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,

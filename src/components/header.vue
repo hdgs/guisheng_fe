@@ -54,7 +54,6 @@ export default {
             hide: Hidden
         },
         mounted(){
-            // console.log(window.location)
             if(window.location.pathname == '/search'){
                 this.onclick = true
                 fetch("/api/v1.0/hottag/")
@@ -86,9 +85,6 @@ export default {
                 }else{
                     console.log("hah")
                 }
-                // console.log(Cookie.getCookie("token"))
-                // Cookie.clearCookie("token")
-                // console.log(Cookie.getCookie("token"))
                 fetch("/api/v1.0/hottag/")
                     .then((res) => {
                         return res.json()
@@ -108,7 +104,7 @@ export default {
                 if (!Cookie.getCookie("token")) {
                     this.showTips = true
                 } else {
-                    window.location = "/profile"
+                    window.location = "/profile/" + Cookie.getCookie("uid")
                 }
             },
             postContent() {
@@ -128,7 +124,6 @@ export default {
                     .then(json => {
                         this.onclick = false
                         this.content = ""
-                        console.log("header",json)
                         bus.$emit('search', json)
                     })
             }
