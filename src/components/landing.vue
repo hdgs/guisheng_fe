@@ -6,7 +6,9 @@ import 'whatwg-fetch'
 import Cookie from '../common/cookie.js'
 export default {
     mounted() {
-        fetch("/api/v1.0/login/", {
+        Cookie.setCookie("token", "value.token", 3000)
+        Cookie.setCookie("uid", "4", 3000)
+        fetch("/api/v1.0/login", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

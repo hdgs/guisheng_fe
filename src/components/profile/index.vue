@@ -178,20 +178,24 @@ export default {
                 newWeibo: "",
                 changedImg: "",
                 inputValue: "",
-                avatarData: ""
+                avatarData: "",
+                pic_url:""
             }
         },
         components: {
             "item": Item,
         },
         mounted() {
-            fetch('/profileInfo').then((res) => {
+            console.log("profile",this.profile)
+            console.log('/api/v1.0' + window.location.pathname + '/')
+            fetch('/api/v1.0' + window.location.pathname + '/').then((res) => {
                 return res.json()
             }).then(value => {
-                console.log(value)
+                console.log("value")
                 this.profile = value
                 this.changedImg = this.profile.img_url
             })
+            console.log('/api/v1.0 ' , this.profile)
         },
         methods: {
             messageChange() {
@@ -203,13 +207,17 @@ export default {
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
                 console.log("this.avatarData",this.avatarData)
-                fetch('/api/v1.0/profile/edit/upload_pic', {
+                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic', {
                         method: 'POST',
-                        // headers: {
-                        //     'Accept': 'image/*',
-                        //     'Content-Type': 'image/*'
-                        // },
+                        headers: {
+                            'Accept': 'image/*',
+                            'Content-Type': 'image/*'
+                        },
                         body: this.avatarData
+                    }).then(res => {
+                        return res.json()
+                    }).then(value =>{
+                        this.pic_url = value
                     })
                 this.editChange = true
             },
@@ -229,7 +237,7 @@ export default {
             submitChange() {
                 if (!this.editChange) return
 
-                let promise1 = fetch('/api/v1.0/profile/edit/', {
+                let promise1 = fetch('/api/v1.0/profile/' + this.profile.user_id + '/edit/', {
                         method: 'PUT',
                         headers: {
                             'Accept': 'application/json',
@@ -238,37 +246,24 @@ export default {
                         body: JSON.stringify({
                             name: this.newName ? this.newName : this.profile.name,
                             introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo
+                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
+                            img_url:this.pic_url ? this.pic_url : this.profile.weibo.img_url
                         })
                     })
                     .then(res => {
                         return res.json()
                     })
-                    // .then(value => {
-                    //     console.log(value, this.showSuccess)
-                    //     this.profile = value
-                    //     this.changeMessage = false
-                    //     this.editChange = false
-                    // })
-                let promise2 = fetch('/api/v1.0/profile/edit', {
-                        method: 'POST',
-                        // headers: {
-                        //     'Accept': 'image/*',
-                        //     'Content-Type': 'image/*'
-                        // },
-                        body: this.avatarData
-                    }).then(res =>{
-                        return res.blob()
+                    .then(value => {
+                        console.log(value, this.showSuccess)
+                        this.profile = value
+                        this.changeMessage = false
+                        this.editChange = false
                     })
-                Promise.all([promise1, promise2]).then(value =>{
-                    this.profile = value
-                    this.changeMessage = false
-                    this.editChange = false
-                })
             },
             showMyWorks() {
                 this.showWorks = true
-                fetch('/api/v1.0/profile/works').then(res => {
+                var api = "/api/v1.0/profile/" + this.profile.user_id + "/works"
+                fetch(api).then(res => {
                     return res.json()
                 }).then(value => {
                     this.list = value
@@ -281,7 +276,7 @@ export default {
             },
             showCollection() {
                 this.showWorks = true
-                fetch('/api/v1.0/profile/collection').then(res => {
+                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/collections/').then(res => {
                     return res.json()
                 }).then(value => {
                     this.list = value

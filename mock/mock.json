@@ -51,27 +51,37 @@
         "endpoint": "/api/v1.0/interaction/recommend",
         "async": true
     }, {
-        "name": "second",
-        "endpoint": "/second",
+        "name": "article",
+        "endpoint": "/article/:id",
         "template": "second",
         "async": false
     }, {
+        "name": "interaction",
+        "endpoint": "interaction/:Int",
+        "template": "second",
+        "async": false
+    },{
+        "name": "news",
+        "endpoint": "/news/:id",
+        "template": "second",
+        "async": false
+    },{
         "name": "pictures",
-        "endpoint": "/pictures",
+        "endpoint": "/pics/:id",
         "template": "pictures",
         "async": false
     }, {
         "name": "profile",
-        "endpoint": "/profile",
+        "endpoint": "/profile/:id",
         "template": "profile",
         "async": false
     }, {
         "name":"profileInfo",
-        "endpoint":"/profileInfo",
+        "endpoint":"/api/v1.0/profile/:id",
         "async": true
     },{
         "name": "everydaypic",
-        "endpoint": "/api/v1.0/everyDayPic",
+        "endpoint": "/api/v1.0/everydaypic",
         "async": true
     }, {
         "name": "pics",
@@ -410,7 +420,8 @@
             "suggestion": "这里有一些个人简介",
             "bg_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
             "user_role":0,
-            "role":0
+            "role":0,
+            "user_id":3
         },
         "pics": {
             "title": "这里会返回一串html页面展示为图片二级页面"

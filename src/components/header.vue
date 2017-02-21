@@ -60,7 +60,7 @@ export default {
                     .then((res) => {
                         return res.json()
                     }).then(value => {
-                        this.tagList = value
+                        this.tagList = value.hot_tag
                     })
             }
         },
@@ -89,7 +89,7 @@ export default {
                     .then((res) => {
                         return res.json()
                     }).then(value => {
-                        this.tagList = value
+                        this.tagList = value.hot_tag
                     })
                 if (this.onclick) {
                     if(window.location.pathname == '/search')
@@ -108,7 +108,8 @@ export default {
                 }
             },
             postContent() {
-                fetch('/api/v1.0/feed', {
+                console.log(this.content)
+                fetch('/api/v1.0/feed/', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
