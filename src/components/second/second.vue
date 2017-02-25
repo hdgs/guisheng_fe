@@ -42,10 +42,16 @@ export default {
             if(Map.FETCH_URL_MAP[i] == ids[1])
                 kind = i
         }
-        console.log("/api/v1.0/comments?article_id="+ ids[2]+"&kind=" + kind)
-        let promise1 = fetch("/api/v1.0" + api).then((res) => {
+        console.log("api","/api/v1.0" + api + "/")
+        let promise1 = fetch("/api/v1.0" + api + "/").then((res) => {
             return res.json()
-        }).then( res => {
+        })
+        let promise2 = fetch("/api/v1.0/comments/?article_id="+ ids[2]+"&kind=" + kind).then((res) => {
+            return res.json()
+        })
+        Promise.all([promise1, promise2]).then(values => {
+            console.log("me",values)
+            this.$refs.articleInfo.article = values[0]
             fetch("/api/v1.0/" + ids[1] + "/recommend/",{
                         method: 'POST',
                         headers: {
@@ -60,15 +66,6 @@ export default {
                     }).then(res => {
                         this.list = res
                     })
-        })
-        let promise2 = fetch("/api/v1.0/comments?article_id="+ ids[2]+"&kind=" + kind).then((res) => {
-            return res.json()
-        }).then(value => {
-            console.log("xx",value)
-        })
-        console.log("/api/v1.0/" + ids[1] + "/recommend/")
-        Promise.all([promise1, promise2]).then(values => {
-            this.$refs.articleInfo.article = values[0]
             console.log("花湖", "/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind],this.$refs.articleInfo.article.user_role)
                 this.$refs.articleComments.articleInfo = {
                     id: values[0].id,

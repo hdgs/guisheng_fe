@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.item" v-bind:style = "itemHeight">
   <a v-bind:href="url">
-    <div :class="imgStyle" v-show = "item.img_url.length">
+    <div :class="imgStyle" v-show = "item.img_url">
     <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" >
   </div>
     <div :class = "$style.title" v-bind:style = "titleWidth">{{item.title}}</div> 
@@ -34,7 +34,7 @@ import Map from '../../common/keymap.js'
     computed:{
       styleObject:function(){
           return {
-          marginRight:this.item.img_url.length? '7%':'0',
+          marginRight:this.item.img_url? '7%':'0',
           margin: (!this.item.description)? '0':'15px 15px 0 15px',
         }
       },

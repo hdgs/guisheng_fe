@@ -57,7 +57,7 @@
         "async": false
     }, {
         "name": "interaction",
-        "endpoint": "interaction/:Int",
+        "endpoint": "/interaction/:Int",
         "template": "second",
         "async": false
     },{

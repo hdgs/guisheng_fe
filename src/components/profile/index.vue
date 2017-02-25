@@ -132,7 +132,7 @@
                         </svg>
                     </div>
                     <div :class="$style.changeButton">修改头像
-                        <input type="file" id="file" :class="$style.uploadFile" v-on:change="getName" v-bind:value="this.inputValue" accept="image/*">
+                        <input type="file" id="file" name="file" :class="$style.uploadFile" v-on:change="getName" v-bind:value="this.inputValue" accept="image/*">
                     </div>
                 </div>
             </div>
@@ -202,12 +202,13 @@ export default {
                 this.changeMessage = true
             },
             getName(e) {
+                console.log("this.profile.user_id",this.profile.user_id)
                 this.changedImg = URL.createObjectURL(e.target.files[0])
                 console.log(e.target)
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
                 console.log("this.avatarData",this.avatarData)
-                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic', {
+                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/', {
                         method: 'POST',
                         headers: {
                             'Accept': 'image/*',
@@ -218,6 +219,7 @@ export default {
                         return res.json()
                     }).then(value =>{
                         this.pic_url = value
+                        console.log("value",value)
                     })
                 this.editChange = true
             },
@@ -276,6 +278,7 @@ export default {
             },
             showCollection() {
                 this.showWorks = true
+                console.log("this.profile.user_id",this.profile.user_id)
                 fetch('/api/v1.0/profile/'+ this.profile.user_id +'/collections/').then(res => {
                     return res.json()
                 }).then(value => {
@@ -308,7 +311,7 @@ export default {
             submitSuggest() {
                 console.log(this.suggestInfo, this.suggest)
                 if (!this.suggest || !this.suggestInfo) return
-                fetch('/api/v1.0/profile/suggestion/', {
+                fetch('/api/v1.0/profile/' + this.profile.user_id + '/suggestions/', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',

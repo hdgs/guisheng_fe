@@ -10,7 +10,6 @@
   import 'whatwg-fetch'
   import Item from './item'
   import scrollDirective from '../../directives/scroll'
-  import { bus } from '../../bus.js'
   import Cookie from '../../common/cookie.js'
 
   export default {
@@ -25,22 +24,20 @@
       scroll: scrollDirective
     },
   	mounted () {
+      console.log(this.isScroll)
       this.request()
-       // bus.$on('search', this.addTodo)
-      // Cookie.setCookie("token", "hah", "60")
-    },
-    created() {
-        // bus.$on('search', this.addTodo)
     },
     components:{
       "item":Item,
     },
     methods:{
       onScroll(){
+      console.log(this.isScroll)
         if(this.isScroll){
           return
         }
         
+      console.log(this.isScroll)
           this.isScroll = true
           this.currentPage += 1
           this.request()

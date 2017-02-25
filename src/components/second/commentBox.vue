@@ -45,24 +45,21 @@ export default {
             addCommentLike: function (comment, index) {
                 if (this.greatComment[index]) return
                 console.log(index)
-                fetch("/api/v1.0/like/comment", {
+                fetch("/api/v1.0/like/comment/", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        comment_id: this.comment.id
+                        comment_id: this.comment.comment_id
                     })
                 })
-                console.log(this.comment)
                 this.comment.likes++
                 this.greatComment[index] = true
                 this.curi = index
-                console.log(this.curi, this.greatComment)
             },
             getToTheAutherProfile:function(comment){
-                console.log(comment.user_role)
             	if(comment.user_role) return
             		window.location = "/profile/" + comment.user_id
             }

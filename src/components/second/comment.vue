@@ -168,7 +168,7 @@ export default {
             },
             likePicture() {
                 if (this.liked) return
-                fetch("/api/v1.0/like/picture", {
+                fetch("/api/v1.0/like/picture/", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -183,7 +183,7 @@ export default {
             },
             commentOthers: function (comment) {
                 console.log(comment, this.message)
-                this.preMessage = "@" + comment.name + ":"
+                this.preMessage = "@" + comment.name + ":" + "\n"
                 console.log(this.preMessage)
 
             },
@@ -236,7 +236,7 @@ export default {
                     return
                 }
                 console.log(this.articleInfo)
-                fetch('/api/v1.0/comments', {
+                fetch('/api/v1.0/comments/', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -431,6 +431,7 @@ window._bd_share_config = {
     position: absolute;
     padding: 1px 3px;
     top: 6px;
+    min-width: 12px;
     vertical-align: middle;
     right: 20%;
     border-radius: 4px;
@@ -443,10 +444,11 @@ window._bd_share_config = {
 .likesCount {
     line-height: 16px;
     position: absolute;
+    min-width: 12px;
     padding: 1px 3px;
     top: 6px;
     vertical-align: middle;
-    right: -1%;
+    right: 10%;
     border-radius: 4px;
     text-align: center;
     color: $white;

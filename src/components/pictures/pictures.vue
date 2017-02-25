@@ -117,17 +117,18 @@ export default {
         }
     },
     mounted() {
-        let promise1 = fetch("/api/v1.0/pics").then((res) => {
+        var api = window.location.pathname
+        var ids = api.split('/')
+        let promise1 = fetch("/api/v1.0" + api + "/").then((res) => {
             return res.json()
         })
-        let promise2 = fetch("/api/v1.0/comments").then((res) => {
+        let promise2 = fetch("/api/v1.0/comments/?article_id="+ ids[2]+"&kind=2").then((res) => {
             return res.json()
         })
         Promise.all([promise1, promise2]).then(values => {
-            this.pics = values[0].imgUrl
-            this.descriptionImg = values[0].imgDescription
+            this.pics = values[0].pics
+            this.descriptionImg = values[0].introduction
             this.picInfo = values[0]
-            console.log("this.picInfo.id", this.picInfo.id)
             this.$refs.picComments.obj = values[1]
             this.$refs.picComments.articleInfo = {
                 id: values[0].id,
@@ -135,7 +136,7 @@ export default {
                 commentCount: values[0].commentCount,
                 likes: values[0].likes
             }
-            fetch("/api/v1.0/pics/recommend/", {
+            fetch("/api/v1.0/" + ids[1] + "/recommend/", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
