@@ -332,11 +332,6 @@ export default {
     margin-top: 10.5px;
 }
 
-
-/*.count {
-    margin-top: 7.5px;
-}*/
-
 .ad {
     width: 100%;
     height: 100px;

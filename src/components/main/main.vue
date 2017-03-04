@@ -94,6 +94,7 @@ export default {
 
 .bg_pic {
     width: 100%;
+    height: 180px;
 }
 
 .pic {

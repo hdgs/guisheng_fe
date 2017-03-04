@@ -186,8 +186,6 @@ export default {
             "item": Item,
         },
         mounted() {
-            console.log("profile",this.profile)
-            console.log('/api/v1.0' + window.location.pathname + '/')
             fetch('/api/v1.0' + window.location.pathname + '/').then((res) => {
                 return res.json()
             }).then(value => {
@@ -202,25 +200,27 @@ export default {
                 this.changeMessage = true
             },
             getName(e) {
-                console.log("this.profile.user_id",this.profile.user_id)
                 this.changedImg = URL.createObjectURL(e.target.files[0])
-                console.log(e.target)
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
-                console.log("this.avatarData",this.avatarData)
-                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/', {
+                console.log("this.avatarData",this.avatarData.get('file'))
+                fetch('http://120.24.4.254:8888/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/', {
                         method: 'POST',
-                        headers: {
-                            'Accept': 'image/*',
-                            'Content-Type': 'image/*'
-                        },
+                        // headers: {
+                        //     'Content-Type': 'multipart/form-data',
+                        //     'Accept':'application/json'
+                        // },
                         body: this.avatarData
                     }).then(res => {
                         return res.json()
                     }).then(value =>{
                         this.pic_url = value
-                        console.log("value",value)
+                        console.log("value  ",value)
                     })
+                // var xmlhttp=new XMLHttpRequest()
+                // xmlhttp.open("POST",'/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/',false)
+                // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8")
+                // xmlhttp.send(this.avatarData)
                 this.editChange = true
             },
             returnBack(){
@@ -256,7 +256,6 @@ export default {
                         return res.json()
                     })
                     .then(value => {
-                        console.log(value, this.showSuccess)
                         this.profile = value
                         this.changeMessage = false
                         this.editChange = false

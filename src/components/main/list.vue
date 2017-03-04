@@ -32,7 +32,7 @@
     },
     methods:{
       onScroll(){
-      console.log(this.isScroll)
+      console.log("this.isScroll",this.isScroll)
         if(this.isScroll){
           return
         }
@@ -43,17 +43,13 @@
           this.request()
         
       },
-      // addTodo(content){
-      //   this.list = content
-      //   console.log("list",content)
-      // },
       request(){
         let params = {
           page: this.currentPage,
           kind: consts. MAIN_ROUTER_KIND_MAP[this.$route.fullPath],
           count: 5
         }
-        // expected ?page=0&kind=0&count=5
+        console.log("/api/v1.0/feed/?" + url.getUrlComponent(params))
         fetch("/api/v1.0/feed/?" + url.getUrlComponent(params))
         .then( (res) => {
           if (res.ok) {
