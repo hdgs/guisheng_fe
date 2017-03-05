@@ -2,6 +2,7 @@
     <div id="xxx">
         <div :class = "$style.line"></div>
         <item :item="item" v-for="item in list"></item>
+        <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
     </div>
 </template>
 <script>
@@ -38,5 +39,11 @@ export default {
     width: 100%;
     height: 5px;
     background: $grey;
+}
+.tip {
+    text-align: center;
+    font-size: 17px;
+    color: $black_t;
+    padding: 15px;
 }
 </style>

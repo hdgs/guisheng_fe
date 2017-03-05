@@ -105,7 +105,7 @@
             </div>
             <div :class="$style.line"></div>
             <div :class="$style.title_s">您的意见：</div>
-            <textarea type="text" :class="$style.input" placeholder="输入您的反馈详情" v-model="suggest"></textarea>
+            <textarea type="text" :class="$style.input" placeholder="输入您的反馈详情" v-model="suggestion"></textarea>
             <div :class="$style.title_s">联系方式：</div>
             <textarea type="text" :class="$style.inputInfo" placeholder="手机号码/QQ/邮箱" v-model="suggestInfo"></textarea>
             <button :class="$style.signout" v-on:click="submitSuggest">提交</button>
@@ -189,11 +189,9 @@ export default {
             fetch('/api/v1.0' + window.location.pathname + '/').then((res) => {
                 return res.json()
             }).then(value => {
-                console.log("value")
                 this.profile = value
                 this.changedImg = this.profile.img_url
             })
-            console.log('/api/v1.0 ' , this.profile)
         },
         methods: {
             messageChange() {
@@ -203,24 +201,14 @@ export default {
                 this.changedImg = URL.createObjectURL(e.target.files[0])
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
-                console.log("this.avatarData",this.avatarData.get('file'))
-                fetch('http://120.24.4.254:8888/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/', {
+                fetch('http://120.24.4.254:7777/guisheng/upload_pics/', {
                         method: 'POST',
-                        // headers: {
-                        //     'Content-Type': 'multipart/form-data',
-                        //     'Accept':'application/json'
-                        // },
                         body: this.avatarData
                     }).then(res => {
                         return res.json()
                     }).then(value =>{
-                        this.pic_url = value
-                        console.log("value  ",value)
+                        this.pic_url = value.pic_url
                     })
-                // var xmlhttp=new XMLHttpRequest()
-                // xmlhttp.open("POST",'/api/v1.0/profile/'+ this.profile.user_id +'/edit/upload_pic/',false)
-                // xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;charset=UTF-8")
-                // xmlhttp.send(this.avatarData)
                 this.editChange = true
             },
             returnBack(){
@@ -249,7 +237,7 @@ export default {
                             name: this.newName ? this.newName : this.profile.name,
                             introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
                             weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                            img_url:this.pic_url ? this.pic_url : this.profile.weibo.img_url
+                            img_url:this.pic_url? this.pic_url : this.profile.weibo.img_url
                         })
                     })
                     .then(res => {
@@ -259,6 +247,9 @@ export default {
                         this.profile = value
                         this.changeMessage = false
                         this.editChange = false
+                        this.newName = ""
+                        this.newIntroduction = ""
+                        this.newWeibo = ""
                     })
             },
             showMyWorks() {
@@ -268,7 +259,6 @@ export default {
                     return res.json()
                 }).then(value => {
                     this.list = value
-                    console.log(value)
                     this.title = "我的作品"
                 })
             },
@@ -305,11 +295,10 @@ export default {
             closeIt() {
                 this.showSuggest = false
                 this.showSuccess = false
-                console.log(this.showSuccess)
             },
             submitSuggest() {
-                console.log(this.suggestInfo, this.suggest)
-                if (!this.suggest || !this.suggestInfo) return
+                console.log(this.suggestInfo, this.suggestion)
+                if (!this.suggestion || !this.suggestInfo) return
                 fetch('/api/v1.0/profile/' + this.profile.user_id + '/suggestions/', {
                         method: 'POST',
                         headers: {
@@ -324,15 +313,12 @@ export default {
                     .then(res => {
                         return res.json()
                     }).then(value => {
-                        console.log(value, this.showSuccess)
                         this.showSuccess = true
-                        this.suggestion = ""
-                        console.log(this.showSuccess)
-                        this.suggestInfo = ""
                         setTimeout(() => {
                             this.showSuggest = false
                             this.showSuccess = false
-                            console.log(this.showSuccess)
+                            this.suggestion = ""
+                            this.suggestInfo = ""
                         }, 2000)
 
                     })
