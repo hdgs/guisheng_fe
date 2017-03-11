@@ -49,6 +49,7 @@
             <item :item="item" v-for="item in list"></item>
         </div>
         <div :class="$style.occupy"></div>
+        </div>
 </template>
 <script>
 import CssToMatrix from 'css-to-matrix'

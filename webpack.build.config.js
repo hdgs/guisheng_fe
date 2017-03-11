@@ -7,13 +7,13 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
   entry: {
-    'main': ['./src/main.js', 'webpack-hot-middleware/client'],
-    'second': ['./src/second.js', 'webpack-hot-middleware/client'],
-    'pictures': ['./src/pictures.js', 'webpack-hot-middleware/client'],
-    'wrong': ['./src/wrong.js','webpack-hot-middleware/client'],
-    'search':['./src/search.js','webpack-hot-middleware/client'],
-    'landing':['./src/landing.js','webpack-hot-middleware/client'],
-    vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
+    'main': ['./src/main.js'],
+    'second': ['./src/second.js'],
+    'pictures': ['./src/pictures.js'],
+    'wrong': ['./src/wrong.js'],
+    'search':['./src/search.js'],
+    'landing':['./src/landing.js'],
+    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
     path: path.join(__dirname, "static"),
