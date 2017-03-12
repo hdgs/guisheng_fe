@@ -99,6 +99,7 @@ export default {
 
 .pic {
     width: 100%;
+    height: 180px;
     display: block;
 }
 

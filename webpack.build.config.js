@@ -13,7 +13,7 @@ module.exports = {
     'wrong': ['./src/wrong.js','webpack-hot-middleware/client'],
     'search':['./src/search.js','webpack-hot-middleware/client'],
     'landing':['./src/landing.js','webpack-hot-middleware/client'],
-    vendor: ["superagent", "vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
+    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
   },
   output: {
     path: path.join(__dirname, "static"),
