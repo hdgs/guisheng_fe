@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "css-to-matrix": "^1.0.0",
+    "uglify-js": "^2.8.12",
     "vue": "^2.0.5",
     "vue-token": "^1.0.2",
     "whatwg-fetch": "^1.0.0"

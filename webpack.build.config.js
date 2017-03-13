@@ -6,114 +6,120 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 module.exports = {
-  entry: {
-    'main': ['./src/main.js', 'webpack-hot-middleware/client'],
-    'second': ['./src/second.js', 'webpack-hot-middleware/client'],
-    'pictures': ['./src/pictures.js', 'webpack-hot-middleware/client'],
-    'wrong': ['./src/wrong.js','webpack-hot-middleware/client'],
-    'search':['./src/search.js','webpack-hot-middleware/client'],
-    'landing':['./src/landing.js','webpack-hot-middleware/client'],
-    vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
-  },
-  output: {
-    path: path.join(__dirname, "static"),
-    publicPath: '/static/',
-    filename: '[name].[chunkhash].js'
-  },
-  vue: {
-    cssModules: {
-      // overwrite local ident name
-      localIdentName: '[path][name]---[local]---[hash:base64:5]',
-      // enable camelCase
-      camelCase: true
-    }
-  },
-  module: {
-    resolveLoader: {
-      root: path.join(__dirname, "node_modules")
+    entry: {
+        'main': ['./src/main.js'],
+        'second': ['./src/second.js'],
+        'pictures': ['./src/pictures.js'],
+        'wrong': ['./src/wrong.js'],
+        'search': ['./src/search.js'],
+        'landing': ['./src/landing.js'],
+        vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
     },
-    loaders: [{
-      test: /\.vue$/,
-      loader: 'vue'
-    }, {
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      include: [
-        path.resolve(__dirname, "src"),
-      ],
-    }, {
-      test: /\.(html|tpl)$/,
-      loader: 'html-loader'
-    }, {
-      test: /\.(png|jpg|gif|svg)$/,
-      loader: 'file?limit=8192',
-      query: {
-        name: '[name].[ext]?[hash]'
-      }
-    }, {
-      test: /\.scss$/,
-      loaders: ["style", "css", "sass"]
-    }]
-  },
-  devtool: '#eval-source-map',
-  resolve: {
-    extensions: ['', '.js', '.scss', '.vue'],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/base.html',
-      inject:false,
-      template: './template/base.ejs',
-      chunks: ['vendor']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/index.html',
-      inject:false,
-      template: './template/index.ejs',
-      chunks: ['main']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/pictures.html',
-      inject:false,
-      template: './template/pictures.ejs',
-      chunks: ['pictures']
-    }),
-    new HtmlWebpackPlugin({
-    	alwaysWriteToDisk: true,
-      filename: 'template/second.html',
-      inject:false,
-      template: './template/second.ejs',
-      chunks: ['second']
-    }),
-    new HtmlWebpackPlugin({
-      alwaysWriteToDisk: true,
-      filename: 'template/wrong.html',
-      inject:false,
-      template: './template/wrong.ejs',
-      chunks: ['wrong']
-    }),
-    new HtmlWebpackPlugin({
-      alwaysWriteToDisk: true,
-      filename: 'template/search.html',
-      inject:false,
-      template: './template/search.ejs',
-      chunks: ['search']
-    }),
-    new HtmlWebpackPlugin({
-      alwaysWriteToDisk: true,
-      filename: 'template/landing.html',
-      inject:false,
-      template: './template/landing.ejs',
-      chunks: ['landing']
-    }),
-    new HtmlWebpackHarddiskPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js")
-  ]
+    output: {
+        path: path.join(__dirname, "static"),
+        publicPath: '/static/',
+        filename: '[name].[chunkhash].js'
+    },
+    vue: {
+        cssModules: {
+            // overwrite local ident name
+            localIdentName: '[path][name]---[local]---[hash:base64:5]',
+            // enable camelCase
+            camelCase: true
+        }
+    },
+    module: {
+        resolveLoader: {
+            root: path.join(__dirname, "node_modules")
+        },
+        loaders: [{
+            test: /\.vue$/,
+            loader: 'vue'
+        }, {
+            test: /\.js$/,
+            loader: 'babel',
+            exclude: /node_modules/,
+            include: [
+                path.resolve(__dirname, "src"),
+            ],
+        }, {
+            test: /\.(html|tpl)$/,
+            loader: 'html-loader'
+        }, {
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'file?limit=8192',
+            query: {
+                name: '[name].[ext]?[hash]'
+            }
+        }, {
+            test: /\.scss$/,
+            loaders: ["style", "css", "sass"]
+        }]
+    },
+    devtool: '#eval-source-map',
+    resolve: {
+        extensions: ['', '.js', '.scss', '.vue'],
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/base.html',
+            inject: false,
+            template: './template/base.ejs',
+            chunks: ['vendor']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/index.html',
+            inject: false,
+            template: './template/index.ejs',
+            chunks: ['main']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/pictures.html',
+            inject: false,
+            template: './template/pictures.ejs',
+            chunks: ['pictures']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/second.html',
+            inject: false,
+            template: './template/second.ejs',
+            chunks: ['second']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/wrong.html',
+            inject: false,
+            template: './template/wrong.ejs',
+            chunks: ['wrong']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/search.html',
+            inject: false,
+            template: './template/search.ejs',
+            chunks: ['search']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/landing.html',
+            inject: false,
+            template: './template/landing.ejs',
+            chunks: ['landing']
+        }),
+        new HtmlWebpackHarddiskPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: true,
+            compress: {
+                warnings: false, // Suppress uglification warnings
+            },
+        }),
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js")
+    ]
 };
