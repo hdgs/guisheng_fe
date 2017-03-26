@@ -11,6 +11,7 @@ module.exports = {
         'second': ['./src/second.js'],
         'pictures': ['./src/pictures.js'],
         'wrong': ['./src/wrong.js'],
+        'profile': ['./src/profile.js'],
         'search': ['./src/search.js'],
         'landing': ['./src/landing.js'],
         vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
@@ -59,6 +60,9 @@ module.exports = {
     devtool: '#eval-source-map',
     resolve: {
         extensions: ['', '.js', '.scss', '.vue'],
+         alias:{
+            'vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.min'),
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -110,6 +114,13 @@ module.exports = {
             template: './template/landing.ejs',
             chunks: ['landing']
         }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/profile.html',
+            inject: false,
+            template: './template/profile.ejs',
+            chunks: ['profile']
+        }),
         new HtmlWebpackHarddiskPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
@@ -117,7 +128,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             mangle: true,
             compress: {
-                warnings: false, // Suppress uglification warnings
+                warnings: false, 
             },
         }),
         new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js")

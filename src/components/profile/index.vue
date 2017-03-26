@@ -22,6 +22,9 @@
             </div>
             <div :class="$style.intro">个人介绍：{{profile.introduction}}</div>
         </div>
+        <svg viewBox="0 0 200 200" :class="$style.largeimg">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#test"></use>
+                </svg>
         <div :class="$style.list">
             <div :class="$style.col" v-show="!profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
