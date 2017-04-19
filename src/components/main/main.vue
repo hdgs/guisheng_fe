@@ -34,13 +34,11 @@
     </div>
 </template>
 <script>
-import 'whatwg-fetch'
+import FETCH from '../../common/fetch.js'
 
 export default {
     mounted() {
-            fetch('/api/v1.0/everydaypic').then((res) => {
-                return res.json()
-            }).then(value => {
+            FETCH.FetchData('/api/v1.0/everydaypic/','GET').then(value => {
                 this.pic = value
             })
         },

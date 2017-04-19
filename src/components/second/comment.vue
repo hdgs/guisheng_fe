@@ -51,7 +51,7 @@
                 <comment :comment="comment"></comment>
             </div>
             <div :class="$style.sline"></div>
-
+            <div :class = "$style.occupy"></div>
         </div>
         <div v-show="showShare" :class="$style.sharePage">
             <div :class="$style.maskShare"></div>
@@ -80,6 +80,7 @@ import IHtml from '../../directives/innerHtml'
 import Clear from '../../directives/clearHtml'
 import CommentBox from './commentBox'
 import Cookie from '../../common/cookie.js'
+import FETCH from '../../common/fetch.js'
 
 export default {
     data() {
@@ -93,7 +94,7 @@ export default {
                 curi: 0,
                 showTips: false,
                 obj: [],
-                url:"",
+                url: "",
                 liked: false,
                 showShare: false,
                 message: "",
@@ -106,7 +107,7 @@ export default {
                     kind: 0,
                     commentCount: 0,
                     user_role: -1,
-                    user_id:1
+                    user_id: 1
                 }
             }
         },
@@ -114,16 +115,6 @@ export default {
             "comment": CommentBox,
         },
         computed: {
-            changeWordColor: function () {
-                return {
-                    color: this.obj[this.curi].greatComment ? 'orange' : '',
-                }
-            },
-            changeLikeColor: function () {
-                return {
-                    fill: this.greatComment ? 'orange' : ''
-                }
-            },
             BoxWidth: function () {
                 return {
                     width: this.articleInfo.kind == 2 ? '25%' : '33.3%'
@@ -170,23 +161,16 @@ export default {
             },
             likePicture() {
                 if (this.liked) return
-                fetch("/api/v1.0/like/picture/", {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        picture_id: this.articleInfo.id
-                    })
+                FETCH.FetchData("/api/v1.0/like/picture/", "POST", {
+                    picture_id: this.articleInfo.id
+                }).then(res => {
+                    this.articleInfo.likes++
+                        this.liked = true
                 })
-                this.articleInfo.likes++
-                    this.liked = true
+
             },
             commentOthers: function (comment) {
-                console.log(comment, this.message)
                 this.preMessage = "@" + comment.name + ":" + "\n"
-                console.log(this.preMessage)
 
             },
             changeMessage: function (e) {
@@ -202,11 +186,10 @@ export default {
             },
             activeComment: function (e) {
                 if (!this.showComment) {
-                    fetch(this.url).then((res) => {
-                        return res.json()
-                    }).then(res => {
-                        this.obj = res
-                    })
+                    FETCH.FetchData(this.url, "GET")
+                        .then(res => {
+                            this.obj = res
+                        })
                     this.showComment = true
                 }
             },
@@ -223,18 +206,10 @@ export default {
                     this.colorChange = false
 
                 } else this.colorChange = true
-                console.log
                 var apiName = this.colorChange ? "/api/v1.0/collect_delete/" : "/api/v1.0/collect/"
-                fetch(apiName, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        kind: this.articleInfo.kind,
-                        article_id: this.articleInfo.id
-                    })
+                FETCH.FetchData(apiName, 'POST', {
+                    kind: this.articleInfo.kind,
+                    article_id: this.articleInfo.id
                 })
             },
             submit: function (e) {
@@ -244,23 +219,14 @@ export default {
                     this.showTips = true
                     return
                 }
-                fetch('/api/v1.0/comments/', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            comment_id: this.currentCommentId,
-                            article_id: this.articleInfo.id,
-                            kind: this.articleInfo.kind,
-                            message: this.message,
-                            user_id: Cookie.getCookie("uid")
-                        })
+                FETCH.FetchData('/api/v1.0/comments/', 'POST', {
+                        comment_id: this.currentCommentId,
+                        article_id: this.articleInfo.id,
+                        kind: this.articleInfo.kind,
+                        message: this.message,
+                        user_id: Cookie.getCookie("uid")
                     })
-                    .then(res => {
-                        return res.json()
-                    }).then(value => {
+                    .then(value => {
                         console.log(value.status)
                         console.log(this.currentCommentId, "+", this.message)
                         this.message = ""
@@ -382,7 +348,7 @@ window._bd_share_config = {
 }
 
 .sline {
-    height: 56px;
+    height: 1px;
     width: 100%;
     background-color: $grey_l;
 }
@@ -481,6 +447,7 @@ window._bd_share_config = {
 .commentPage {
     position: absolute;
     top: 0;
+    min-height:100%;
     background-color: $white;
     z-index: $Zindex4;
     width: 100%;

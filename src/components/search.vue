@@ -28,7 +28,6 @@ export default {
         methods: {
             addTodo(content) {
                 this.list = content
-                console.log("list", content)
             },
         }
 }

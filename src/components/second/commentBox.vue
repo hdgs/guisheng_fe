@@ -21,43 +21,35 @@
     </div>
 </template>
 <script>
+import FETCH from '../../common/fetch.js'
+
 export default {
     data() {
             return {
                 flag: 0,
-                greatComment:[false],
-                curi:-1
+                greatComment:false
             }
         },
         computed: {
             changeWordColor: function () {
                 return {
-                    color: this.greatComment[this.curi] ? 'orange' : '',
+                    color: this.greatComment ? 'orange' : '',
                 }
             },
             changeLikeColor: function () {
                 return {
-                    fill: this.greatComment[this.curi] ? 'orange' : ''
+                    fill: this.greatComment ? 'orange' : ''
                 }
             }
         },
         methods: {
             addCommentLike: function (comment, index) {
-                if (this.greatComment[index]) return
-                console.log(index)
-                fetch("/api/v1.0/like/comment/", {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                if (this.greatComment) return
+                FETCH.FetchData("/api/v1.0/like/comment/","POST",{
                         comment_id: this.comment.comment_id
                     })
-                })
                 this.comment.likes++
-                this.greatComment[index] = true
-                this.curi = index
+                this.greatComment = true
             },
             getToTheAutherProfile:function(comment){
             	if(comment.user_role) return

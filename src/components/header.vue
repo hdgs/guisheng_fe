@@ -18,7 +18,7 @@
         <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
             <div :class="$style.searchBox" v-on:click="Search">
                 <input type="text" :class="$style.input" v-model="content">
-                <div  :class="$style.button" v-on:click="postContent">搜索</div>
+                <div :class="$style.button" v-on:click="postContent">搜索</div>
             </div>
             <div :class="$style.title_s">热门搜索</div>
             <div :class="$style.tagList" v-on:click="Search">
@@ -40,6 +40,7 @@ import {
     bus
 } from '../bus.js'
 import Cookie from '../common/cookie.js'
+import FETCH from '../common/fetch.js'
 
 export default {
     data() {
@@ -53,15 +54,12 @@ export default {
         directives: {
             hide: Hidden
         },
-        mounted(){
-            if(window.location.pathname == '/search'){
+        mounted() {
+            if (window.location.pathname == '/search') {
                 this.onclick = true
-                fetch("/api/v1.0/hottag/")
-                    .then((res) => {
-                        return res.json()
-                    }).then(value => {
-                        this.tagList = value.hot_tag
-                    })
+                FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
+                    this.tagList = value.hot_tag
+                })
             }
         },
         methods: {
@@ -78,20 +76,17 @@ export default {
                 this.showTips = false
             },
             showSearch(e) {
-                if(window.location.pathname !== '/search'){
+                if (window.location.pathname !== '/search') {
                     window.location = '/search'
                     this.onclick = true
-                }else{
+                } else {
                     console.log("hah")
                 }
-                fetch("/api/v1.0/hottag/")
-                    .then((res) => {
-                        return res.json()
-                    }).then(value => {
-                        this.tagList = value.hot_tag
-                    })
+                FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
+                    this.tagList = value.hot_tag
+                })
                 if (this.onclick) {
-                    if(window.location.pathname == '/search')
+                    if (window.location.pathname == '/search')
                         window.history.back()
                     this.onclick = false
                     this.content = ""
@@ -108,29 +103,18 @@ export default {
             },
             postContent() {
                 console.log(this.content)
-                fetch('/api/v1.0/feed/', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            content: this.content
-                        })
-                    })
-                    .then(res => {
-                        return res.json()
-                    })
-                    .then(json => {
-                        this.onclick = false
-                        this.content = ""
-                        bus.$emit('search', json)
-                    })
+                FETCH.FetchData('/api/v1.0/feed/', "POST", {
+                    content: this.content
+                }).then(json => {
+                    this.onclick = false
+                    this.content = ""
+                    bus.$emit('search', json)
+                })
             }
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../scss/color.scss';
 .top {
     z-index: $Zindex3;

@@ -1,7 +1,7 @@
 <template>
     <div id="xxx" :class="$style.picSecond" v-width="changeWidth">
         <div :class="$style.titleBox">
-            <svg viewBox="0 0 200 200" :class="$style.img" v-on:click = "goBack()">
+            <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="goBack()">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
             </svg>
             <div :class="$style.title">{{picInfo.title}}</div>
@@ -44,12 +44,12 @@
             <img v-bind:src="tappedImgSrc" v-finger:pintch="onPintch" v-bind:style="imgTransform" v-finger:doubleTap="imgScale" v-finger:swipeMove="imgSwipe" :class="$style.testbox">
         </div>
         <picComments ref="picComments"></picComments>
-        <div :class="$style.recommend">
+        <div :class="$style.recommend" v-show = list.length>
             <div :class="$style.recommendTitle">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
         </div>
         <div :class="$style.occupy"></div>
-        </div>
+    </div>
 </template>
 <script>
 import CssToMatrix from 'css-to-matrix'
@@ -59,6 +59,7 @@ import transitionEndDirective from '../../directives/transition'
 import widthDirective from '../../directives/width'
 import radioDirective from '../../directives/getradio'
 import Item from '../main/item'
+import FETCH from '../../common/fetch.js'
 
 let cssToMatrix = new CssToMatrix
 
@@ -120,12 +121,8 @@ export default {
     mounted() {
         var api = window.location.pathname
         var ids = api.split('/')
-        let promise1 = fetch("/api/v1.0" + api + "/").then((res) => {
-            return res.json()
-        })
-        let promise2 = fetch("/api/v1.0/comments/?article_id="+ ids[2]+"&kind=2").then((res) => {
-            return res.json()
-        })
+        let promise1 = FETCH.FetchData("/api/v1.0" + api + "/", "GET")
+        let promise2 = FETCH.FetchData("/api/v1.0/comments/?article_id=" + ids[2] + "&kind=2", "GET")
         Promise.all([promise1, promise2]).then(values => {
             this.pics = values[0].pics
             this.descriptionImg = values[0].introduction
@@ -137,17 +134,8 @@ export default {
                 commentCount: values[0].commentCount,
                 likes: values[0].likes
             }
-            fetch("/api/v1.0/" + ids[1] + "/recommend/", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    article_id: this.picInfo.id
-                })
-            }).then((res) => {
-                return res.json()
+            FETCH.FetchData("/api/v1.0/" + ids[1] + "/recommend/", "POST", {
+                article_id: this.picInfo.id
             }).then((res) => {
                 this.list = res
             })
@@ -163,7 +151,7 @@ export default {
         radio: radioDirective
     },
     methods: {
-        goBack(){
+        goBack() {
             window.history.back()
         },
         switchAble(direction) {
@@ -243,7 +231,6 @@ export default {
         initImgRadio(radio, index) {
             this.imgRadioArr[index] = radio
             this.picHeight = this.picWidth * 0.75
-            console.log(this.picHeight)
             this.tappedImgDescription = this.descriptionImg[this.i].description
         },
         imgScale() {

@@ -4,23 +4,17 @@
 <script>
 import 'whatwg-fetch'
 import Cookie from '../common/cookie.js'
+import FETCH from '../common/fetch.js'
+
 export default {
     mounted() {
-        Cookie.setCookie("token", "value.token", 3000)
-        Cookie.setCookie("uid", "4", 3000)
-        fetch("/api/v1.0/login", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: Cookie.getQueryString("email"),
+        // Cookie.setCookie("token", "value.token", 3000)
+        // Cookie.setCookie("email", "799414444@qq.com", 3000)
+        // Cookie.setCookie("uid", "4", 3000)
+        FETCH.FetchData("/api/v1.0/login","POST",{
+                email: Cookie.getCookie("email"),
                 password:"1234"
-            })
-        }).then(res => {
-            return res.json()
-        }).then(value => {
+            }).then(value => {
             console.log(value)
             Cookie.setCookie("token", value.token, 3000)
             Cookie.setCookie("uid", value.uid, 3000)

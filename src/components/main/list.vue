@@ -1,75 +1,65 @@
 <template>
-  <div v-scroll = "onScroll" :class="$style.app" >
-    <item :item = "item" v-for = "item in list"></item>
-  </div>
+    <div v-scroll="onScroll" :class="$style.app">
+        <item :item="item" v-for="item in list"></item>
+    </div>
 </template>
-
 <script>
-  import consts from '../../common/consts' 
-  import url from '../../common/url' 
-  import 'whatwg-fetch'
-  import Item from './item'
-  import scrollDirective from '../../directives/scroll'
-  import Cookie from '../../common/cookie.js'
+import consts from '../../common/consts'
+import url from '../../common/url'
+import 'whatwg-fetch'
+import Item from './item'
+import scrollDirective from '../../directives/scroll'
+import Cookie from '../../common/cookie.js'
+import FETCH from '../../common/fetch.js'
 
-  export default {
+export default {
     data() {
-      return {
-        currentPage:0,
-        list:[],
-        isScroll:false
-      }
-    },
-    directives: {
-      scroll: scrollDirective
-    },
-  	mounted () {
-      console.log(this.isScroll)
-      this.request()
-    },
-    components:{
-      "item":Item,
-    },
-    methods:{
-      onScroll(){
-      console.log("this.isScroll",this.isScroll)
-        if(this.isScroll){
-          return
-        }
-        
-      console.log(this.isScroll)
-          this.isScroll = true
-          this.currentPage += 1
-          this.request()
-        
-      },
-      request(){
-        let params = {
-          page: this.currentPage,
-          kind: consts. MAIN_ROUTER_KIND_MAP[this.$route.fullPath],
-          count: 5
-        }
-        console.log("/api/v1.0/feed/?" + url.getUrlComponent(params))
-        fetch("/api/v1.0/feed/?" + url.getUrlComponent(params))
-        .then( (res) => {
-          if (res.ok) {
-                    return res.json()
-                } else {
-                    this.wrong = true
+            return {
+                currentPage: 0,
+                list: [],
+                isScroll: false
+            }
+        },
+        directives: {
+            scroll: scrollDirective
+        },
+        mounted() {
+            this.request()
+        },
+        components: {
+            "item": Item,
+        },
+        methods: {
+            onScroll() {
+                console.log("this.isScroll", this.isScroll)
+                if (this.isScroll) {
+                    return
                 }
-        }).then( value => {
-          this.list = this.list.concat(value)
-          if(this.isScroll)
-            this.isScroll = false
-        })
-      }
-    }
-  }
-</script>
 
+                console.log(this.isScroll)
+                this.isScroll = true
+                this.currentPage += 1
+                this.request()
+
+            },
+            request() {
+                let params = {
+                    page: this.currentPage,
+                    kind: consts.MAIN_ROUTER_KIND_MAP[this.$route.fullPath],
+                    count: 5
+                }
+                FETCH.FetchData("/api/v1.0/feed/?" + url.getUrlComponent(params), "GET").then(value => {
+                    this.list = this.list.concat(value)
+                    if (this.isScroll)
+                        this.isScroll = false
+                })
+            }
+        }
+}
+</script>
 <style lang='sass' module>
 .app {
-  align-items: flex-start;
-	font-family: "黑体-简", Helvetica, sans-serif;
+    align-items: flex-start;
+    font-family: "黑体-简", Helvetica, sans-serif;
 }
 </style>
