@@ -16,7 +16,7 @@ export default {
 .wrongPage {
     height: 100%;
     width: 100%;
-    z-index: 2;
+    z-index: $Zindex2;
     position: fixed;
     background: $grey;
 }

@@ -138,6 +138,7 @@ export default {
     font-size: 13px;
     line-height: 1.5;
     color: $black;
+    word-break: break-word;
 }
 
 .time {

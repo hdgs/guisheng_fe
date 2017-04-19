@@ -1,6 +1,5 @@
 <template>
-  <div :class="$style.item" v-bind:style = "itemHeight">
-  <a v-bind:href="url">
+  <div :class="$style.item" v-bind:style = "itemHeight" v-on:click = "toSecond">
     <div :class="imgStyle" v-show = "item.img_url">
     <img v-bind:src = "item.img_url" alt="图片" :class="$style.imgbox" >
   </div>
@@ -14,7 +13,6 @@
         </div>
         <div :class = "$style.tag">#{{item.tag}}#</div> 
       </div>
-  </a>
     </div>
 </template>
 
@@ -28,7 +26,7 @@ import Map from '../../common/keymap.js'
     },
      mounted() {
       this.url = Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id
-      console.log(this.item.article_id, Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id)
+      // console.log(this.item.article_id, Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id)
      },
     props:['item'],
     computed:{
@@ -55,7 +53,7 @@ import Map from '../../common/keymap.js'
     },
     methods:{
       toSecond(){
-        console.log("item.kind",this.item,"item.article_id",this.item.article_id)
+        window.location.pathname = this.url
       }
     }
   }

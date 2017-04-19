@@ -47,15 +47,15 @@
                 </svg>
                 <div :class="$style.commentTitle">评论区</div>
             </div>
-            <div  v-for="comment in obj" v-on:click="commentOthers(comment)">
-                 <comment :comment="comment"></comment>
+            <div v-for="comment in obj" v-on:click="commentOthers(comment)">
+                <comment :comment="comment"></comment>
             </div>
-           
             <div :class="$style.sline"></div>
+
         </div>
         <div v-show="showShare" :class="$style.sharePage">
-            <div :class = "$style.maskShare"></div>
-            <div :class = "$style.shareBox">
+            <div :class="$style.maskShare"></div>
+            <div :class="$style.shareBox">
                 <div class="bdsharebuttonbox" data-tag="share_1">
                     <a class="bds_mshare" data-cmd="mshare" style="margin:12%;"></a>
                     <a class="bds_evernotecn" data-cmd="evernotecn" style="margin:12%;"></a>
@@ -68,7 +68,7 @@
                     <a class="bds_fbook" data-cmd="fbook" style="margin:12%;"></a>
                     <a class="bds_twi" data-cmd="twi" style="margin:12%;"></a>
                 </div>
-                <div :class = "$style.occupy"></div>
+                <div :class="$style.occupy"></div>
             </div>
         </div>
     </div>
@@ -93,6 +93,7 @@ export default {
                 curi: 0,
                 showTips: false,
                 obj: [],
+                url:"",
                 liked: false,
                 showShare: false,
                 message: "",
@@ -104,7 +105,8 @@ export default {
                     id: 0,
                     kind: 0,
                     commentCount: 0,
-                    user_role: -1
+                    user_role: -1,
+                    user_id:1
                 }
             }
         },
@@ -199,7 +201,14 @@ export default {
                 }
             },
             activeComment: function (e) {
-                if (!this.showComment) this.showComment = true
+                if (!this.showComment) {
+                    fetch(this.url).then((res) => {
+                        return res.json()
+                    }).then(res => {
+                        this.obj = res
+                    })
+                    this.showComment = true
+                }
             },
             quit() {
                 this.showTips = false
@@ -235,7 +244,6 @@ export default {
                     this.showTips = true
                     return
                 }
-                console.log(this.articleInfo)
                 fetch('/api/v1.0/comments/', {
                         method: 'POST',
                         headers: {
@@ -246,7 +254,8 @@ export default {
                             comment_id: this.currentCommentId,
                             article_id: this.articleInfo.id,
                             kind: this.articleInfo.kind,
-                            message: this.message
+                            message: this.message,
+                            user_id: Cookie.getCookie("uid")
                         })
                     })
                     .then(res => {
@@ -281,7 +290,6 @@ window._bd_share_config = {
     },
     share: [{
         "bdSize": 32,
-        // "bdCustomStyle" : ".bds_mshare{margin:10px;}"
     }],
     image: [{
         viewType: 'collection',
@@ -294,13 +302,14 @@ window._bd_share_config = {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
-.maskShare{
-    background: rgba(53,53,53,0.55);
-    z-index: 2;
+.maskShare {
+    background: rgba(53, 53, 53, 0.55);
+    z-index: $Zindex2;
     position: fixed;
     width: 100%;
     height: 246px;
 }
+
 .sharePage {
     top: 54px;
     width: 100%;
@@ -309,23 +318,25 @@ window._bd_share_config = {
     position: fixed;
 }
 
-.shareBox{
-    top:300px;
+.shareBox {
+    top: 300px;
     width: 100%;
     bottom: 0;
     left: 0;
     position: fixed;
     background: white;
 }
-.occupy{
+
+.occupy {
     height: 50px;
     width: 100%;
 }
+
 .mask {
     position: fixed;
     width: 100%;
     background-color: rgba(229, 233, 233, 0.85);
-    z-index: 2;
+    z-index: $Zindex2;
     bottom: 50px;
     top: 0;
 }
@@ -335,7 +346,7 @@ window._bd_share_config = {
     top: 0;
     bottom: 0;
     width: 100%;
-    z-index: 6;
+    z-index: $Zindex6;
     background-color: rgba(51, 51, 51, 0.85);
 }
 
@@ -371,7 +382,7 @@ window._bd_share_config = {
 }
 
 .sline {
-    height: 1px;
+    height: 56px;
     width: 100%;
     background-color: $grey_l;
 }
@@ -386,7 +397,7 @@ window._bd_share_config = {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 5;
+    z-index: $Zindex5;
     background-color: #333;
 }
 
@@ -468,11 +479,10 @@ window._bd_share_config = {
 }
 
 .commentPage {
-    position: fixed;
+    position: absolute;
     top: 0;
-    bottom: 0;
     background-color: $white;
-    z-index: 4;
+    z-index: $Zindex4;
     width: 100%;
 }
 

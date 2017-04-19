@@ -78,7 +78,6 @@ export default {
                 this.showTips = false
             },
             showSearch(e) {
-                console.log(window.location.pathname)
                 if(window.location.pathname !== '/search'){
                     window.location = '/search'
                     this.onclick = true
@@ -134,7 +133,7 @@ export default {
 <style lang ="sass" module>
 @import '../scss/color.scss';
 .top {
-    z-index: 3;
+    z-index: $Zindex3;
     position: relative;
     background-color: $white;
     height: 54px;
@@ -146,7 +145,7 @@ export default {
     top: 0;
     bottom: 0;
     width: 100%;
-    z-index: 6;
+    z-index: $Zindex6;
     background-color: rgba(51, 51, 51, 0.85);
 }
 
@@ -215,7 +214,7 @@ export default {
 .mask {
     position: fixed;
     top: 54px;
-    z-index: 3;
+    z-index: $Zindex3;
     height: 100%;
     width: 100%;
     background-color: rgba(229, 233, 233, 0.85);
@@ -231,16 +230,16 @@ export default {
     padding-left: 10px;
     padding-right: 68px;
     height: 31px;
-    width: 100%;
+    width: 80%;
     border: none;
     box-sizing: border-box;
     composes: horizon from 'sass-loader!../scss/utility.scss';
 }
 
 .button {
-    position: absolute;
-    width: 32px;
-    right: 16px;
+    width: 20%;
+    float: right;
+    box-sizing: border-box;
     font-size: 16px;
     background-color: $orange_button;
     color: $white;

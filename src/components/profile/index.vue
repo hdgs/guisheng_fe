@@ -3,7 +3,7 @@
         <div :class="$style.info">
             <div :class="$style.top">
                 <div :class="$style.back">
-                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click = "returnBack">
+                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="returnBack">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
                     </svg>
                 </div>
@@ -12,7 +12,7 @@
             <div :class="$style.avatar">
                 <div :class="$style.avatarbox">
                     <img :class="$style.avatarimg" v-bind:src="profile.img_url">
-                    <div :class="$style.sign" v-show="!profile.role">
+                    <div :class="$style.sign" v-show="profile.role">
                         <span>认证作者</span>
                         <svg viewBox="0 0 200 200" :class="$style.img">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sign"></use>
@@ -22,11 +22,8 @@
             </div>
             <div :class="$style.intro">个人介绍：{{profile.introduction}}</div>
         </div>
-        <svg viewBox="0 0 200 200" :class="$style.largeimg">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#test"></use>
-                </svg>
         <div :class="$style.list">
-            <div :class="$style.col" v-show="!profile.role">
+            <div :class="$style.col" v-show="profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#weibo"></use>
                 </svg>
@@ -35,7 +32,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-show="!profile.user_role">
+            <div :class="$style.col" v-show="!profile.user_role && my_id == profile.user_id">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use>
                 </svg>
@@ -44,7 +41,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-show="profile.role == profile.user_role">
+            <div :class="$style.col" v-show="my_id == profile.user_id">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#collection"></use>
                 </svg>
@@ -53,7 +50,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="showMyWorks" v-show="profile.user_role && !profile.role">
+            <div :class="$style.col" v-on:click="showMyWorks" v-show="my_id != profile.user_id && profile.role">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use>
                 </svg>
@@ -62,7 +59,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="showMySuggest" v-show="profile.role == profile.user_role">
+            <div :class="$style.col" v-on:click="showMySuggest" v-show="my_id == profile.user_id">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#feedback"></use>
                 </svg>
@@ -71,7 +68,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-on:click="messageChange" v-show="profile.role == profile.user_role">
+            <div :class="$style.col" v-on:click="messageChange" v-show="my_id == profile.user_id">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#modify"></use>
                 </svg>
@@ -85,7 +82,7 @@
         <div v-show="returnIt" :class="$style.suggestMask">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
-                <div :class="$style.returnButton" v-on:click = "exit">退出</div>
+                <div :class="$style.returnButton" v-on:click="exit">退出</div>
                 <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
         </div>
@@ -96,6 +93,7 @@
                 </svg>
                 <div :class="$style.commentTitle">{{this.title}}</div>
             </div>
+            <div :class="$style.line"></div>
             <item :item="item" v-for="item in list"></item>
             <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
         </div>
@@ -182,14 +180,26 @@ export default {
                 changedImg: "",
                 inputValue: "",
                 avatarData: "",
-                pic_url:""
+                pic_url: "",
+                my_id: 0
             }
         },
         components: {
             "item": Item,
         },
         mounted() {
-            fetch('/api/v1.0' + window.location.pathname + '/').then((res) => {
+            var api = window.location.pathname
+            this.my_id = Cookie.getCookie("uid")
+            fetch('/api/v1.0' + api + '/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    my_id: this.my_id
+                })
+            }).then((res) => {
                 return res.json()
             }).then(value => {
                 this.profile = value
@@ -205,16 +215,16 @@ export default {
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
                 fetch('http://120.24.4.254:7777/guisheng/upload_pics/', {
-                        method: 'POST',
-                        body: this.avatarData
-                    }).then(res => {
-                        return res.json()
-                    }).then(value =>{
-                        this.pic_url = value.pic_url
-                    })
+                    method: 'POST',
+                    body: this.avatarData
+                }).then(res => {
+                    return res.json()
+                }).then(value => {
+                    this.pic_url = value.pic_url
+                })
                 this.editChange = true
             },
-            returnBack(){
+            returnBack() {
                 window.history.back()
             },
             showReturn() {
@@ -223,7 +233,7 @@ export default {
             editName() {
                 this.editChange = true
             },
-            exit(){
+            exit() {
                 Cookie.clearCookie("token")
                 window.location = "/"
             },
@@ -240,7 +250,7 @@ export default {
                             name: this.newName ? this.newName : this.profile.name,
                             introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
                             weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                            img_url:this.pic_url? this.pic_url : this.profile.weibo.img_url
+                            img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
                         })
                     })
                     .then(res => {
@@ -257,7 +267,7 @@ export default {
             },
             showMyWorks() {
                 this.showWorks = true
-                var api = "/api/v1.0/profile/" + this.profile.user_id + "/works"
+                var api = "/api/v1.0/profile/" + this.profile.user_id + "/works/"
                 fetch(api).then(res => {
                     return res.json()
                 }).then(value => {
@@ -270,8 +280,8 @@ export default {
             },
             showCollection() {
                 this.showWorks = true
-                console.log("this.profile.user_id",this.profile.user_id)
-                fetch('/api/v1.0/profile/'+ this.profile.user_id +'/collections/').then(res => {
+                console.log("this.profile.user_id", this.profile.user_id)
+                fetch('/api/v1.0/profile/' + this.profile.user_id + '/collections/').then(res => {
                     return res.json()
                 }).then(value => {
                     this.list = value
@@ -469,6 +479,7 @@ textarea {
 .info {
     width: 100%;
     background-color: $black;
+    padding-bottom: 20px;
 }
 
 .top {
@@ -508,9 +519,13 @@ textarea {
     font-size: 14px;
     line-height: 20px;
     color: $white;
-    height: 80px;
+    height: 60px;
     box-sizing: border-box;
     text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 .avatar {
@@ -621,7 +636,7 @@ textarea {
     top: 0;
     bottom: 0;
     background-color: $grey;
-    z-index: 4;
+    z-index: $Zindex4;
 }
 
 .suggestPage {
@@ -631,7 +646,7 @@ textarea {
     bottom: 0;
     right: 0;
     background-color: $white;
-    z-index: 4;
+    z-index: $Zindex4;
     font-family: '黑体-简';
 }
 

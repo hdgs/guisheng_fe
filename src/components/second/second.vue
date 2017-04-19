@@ -2,7 +2,7 @@
     <div id="xxx">
         <articleInfo ref="articleInfo" ></articleInfo>
         <articleComments ref="articleComments"></articleComments>
-        <div :class = "$style.recommend">
+        <div :class = "$style.recommend" v-show = "list.length">
             <div :class = "$style.title"  v-on:click = "closeComment">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
         </div>
@@ -43,10 +43,10 @@ export default {
                 kind = i
         }
         console.log("api","/api/v1.0" + api + "/")
-        let promise1 = fetch("/api/v1.0" + api + "/").then((res) => {
+        let promise1 = fetch("http://120.24.4.254:8888/api/v1.0" + api + "/").then((res) => {
             return res.json()
         })
-        let promise2 = fetch("/api/v1.0/comments/?article_id="+ ids[2]+"&kind=" + kind).then((res) => {
+        let promise2 = fetch("http://120.24.4.254:8888/api/v1.0/comments/?article_id="+ ids[2]+"&kind=" + kind).then((res) => {
             return res.json()
         })
         Promise.all([promise1, promise2]).then(values => {
@@ -68,12 +68,13 @@ export default {
                     })
             console.log("花湖", "/api/v1.0/" + Map.FETCH_URL_MAP[this.$refs.articleInfo.article.kind],this.$refs.articleInfo.article.user_role)
                 this.$refs.articleComments.articleInfo = {
-                    id: values[0].id,
+                    id: ids[2],
                     kind: values[0].kind,
                     commentCount: values[0].commentCount,
                     user_role: values[0].user_role
                 }
-                this.$refs.articleComments.obj = values[1]        
+                this.$refs.articleComments.obj = values[1]
+                this.$refs.articleComments.url = "/api/v1.0/comments/?article_id="+ ids[2]+"&kind=" + kind        
             })
     },
     components: {

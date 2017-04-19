@@ -323,7 +323,7 @@ export default {
     right: 10px;
     top: 54px;
     color: #fff;
-    z-index: 99;
+    z-index: $Zindex6;
 }
 
 .mask {
