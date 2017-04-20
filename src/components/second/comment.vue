@@ -175,7 +175,6 @@ export default {
             },
             changeMessage: function (e) {
                 this.clear = false
-                console.log(e)
                 this.message = e
             },
             closeComment: function () {
@@ -197,7 +196,6 @@ export default {
                 this.showTips = false
             },
             ClickChangeColor: function () {
-                console.log(this.articleInfo)
                 if (!Cookie.getCookie("token")) {
                     this.showTips = true
                     return

@@ -38,19 +38,6 @@
             <div :class="$style.editor">[责任编辑:{{article.editor}}]</div>
         </div>
         <div :class="$style.line"></div>
-        <div :class="$style.lightBox">
-            <div :class="$style.light" v-on:click="like(index)" v-for="(item, index) in article.like">
-                <div :class="$style.lightImg"><img v-bind:src="Imgs[index]" :class="$style.img"></div>
-                <div :class="$style.addOne" v-show="change == index">+1</div>
-                <div :class="(change == index)? $style.lightWordBox_hover:$style.lightWordBox">
-                    <div :class="$style.word">{{words[index]}}</div>
-                    <div :class="$style.count">{{item}}</div>
-                </div>
-            </div>
-        </div>
-        <div :class="$style.ad">
-            <a href="https://www.zhihu.com/question/20790576"><img src="http://img02.tooopen.com/images/20151225/tooopen_sy_152706581529.jpg" alt="广告位" :class="$style.ad_img"></a>
-        </div>
     </div>
 </template>
 <script>
@@ -61,11 +48,8 @@ export default {
     data() {
             return {
                 likes: 0,
-                flag: 0,
                 musicPlay: false,
                 change: -1,
-                words: ["不错耶", "好喜欢", "什么鬼"],
-                Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
                 article: {
                     "id": 0,
                     "author_id": 0,
@@ -85,18 +69,6 @@ export default {
             }
         },
         methods: {
-            like(index) {
-                if (this.flag) return
-                FETCH.FetchData('/api/v1.0/light/', 'POST', {
-                    article_id: this.article.id,
-                    kind: this.article.kind,
-                    like_degree: index
-                }).then(value => {
-                    this.article.like[index]++
-                        this.flag = 1
-                    this.change = index
-                })
-            },
             play() {
                 var audio = document.getElementById("audio")
                 if (!this.musicPlay) {
@@ -131,24 +103,6 @@ export default {
     width: 50px;
     left: 20%;
     top: 75px;
-}
-
-.addOne {
-    font-size: 14px;
-    color: $orange;
-    position: absolute;
-    right: 25%;
-    top: 40px;
-    animation: loading 0.5s;
-}
-
-@keyframes loading {
-    0% {
-        transform: translateY(100%);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .audio {
@@ -281,58 +235,5 @@ export default {
     background-color: $grey_l;
 }
 
-.lightBox {
-    font-size: 0;
-    padding: 27.5px 0 20px 0;
-}
 
-.light {
-    margin: 0 auto;
-    vertical-align: middle;
-    display: inline-block;
-    width: 33.3%;
-    text-align: center;
-    position: relative;
-}
-
-.lightImg {
-    width: 50px;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 11.5px;
-}
-
-.lightWordBox {
-    border-radius: 27.5px;
-    height: 55px;
-    margin: 0 auto;
-    width: 55px;
-    border: 1px solid $grey_b;
-    font-size: 14px;
-}
-
-.lightWordBox_hover {
-    border: 1px solid $orange_b;
-    color: $orange_b;
-    border-radius: 27.5px;
-    height: 55px;
-    margin: 0 auto;
-    width: 55px;
-    font-size: 14px;
-}
-
-.word {
-    margin-top: 10.5px;
-}
-
-.ad {
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-}
-
-.ad_img {
-    height: 100%;
-    width: 100%;
-}
 </style>
