@@ -1,6 +1,5 @@
 let scrollCallback = function(callback) {
-    if (document.body.scrollHeight < 1000) {
-        console.log("document.body.scrollHeight",document.body.scrollHeight)
+    if (document.body.scrollHeight < 880) {
         return
     }
     if (document.body.scrollHeight - window.scrollY - 100 <= document.body.clientHeight) {

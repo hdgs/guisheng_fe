@@ -32,7 +32,7 @@
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
-            <div :class="$style.col" v-show="!profile.user_role && my_id == profile.user_id">
+            <div :class="$style.col" v-show="profile.user_role && my_id == profile.user_id">
                 <svg viewBox="0 0 200 200" :class="$style.largeimg">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#work"></use>
                 </svg>
@@ -280,7 +280,6 @@ export default {
             },
             showCollection() {
                 this.showWorks = true
-                console.log("this.profile.user_id", this.profile.user_id)
                 fetch('/api/v1.0/profile/' + this.profile.user_id + '/collections/').then(res => {
                     return res.json()
                 }).then(value => {
@@ -456,7 +455,7 @@ textarea {
 }
 
 .input {
-    width: 100%;
+    width: 90%;
     height: 110px;
     font-size: 15px;
     padding: 15px;
@@ -464,7 +463,7 @@ textarea {
 }
 
 .inputInfo {
-    width: 100%;
+    width: 90%;
     font-size: 15px;
     padding: 15px;
     border-bottom: 0.50px solid $grey;
