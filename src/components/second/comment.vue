@@ -2,7 +2,7 @@
     <div id="xxx" :class="$style.container">
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable="true">{{preMessage}}</div>
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable >{{preMessage}}</div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -33,13 +33,7 @@
                 </div>
             </div>
         </div>
-        <div v-show="showTips" :class="$style.suggestMask">
-            <div :class="$style.returnCard">
-                <div :class="$style.returnContent">登录以后才能评论和收藏哦~</div>
-                <div :class="$style.returnButton">我要登录</div>
-                <div :class="$style.returnButton" v-on:click="quit">取消</div>
-            </div>
-        </div>
+        <modal v-show="showTips"></modal>
         <div :class="$style.commentPage" v-show="showComment">
             <div :class="$style.titleBox">
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
@@ -53,24 +47,7 @@
             <div :class="$style.sline"></div>
             <div :class = "$style.occupy"></div>
         </div>
-        <div v-show="showShare" :class="$style.sharePage">
-            <div :class="$style.maskShare"></div>
-            <div :class="$style.shareBox">
-                <div class="bdsharebuttonbox" data-tag="share_1">
-                    <a class="bds_mshare" data-cmd="mshare" style="margin:12%;"></a>
-                    <a class="bds_evernotecn" data-cmd="evernotecn" style="margin:12%;"></a>
-                    <a class="bds_qzone" data-cmd="qzone" href="#" style="margin:12%;"></a>
-                    <a class="bds_tsina" data-cmd="tsina" style="margin:12%;"></a>
-                    <a class="bds_baidu" data-cmd="baidu" style="margin:12%;"></a>
-                    <a class="bds_sqq" data-cmd="sqq" style="margin:12%;"></a>
-                    <a class="bds_tqq" data-cmd="tqq" style="margin:12%;"></a>
-                    <a class="bds_weixin" data-cmd="weixin" style="margin:12%;"></a>
-                    <a class="bds_fbook" data-cmd="fbook" style="margin:12%;"></a>
-                    <a class="bds_twi" data-cmd="twi" style="margin:12%;"></a>
-                </div>
-                <div :class="$style.occupy"></div>
-            </div>
-        </div>
+        <sharePage v-show="showShare"></sharePage>
     </div>
 </template>
 <script>
@@ -81,6 +58,8 @@ import Clear from '../../directives/clearHtml'
 import CommentBox from './commentBox'
 import Cookie from '../../common/cookie.js'
 import FETCH from '../../common/fetch.js'
+import SharePage from './sharePage'
+import Modal from './modal'
 
 export default {
     data() {
@@ -89,7 +68,6 @@ export default {
                 show: false,
                 clear: false,
                 submitted: false,
-                colorChange: false,
                 focusFlag: false,
                 curi: 0,
                 showTips: false,
@@ -107,12 +85,15 @@ export default {
                     kind: 0,
                     commentCount: 0,
                     user_role: -1,
-                    user_id: 1
+                    user_id: 1,
+                    collected: 0
                 }
             }
         },
         components: {
             "comment": CommentBox,
+            "sharePage":SharePage,
+            "modal":Modal
         },
         computed: {
             BoxWidth: function () {
@@ -122,7 +103,7 @@ export default {
             },
             changeColor: function () {
                 return {
-                    fill: this.colorChange ? 'orange' : '#fff'
+                    fill: this.articleInfo.collected ? 'orange' : '#fff'
                 }
             },
             Comment: function () {
@@ -192,23 +173,23 @@ export default {
                     this.showComment = true
                 }
             },
-            quit() {
-                this.showTips = false
-            },
             ClickChangeColor: function () {
                 if (!Cookie.getCookie("token")) {
                     this.showTips = true
                     return
                 }
-                if (this.colorChange) {
-                    this.colorChange = false
+                if (this.articleInfo.collected == 1) {
+                    this.articleInfo.collected = 0
 
-                } else this.colorChange = true
-                var apiName = this.colorChange ? "/api/v1.0/collect_delete/" : "/api/v1.0/collect/"
-                FETCH.FetchData(apiName, 'POST', {
+                } else {
+                    this.articleInfo.collected = 1
+                }
+                var apiName = this.articleInfo.collected ? "/api/v1.0/collect/" : "/api/v1.0/collect_delete/"
+                FETCH.FetchData(apiName, "POST", {
                     kind: this.articleInfo.kind,
-                    article_id: this.articleInfo.id
-                })
+                    article_id: this.articleInfo.id,
+                    my_id: Cookie.getCookie("uid")
+                },{})
             },
             submit: function (e) {
                 e.stopPropagation();
@@ -225,8 +206,6 @@ export default {
                         user_id: Cookie.getCookie("uid")
                     })
                     .then(value => {
-                        console.log(value.status)
-                        console.log(this.currentCommentId, "+", this.message)
                         this.message = ""
                         this.commentHolder = "写评论..."
                         this.showComment = false
@@ -245,52 +224,9 @@ export default {
             }
         }
 }
-window._bd_share_config = {
-    common: {
-        bdText: '自定义分享内容',
-        bdDesc: '自定义分享摘要',
-        bdUrl: '自定义分享url地址',
-        bdPic: '自定义分享图片'
-    },
-    share: [{
-        "bdSize": 32,
-    }],
-    image: [{
-        viewType: 'collection',
-        viewPos: 'bottom',
-        viewColor: 'white',
-        viewSize: '32',
-        viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren', 'evernotecn']
-    }]
-}
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
-.maskShare {
-    background: rgba(53, 53, 53, 0.55);
-    z-index: $Zindex2;
-    position: fixed;
-    width: 100%;
-    height: 246px;
-}
-
-.sharePage {
-    top: 54px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-}
-
-.shareBox {
-    top: 300px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    background: white;
-}
-
 .occupy {
     height: 50px;
     width: 100%;
@@ -303,38 +239,6 @@ window._bd_share_config = {
     z-index: $Zindex2;
     bottom: 50px;
     top: 0;
-}
-
-.suggestMask {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: $Zindex6;
-    background-color: rgba(51, 51, 51, 0.85);
-}
-
-.returnCard {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 217px;
-    height: 87.5px;
-    background-color: $white;
-    color: $black;
-    padding: 25px 17.5px 15px;
-    border-radius: 2px;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.returnButton {
-    float: right;
-    margin-left: 25px;
-    color: $orange;
-    cursor: pointer;
-    margin-top: 16px;
 }
 
 .comment {
@@ -404,12 +308,12 @@ window._bd_share_config = {
 .commentCount {
     line-height: 16px;
     position: absolute;
-    padding: 1px 3px;
+    padding: 0 3px;
     top: 6px;
     min-width: 12px;
     vertical-align: middle;
     right: 20%;
-    border-radius: 4px;
+    border-radius: 30%;
     text-align: center;
     color: $white;
     background-color: $orange_count;

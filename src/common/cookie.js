@@ -2,7 +2,7 @@
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
+    var expires = "expires=" + d.toUTCString() + ";path = /";
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 //获取cookie
@@ -19,6 +19,15 @@ function getCookie(cname) {
 //清除cookie  
 function clearCookie(name) {
     setCookie(name, "", -1);
+}
+
+//删除cookie
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString() + ";path = /";
 }
 
 function checkCookie(val) {
@@ -53,6 +62,7 @@ var cookie = {
     clearCookie: clearCookie,
     checkCookie: checkCookie,
     getToken: getToken,
-    getQueryString: getQueryString
+    getQueryString: getQueryString,
+    delCookie:delCookie
 }
 module.exports = cookie;

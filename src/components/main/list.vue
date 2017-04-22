@@ -9,7 +9,6 @@ import url from '../../common/url'
 import 'whatwg-fetch'
 import Item from './item'
 import scrollDirective from '../../directives/scroll'
-import Cookie from '../../common/cookie.js'
 import FETCH from '../../common/fetch.js'
 
 export default {
@@ -31,7 +30,6 @@ export default {
         },
         methods: {
             onScroll() {
-                console.log("this.isScroll", this.isScroll)
                 if (this.isScroll) {
                     return
                 }

@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.go">跳转中......</div>
+    <div :class="$style.go">登录中......</div>
 </template>
 <script>
 import 'whatwg-fetch'
@@ -8,18 +8,16 @@ import FETCH from '../common/fetch.js'
 
 export default {
     mounted() {
-        // Cookie.setCookie("token", "value.token", 3000)
         Cookie.setCookie("email", "1234@qq.com", 3000)
-        // Cookie.setCookie("uid", "4", 3000)
-        FETCH.FetchData("/api/v1.0/login","POST",{
+        FETCH.FetchData("/api/v1.0/login/","POST",{
                 email: Cookie.getCookie("email"),
                 password:"1234"
             }).then(value => {
             console.log(value)
-            Cookie.setCookie("token", value.token, 3000)
-            Cookie.setCookie("uid", value.uid, 3000)
+            Cookie.setCookie("token", value.token)
+            Cookie.setCookie("uid", value.uid)
             setTimeout(() => {
-                window.location = "/"
+                window.history.back(-1);
             }, 2000)
         })
     }

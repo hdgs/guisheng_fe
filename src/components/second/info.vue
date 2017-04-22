@@ -115,6 +115,7 @@ export default {
 
 .film_pic {
     width: 100%;
+    height: 240px;
     display: block;
 }
 
@@ -158,6 +159,7 @@ export default {
 
 .img {
     width: 100%;
+    height: 100%;
 }
 
 .music_pis {

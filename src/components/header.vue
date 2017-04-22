@@ -28,7 +28,7 @@
         <div v-show="showTips" :class="$style.suggestMask">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">登录以后才能评论和收藏哦~</div>
-                <div :class="$style.returnButton">我要登录</div>
+                <div :class="$style.returnButton" v-on:click = "admin">我要登录</div>
                 <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
         </div>
@@ -74,6 +74,9 @@ export default {
             },
             quit() {
                 this.showTips = false
+            },
+            admin(){
+                window.location = "/landing"
             },
             showSearch(e) {
                 if (window.location.pathname !== '/search') {

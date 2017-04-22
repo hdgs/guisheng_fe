@@ -15,7 +15,7 @@
                     </svg>
                 </div>
             </div>
-            <div :class="$style.content">{{comment.message}}</div>
+            <div :class="$style.content" v-html = "comment.message"></div>
             <div :class="$style.time">{{comment.time}}</div>
         </div>
     </div>
@@ -64,6 +64,7 @@ export default {
 .comment {
     border-top: solid 1px $grey_l;
     padding: 15px;
+    box-sizing: border-box;
     width: 100%;
     composes: space from 'sass-loader!../../scss/utility.scss';
     position: relative;

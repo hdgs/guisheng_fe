@@ -41,6 +41,7 @@ import widthDirective from '../../directives/width'
 import Item from '../main/item'
 import FETCH from '../../common/fetch.js'
 import Banner from './banner'
+import Cookie from '../../common/cookie.js'
 
 
 export default {
@@ -56,11 +57,14 @@ export default {
     mounted() {
         var api = window.location.pathname
         var ids = api.split('/')
-        let promise1 = FETCH.FetchData("/api/v1.0" + api + "/", "GET")
+        let promise1 = FETCH.FetchData("/api/v1.0" + api + "/", "POST",{
+            my_id: Cookie.getCookie("uid") ? Cookie.getCookie("uid"): -1
+        })
         let promise2 = FETCH.FetchData("/api/v1.0/comments/?article_id=" + ids[2] + "&kind=2", "GET")
         Promise.all([promise1, promise2]).then(values => {
             this.pics = values[0].pics
             this.$refs.bannerPic.pics = values[0].pics
+            console.log("this.$refs.bannerPic.pics",values[0])
             this.$refs.bannerPic.descriptionImg = values[0].introduction
             this.picInfo = values[0]
             this.$refs.picComments.obj = values[1]
@@ -68,7 +72,8 @@ export default {
                 id: values[0].id,
                 kind: values[0].kind,
                 commentCount: values[0].commentCount,
-                likes: values[0].likes
+                likes: values[0].likes,
+                collected:values[0].collected
             }
             FETCH.FetchData("/api/v1.0/" + ids[1] + "/recommend/", "POST", {
                 article_id: this.picInfo.id

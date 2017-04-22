@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div :class="$style.intro">个人介绍：{{profile.introduction}}</div>
+            <div :class="$style.intro">个人介绍：{{profile.introduction ? profile.introduction: '懒宝宝还没有自我介绍呢~'}}</div>
         </div>
         <div :class="$style.list">
             <div :class="$style.col" v-show="profile.role">
@@ -28,7 +28,7 @@
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#weibo"></use>
                 </svg>
                 <div :class="$style.text">
-                    <a>{{profile.weibo}}</a>
+                    <a>{{profile.weibo ? profile.weibo:'未填写'}}</a>
                     <a :class="$style.arrow">></a>
                 </div>
             </div>
@@ -78,14 +78,9 @@
                 </div>
             </div>
         </div>
-        <button :class="$style.signout" v-on:click="showReturn" v-show="profile.role == profile.user_role">登出</button>
-        <div v-show="returnIt" :class="$style.suggestMask">
-            <div :class="$style.returnCard">
-                <div :class="$style.returnContent">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
-                <div :class="$style.returnButton" v-on:click="exit">退出</div>
-                <div :class="$style.returnButton" v-on:click="quit">取消</div>
-            </div>
-        </div>
+        <button :class="$style.signout" v-on:click="showReturn" v-show="my_id == profile.user_id">登出</button>
+        <exitPage v-show="returnIt"></exitPage>
+
         <div v-show="showWorks" :class="$style.commentPage">
             <div :class="$style.titleBox">
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
@@ -97,6 +92,7 @@
             <item :item="item" v-for="item in list"></item>
             <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
         </div>
+
         <div v-show="showSuggest" :class="$style.suggestPage">
             <div :class="$style.titleBox">
                 <svg viewBox="0 0 200 200" :class="$style.imgBack" v-on:click="closeComment">
@@ -147,10 +143,10 @@
                 <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.introduction}}</span>
                 <textarea type="text" v-show="editChange" v-model="newIntroduction" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
             </div>
-            <div :class="$style.changeInfo" v-show="!profile.user_role">
+            <div :class="$style.changeInfo" v-show="profile.user_role">
                 <span :class="$style.nameF" v-on:click="editName">微博：</span>
                 <span :class="$style.changeName" v-show="!editChange" v-on:click="editName">{{profile.weibo}}</span>
-                <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo ? profile.weibo:'请输入您的微博地址'"></textarea>
+                <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo ? profile.weibo:'请输入您的微博名'"></textarea>
             </div>
         </div>
     </div>
@@ -159,6 +155,8 @@
 import 'whatwg-fetch'
 import Item from '../main/item'
 import Cookie from '../../common/cookie.js'
+import ExitPage from './exitPage'
+
 export default {
     data() {
             return {
@@ -186,6 +184,7 @@ export default {
         },
         components: {
             "item": Item,
+            "exitPage": ExitPage
         },
         mounted() {
             var api = window.location.pathname
@@ -233,10 +232,6 @@ export default {
             editName() {
                 this.editChange = true
             },
-            exit() {
-                Cookie.clearCookie("token")
-                window.location = "/"
-            },
             submitChange() {
                 if (!this.editChange) return
 
@@ -275,9 +270,9 @@ export default {
                     this.title = "我的作品"
                 })
             },
-            quit() {
-                this.returnIt = false
-            },
+            // quit() {
+            //     this.returnIt = false
+            // },
             showCollection() {
                 this.showWorks = true
                 fetch('/api/v1.0/profile/' + this.profile.user_id + '/collections/').then(res => {
@@ -398,7 +393,7 @@ textarea {
     fill: $orange;
 }
 
-.returnCard {
+/*.returnCard {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -409,15 +404,15 @@ textarea {
     padding: 15px;
     border-radius: 2px;
     transform: translate(-50%, -50%);
-}
+}*/
 
-.returnButton {
+/*.returnButton {
     float: right;
     margin-left: 25px;
     color: $orange;
     cursor: pointer;
     margin-top: 16px;
-}
+}*/
 
 .line {
     width: 100%;

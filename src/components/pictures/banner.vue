@@ -2,9 +2,9 @@
     <div>
         <div :class="$style.banner" v-bind:style="imgHeight">
             <div :class="$style.container" v-finger:swipeMove="onSwipe" v-finger:swipe="afterSwipe" v-finger:tap="showMask" v-bind:style="styleObject" v-transitionEnd="changeState">
-                <img alt="picture" v-bind:src="img.pic_url" v-bind:style="imgWidth" v-for="img in pics" v-radio="initImgRadio">
+                <img alt="picture" v-bind:src="img" v-bind:style="imgWidth" v-for="img in pics" v-radio="initImgRadio">
             </div>
-            <div :class="$style.lastOneMask" v-show="lastOne" v-bind:style="imgHeight">
+            <div :class="$style.lastOneMask" v-show="lastOne" v-bind:style="imgHeight" v-finger:swipeMove="formerPic">
                 <svg viewBox="0 0 200 200" :class="$style.imgRecommend">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#recommend"></use>
                 </svg>
@@ -45,7 +45,8 @@ export default {
                 imgRadioArr: [],
                 tappedImgSrc: "",
                 tappedImgDescription: "",
-                lastOne: false
+                lastOne: false,
+                descriptionImg:[]
             }
         },
         computed: {
@@ -80,18 +81,18 @@ export default {
                 }
             }
         },
-        mounted() {
-            console.log("this.picWidth", this.pics)
-        },
         directives: {
             transitionEnd: transitionEndDirective,
             radio: radioDirective
         },
         methods: {
+            formerPic(d){
+                if(d.direction == 'Right' && this.i == this.pics.length-1)
+                    this.lastOne = false
+            },
             switchAble(direction) {
                 if (direction == 'Right') {
                     this.lastOne = false
-                    console.log(this.lastOne)
                 }
                 if ((direction == 'Right' && this.i == 0) || (this.i == (this.pics.length - 1) && direction == 'Left')) {
                     if (this.i == (this.pics.length - 1) && direction == 'Left') {
@@ -111,7 +112,6 @@ export default {
                 if (this.picWidth / 2 + Math.abs(this.ix + e.deltaX) < (this.picWidth * this.customscale) / 2) {
                     this.ix += e.deltaX
                 }
-                console.log(document.body.clientHeight, window.screen.height, window.screen.availHeight)
                 var picHeight = this.picWidth / this.imgRadioArr[this.i]
                 if ((this.screenHeight < this.customscale * picHeight) && (this.screenHeight / 2 + Math.abs(this.iy + e.deltaY) - 40 * this.customscale < picHeight * this.customscale / 2)) {
                     this.iy += e.deltaY
@@ -132,23 +132,25 @@ export default {
 
                     if (e.direction == 'Left') {
                         this.i++
+                        this.$parent.i++
                             this.x = -this.picWidth * this.i
                     } else {
                         this.i--
+                        this.$parent.i--
                             this.x = -this.picWidth * this.i
                     }
                 } else {
                     this.x = -this.picWidth * this.i
                 }
                 this.isSwitching = true
-                this.tappedImgDescription = this.descriptionImg[this.i].description
+                this.tappedImgDescription = this.descriptionImg[this.i]
             },
             changeState() {
                 this.isSwitching = false
             },
             showMask(e, index) {
                 this.ifTab = true
-                this.tappedImgSrc = this.pics[index].pic_url
+                this.tappedImgSrc = this.pics[index]
                 this.picHight = this.picWidth / this.imgRadioArr[index]
             },
             hideMask() {
@@ -161,7 +163,7 @@ export default {
             initImgRadio(radio, index) {
                 this.imgRadioArr[index] = radio
                 this.picHeight = this.picWidth * 0.75
-                this.tappedImgDescription = this.descriptionImg[this.i].description
+                this.tappedImgDescription = this.descriptionImg[this.i]
             },
             imgScale() {
                 if (this.customscale > 1.0) {
