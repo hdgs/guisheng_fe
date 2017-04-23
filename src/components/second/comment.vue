@@ -95,6 +95,9 @@ export default {
             "sharePage":SharePage,
             "modal":Modal
         },
+        mounted(){
+            console.log(this.articleInfo,"sf")
+        },
         computed: {
             BoxWidth: function () {
                 return {

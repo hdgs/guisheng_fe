@@ -56,7 +56,6 @@ export default {
             this.$refs.articleInfo.article = values[0]
             this.$refs.light.article = values[0]
             this.$refs.light.article.id = ids[2]
-            console.log(this.$refs.articleInfo.article)
             FETCH.FetchData("/api/v1.0/" + ids[1] + "/recommend/", "POST", {
                 article_id: ids[2]
             }).then(res => {
@@ -89,14 +88,6 @@ export default {
 </script>
 <style lang='sass' module>
 @import '../../scss/color.scss';
-#app {
-    color: green;
-    max-width: 600px;
-    align-items: flex-start;
-    font-family: Source Sans Pro, Helvetica, sans-serif;
-    text-align: center;
-}
-
 .title {
     font-size: 18px;
     color: $orange;

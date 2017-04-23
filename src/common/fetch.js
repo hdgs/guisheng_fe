@@ -26,6 +26,22 @@ export default {
                 }
             })
             return p
-        }
+        } else if (method == 'PUT') {
+            let p = fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            }).then(res => {
+                if (res.ok) {
+                    return res.json()
+                } else {
+                    callback()
+                }
+            })
+            return p
+        } 
     }
 }

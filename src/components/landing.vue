@@ -16,10 +16,12 @@ export default {
             console.log(value)
             Cookie.setCookie("token", value.token)
             Cookie.setCookie("uid", value.uid)
+        // Cookie.setCookie("uid", 2)
             setTimeout(() => {
                 window.history.back(-1);
             }, 2000)
         })
+        Cookie.setCookie("uid", 2)
     }
 }
 </script>

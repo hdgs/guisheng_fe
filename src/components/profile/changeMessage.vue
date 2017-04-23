@@ -22,13 +22,13 @@
                 </div>
             </div>
         </div>
-        <div :class="$style.changeInfo"  v-on:click="editName">
+        <div :class="$style.changeInfo" v-on:click="editName">
             <span :class="$style.nameF">昵称：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.name}}</span>
             <textarea type="text" v-show="editChange" v-model="newName" :class="$style.newName" autofocus rows="1" v-bind:placeholder="profile.name"></textarea>
         </div>
         <div :class="$style.changeInfo" v-on:click="editName">
-            <span :class="$style.nameF" >简介：</span>
+            <span :class="$style.nameF">简介：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.introduction}}</span>
             <textarea type="text" v-show="editChange" v-model="newIntroduction" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
         </div>
@@ -40,6 +40,8 @@
     </div>
 </template>
 <script>
+import Fetch from '../../common/fetch.js'
+
 export default {
     data() {
             return {
@@ -63,25 +65,13 @@ export default {
             },
             submitChange() {
                 if (!this.editChange) return
-
-                let promise1 = fetch('/api/v1.0/profile/' + this.profile.user_id + '/edit/', {
-                        method: 'PUT',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: this.newName ? this.newName : this.profile.name,
-                            introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                            weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                            img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
-                        })
-                    })
-                    .then(res => {
-                        return res.json()
-                    })
-                    .then(value => {
-                    	this.profile = value
+                let promise1 = Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/edit/', 'PUT', {
+                        name: this.newName ? this.newName : this.profile.name,
+                        introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
+                        weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
+                        img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
+                    }).then(value => {
+                        this.profile = value
                         this.$parent.profile = value
                         this.$parent.changeMessage = false
                         this.editChange = false
@@ -110,7 +100,7 @@ export default {
         }
 }
 </script>
-<style lang="sass" module>
+<style lang ="sass" module>
 @import '../../scss/color.scss';
 .suggestPage {
     position: absolute;
@@ -157,12 +147,6 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-}
-
-textarea {
-    outline: none;
-    width: 100%;
-    border: none;
 }
 
 .changeInfo {

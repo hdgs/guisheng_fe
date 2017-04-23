@@ -1,6 +1,7 @@
 <template>
     <div v-scroll="onScroll" :class="$style.app">
         <item :item="item" v-for="item in list"></item>
+        <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
     </div>
 </template>
 <script>
@@ -56,8 +57,16 @@ export default {
 }
 </script>
 <style lang='sass' module>
+@import '../../scss/color.scss';
 .app {
     align-items: flex-start;
     font-family: "黑体-简", Helvetica, sans-serif;
+}
+
+.tip {
+    text-align: center;
+    font-size: 17px;
+    color: $black_t;
+    padding-bottom: 15px;
 }
 </style>

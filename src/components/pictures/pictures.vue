@@ -107,7 +107,7 @@ export default {
 @import '../../scss/color.scss';
 .picSecond {
     background-color: $white;
-    height: 90%;
+    min-height: 90%;
 }
 
 .occupy {
