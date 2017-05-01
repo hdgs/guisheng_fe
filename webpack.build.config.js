@@ -30,6 +30,7 @@ module.exports = {
         }
     },
     module: {
+        noParse: /vue.runtime.min/,
         resolveLoader: {
             root: path.join(__dirname, "node_modules")
         },
@@ -57,7 +58,6 @@ module.exports = {
             loaders: ["style", "css", "sass"]
         }]
     },
-    devtool: '#eval-source-map',
     resolve: {
         extensions: ['', '.js', '.scss', '.vue'],
          alias:{
@@ -123,7 +123,6 @@ module.exports = {
         }),
         new HtmlWebpackHarddiskPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             mangle: true,
