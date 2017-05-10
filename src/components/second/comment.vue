@@ -95,9 +95,6 @@ export default {
             "sharePage":SharePage,
             "modal":Modal
         },
-        mounted(){
-            console.log(this.articleInfo,"sf")
-        },
         computed: {
             BoxWidth: function () {
                 return {
@@ -164,16 +161,19 @@ export default {
             closeComment: function () {
                 if (this.showComment) {
                     this.showComment = false
+                    this.$parent.showComment = false
                     this.message = ""
                 }
             },
             activeComment: function (e) {
+                console.log("this.$parent",this.$parent)
                 if (!this.showComment) {
                     FETCH.FetchData(this.url, "GET")
                         .then(res => {
                             this.obj = res
                         })
                     this.showComment = true
+                    this.$parent.showComment = true
                 }
             },
             ClickChangeColor: function () {
@@ -233,15 +233,6 @@ export default {
 .occupy {
     height: 50px;
     width: 100%;
-}
-
-.mask {
-    position: fixed;
-    width: 100%;
-    background-color: rgba(229, 233, 233, 0.85);
-    z-index: $Zindex2;
-    bottom: 50px;
-    top: 0;
 }
 
 .comment {
@@ -351,6 +342,7 @@ export default {
 
 .commentPage {
     position: absolute;
+    overflow: auto;
     top: 0;
     min-height:100%;
     background-color: $white;

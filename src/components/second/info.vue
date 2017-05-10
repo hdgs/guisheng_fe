@@ -102,7 +102,7 @@ export default {
     position: absolute;
     width: 50px;
     left: 20%;
-    top: 75px;
+    top: 20%;
 }
 
 .audio {
@@ -124,6 +124,7 @@ export default {
 }
 
 .musicBox {
+    position: relative;
     composes: space from 'sass-loader!../../scss/utility.scss';
 }
 

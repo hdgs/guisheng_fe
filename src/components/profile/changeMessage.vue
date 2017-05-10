@@ -66,19 +66,19 @@ export default {
             submitChange() {
                 if (!this.editChange) return
                 let promise1 = Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/edit/', 'PUT', {
-                        name: this.newName ? this.newName : this.profile.name,
-                        introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                        weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                        img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
-                    }).then(value => {
-                        this.profile = value
-                        this.$parent.profile = value
-                        this.$parent.changeMessage = false
-                        this.editChange = false
-                        this.newName = ""
-                        this.newIntroduction = ""
-                        this.newWeibo = ""
-                    })
+                    name: this.newName ? this.newName : this.profile.name,
+                    introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
+                    weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
+                    img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
+                }).then(value => {
+                    this.profile = value
+                    this.$parent.profile = value
+                    this.$parent.changeMessage = false
+                    this.editChange = false
+                    this.newName = ""
+                    this.newIntroduction = ""
+                    this.newWeibo = ""
+                })
             },
             getName(e) {
                 this.changedImg = URL.createObjectURL(e.target.files[0])
@@ -100,7 +100,7 @@ export default {
         }
 }
 </script>
-<style lang ="sass" module>
+<style lang="sass" module>
 @import '../../scss/color.scss';
 .suggestPage {
     position: absolute;

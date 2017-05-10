@@ -1,5 +1,5 @@
 <template>
-    <div v-show="returnIt" :class="$style.suggestMask">
+    <div :class="$style.suggestMask">
         <div :class="$style.returnCard" >
             <div v-show = "flag">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
             <div :class="$style.returnButton" v-on:click="exit" v-show = "flag">退出</div>

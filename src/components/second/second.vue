@@ -1,13 +1,13 @@
 <template>
-    <div id="xxx">
+    <div id="xxx" :style = "stopScroll">
         <articleInfo ref="articleInfo"></articleInfo>
         <light ref = "light"></light>
-        <articleComments ref="articleComments"></articleComments>
         <ad></ad>
         <div :class="$style.recommend" v-show="list.length">
             <div :class="$style.title" v-on:click="closeComment">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
         </div>
+        <articleComments ref="articleComments"></articleComments>
         <div :class="$style.occupy"></div>
     </div>
 </template>
@@ -30,6 +30,12 @@ export default {
             return {
                 transform: 'translateX(' + this.x + 'px)'
             }
+        },
+        stopScroll: function () {
+            return{
+                overflow: this.showComment ? 'hidden':'auto',
+                height:this.showComment?'90%':''
+            }
         }
     },
     data() {
@@ -37,7 +43,8 @@ export default {
             closeCom: false,
             x: 0,
             foo: 0,
-            list: []
+            list: [],
+            showComment:false
         }
     },
     mounted() {

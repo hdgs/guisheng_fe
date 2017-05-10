@@ -11,7 +11,7 @@
         <div :class = "$style.views_img" v-show ="item.kind != 1">
           <svg viewBox="0 0 200 200" :class="$style.view_img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use></svg>
         </div>
-        <div :class = "$style.tag">#{{item.tag}}#</div> 
+        <div :class = "$style.tag" v-show = "item.tag">#{{item.tag}}#</div> 
       </div>
     </div>
 </template>
@@ -116,7 +116,7 @@ import Map from '../../common/keymap.js'
   composes: space from 'sass-loader!../../scss/utility.scss';
 }
 .author{
-  width: 30%;
+  width: 50%;
   padding-left: 15px;
   float: left;
   composes: common; 
