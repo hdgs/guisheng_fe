@@ -67,7 +67,7 @@ export default {
 
 .line {
     width: 100%;
-    height: 0.5px;
+    height: 1px;
     background-color: $grey;
 }
 

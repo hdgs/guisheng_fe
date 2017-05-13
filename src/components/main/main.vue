@@ -24,13 +24,21 @@
             <div :class="$style.bottom">
                 <div :class="$style.tittle">#每日一图#</div>
                 <div :class="$style.des">
-                    <div :class="$style.climate_img"><img v-bind:src="pic.climate_url" alt="climate icon"></div>
+                    <div :class="$style.climate_img"><img v-bind:src="pic.climate_url" alt="climate icon" :class = "$style.climate_icon"></div>
                     <div :class="$style.description">{{pic.climate}} · </div>
                     <div :class="$style.date">{{pic.date}}</div>
                 </div>
             </div>
         </div>
-        <router-view></router-view>
+        <a :class="$style.container" v-show = "showTopic" :href = "topicUrl">
+            <img :src="topic.img_url" alt="喝茶吧" :class = "$style.topicImg">
+            <div :class = "$style.topicBox">
+                <div :class = "$style.topicTitle">喝茶吧</div>
+                <div :class = "$style.rline"></div>
+                <div :class = "$style.topic">{{topic.title}}</div>
+            </div>
+        </a>
+       <router-view></router-view>
     </div>
 </template>
 <script>
@@ -41,18 +49,54 @@ export default {
             FETCH.FetchData('/api/v1.0/everydaypic/','GET').then(value => {
                 this.pic = value
             })
+            FETCH.FetchData('/api/v1.0/tea/','GET').then(value => {
+                this.topic = value
+                this.topicUrl = '/interaction/' + value.article_id
+            })
         },
         data() {
             return {
                 list: [],
                 pic: {},
-                onShow: true
+                onShow: true,
+                showTopic: false,
+                topic:{},
+                topicUrl:""
             }
         }
 }
 </script>
-<style lang='sass' module>
+<style lang ='sass' module>
 @import '../../scss/color.scss';
+
+.topicImg{
+    width:100%;
+    height: 180px;
+    display: block;
+}
+.topicBox{
+    background-color: $white;
+    composes: space from 'sass-loader!../../scss/utility.scss';
+    padding: 17px 25px;
+}
+.rline{
+    height: 40px;
+    width: 1px;
+    margin: 0 5%;
+    background-color: $grey;
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+}
+.topicTitle{
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    font-size: 20px;
+    color: $orange;
+}
+.topic{
+    composes: horizon from 'sass-loader!../../scss/utility.scss';
+    font-size: 14px;
+    color: $black;
+    width: 70%;
+}
 .app {
     font-family: Source Sans Pro, Helvetica, sans-serif;
 }
@@ -88,6 +132,7 @@ export default {
 .container {
     position: relative;
     margin-bottom: 20px;
+    display: block;
 }
 
 .bg_pic {
@@ -137,6 +182,10 @@ export default {
 .climate_img {
     composes: common;
     margin-right: 4.5px;
+}
+
+.climate_icon{   
+    width: 15px;
 }
 
 .description {

@@ -45,5 +45,10 @@ router.beforeEach((to, from, next) => {
   }else{
   	app.onShow = false
   }
+  if(to.path === '/interaction'){
+    app.showTopic = true
+  }else{
+    app.showTopic =false
+  }
   next()
 })

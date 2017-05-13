@@ -25,6 +25,7 @@ import Map from '../../common/keymap.js'
       }
     },
      mounted() {
+
       this.url = Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id
      },
     props:['item'],
@@ -67,10 +68,10 @@ import Map from '../../common/keymap.js'
   box-shadow: 0px 3px 1px rgba(7,0,2,0.11);
 }
 .title{
-  display: -webkit-box;
+  /*display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  overflow: hidden;
+  overflow: hidden;*/
   margin-top: 14px;
   margin-left: 15px;
   font-size: 21px;
@@ -79,10 +80,10 @@ import Map from '../../common/keymap.js'
 }
 .description{
   font-size: 14px;
-  display: -webkit-box;
+ /* display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  overflow: hidden;
+  overflow: hidden;*/
 }
 .img{
   width: 49%;
@@ -118,7 +119,6 @@ import Map from '../../common/keymap.js'
 .author{
   width: 50%;
   padding-left: 15px;
-  float: left;
   composes: common; 
 }
 .tag{
