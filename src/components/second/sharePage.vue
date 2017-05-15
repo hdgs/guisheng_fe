@@ -45,7 +45,7 @@ window._bd_share_config = {
     z-index: $Zindex2;
     position: fixed;
     width: 100%;
-    height: 246px;
+    height: 210px;
 }
 
 .sharePage {
@@ -57,7 +57,7 @@ window._bd_share_config = {
 }
 
 .shareBox {
-    top: 300px;
+    top: 260px;
     width: 100%;
     bottom: 0;
     left: 0;

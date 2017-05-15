@@ -48,10 +48,7 @@ module.exports = {
             loader: 'html-loader'
         }, {
             test: /\.(png|jpg|gif|svg)$/,
-            loader: 'file?limit=8192',
-            query: {
-                name: '[name].[ext]?[hash]'
-            }
+            loader: 'url-loader?limit=20&name=images/[hash:8].[name].[ext]'
         }, {
             test: /\.scss$/,
             loader: 'style!css!sass'

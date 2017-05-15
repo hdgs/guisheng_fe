@@ -25,17 +25,17 @@
         <div :class="$style.changeInfo" v-on:click="editName">
             <span :class="$style.nameF">昵称：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.name}}</span>
-            <textarea type="text" v-show="editChange" v-model="newName" :class="$style.newName" autofocus rows="1" v-bind:placeholder="profile.name"></textarea>
+            <textarea type="text" v-show="editChange" v-on:input = "newName = $event.target.value" v-bind:value = "profile.name" :class="$style.newName" autofocus rows="1"></textarea>
         </div>
         <div :class="$style.changeInfo" v-on:click="editName">
             <span :class="$style.nameF">简介：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.introduction}}</span>
-            <textarea type="text" v-show="editChange" v-model="newIntroduction" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.introduction"></textarea>
+            <textarea type="text" v-show="editChange" :class="$style.newName" autofocus rows="4"  v-on:input="newIntroduction = $event.target.value" v-bind:value = "profile.introduction"></textarea>
         </div>
         <div :class="$style.changeInfo" v-show="profile.user_role" v-on:click="editName">
             <span :class="$style.nameF">微博：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.weibo}}</span>
-            <textarea type="text" v-show="editChange" v-model="newWeibo" :class="$style.newName" autofocus rows="4" v-bind:placeholder="profile.weibo ? profile.weibo:'请输入您的微博名'"></textarea>
+            <textarea type="text" v-show="editChange" v-on:input = "newWeibo = $event.target.value" :class="$style.newName" autofocus rows="4" v-bind:value="profile.weibo ? profile.weibo:'请输入您的微博名'"></textarea>
         </div>
     </div>
 </template>

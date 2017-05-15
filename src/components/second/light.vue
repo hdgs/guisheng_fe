@@ -1,7 +1,11 @@
 <template>
     <div :class="$style.lightBox">
         <div :class="$style.light" v-on:click="like(index)" v-for="(item, index) in article.like_degree">
-            <div :class="$style.lightImg"><img v-bind:src="Imgs[index]" :class="$style.img"></div>
+            <div :class="$style.lightImg">
+                <div :class="$style.img0" v-show = "index == 0"></div>
+                <div :class="$style.img1" v-show = "index == 1"></div>
+                <div :class="$style.img2" v-show = "index == 2"></div>
+            </div>
             <div :class="$style.addOne" v-show="change == index">+1</div>
             <div :class="(change == index)? $style.lightWordBox_hover:$style.lightWordBox">
                 <div :class="$style.word">{{words[index]}}</div>
@@ -21,7 +25,7 @@ export default {
                 flag: 0,
                 change: -1,
                 words: ["不错耶", "好喜欢", "什么鬼"],
-                Imgs: ["http://ol8raxkl5.bkt.clouddn.com/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
+                Imgs: ["/img/great.png", "http://ol8raxkl5.bkt.clouddn.com/likeit.png", "http://ol8raxkl5.bkt.clouddn.com/what.png"],
                 article: {
                 	"id":0,
                     "kind": 0,
@@ -118,7 +122,23 @@ export default {
     }
 }
 
-.img {
+.img{
     width: 100%;
+    height: 45px;
+    background-size: 100%;
+}
+.img0 { 
+    composes: img;
+    background-image: url('../../img/great.png');
+}
+
+.img1 {
+    composes: img;
+    background-image: url('../../img/likeit.png');
+}
+
+.img2 {
+    composes: img;
+    background-image: url('../../img/what.png');
 }
 </style>
