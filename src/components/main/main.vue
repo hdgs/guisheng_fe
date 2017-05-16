@@ -28,7 +28,7 @@
                         <svg viewBox="0 0 200 200" :class="$style.climate_icon">    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="climate_pic"></use>
                         </svg>
                     </div>
-                    <div :class="$style.description">{{word}} · </div>
+                    <div :class="$style.climate_img">{{word}} · </div>
                     <div :class="$style.date">{{pic.date}}</div>
                 </div>
             </div>
@@ -104,10 +104,6 @@ export default {
     color: $black;
     width: 70%;
 }
-.app {
-    font-family: Source Sans Pro, Helvetica, sans-serif;
-}
-
 .top {
     composes: space from 'sass-loader!../../scss/utility.scss';
     height: 47px;
@@ -130,6 +126,7 @@ export default {
 
 .link:hover {
     font-weight: bold;
+    color: $green;
 }
 
 .tab:hover {
@@ -160,7 +157,8 @@ export default {
     width: 100%;
     color: $white;
     height: 30px;
-    composes: space from 'sass-loader!../../scss/utility.scss';
+    display: flex;
+    align-items:center;
 }
 
 .common {
@@ -173,35 +171,29 @@ export default {
 .tittle {
     width: 30%;
     padding-left: 15px;
-    text-align: left;
-    composes: common;
-    box-sizing: border-box;
 }
 
 .des {
-    width: 70%;
-    text-align: right;
+    margin-left: 20%;
+    width: 40%;
     padding-right: 15px;
     box-sizing: border-box;
-    composes: common;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .climate_img {
-    composes: common;
-    margin-right: 4.5px;
+    margin-right: 5px;
 }
 
 .climate_icon{   
     width: 15px;
+    display: block;
     fill: $white;
 }
 
-.description {
+.climate_img {
     margin-right: 6px;
-    composes: common;
-}
-
-.date {
-    composes: common;
 }
 </style>

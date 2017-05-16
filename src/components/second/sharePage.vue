@@ -40,6 +40,8 @@ window._bd_share_config = {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .maskShare {
     background: rgba(53, 53, 53, 0.55);
     z-index: $Zindex2;

@@ -2,7 +2,7 @@
     <div id="header" v-hide="onclick||showTips">
         <div :class="$style.top">
             <div :class="$style.logo">
-                <img src="http://ol8raxkl5.bkt.clouddn.com/logo.png" alt="华大桂声" :class="$style.logoImg" v-on:click="backToRoot">
+                <div :class="$style.logoImg" v-on:click="backToRoot"></div>
             </div>
             <div :class="$style.profile" v-on:click="showProfile">
                 <svg viewBox="0 0 200 200" :class="$style.img">
@@ -117,10 +117,11 @@ export default {
         }
 }
 </script>
-<style lang="sass" module>
+<style lang ="sass" module>
 @import '../scss/color.scss';
+@import '../scss/zindex.scss';
 .top {
-    z-index: $Zindex3;
+    z-index: $Zindex2;
     position: relative;
     background-color: $white;
     height: 54px;
@@ -132,7 +133,7 @@ export default {
     top: 0;
     bottom: 0;
     width: 100%;
-    z-index: $Zindex6;
+    z-index: $Zindex3;
     background-color: rgba(51, 51, 51, 0.85);
 }
 
@@ -196,12 +197,16 @@ export default {
 .logoImg {
     vertical-align: middle;
     height: 24px;
+    width: 95px;
+    margin-top: 14.5px;
+    background-size: 100%;
+    background-image: url('../img/hdgslogo.png');
 }
 
 .mask {
     position: fixed;
     top: 54px;
-    z-index: $Zindex3;
+    z-index: $Zindex2;
     height: 100%;
     width: 100%;
     background-color: rgba(229, 233, 233, 0.85);

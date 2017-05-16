@@ -56,6 +56,8 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .suggestPage {
     position: absolute;
     width: 100%;
@@ -63,7 +65,7 @@ export default {
     bottom: 0;
     right: 0;
     background-color: $white;
-    z-index: $Zindex4;
+    z-index: $Zindex2;
     font-family: '黑体-简';
 }
 

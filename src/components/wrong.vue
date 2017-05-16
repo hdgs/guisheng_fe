@@ -17,6 +17,8 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../scss/color.scss';
+@import '../scss/zindex.scss';
+
 .wrongPage {
     height: 100%;
     width: 100%;

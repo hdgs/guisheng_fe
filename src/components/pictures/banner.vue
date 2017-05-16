@@ -180,6 +180,8 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .banner {
     width: 100%;
     overflow: hidden;
@@ -219,7 +221,7 @@ export default {
     right: 10px;
     top: 54px;
     color: #fff;
-    z-index: $Zindex6;
+    z-index: $Zindex2;
 }
 
 .mask:after {

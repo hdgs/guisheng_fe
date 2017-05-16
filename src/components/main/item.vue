@@ -7,11 +7,14 @@
       <div :class = "$style.description" v-show ="item.description" v-bind:style = "styleObject">{{item.description}}</div>
       <div :class="$style.bottom">
         <div :class = "$style.author">by {{item.author}}</div>
-        <div :class = "$style.views" v-show ="item.kind != 1">{{item.views}}</div>
-        <div :class = "$style.views_img" v-show ="item.kind != 1">
-          <svg viewBox="0 0 200 200" :class="$style.view_img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use></svg>
+        <div :class = "$style.right">
+          <div :class = "$style.tag" v-show = "item.tag">#{{item.tag}}#</div> 
+          <div :class = "$style.views_img" v-show ="item.kind != 1">
+            <svg viewBox="0 0 200 200" :class="$style.view_img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use></svg>
+          </div> 
+          <div :class = "$style.views" v-show ="item.kind != 1">{{item.views}}</div>
         </div>
-        <div :class = "$style.tag" v-show = "item.tag">#{{item.tag}}#</div> 
+        
       </div>
     </div>
 </template>
@@ -105,39 +108,39 @@ import Map from '../../common/keymap.js'
   width: 100%;
   display: block;
 }
-.common{
+/*.common{
   color: #999999;
   font-size: 12px;
   composes: horizon from 'sass-loader!../../scss/utility.scss';
-}
+}*/
 .bottom{
   overflow: hidden;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  composes: space from 'sass-loader!../../scss/utility.scss';
+  padding: 10px 0;
+  display: flex;
+  color: #999999;
+  font-size: 12px;
 }
 .author{
   width: 50%;
   padding-left: 15px;
-  composes: common; 
+}
+.right{
+  margin-left: 13%;
+  display: flex;
+  align-items: center;
 }
 .tag{
-  float: right;
   margin-right: 17px;
-  composes: common; 
 }
 .views_img{
-  float: right;
   margin-right: 4.5px;
-  composes: common; 
   fill:#999;
+  display: block;
 }
 .view_img{
   width: 13px;
 }
 .views{
-  float: right;
   margin-right: 15px;
-  composes: common; 
 }
 </style>

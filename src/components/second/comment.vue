@@ -230,6 +230,8 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .occupy {
     height: 50px;
     width: 100%;
@@ -259,7 +261,7 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: $Zindex5;
+    z-index: $Zindex3;
     background-color: #333;
 }
 
@@ -346,7 +348,7 @@ export default {
     top: 0;
     min-height:100%;
     background-color: $white;
-    z-index: $Zindex4;
+    z-index: $Zindex2;
     width: 100%;
 }
 

@@ -21,12 +21,14 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .suggestMask {
     position: fixed;
     top: 0;
     bottom: 0;
     width: 100%;
-    z-index: $Zindex6;
+    z-index: $Zindex3;
     background-color: rgba(51, 51, 51, 0.85);
 }
 

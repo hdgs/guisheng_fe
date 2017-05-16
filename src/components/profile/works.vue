@@ -33,13 +33,15 @@ export default {
 </script>
 <style lang ="sass" module>
 @import '../../scss/color.scss';
+@import '../../scss/zindex.scss';
+
 .commentPage {
     position: absolute;
     width: 100%;
     top: 0;
     bottom: 0;
     background-color: $grey;
-    z-index: $Zindex4;
+    z-index: $Zindex2;
 }
 
 .titleBox {
