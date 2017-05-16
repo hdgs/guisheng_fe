@@ -24,8 +24,11 @@
             <div :class="$style.bottom">
                 <div :class="$style.tittle">#每日一图#</div>
                 <div :class="$style.des">
-                    <div :class="$style.climate_img"><img v-bind:src="pic.climate_url" alt="climate icon" :class = "$style.climate_icon"></div>
-                    <div :class="$style.description">{{pic.climate}} · </div>
+                    <div :class="$style.climate_img">
+                        <svg viewBox="0 0 200 200" :class="$style.climate_icon">    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="climate_pic"></use>
+                        </svg>
+                    </div>
+                    <div :class="$style.description">{{word}} · </div>
                     <div :class="$style.date">{{pic.date}}</div>
                 </div>
             </div>
@@ -48,6 +51,8 @@ export default {
     mounted() {
             FETCH.FetchData('/api/v1.0/everydaypic/','GET').then(value => {
                 this.pic = value
+                this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
+                this.word = value.climate == 1 ? "晴天" : value.climate == 2 ? "阴天" : "小雨"
             })
             FETCH.FetchData('/api/v1.0/tea/','GET').then(value => {
                 this.topic = value
@@ -61,7 +66,9 @@ export default {
                 onShow: true,
                 showTopic: false,
                 topic:{},
-                topicUrl:""
+                topicUrl:"",
+                word:"晴天",
+                climate_pic: "#cloudy"
             }
         }
 }
@@ -186,9 +193,11 @@ export default {
 
 .climate_icon{   
     width: 15px;
+    fill: $white;
 }
 
 .description {
+    margin-right: 6px;
     composes: common;
 }
 
