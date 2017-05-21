@@ -1,5 +1,5 @@
 <template>
-    <div id="xxx" :class="$style.picSecond" v-width="changeWidth">
+    <div id="xxx" :class="$style.picSecond" v-width="changeWidth" :style = "stopScroll">
         <div :class="$style.titleBox">
             <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="goBack()">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
@@ -51,7 +51,8 @@ export default {
             pics: [],
             picWidth: 500,
             picInfo: {},
-            list: []
+            list: [],
+            showComment:false
         }
     },
     mounted() {
@@ -68,6 +69,7 @@ export default {
             this.$refs.bannerPic.descriptionImg = values[0].introduction
             this.picInfo = values[0]
             this.$refs.picComments.obj = values[1]
+            this.$refs.picComments.url = "/api/v1.0/comments/?article_id=" + ids[2] + "&kind=2"
             this.$refs.picComments.articleInfo = {
                 id: values[0].id,
                 kind: values[0].kind,
@@ -82,6 +84,14 @@ export default {
             })
         })
     },
+    computed: {
+        stopScroll: function () {
+            return{
+                overflow: this.showComment ? 'hidden':'auto',
+                height:this.showComment?'90%':''
+            }
+        }
+    },
     components: {
         "picComments": comments,
         "item": Item,
@@ -92,7 +102,8 @@ export default {
     },
     methods: {
         goBack() {
-            window.history.back()
+            // window.history.back()
+            window.location.href = '/'
         },
         changeWidth(e, l) {
             this.picWidth = e

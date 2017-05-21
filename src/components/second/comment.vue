@@ -166,7 +166,6 @@ export default {
                 }
             },
             activeComment: function (e) {
-                console.log("this.$parent",this.$parent)
                 if (!this.showComment) {
                     FETCH.FetchData(this.url, "GET")
                         .then(res => {

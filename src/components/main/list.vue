@@ -34,8 +34,6 @@ export default {
                 if (this.isScroll) {
                     return
                 }
-
-                console.log(this.isScroll)
                 this.isScroll = true
                 this.currentPage += 1
                 this.request()

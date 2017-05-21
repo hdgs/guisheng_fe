@@ -13,8 +13,7 @@
             <svg viewBox="0 0 200 200" :class="$style.view_img"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#view"></use></svg>
           </div> 
           <div :class = "$style.views" v-show ="item.kind != 1">{{item.views}}</div>
-        </div>
-        
+        </div>  
       </div>
     </div>
 </template>
