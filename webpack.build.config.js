@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+let FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -70,6 +71,7 @@ module.exports = {
             filename: 'template/base.html',
             inject: false,
             template: './template/base.ejs',
+            favicon: './src/img/1.png',
             chunks: ['vendor']
         }),
         new HtmlWebpackPlugin({
@@ -122,6 +124,7 @@ module.exports = {
             chunks: ['profile']
         }),
         new HtmlWebpackHarddiskPlugin(),
+        new FaviconsWebpackPlugin('./src/img/1.png'),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -130,6 +133,7 @@ module.exports = {
                 warnings: false, 
             },
         }),
+        // new FaviconsWebpackPlugin('src/img/1.png'),
         new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js")
     ]
 };
