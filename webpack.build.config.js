@@ -49,19 +49,16 @@ module.exports = {
             test: /\.(html|tpl)$/,
             loader: 'html-loader'
         }, {
-            test: /\.(png|jpg|gif|svg)$/,
-            loader: 'file?limit=8192',
-            query: {
-                name: '[name].[ext]?[hash]'
-            }
-        }, {
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loaders: ['url-loader?limit=8192', 'file-loader']
+        } ,{
             test: /\.scss$/,
             loaders: ["style", "css", "sass"]
         }]
     },
     resolve: {
         extensions: ['', '.js', '.scss', '.vue'],
-         alias:{
+        alias: {
             'vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.min'),
         }
     },
@@ -130,7 +127,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             mangle: true,
             compress: {
-                warnings: false, 
+                warnings: false,
             },
         }),
         // new FaviconsWebpackPlugin('src/img/1.png'),

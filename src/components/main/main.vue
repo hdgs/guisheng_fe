@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                     <div :class="$style.climate_img">{{word}} · </div>
-                    <div :class="$style.date">{{pic.date}}</div>
+                    <div :class="$style.date">{{date}}</div>
                 </div>
             </div>
         </div>
@@ -53,6 +53,8 @@ export default {
                 this.pic = value
                 this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
                 this.word = value.climate == 1 ? "晴天" : value.climate == 2 ? "阴天" : "小雨"
+                var d = value.date.substring(0,10).split("-")
+                this.date = d[1] + '/' + d[2]
             })
             FETCH.FetchData('/api/v1.0/tea/','GET').then(value => {
                 this.topic = value
@@ -68,6 +70,7 @@ export default {
                 topic:{},
                 topicUrl:"",
                 word:"晴天",
+                date:"",
                 climate_pic: "#cloudy"
             }
         }

@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, ""),
-        publicPath: 'http://localhost:3000/dist/',
+        publicPath: '/dist/',
         filename: '[name]'
     },
     vue: {
@@ -68,7 +68,6 @@ module.exports = {
             filename: 'template/base.html',
             inject: false,
             template: './template/base.ejs',
-            // favicon: './src/img/1.png',
             chunks: ['vendor']
         }),
         new HtmlWebpackPlugin({

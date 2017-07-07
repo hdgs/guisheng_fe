@@ -54,7 +54,7 @@ export default {
         }
 }
 </script>
-<style lang='sass' module>
+<style lang ='sass' module>
 @import '../../scss/color.scss';
 .app {
     align-items: flex-start;
