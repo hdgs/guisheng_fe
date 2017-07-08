@@ -5,14 +5,15 @@
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
-                    <div :class="$style.score">豆瓣评分：{{article.film.score}} > </div>
+                    <div :class="$style.score">豆瓣评分：{{article.film.scores}} > </div>
                 </div>
             </a>
         </div>
         <div v-show="article.music.music_url.length" :class="$style.musicBox">
-            <img v-bind:src="article.music.img_url" alt="" :class="$style.music_pis">
+            <img v-bind:src="article.music.music_img_url" alt="" :class="$style.music_pis">
             <div :class="$style.music_mask"></div>
-            <audio src="https://cdn.gomix.com/6f5b042d-533c-4dc6-9069-85376ee73137%2FElvis%20Costello%20-%20She.mp3" controls="controls" id="audio" :class="$style.audio"></audio>
+            <!-- https://cdn.gomix.com/6f5b042d-533c-4dc6-9069-85376ee73137%2FElvis%20Costello%20-%20She.mp3 -->
+            <audio :src="article.music.music_url" controls="controls" id="audio" :class="$style.audio"></audio>
             <svg viewBox="0 0 200 200" :class="$style.stop" v-show="musicPlay" v-on:click="play">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stop"></use>
             </svg>

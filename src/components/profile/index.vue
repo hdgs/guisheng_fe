@@ -171,13 +171,14 @@ $topHeight:50px;
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 .profile {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     background-color: $white;
+    padding-bottom: 15px;
 }
 
 .info {
@@ -221,20 +222,25 @@ body {
     width: 100%;
     padding: 0 24px;
     font-size: 14px;
-    line-height: 20px;
+    height: 2.8em;
+    line-height:1.4em;
     color: $white;
-    height: 60px;
     box-sizing: border-box;
     text-align: center;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
+    position:relative;
+    overflow:hidden;
+}
+.intro:after{
+    content:"...";
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 15px 1px 45px;
 }
 
 .avatar {
     width: 100%;
-    height: 150px;
+    height: 110px;
     position: relative;
 }
 
@@ -254,7 +260,7 @@ body {
 }
 
 .sign {
-    margin-top: 18px;
+    margin-top: 8px;
     text-indent: 20px;
     color: $orange;
 }
@@ -303,11 +309,11 @@ body {
     box-sizing: border-box;
     border: 1px $orange solid;
     background-color: $white;
-    margin: 0 auto;
+    margin: 0px auto;
     border-radius: 3%;
     color: #fbb848;
     font-size: 16px;
-    margin-top: 26px;
+    margin-top:26px;
     outline: none;
 }
 

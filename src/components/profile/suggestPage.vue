@@ -59,7 +59,7 @@ export default {
 @import '../../scss/zindex.scss';
 
 .suggestPage {
-    position: absolute;
+    position: fixed;
     width: 100%;
     top: 0;
     bottom: 0;
