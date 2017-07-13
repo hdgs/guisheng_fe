@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Second from './components/second/second'
-import vueFinger from 'vue-finger'
+import vueFinger from 'v-finger'
 
 Vue.use(vueFinger)
 

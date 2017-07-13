@@ -2,7 +2,7 @@
     <div id="xxx" :class="$style.container">
         <div :class="$style.commentbox" v-bind:style="commentBox">
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable >{{preMessage}}</div>
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable>{{preMessage}}</div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -151,7 +151,9 @@ export default {
 
             },
             commentOthers: function (comment) {
-                this.preMessage = "@" + comment.name + ":" + "\n"
+                this.currentCommentId = comment.comment_id
+                this.preMessage = "@" + comment.name + ":"
+                this.focusFlag = true
 
             },
             changeMessage: function (e) {
@@ -214,11 +216,6 @@ export default {
                         this.clear = true
                         this.articleInfo.commentCount++
                     })
-            },
-            change: function (commentId) {
-                this.currentCommentId = commentId
-                this.focusFlag = true
-                this.commentHolder = "回复" + commentId
             },
             changeHolder: function () {
                 this.commentHolder = "写评论..."

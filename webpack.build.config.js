@@ -18,7 +18,7 @@ module.exports = {
         vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
     },
     output: {
-        path: path.join(__dirname, "static"),
+        path: path.join(__dirname, "dist"),
         publicPath: '/static/',
         filename: '[name].[chunkhash].js'
     },
