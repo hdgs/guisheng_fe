@@ -60,9 +60,9 @@ router.get('/profile/:id', function(ctx, next){
 });
 
 
-router.get("/", async (ctx) => {
+router.get(/^\/static(?:\/|$)/, async (ctx) => {
      await send(ctx, ctx.path, {
-         root: path.join(__dirname, "../dist")
+         root: path.join(__dirname, "../dist/static")
      });
 })
 
