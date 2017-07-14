@@ -59,7 +59,6 @@ router.get('/profile/:id', function(ctx, next){
         ctx.body = template({})
 });
 
-
 router.get(/^\/static(?:\/|$)/, async (ctx) => {
      await send(ctx, ctx.path, {
          root: path.join(__dirname, "../dist/static")
