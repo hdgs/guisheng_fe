@@ -126,7 +126,7 @@ module.exports = {
             chunks: ['search.js']
         }),
         new HtmlWebpackHarddiskPlugin(),
-        new FaviconsWebpackPlugin('./src/img/1.png'),
+        // new FaviconsWebpackPlugin('./src/img/1.png'),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
