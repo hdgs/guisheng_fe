@@ -60,7 +60,7 @@ router.get('/profile/:id', function(ctx, next){
 });
 
 
-router.get(/^\/$/, async (ctx) => {
+router.get("/", async (ctx) => {
      await send(ctx, ctx.path, {
          root: path.join(__dirname, "../dist")
      });
