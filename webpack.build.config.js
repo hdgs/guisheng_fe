@@ -19,7 +19,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, "dist"),
-        publicPath: '/static/',
+        publicPath: '/',
         filename: '[name].[chunkhash].js'
     },
     vue: {
