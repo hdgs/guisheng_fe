@@ -80,6 +80,12 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
+            filename: 'template/header.html',
+            inject: false,
+            template: './template/header.ejs'
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
             filename: 'template/pictures.html',
             inject: false,
             template: './template/pictures.ejs',
