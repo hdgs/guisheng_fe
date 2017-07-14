@@ -58,9 +58,9 @@ module.exports = {
     devtool: '#eval-source-map',
     resolve: {
         extensions: ['', '.js', '.scss', '.vue'],
-        // root:[
-        //     path.resolve('/Users/Elegenthus/Desktop/guishing_fe')
-        // ]
+        alias: {
+            'vue': path.resolve(__dirname, 'node_modules/vue/dist/vue.runtime.min'),
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -120,10 +120,16 @@ module.exports = {
             chunks: ['search.js']
         }),
         new HtmlWebpackHarddiskPlugin(),
-        // new FaviconsWebpackPlugin('./src/img/1.png'),
+        new FaviconsWebpackPlugin('./src/img/1.png'),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: true,
+            compress: {
+                warnings: false,
+            },
+        }),
         new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
     ]
 };
