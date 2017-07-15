@@ -49,9 +49,9 @@ module.exports = {
             test: /\.(html|tpl)$/,
             loader: 'html-loader'
         }, {
-            test: /\.(jpe?g|png|gif|svg)$/i,
-            loaders: ['url-loader?limit=8192', 'file-loader']
-        } ,{
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: 'url-loader?limit=20&name=images/[hash:8].[name].[ext]'
+        }, {
             test: /\.scss$/,
             loaders: ["style", "css", "sass"]
         }]
