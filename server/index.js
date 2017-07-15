@@ -59,6 +59,7 @@ router.get('/profile/:id', function(ctx, next){
         ctx.body = template({})
 });
 
+
 router.get(/^\/static(?:\/|$)/, async (ctx) => {
     let filePath = ctx.path.replace(/static\//, "/dist/")
      await send(ctx, filePath, {
