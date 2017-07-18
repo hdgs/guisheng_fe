@@ -27,7 +27,7 @@
         </div>
         <div v-show="showTips" :class="$style.suggestMask">
             <div :class="$style.returnCard">
-                <div :class="$style.returnContent">登录以后才能评论和收藏哦~</div>
+                <div :class="$style.returnContent">您还没有登录哦~</div>
                 <div :class="$style.returnButton" v-on:click = "admin">我要登录</div>
                 <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
@@ -64,7 +64,7 @@ export default {
         },
         methods: {
             backToRoot() {
-                window.location = "/"
+                window.history.back()
             },
             getTag(e) {
                 this.content = e
@@ -196,9 +196,9 @@ export default {
 
 .logoImg {
     vertical-align: middle;
-    height: 24px;
+    height: 32px;
     width: 95px;
-    margin-top: 14.5px;
+    margin-top: 11px;
     background-size: 100%;
     background-image: url('../img/hdgslogo.png');
 }

@@ -4,6 +4,26 @@
         "endpoint": "/",
         "template": "index",
         "async": false
+    },{
+        "name": "pics",
+        "endpoint": "/pics",
+        "template": "index",
+        "async": false
+    },{
+        "name": "news",
+        "endpoint": "/news",
+        "template": "index",
+        "async": false
+    },{
+        "name": "article",
+        "endpoint": "/article",
+        "template": "index",
+        "async": false
+    },{
+        "name": "interaction",
+        "endpoint": "/interaction",
+        "template": "index",
+        "async": false
     }, {
         "name": "api.feed",
         "endpoint": "/api/v1.0/feed",

@@ -11,60 +11,81 @@ const templateRoot = path.join(__dirname, "../dist/template")
 
 app.use(userAgent);
 
-router.get('/', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
-        ctx.body = template({})
+    ctx.body = template({})
+});
+router.get('/pics', function(ctx, next) {
+    console.log(ctx.userAgent)
+    let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
+    ctx.body = template({})
+});
+router.get('/news', function(ctx, next) {
+    console.log(ctx.userAgent)
+    let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
+    ctx.body = template({})
+});
+router.get('/article', function(ctx, next) {
+    console.log(ctx.userAgent)
+    let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
+    ctx.body = template({})
 });
 
-router.get('/landing', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/interaction', function(ctx, next) {
+    console.log(ctx.userAgent)
+    let template = swig.compileFile(path.resolve(templateRoot, "index.html"));
+    ctx.body = template({})
+});
+
+router.get('/landing', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "landing.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/search', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/search', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "search.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/article/:id', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/article/:id', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "second.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/interaction/:Int', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/interaction/:Int', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "second.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/news/:id', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/news/:id', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "second.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/pics/:id', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/pics/:id', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "pictures.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
-router.get('/profile/:id', function(ctx, next){
-	console.log(ctx.userAgent)
+router.get('/profile/:id', function(ctx, next) {
+    console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "profile.html"));
-        ctx.body = template({})
+    ctx.body = template({})
 });
 
 
-router.get(/^\/static(?:\/|$)/, async (ctx) => {
+router.get(/^\/static(?:\/|$)/, async(ctx) => {
     let filePath = ctx.path.replace(/static\//, "")
-     await send(ctx, filePath, {
-         root: path.join(__dirname, "../dist")
-     });
+    await send(ctx, filePath, {
+        root: path.join(__dirname, "../dist")
+    });
 })
 
 app
