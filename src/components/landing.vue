@@ -41,22 +41,9 @@ export default {
                 })
             }
         })
-        // FETCH.FetchData("/api/v1.0/login/","POST",{
-                
-        //     }).then(value => {
-        //         if(value.ok){
-        //             console.log(value)
-        //             Cookie.setCookie("token", value.token)
-        //             Cookie.setCookie("uid", value.uid)
-        //         }else{
-        //             console.log("失败了")
-        //         }
-            
-        // // Cookie.setCookie("uid", 2)
-            setTimeout(() => {
+        setTimeout(() => {
             window.location = "/";
-            }, 2000)
-        // })
+        }, 2000)
     }
 }
 </script>
