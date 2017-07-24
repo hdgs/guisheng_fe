@@ -8,8 +8,6 @@ import FETCH from '../common/fetch.js'
 
 export default {
     mounted() {
-        // Cookie.setCookie("email", "1234@qq.com", 3000)
-        console.log(window.location.href.split('?')[1].split('=')[1])
         var email = window.location.href.split('?')[1].split('=')[1]
         fetch("/api/v1.0/login/",{
             method: 'POST',
