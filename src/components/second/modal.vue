@@ -9,14 +9,14 @@
 </template>
 <script>
 export default {
-        methods: {
-            quit() {
-                this.$parent.showTips = false
-            },
-            login(){
-                 window.location = "https://user.muxixyz.com?landing=120.24.4.254:8777/landing"
-            }
+    methods: {
+        quit() {
+            this.$parent.showTips = false
+        },
+        login(){
+             window.location = "https://user.muxixyz.com?landing=120.24.4.254:8777/landing"
         }
+    }
 }
 </script>
 <style lang ="sass" module>
