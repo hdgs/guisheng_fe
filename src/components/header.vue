@@ -99,6 +99,7 @@ export default {
             },
             showProfile() {
                 if (!Cookie.getCookie("token")) {
+                    console.log("Cookie.getCookie(token)",Cookie.getCookie("token"))
                     this.showTips = true
                 } else {
                     window.location = "/profile/" + Cookie.getCookie("uid")

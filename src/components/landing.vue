@@ -21,7 +21,7 @@ export default {
             })
         }).then(res => {
             if(res.ok){
-                console.log("hahah")
+                return res.json()
             }else{
                 FETCH.FetchData("/api/v1.0/register/","POST",{
                     email: email,
@@ -32,15 +32,19 @@ export default {
                         email: email,
                         password:"muxistudio304",
                     }).then(value => {
-                    Cookie.setCookie("token", value.token)
-                    Cookie.setCookie("uid", value.uid)
+                        Cookie.setCookie("token", value.token)
+                        Cookie.setCookie("uid", value.uid)
                     })
             
                 })
             }
+        }).then( value => {
+            console.log("不会重复",value)
+            Cookie.setCookie("token", value.token)
+            Cookie.setCookie("uid", value.uid)
         })
         setTimeout(() => {
-            window.location = "/";
+            window.history.go(-2);
         }, 2000)
     }
 }
