@@ -76,7 +76,7 @@ export default {
                 this.showTips = false
             },
             admin(){
-                window.location = "/landing"
+                window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
             },
             showSearch(e) {
                 if (window.location.pathname !== '/search') {

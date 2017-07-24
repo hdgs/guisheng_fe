@@ -8,20 +8,55 @@ import FETCH from '../common/fetch.js'
 
 export default {
     mounted() {
-        Cookie.setCookie("email", "1234@qq.com", 3000)
-        FETCH.FetchData("/api/v1.0/login/","POST",{
-                email: Cookie.getCookie("email"),
-                password:"1234"
-            }).then(value => {
-            console.log(value)
-            Cookie.setCookie("token", value.token)
-            Cookie.setCookie("uid", value.uid)
-        // Cookie.setCookie("uid", 2)
-            setTimeout(() => {
-                window.history.back(-1);
-            }, 2000)
+        // Cookie.setCookie("email", "1234@qq.com", 3000)
+        console.log(window.location.href.split('?')[1].split('=')[1])
+        var email = window.location.href.split('?')[1].split('=')[1]
+        fetch("/api/v1.0/login/",{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password:"muxistudio304"
+            })
+        }).then(res => {
+            if(res.ok){
+                console.log("hahah")
+            }else{
+                FETCH.FetchData("/api/v1.0/register/","POST",{
+                    email: email,
+                    password:"muxistudio304",
+                    username: email
+                }).then(value => {
+                    FETCH.FetchData("/api/v1.0/login/","POST",{
+                        email: email,
+                        password:"muxistudio304",
+                    }).then(value => {
+                    Cookie.setCookie("token", value.token)
+                    Cookie.setCookie("uid", value.uid)
+                    })
+            
+                })
+            }
         })
-        Cookie.setCookie("uid", 2)
+        // FETCH.FetchData("/api/v1.0/login/","POST",{
+                
+        //     }).then(value => {
+        //         if(value.ok){
+        //             console.log(value)
+        //             Cookie.setCookie("token", value.token)
+        //             Cookie.setCookie("uid", value.uid)
+        //         }else{
+        //             console.log("失败了")
+        //         }
+            
+        // // Cookie.setCookie("uid", 2)
+            setTimeout(() => {
+            window.location = "/";
+            }, 2000)
+        // })
     }
 }
 </script>
