@@ -1,6 +1,7 @@
 <template>
     <div :class="$style.ad">
-        <a href="https://www.zhihu.com/question/20790576"><img src="http://img02.tooopen.com/images/20151225/tooopen_sy_152706581529.jpg" alt="广告位" :class="$style.ad_img"></a>
+        <a href="https://ccnubox.muxixyz.com">
+        <img src="https://occc3ev3l.qnssl.com/ccnubox_ad.png" alt="广告位" :class="$style.ad_img"></a>
     </div>
 </template>
 <style lang ="sass" module>

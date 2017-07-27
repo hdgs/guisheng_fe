@@ -1,7 +1,9 @@
+Vue.config.devtools = true
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './components/main/main'
 import List from './components/main/list'
+import Special from './components/main/special'
 
 Vue.use(VueRouter)
 const Index = Vue.extend({
@@ -31,7 +33,7 @@ const router = new VueRouter({
         { path: '/pics', component: Pics },
         { path: '/news', component: News },
         { path: '/article', component: Article },
-        { path: '/interaction', component: Interaction }
+        { path: '/interaction', component: Interaction },
     ]
 })
 

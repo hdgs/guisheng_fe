@@ -126,6 +126,7 @@ export default {
     width: 100%;
     height: 45px;
     background-size: 100%;
+    background-repeat: no-repeat;
 }
 .img0 { 
     composes: img;

@@ -60,6 +60,8 @@ export default {
                 this.topic = value
                 this.topicUrl = '/interaction/' + value.article_id
             })
+            if(window.location.pathname !== '/')
+                this.onShow = false
         },
         data() {
             return {

@@ -64,7 +64,7 @@ export default {
         },
         methods: {
             backToRoot() {
-                window.history.back()
+                window.location = "/"
             },
             getTag(e) {
                 this.content = e

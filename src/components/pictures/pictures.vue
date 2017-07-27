@@ -43,7 +43,6 @@ import FETCH from '../../common/fetch.js'
 import Banner from './banner'
 import Cookie from '../../common/cookie.js'
 
-
 export default {
     data() {
         return {
@@ -102,8 +101,7 @@ export default {
     },
     methods: {
         goBack() {
-            // window.history.back()
-            window.location.href = '/'
+            window.history.back()
         },
         changeWidth(e, l) {
             this.picWidth = e
