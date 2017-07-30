@@ -7,7 +7,6 @@
 <style lang ="sass" module>
 .ad {
     width: 100%;
-    height: 100px;
     overflow: hidden;
     margin-bottom: 10px;
 }

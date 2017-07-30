@@ -15,6 +15,7 @@ module.exports = {
         'profile': ['./src/profile.js'],
         'search': ['./src/search.js'],
         'landing': ['./src/landing.js'],
+        'special': ['./src/special.js'],
         vendor: ["vue", "whatwg-fetch", "./src/style.js", "./src/header.js"]
     },
     output: {
@@ -125,6 +126,13 @@ module.exports = {
             inject: false,
             template: './template/profile.ejs',
             chunks: ['profile']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/special.html',
+            inject: false,
+            template: './template/special.ejs',
+            chunks: ['special']
         }),
         new HtmlWebpackHarddiskPlugin(),
         new FaviconsWebpackPlugin('./src/img/1.png'),

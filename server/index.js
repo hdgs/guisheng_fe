@@ -50,6 +50,12 @@ router.get('/search', function(ctx, next) {
     ctx.body = template({})
 });
 
+router.get('/special', function(ctx, next) {
+    console.log(ctx.userAgent)
+    let template = swig.compileFile(path.resolve(templateRoot, "special.html"));
+    ctx.body = template({})
+});
+
 router.get('/article/:id', function(ctx, next) {
     console.log(ctx.userAgent)
     let template = swig.compileFile(path.resolve(templateRoot, "second.html"));

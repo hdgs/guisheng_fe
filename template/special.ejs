@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block msg %} {% include 'header.html' %}
+<div id="special">
+
+</div>
+{% endblock %} {% block script %}
+<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
+        {% endblock %}

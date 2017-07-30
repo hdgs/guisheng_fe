@@ -15,6 +15,7 @@ module.exports = {
         'landing.js': ['./src/landing.js', 'webpack-hot-middleware/client'],
         'wrong.js': ['./src/wrong.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'search.js': ['./src/search.js', 'webpack-hot-middleware/client', "./src/header.js"],
+        'special.js': ['./src/special.js', 'webpack-hot-middleware/client', "./src/header.js"],
         vendor: ["vue", "whatwg-fetch", "./src/style.js"]
     },
     output: {
@@ -117,6 +118,13 @@ module.exports = {
             inject: false,
             template: './template/wrong.ejs',
             chunks: ['wrong.js']
+        }),
+        new HtmlWebpackPlugin({
+            alwaysWriteToDisk: true,
+            filename: 'template/special.html',
+            inject: false,
+            template: './template/special.ejs',
+            chunks: ['special.js']
         }),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,

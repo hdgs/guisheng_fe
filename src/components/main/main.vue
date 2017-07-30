@@ -18,64 +18,73 @@
             </div>
         </div>
         <div v-show="onShow" :class="$style.container">
-            <div :class="$style.bg_pic">
-                <img v-bind:src="pic.img_url" :class="$style.pic" alt="每日一图">
-            </div>
-            <div :class="$style.bottom">
-                <div :class="$style.tittle">#每日一图#</div>
-                <div :class="$style.des">
-                    <div :class="$style.climate_img">
-                        <svg viewBox="0 0 200 200" :class="$style.climate_icon">    <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="climate_pic"></use>
-                        </svg>
-                    </div>
-                    <div :class="$style.climate_img">{{word}} · </div>
-                    <div :class="$style.date">{{date}}</div>
+            <a href = "/special">
+                <div :class="$style.bg_pic">
+                    <img v-bind:src="pic.img_url" :class="$style.pic" alt="每日一图">
                 </div>
-            </div>
+                <div :class="$style.bottom">
+                    <div :class="$style.tittle">#新生专题#</div>
+                    <div :class="$style.des">
+                        <div :class="$style.climate_img">
+                            <svg viewBox="0 0 200 200" :class="$style.climate_icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="climate_pic"></use>
+                            </svg>
+                        </div>
+                        <div :class="$style.climate_img">{{word}} · </div>
+                        <div :class="$style.date">{{date}}</div>
+                    </div>
+                </div>
+            </a>
         </div>
-        <a :class="$style.container" v-show = "showTopic" :href = "topicUrl">
-            <img :src="topic.img_url" alt="喝茶吧" :class = "$style.topicImg">
-            <div :class = "$style.topicBox">
-                <div :class = "$style.topicTitle">喝茶吧</div>
-                <div :class = "$style.rline"></div>
-                <div :class = "$style.topic">{{topic.title}}</div>
+        <a :class="$style.container" v-show="showTopic" :href="topicUrl">
+            <img :src="topic.img_url" alt="喝茶吧" :class="$style.topicImg">
+            <div :class="$style.topicBox">
+                <div :class="$style.topicTitle">喝茶吧</div>
+                <div :class="$style.rline"></div>
+                <div :class="$style.topic">{{topic.title}}</div>
             </div>
         </a>
-       <router-view></router-view>
+        <router-view></router-view>
+        <smodal v-show="showModal"></smodal>
     </div>
 </template>
 <script>
 import FETCH from '../../common/fetch.js'
+import Smodal from './smodal'
 
 export default {
     mounted() {
-            FETCH.FetchData('/api/v1.0/everydaypic/','GET').then(value => {
-                this.pic = value
-                this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
-                this.word = value.climate == 1 ? "晴天" : value.climate == 2 ? "阴天" : "小雨"
-                var d = value.date.substring(0,10).split("-")
-                this.date = d[1] + '/' + d[2]
-            })
-            FETCH.FetchData('/api/v1.0/tea/','GET').then(value => {
-                this.topic = value
-                this.topicUrl = '/interaction/' + value.article_id
-            })
-            if(window.location.pathname !== '/')
-                this.onShow = false
-        },
-        data() {
-            return {
-                list: [],
-                pic: {},
-                onShow: true,
-                showTopic: false,
-                topic:{},
-                topicUrl:"",
-                word:"晴天",
-                date:"",
-                climate_pic: "#cloudy"
-            }
+        FETCH.FetchData('/api/v1.0/everydaypic/', 'GET').then(value => {
+            this.pic = value
+            this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
+            this.word = value.climate == 1 ? "晴" : value.climate == 2 ? "阴" : "雨"
+            var d = value.date.substring(0, 10).split("-")
+            this.date = d[1] + '/' + d[2]
+        })
+        FETCH.FetchData('/api/v1.0/tea/', 'GET').then(value => {
+            this.topic = value
+            this.topicUrl = '/interaction/' + value.article_id
+        })
+        if (window.location.pathname !== '/')
+            this.onShow = false
+    },
+    components:{
+        "smodal":Smodal
+    },
+    data() {
+        return {
+            list: [],
+            pic: {},
+            onShow: true,
+            showTopic: false,
+            topic: {},
+            topicUrl: "",
+            word: "晴",
+            date: "",
+            climate_pic: "#cloudy",
+            showModal:true
         }
+    }
 }
 </script>
 <style lang ='sass' module>

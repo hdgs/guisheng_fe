@@ -1,8 +1,11 @@
 <template>
     <div id="xxx" :class="$style.container">
         <div :class="$style.commentbox" v-bind:style="commentBox">
-            <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusFlag" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable>{{preMessage}}</div>
+            <svg viewBox="0 0 200 200" :class="$style.last" v-show="!showComment" v-on:click = "backToLast">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backToLast"></use>
+            </svg>
+            <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusScroll" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable ref = "doc">{{preMessage}}</div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -108,7 +111,7 @@ export default {
             },
             Comment: function () {
                 return {
-                    width: this.showComment ? '78.1%' : '40%',
+                    width: this.showComment ? '78.1%' : '30%',
                     height: this.showComment ? '' : '30px',
                     lineHeight: this.showComment ? '25px' : '',
                     float: this.showComment ? 'left' : ''
@@ -140,6 +143,9 @@ export default {
                 else
                     this.showShare = true
             },
+            focusScroll(){
+                this.$refs.doc.focus()
+            },
             likePicture() {
                 if (this.liked) return
                 FETCH.FetchData("/api/v1.0/like/picture/", "POST", {
@@ -149,6 +155,9 @@ export default {
                         this.liked = true
                 })
 
+            },
+            backToLast(){
+                window.history.back()
             },
             commentOthers: function (comment) {
                 this.currentCommentId = comment.comment_id
@@ -296,6 +305,12 @@ export default {
     line-height: 50px;
     height: 50px;
 }
+ 
+.last{
+    composes: img;
+    margin-left: 3%;
+    composes: horizon from 'sass-loader!../../scss/utility.scss'; 
+} 
 
 .commentCount {
     line-height: 16px;

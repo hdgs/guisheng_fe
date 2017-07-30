@@ -1,257 +1,297 @@
 {
     "routes": [{
-        "name": "home",
-        "endpoint": "/",
-        "template": "index",
-        "async": false
-    },{
-        "name": "pics",
-        "endpoint": "/pics",
-        "template": "index",
-        "async": false
-    },{
-        "name": "news",
-        "endpoint": "/news",
-        "template": "index",
-        "async": false
-    },{
-        "name": "article",
-        "endpoint": "/article",
-        "template": "index",
-        "async": false
-    },{
-        "name": "interaction",
-        "endpoint": "/interaction",
-        "template": "index",
-        "async": false
-    }, {
-        "name": "api.feed",
-        "endpoint": "/api/v1.0/feed",
-        "queryKey": {
-            "category": "kind",
-            "pagination": "page",
-            "sort": "sort"
+            "name": "home",
+            "endpoint": "/",
+            "template": "index",
+            "async": false
+        }, {
+            "name": "pics",
+            "endpoint": "/pics",
+            "template": "index",
+            "async": false
+        }, {
+            "name": "special",
+            "endpoint": "/special",
+            "template": "special",
+            "async": false
+        }, {
+            "name": "news",
+            "endpoint": "/news",
+            "template": "index",
+            "async": false
+        }, {
+            "name": "article",
+            "endpoint": "/article",
+            "template": "index",
+            "async": false
+        }, {
+            "name": "interaction",
+            "endpoint": "/interaction",
+            "template": "index",
+            "async": false
+        }, {
+            "name": "api.feed",
+            "endpoint": "/api/v1.0/feed",
+            "queryKey": {
+                "category": "kind",
+                "pagination": "page",
+                "sort": "sort"
+            },
+            "async": true
+        }, {
+            "name": "api.recommend_articles",
+            "endpoint": "/api/v1.0/articles/recommend",
+            "async": true
+        }, {
+            "name": "api.special",
+            "endpoint": "/api/v1.0/special/feed/",
+            "method": "post",
+            "async": true
+        }, {
+            "name": "login",
+            "method": "post",
+            "endpoint": "/api/v1.0/login/",
+            "async": true
+        }, {
+            "name": "wrong",
+            "endpoint": "/wrong",
+            "template": "wrong",
+            "async": false
+        }, {
+            "name": "search",
+            "endpoint": "/search",
+            "template": "search",
+            "async": false
+        }, {
+            "name": "landing",
+            "endpoint": "/landing",
+            "template": "landing",
+            "async": false
+        }, {
+            "name": "api.recommend_photos",
+            "method": "post",
+            "endpoint": "/api/v1.0/pics/recommend",
+            "async": true
+        }, {
+            "name": "api.recommend_news",
+            "endpoint": "/api/v1.0/news/recommend",
+            "async": true
+        }, {
+            "name": "api.recommend_interactions",
+            "endpoint": "/api/v1.0/interaction/recommend",
+            "async": true
+        }, {
+            "name": "article",
+            "endpoint": "/article/:id",
+            "template": "second",
+            "async": false
+        }, {
+            "name": "interaction",
+            "endpoint": "/interaction/:Int",
+            "template": "second",
+            "async": false
+        }, {
+            "name": "news",
+            "endpoint": "/news/:id",
+            "template": "second",
+            "async": false
+        }, {
+            "name": "pictures",
+            "endpoint": "/pics/:id",
+            "template": "pictures",
+            "async": false
+        }, {
+            "name": "profile",
+            "endpoint": "/profile/:id",
+            "template": "profile",
+            "async": false
+        }, {
+            "name": "profileInfo",
+            "endpoint": "/api/v1.0/profile/:id",
+            "async": true
+        }, {
+            "name": "everydaypic",
+            "endpoint": "/api/v1.0/everydaypic",
+            "async": true
+        }, {
+            "name": "pics",
+            "endpoint": "/api/v1.0/pics",
+            "async": true
+        }, {
+            "name": "article",
+            "endpoint": "/api/v1.0/article/",
+            "async": true
+        }, {
+            "name": "hot_tag",
+            "endpoint": "/api/v1.0/hottag/",
+            "async": true
+        }, {
+            "name": "comments",
+            "endpoint": "/api/v1.0/comments",
+            "async": true
+        }, {
+            "name": "returnComment",
+            "method": "post",
+            "endpoint": "/api/v1.0/comments",
+            "async": true
+        }, {
+            "name": "returnContent",
+            "method": "post",
+            "endpoint": "/api/v1.0/feed",
+            "async": true
+        }, {
+            "name": "editInfo",
+            "method": "put",
+            "endpoint": "/api/v1.0/profile/edit",
+            "async": true
+        }, {
+            "name": "edit",
+            "method": "put",
+            "endpoint": "/api/v1.0/profile/edit/upload_pic",
+            "async": false
         },
-        "async": true
-    }, {
-        "name": "api.recommend_articles",
-        "endpoint": "/api/v1.0/articles/recommend",
-        "async": true
-    }, {
-        "name":"login",
-        "method": "post",
-        "endpoint":"/api/v1.0/login/",
-        "async":true
-    },{
-        "name":"wrong",
-        "endpoint":"/wrong",
-        "template":"wrong",
-        "async":false
-    },{
-        "name":"search",
-        "endpoint":"/search",
-        "template":"search",
-        "async":false
-    },{
-        "name":"landing",
-        "endpoint":"/landing",
-        "template":"landing",
-        "async":false
-    },{
-        "name": "api.recommend_photos",
-        "method": "post",
-        "endpoint": "/api/v1.0/pics/recommend",
-        "async": true
-    }, {
-        "name": "api.recommend_news",
-        "endpoint": "/api/v1.0/news/recommend",
-        "async": true
-    }, {
-        "name": "api.recommend_interactions",
-        "endpoint": "/api/v1.0/interaction/recommend",
-        "async": true
-    }, {
-        "name": "article",
-        "endpoint": "/article/:id",
-        "template": "second",
-        "async": false
-    }, {
-        "name": "interaction",
-        "endpoint": "/interaction/:Int",
-        "template": "second",
-        "async": false
-    },{
-        "name": "news",
-        "endpoint": "/news/:id",
-        "template": "second",
-        "async": false
-    },{
-        "name": "pictures",
-        "endpoint": "/pics/:id",
-        "template": "pictures",
-        "async": false
-    }, {
-        "name": "profile",
-        "endpoint": "/profile/:id",
-        "template": "profile",
-        "async": false
-    }, {
-        "name":"profileInfo",
-        "endpoint":"/api/v1.0/profile/:id",
-        "async": true
-    },{
-        "name": "everydaypic",
-        "endpoint": "/api/v1.0/everydaypic",
-        "async": true
-    }, {
-        "name": "pics",
-        "endpoint": "/api/v1.0/pics",
-        "async": true
-    }, {
-        "name": "article",
-        "endpoint": "/api/v1.0/article/",
-        "async": true
-    }, {
-        "name": "hot_tag",
-        "endpoint": "/api/v1.0/hottag/",
-        "async": true
-    }, {
-        "name": "comments",
-        "endpoint": "/api/v1.0/comments",
-        "async": true
-    }, {
-        "name": "returnComment",
-        "method": "post",
-        "endpoint": "/api/v1.0/comments",
-        "async": true
-    }, {
-        "name": "returnContent",
-        "method": "post",
-        "endpoint": "/api/v1.0/feed",
-        "async": true
-    }, {
-        "name": "editInfo",
-        "method": "put",
-        "endpoint": "/api/v1.0/profile/edit",
-        "async": true
-    }, {
-        "name": "edit",
-        "method": "put",
-        "endpoint": "/api/v1.0/profile/edit/upload_pic",
-        "async": false
-    },
-    {
-        "name": "light",
-        "method": "post",
-        "endpoint": "/api/v1.0/light/",
-        "async": true
-    },{
-        "name":"suggestionSubmit",
-        "method":"post",
-        "endpoint":"/api/v1.0/profile/suggestion/",
-        "async":true
-    },{
-        "name":"profileWork",
-        "endpoint":"/api/v1.0/profile/works",
-        "async":true
-    },{
-        "name":"profileCollection",
-        "endpoint":"/api/v1.0/profile/collection",
-        "async":true
-    },{
-        "name":"collect",
-        "method":"post",
-        "endpoint":"/api/v1.0/collect",
-        "async":true
-    },{
-        "name":"collect_delete",
-        "method":"post",
-        "endpoint":"/api/v1.0/collect_delete",
-        "async":true
-    },{
-        "name":"likePicture",
-        "method":"post",
-        "endpoint":"/api/v1.0/like/picture",
-        "async":true
-    },{
-        "name":"likeComment",
-        "method":"post",
-        "endpoint":"/api/v1.0/like/comment",
-        "async":true
-    }],
+        {
+            "name": "light",
+            "method": "post",
+            "endpoint": "/api/v1.0/light/",
+            "async": true
+        }, {
+            "name": "suggestionSubmit",
+            "method": "post",
+            "endpoint": "/api/v1.0/profile/suggestion/",
+            "async": true
+        }, {
+            "name": "profileWork",
+            "endpoint": "/api/v1.0/profile/works",
+            "async": true
+        }, {
+            "name": "profileCollection",
+            "endpoint": "/api/v1.0/profile/collection",
+            "async": true
+        }, {
+            "name": "collect",
+            "method": "post",
+            "endpoint": "/api/v1.0/collect",
+            "async": true
+        }, {
+            "name": "collect_delete",
+            "method": "post",
+            "endpoint": "/api/v1.0/collect_delete",
+            "async": true
+        }, {
+            "name": "likePicture",
+            "method": "post",
+            "endpoint": "/api/v1.0/like/picture",
+            "async": true
+        }, {
+            "name": "likeComment",
+            "method": "post",
+            "endpoint": "/api/v1.0/like/comment",
+            "async": true
+        }
+    ],
     "data": {
-        "login":{
-            "uid":"34",
-            "token":"xixihha"
+        "login": {
+            "uid": "34",
+            "token": "xixihha"
         },
-        "api.recommend_photos":[{
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "kind":2,
-            "article_id":3
-        },{
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "kind":2,
-            "article_id":4
-        },{
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "kind":2,
-            "article_id":5
+        "api.special": [{
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "kind": 2,
+            "article_id": 3,
+            "child_topic_id": 1
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "kind": 2,
+            "article_id": 3,
+            "child_topic_id": 2
+        }, {
+            "kind": 1,
+            "article_id": 3,
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "description": "",
+            "child_topic_id": 3
         }],
-        "suggestionSubmit":{
-            "response":"成功"
-        },
-        "editInfo":{
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "name":"七宝",
-            "user_role":0, 
-            "weibo":"七宝",  
-            "introduction":"个人信息介绍"
-        },
-        "profileCollection":[{
-             "article_id":1,
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        "api.recommend_photos": [{
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "kind": 2,
+            "article_id": 3
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "kind": 2,
+            "article_id": 4
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "kind": 2,
+            "article_id": 5
         }],
-        "profileWork":[{
-             "article_id":1,
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-        },{
-             "article_id":1,
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
-        },{
-             "article_id":1,
-            "img_url":"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title":"这是水墨的一篇文章",
-            "author":"汪曾祺",
-            "views":"201",
-            "tag":"人物",
-            "description":"一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        "suggestionSubmit": {
+            "response": "成功"
+        },
+        "editInfo": {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "name": "七宝",
+            "user_role": 0,
+            "weibo": "七宝",
+            "introduction": "个人信息介绍"
+        },
+        "profileCollection": [{
+            "article_id": 1,
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }],
+        "profileWork": [{
+            "article_id": 1,
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }, {
+            "article_id": 1,
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
+        }, {
+            "article_id": 1,
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是水墨的一篇文章",
+            "author": "汪曾祺",
+            "views": "201",
+            "tag": "人物",
+            "description": "一支素烛，半罐野蜂蜜，他的眼睛现在看不见蜜。蜜在罐里，他坐在塌上。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。但他充满了蜜的感觉，浓，稠。他嗓子里并不泛出酸味。他嗓子里并不泛出酸味。"
         }],
         "light": {
 
@@ -438,10 +478,10 @@
             "works": "这是个人作品",
             "collection": "这是个人收藏",
             "suggestion": "这里有一些个人简介",
-            "bg_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
-            "user_role":0,
-            "role":0,
-            "user_id":3
+            "bg_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
+            "user_role": 0,
+            "role": 0,
+            "user_id": 3
         },
         "pics": {
             "title": "这里会返回一串html页面展示为图片二级页面"
@@ -455,7 +495,7 @@
         "article": {
             "id": 0,
             "kind": 1,
-            "author_id":30,
+            "author_id": 30,
             "commentCount": 12,
             "title": "这是一篇影评",
             "author": "这是作者昵称",
@@ -467,7 +507,7 @@
                 "title": "Follow The Map",
                 "img_url": "https://i.ytimg.com/vi/x2d1gDaXbg4/maxresdefault.jpg",
                 "music_url": "返回一个音乐的URL",
-                "singer":"MONO"
+                "singer": "MONO"
             },
             "film": {
                 "film_url": "https://movie.douban.com/subject/26683290/?from=showing",
@@ -475,86 +515,84 @@
                 "score": "8.7"
             },
             "like_degree": [1129, 154, 43],
-            "user_role":-1
+            "user_role": -1
         },
         "comments": [{
             "id": 2,
-            "name":"七宝",
-            "likes":434,
-            "user_role":0,
-            "user_id":1,
+            "name": "七宝",
+            "likes": 434,
+            "user_role": 0,
+            "user_id": 1,
             "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
             "message": "这是一条作者评论，普通用户的头像无法点击，只有认证作者的头像可以点击。",
-            "time":"08:30",
+            "time": "08:30",
             "like_count": 45,
-            "greateComment":false
+            "greateComment": false
         }, {
             "id": 3,
-            "name":"七宝",
-            "likes":21,
-            "user_role":1,
-            "user_id":2,
+            "name": "七宝",
+            "likes": 21,
+            "user_role": 1,
+            "user_id": 2,
             "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
             "message": "这是一条用户评论，普通用户的头像无法点击，只有认证作者的头像可以点击。",
-            "time":"昨天 08:30",
+            "time": "昨天 08:30",
             "comments": [],
             "like_count": 45,
-            "greateComment":false
+            "greateComment": false
         }, {
             "id": 3,
-            "name":"七宝",
-            "likes":3,
-            "user_role":1,
-            "user_id":3,
+            "name": "七宝",
+            "likes": 3,
+            "user_role": 1,
+            "user_id": 3,
             "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-SxAWzpsM_muAMT8ZtFh7bn1aK5-j9f2RlaLhlCKV6L1_uuQBw",
-            "time":"09-27",
+            "time": "09-27",
             "message": "日期超过前天时，评论时间只显示月日。",
             "comments": [],
             "like_count": 45,
-            "greateComment":false
+            "greateComment": false
         }],
         "pics": {
-            "id":2,
-            "kind":2,
-            "title":"这是图集名称",
-            "author":"Mococo",
-            "commentCount":12,
-            "editor":"小桂",
-            "likes":233,
-            "views":201,
-            "time":"16-12-03",
-            "imgDescription":[{
-                    "description": "这是一段关于本图集内容的简介，内容原则上不应过多。 "
-                },{
-                    "description": "这是图片二的描述"
-                },{
-                    "description": "这是图片三的描述"
-                },{
-                    "description": "这是图片四的描述"
-                },{
-                    "description": "这是图片五的描述"
-                },{
-                    "description": "这是图片六的描述"
-                },{
-                    "description": "这是图片七的描述"
-                }
-            ],
-            "imgUrl":[{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg"
-                },{
-                    "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg"
-                }
-            ]
+            "id": 2,
+            "kind": 2,
+            "title": "这是图集名称",
+            "author": "Mococo",
+            "commentCount": 12,
+            "editor": "小桂",
+            "likes": 233,
+            "views": 201,
+            "time": "16-12-03",
+            "imgDescription": [{
+                "description": "这是一段关于本图集内容的简介，内容原则上不应过多。 "
+            }, {
+                "description": "这是图片二的描述"
+            }, {
+                "description": "这是图片三的描述"
+            }, {
+                "description": "这是图片四的描述"
+            }, {
+                "description": "这是图片五的描述"
+            }, {
+                "description": "这是图片六的描述"
+            }, {
+                "description": "这是图片七的描述"
+            }],
+            "imgUrl": [{
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU9-50.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU7.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UU8.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ0.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ1.jpg"
+            }, {
+                "pic_url": "http://guisheng.ccnu.edu.cn/uploads/allimg/161106/275-1611061UZ2.jpg"
+            }]
         },
 
         "interaction": {
