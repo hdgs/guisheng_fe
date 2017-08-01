@@ -166,7 +166,7 @@ export default {
     return {
       list: [],
       arrayList: [],
-      showSide: false
+      showSide: true
     }
   },
   computed: {
@@ -198,7 +198,10 @@ export default {
       })
     },
     closeSide() {
+      // setTimeout(() => {
       this.showSide = false
+      // },500)
+
     },
     sideFunc() {
       if (this.showSide)
@@ -276,7 +279,7 @@ export default {
 }
 .sideLi:hover{
   background-color: $white;
-  box-shadow: 0 0 $green_button_hover 5px 0.2px ;
+  box-shadow: 0 0  10px 1px $green_special;
 }
 
 .sidenav{
@@ -288,7 +291,7 @@ export default {
 }
 
 .sideMask{
-  background-color: rgba(51, 51, 51, 0.5);
+  background-color: rgba(51, 51, 51, 0.3);
   width:50%;
   height:100%;
   z-index:2;
