@@ -1,10 +1,15 @@
 <template>
-    <div id="header" v-hide="onclick||showTips">
-        <div :class="$style.top">
-            <div :class="$style.logo">
+    <div id="header" v-hide="onclick||showTips" >
+        <div :class="$style.top" :style = "headerState">
+            <div :class="$style.icon" v-show = "specialPage" v-on:click = "showSpecial">
+              <svg viewBox="0 0 200 200" :class="$style.img">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#classify"></use>
+              </svg>
+            </div>
+            <div :class="$style.logo" :style = "logoStyle">
                 <div :class="$style.logoImg" v-on:click="backToRoot"></div>
             </div>
-            <div :class="$style.profile" v-on:click="showProfile">
+            <div :class="$style.profile" v-on:click="showProfile" v-show = "!specialPage">
                 <svg viewBox="0 0 200 200" :class="$style.img">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
                 </svg>
@@ -48,7 +53,8 @@ export default {
                 onclick: false,
                 content: "",
                 tagList: [],
-                showTips: false
+                showTips: false,
+                specialPage:false
             }
         },
         directives: {
@@ -61,8 +67,27 @@ export default {
                     this.tagList = value.hot_tag
                 })
             }
+            else if( window.location.pathname == "/special"){
+                this.specialPage = true
+            }
+        },
+        computed:{
+            logoStyle:function(){
+                return{
+                    marginLeft:this.specialPage? '25%':'12.5px'
+                }
+            },
+            headerState:function(){
+                return{
+                    position: this.specialPage? 'sticky':'relative'
+                }
+            }
         },
         methods: {
+            showSpecial(){
+                bus.$emit('showSpecialPage')
+                // this.headerFixed = true
+            },
             backToRoot() {
                 window.location = "/"
             },
@@ -123,9 +148,10 @@ export default {
 @import '../scss/zindex.scss';
 .top {
     z-index: $Zindex2;
-    position: relative;
+     /* position: relative;  */
     background-color: $white;
     height: 54px;
+     width:100%; 
     composes: space from 'sass-loader!../scss/utility.scss';
 }
 
@@ -168,26 +194,34 @@ export default {
 
 .logo {
     margin-left: 12.5px;
-    float: left;
     font-family: "Adobe 黑体 Std";
     color: $orange;
     font-size: 25px;
     composes: common;
+    composes: horizon from 'sass-loader!../scss/utility.scss'; 
+}
+
+.icon{
+    composes: common;
     composes: horizon from 'sass-loader!../scss/utility.scss';
+    margin-left:4%;
 }
 
 .search {
-    float: right;
+    float: right; 
     margin-right: 26px;
     composes: common;
-    composes: horizon from 'sass-loader!../scss/utility.scss';
+    /* composes: horizon from 'sass-loader!../scss/utility.scss'; */
+
+    vertical-align:middle;
 }
 
 .profile {
-    float: right;
+     float: right; 
     margin-right: 17.5px;
     composes: common;
-    composes: horizon from 'sass-loader!../scss/utility.scss';
+    /* composes: horizon from 'sass-loader!../scss/utility.scss'; */
+    vertical-align:middle;
 }
 
 .img {

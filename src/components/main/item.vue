@@ -61,7 +61,7 @@ import Map from '../../common/keymap.js'
   }
 </script>
 
-<style lang='sass' module>
+<style lang ='sass' module>
 .item{
   width: 100%;
   background-color: #fff;

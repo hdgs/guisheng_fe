@@ -197,19 +197,19 @@
         },
         "api.special": [{
             "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title": "这是水墨的一篇文章",
-            "author": "汪曾祺",
+            "title": "这是路线的一篇文章",
+            "author": "华大桂声",
             "views": "201",
-            "tag": "人物",
+            "tag": "路线",
             "kind": 2,
             "article_id": 3,
             "child_topic_id": 1
         }, {
             "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title": "这是水墨的一篇文章",
-            "author": "汪曾祺",
+            "title": "这是超市的一篇文章",
+            "author": "华大桂声",
             "views": "201",
-            "tag": "人物",
+            "tag": "超市",
             "kind": 2,
             "article_id": 3,
             "child_topic_id": 2
@@ -217,12 +217,49 @@
             "kind": 1,
             "article_id": 3,
             "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
-            "title": "这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
-            "author": "汪曾祺",
+            "title": "这是军训的一篇新闻标题超过三行部分不完全显示用省略号代替这是主页的一篇新闻标题超过三行部分不完全显示用省略号代替",
+            "author": "华大桂声",
             "views": "201",
-            "tag": "人物",
+            "tag": "军训",
             "description": "",
             "child_topic_id": 3
+        }, {
+            "kind": 2,
+            "article_id": 1,
+            "img_url": "https://www.fotor.com/images2/features/photo_effects/e_bw.jpg",
+            "title": "这是宿舍的一篇文章",
+            "author": "华大桂声",
+            "views": "2",
+            "tag": "宿舍",
+            "description": "",
+            "child_topic_id": 4
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是游玩的一篇文章",
+            "author": "华大桂声",
+            "views": "201",
+            "tag": "游玩",
+            "kind": 2,
+            "article_id": 3,
+            "child_topic_id": 5
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是吃货的一篇文章",
+            "author": "华大桂声",
+            "views": "201",
+            "tag": "吃货",
+            "kind": 2,
+            "article_id": 3,
+            "child_topic_id": 6
+        }, {
+            "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",
+            "title": "这是学霸的一篇文章",
+            "author": "华大桂声",
+            "views": "201",
+            "tag": "学霸",
+            "kind": 2,
+            "article_id": 3,
+            "child_topic_id": 7
         }],
         "api.recommend_photos": [{
             "img_url": "http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg",

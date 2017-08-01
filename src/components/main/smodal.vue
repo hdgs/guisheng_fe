@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.suggestMask">
         <div :class="$style.returnCard">
-            <div>这里有张图</div>
+            <div :class = "$style.entry"></div>
             <div :class = "$style.bottom">
                 <div :class="$style.returnButton" v-on:click="login">进入新生特刊</div>
             </div>            
@@ -25,6 +25,15 @@ export default {
 @import '../../scss/color.scss';
 @import '../../scss/zindex.scss';
 
+.entry{
+    background-image: url('../../img/entry.png');
+    background-size:90%;
+    background-repeat: no-repeat;  
+    background-position:left;
+    width:100%;
+    height:268px;
+    margin-top: 54px;
+}
 .suggestMask {
     position: fixed;
     top: 54px;
@@ -38,7 +47,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 90%;
+    width: 80%;
     height: 420px; 
     background-color: #eeeeee;
     color: $black;
@@ -56,7 +65,7 @@ export default {
     padding:7px 30px;
     font-weight: 900;
     font-size:20px;
-    width:35%;
+    width:47%;
     margin:0 auto;
     border-radius:4px;
     text-align:center;
