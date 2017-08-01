@@ -146,6 +146,7 @@ export default {
 <style lang ="sass" module>
 @import '../scss/color.scss';
 @import '../scss/zindex.scss';
+
 .top {
     z-index: $Zindex2;
      /* position: relative;  */
