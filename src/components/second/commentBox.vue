@@ -42,6 +42,9 @@ export default {
                 }
             }
         },
+        mounted(){
+            console.log(this.comment)
+        },
         methods: {
             addCommentLike: function (comment, index) {
                 if (this.greatComment) return

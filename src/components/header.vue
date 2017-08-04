@@ -1,6 +1,6 @@
 <template>
-    <div id="header" v-hide="onclick||showTips" >
-        <div :class="$style.top" :style = "headerState">
+    <div id="header" v-hide="onclick||showTips|| headerFixed" >
+        <div :class="$style.top" >
             <div :class="$style.icon" v-show = "specialPage" v-on:click = "showSpecial">
               <svg viewBox="0 0 200 200" :class="$style.img">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#classify"></use>
@@ -54,7 +54,8 @@ export default {
                 content: "",
                 tagList: [],
                 showTips: false,
-                specialPage:false
+                specialPage:false,
+                headerFixed:true
             }
         },
         directives: {
@@ -70,23 +71,26 @@ export default {
             else if( window.location.pathname == "/special"){
                 this.specialPage = true
             }
+           bus.$on('headerFix',this.fixHead)
         },
         computed:{
             logoStyle:function(){
                 return{
                     marginLeft:this.specialPage? '25%':'12.5px'
                 }
-            },
-            headerState:function(){
-                return{
-                    position: this.specialPage? 'sticky':'relative'
-                }
             }
         },
         methods: {
             showSpecial(){
                 bus.$emit('showSpecialPage')
-                // this.headerFixed = true
+                this.fixHead()
+            },
+            fixHead(){
+                 if(this.headerFixed)
+                    this.headerFixed = false
+                else{
+                    this.headerFixed = true
+                }
             },
             backToRoot() {
                 window.location = "/"
@@ -149,7 +153,7 @@ export default {
 
 .top {
     z-index: $Zindex2;
-     /* position: relative;  */
+    position: relative;  
     background-color: $white;
     height: 54px;
      width:100%; 

@@ -201,6 +201,7 @@ export default {
       // setTimeout(() => {
       this.showSide = false
       // },500)
+      bus.$emit('headerFix')
 
     },
     sideFunc() {

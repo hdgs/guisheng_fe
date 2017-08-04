@@ -85,7 +85,7 @@ export default {
                 this.changedImg = URL.createObjectURL(e.target.files[0])
                 this.avatarData = new FormData()
                 this.avatarData.append('file', e.target.files[0])
-                fetch('http://120.24.4.254:7777/guisheng/upload_pics/', {
+                fetch('/guisheng/upload_pics/', {
                     method: 'POST',
                     body: this.avatarData
                 }).then(res => {

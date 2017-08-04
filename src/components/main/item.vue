@@ -70,10 +70,6 @@ import Map from '../../common/keymap.js'
   box-shadow: 0px 3px 1px rgba(7,0,2,0.11);
 }
 .title{
-  /*display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;*/
   margin-top: 14px;
   margin-left: 15px;
   font-size: 21px;
@@ -99,7 +95,7 @@ import Map from '../../common/keymap.js'
 }
 .imgs_s{
   width: 100%;
-  height: 180px;
+  height: 220px;
   overflow: hidden;
 }
 .imgbox{

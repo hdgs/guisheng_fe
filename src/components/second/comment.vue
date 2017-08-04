@@ -145,6 +145,7 @@ export default {
             },
             focusScroll(){
                 this.$refs.doc.focus()
+                this.$refs.doc.scrollIntoView(true)
             },
             likePicture() {
                 if (this.liked) return
@@ -308,7 +309,7 @@ export default {
  
 .last{
     composes: img;
-    margin-left: 3%;
+    margin-left: 2%;
     composes: horizon from 'sass-loader!../../scss/utility.scss'; 
 } 
 
