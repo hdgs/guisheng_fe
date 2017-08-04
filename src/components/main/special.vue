@@ -246,7 +246,7 @@ export default {
 .greenTitle{
   width:100%;
   height:54px;
-  margin-bottom:35px;
+  margin-bottom:30px;
   background:$green_title_s;
 }
 
@@ -254,6 +254,7 @@ export default {
   position: fixed;
   top: 0;
   bottom: 0;
+  padding-bottom:30px;
   width:100%;
   composes: space from 'sass-loader!../../scss/utility.scss';
 }
@@ -294,13 +295,16 @@ export default {
 .sideMask{
   background-color: rgba(51, 51, 51, 0.3);
   width:50%;
-  height:100%;
+  top:0;
+  right:0;
+  left:50%;
+  bottom:0;
   z-index:2;
+  position:fixed;
   composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
 
 .main{
-  /* margin-left: 50%; */
   width:100%;
   padding-top:54px;
   margin-top: -54px;

@@ -105,7 +105,7 @@ export default {
                 this.showTips = false
             },
             admin(){
-                quit()
+                this.quit()
                 window.location = "https://user.muxixyz.com?landing=120.24.4.254:8777/landing"
                 // window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
             },
