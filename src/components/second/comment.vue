@@ -4,8 +4,8 @@
             <svg viewBox="0 0 200 200" :class="$style.last" v-show="!showComment" v-on:click = "backToLast">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backToLast"></use>
             </svg>
-            <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" v-focus="focusScroll" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable ref = "doc">{{preMessage}}</div>
+            <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable id = "doc">{{preMessage}}</div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -48,7 +48,7 @@
                 <comment :comment="comment"></comment>
             </div>
             <div :class="$style.sline"></div>
-            <div :class = "$style.occupy"></div>
+            <div :class = "$style.occupy" v-show = "!showComment"></div>
         </div>
         <sharePage v-show="showShare"></sharePage>
     </div>
@@ -144,8 +144,9 @@ export default {
                     this.showShare = true
             },
             focusScroll(){
+                this.$refs.doc.scrollIntoView(false)
+                // this.$refs.occupyBox.scrollIntoView(false)
                 this.$refs.doc.focus()
-                this.$refs.doc.scrollIntoView(true)
             },
             likePicture() {
                 if (this.liked) return
@@ -185,6 +186,7 @@ export default {
                         })
                     this.showComment = true
                     this.$parent.showComment = true
+                    this.focusScroll()
                 }
             },
             ClickChangeColor: function () {
