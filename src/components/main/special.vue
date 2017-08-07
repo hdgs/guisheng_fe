@@ -4,7 +4,7 @@
     <div :class="$style.sidenavPage" v-show="showSide">
       <div :class="$style.sidenav">
         <div :class="$style.greenTitle"></div>
-        <a href="#route_0">
+        <div v-on:click = "des = 1">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -13,8 +13,8 @@
             </div>
             <div :class="$style.sideTitle">路线</div>
           </li>
-        </a>
-        <a href="#shop">
+        </div>
+        <div v-on:click = "des = 2">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -23,8 +23,8 @@
             </div>
             <div :class="$style.sideTitle">超市</div>
           </li>
-        </a>
-        <a href="#militory_0">
+        </div>
+        <div v-on:click = "des = 3">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -33,8 +33,8 @@
             </div>
             <div :class="$style.sideTitle">军训</div>
           </li>
-        </a>
-        <a href="#dormitory_0">
+        </div>
+        <div v-on:click = "des = 4">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -43,8 +43,8 @@
             </div>
             <div :class="$style.sideTitle">宿舍</div>
           </li>
-        </a>
-        <a href="#travel_0">
+        </div>
+        <div v-on:click = "des = 5">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -53,8 +53,8 @@
             </div>
             <div :class="$style.sideTitle">游玩</div>
           </li>
-        </a>
-        <a href="#eating_0">
+        </div>
+        <div v-on:click = "des = 6">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -63,8 +63,8 @@
             </div>
             <div :class="$style.sideTitle">吃货</div>
           </li>
-        </a>
-        <a href="#learning_0">
+        </div>
+        <div v-on:click = "des = 7">
           <li :class="$style.sideLi">
             <div :class="$style.icon">
               <svg viewBox="0 0 200 200" :class="$style.img">
@@ -73,83 +73,85 @@
             </div>
             <div :class="$style.sideTitle">学霸</div>
           </li>
-        </a>
+        </div>
       </div>
       <div :class="$style.sideMask" v-on:click="closeSide">
       </div>
     </div>
     <div :class="$style.main">
-      <div id="route_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#route"></use>
-          </svg>
+      <transition name="bounce" mode="out-in">
+        <div v-if = "des === 1" key = "1">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#route"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">路线</div>
+          <item :item="item" v-for="item in arrayList[0]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">路线</div>
-        <item :item="item" v-for="item in arrayList[0]"></item>
-      </div>
-      <div id="shop">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
-          </svg>
+        <div  v-else-if = "des === 2" key = "2">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">超市</div>
+          <item :item="item" v-for="item in arrayList[1]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">超市</div>
-        <item :item="item" v-for="item in arrayList[1]"></item>
-      </div>
-      <div id="militory_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#militory"></use>
-          </svg>
+        <div v-else-if = "des === 3" key = "3">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#militory"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">军训</div>
+          <item :item="item" v-for="item in arrayList[2]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">军训</div>
-        <item :item="item" v-for="item in arrayList[2]"></item>
-      </div>
-      <div id="dormitory_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dormitory"></use>
-          </svg>
-        </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">宿舍</div>
+        <div v-else-if = "des === 4" key = "4">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dormitory"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">宿舍</div>
   
-        <item :item="item" v-for="item in arrayList[3]"></item>
-      </div>
-      <div id="travel_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#travel"></use>
-          </svg>
+          <item :item="item" v-for="item in arrayList[3]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">游玩</div>
-        <item :item="item" v-for="item in arrayList[4]"></item>
-      </div>
-      <div id="eating_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#eating"></use>
-          </svg>
+        <div v-else-if = "des === 5" key = "5">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#travel"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">游玩</div>
+          <item :item="item" v-for="item in arrayList[4]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">吃货</div>
-        <item :item="item" v-for="item in arrayList[5]"></item>
-      </div>
-      <div id="learning_0">
-        <div :class="$style.icon_s">
-          <svg viewBox="0 0 200 200" :class="$style.img">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#learning"></use>
-          </svg>
+        <div v-else-if = "des === 6" key = "6">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#eating"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">吃货</div>
+          <item :item="item" v-for="item in arrayList[5]"></item>
         </div>
-        <div :class="$style.line"></div>
-        <div :class="$style.title_s">学霸</div>
-        <item :item="item" v-for="item in arrayList[6]"></item>
-      </div>
+        <div v-else-if = "des === 7" key = "7">
+          <div :class="$style.icon_s">
+            <svg viewBox="0 0 200 200" :class="$style.img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#learning"></use>
+            </svg>
+          </div>
+          <div :class="$style.line"></div>
+          <div :class="$style.title_s">学霸</div>
+          <item :item="item" v-for="item in arrayList[6]"></item>
+        </div>
+      </transition>
       <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
     </div>
   
@@ -169,7 +171,8 @@ export default {
       list: [],
       arrayList: [],
       showSide: true,
-      showSkeleton: true
+      showSkeleton: true,
+      des:1
     }
   },
   // computed: {
@@ -317,6 +320,44 @@ export default {
   padding-top:54px;
   margin-top: -54px;
   /* position:relative; */
+}
+
+.bounce-enter-active {
+    animation: bounce-in 2s;
+}
+
+.bounce-leave-active {
+    animation: bounce-out 2s;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(100px);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce-out {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-100px);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }
 }
 
 </style>

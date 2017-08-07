@@ -9,6 +9,14 @@ import FETCH from '../common/fetch.js'
 export default {
     mounted() {
         var email = window.location.href.split('?')[1].split('=')[1]
+        // var email = "996886231@qq.com"
+        var profile = {}
+        fetch("https://user.muxixyz.com/api/user/?email=" + email).then(res => {
+            return res.json()
+        }).then(value => {
+            console.log("value = ",value)
+            profile = value
+        })
         fetch("/api/v1.0/login/",{
             method: 'POST',
             headers: {
@@ -26,7 +34,7 @@ export default {
                 FETCH.FetchData("/api/v1.0/register/","POST",{
                     email: email,
                     password:"muxistudio304",
-                    username: email
+                    username: profile.username
                 }).then(value => {
                     FETCH.FetchData("/api/v1.0/login/","POST",{
                         email: email,
