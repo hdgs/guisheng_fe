@@ -1,5 +1,6 @@
 <template>
     <div id="xxx" :style = "stopScroll">
+        <skeleton v-show = "showSkeleton"></skeleton>
         <articleInfo ref="articleInfo"></articleInfo>
         <light ref = "light"></light>
         <ad></ad>
@@ -13,6 +14,7 @@
 </template>
 <script>
 import 'whatwg-fetch'
+import Skeleton from './skeleton_s'
 import info from './info'
 import comments from './comment'
 import Item from '../main/item'
@@ -44,7 +46,8 @@ export default {
             x: 0,
             foo: 0,
             list: [],
-            showComment:false
+            showComment:false,
+            showSkeleton:true
         }
     },
     mounted() {
@@ -63,6 +66,7 @@ export default {
             this.$refs.articleInfo.article = values[0]
             this.$refs.light.article = values[0]
             this.$refs.light.article.id = ids[2]
+            this.showSkeleton = false
             FETCH.FetchData("/api/v1.0/" + ids[1] + "/recommend/", "POST", {
                 article_id: ids[2]
             }).then(res => {
@@ -84,7 +88,8 @@ export default {
         "articleComments": comments,
         "item": Item,
         "light":Light,
-        "ad":Ad
+        "ad":Ad,
+        "skeleton":Skeleton
     },
     methods: {
         closeComment: function () {

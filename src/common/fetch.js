@@ -42,6 +42,6 @@ export default {
                 }
             })
             return p
-        } 
+        }
     }
 }

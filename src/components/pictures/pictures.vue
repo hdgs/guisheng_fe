@@ -13,6 +13,7 @@
                 <div :class="$style.totalNum">/{{pics.length}}</div>
             </div>
         </div>
+        <skeleton v-show = "showSkeleton"></skeleton>
         <banner ref = "bannerPic"></banner>
         <div :class="$style.bottom">
             <div :class="$style.author">by {{picInfo.author}}</div>
@@ -42,6 +43,7 @@ import Item from '../main/item'
 import FETCH from '../../common/fetch.js'
 import Banner from './banner'
 import Cookie from '../../common/cookie.js'
+import Skeleton from './skeleton_p'
 
 export default {
     data() {
@@ -51,7 +53,8 @@ export default {
             picWidth: 500,
             picInfo: {},
             list: [],
-            showComment:false
+            showComment:false,
+            showSkeleton:true
         }
     },
     mounted() {
@@ -62,6 +65,7 @@ export default {
         })
         let promise2 = FETCH.FetchData("/api/v1.0/comments/?article_id=" + ids[2] + "&kind=2", "GET")
         Promise.all([promise1, promise2]).then(values => {
+            this.showSkeleton = false
             this.pics = values[0].pics
             this.$refs.bannerPic.pics = values[0].pics
             console.log("this.$refs.bannerPic.pics",values[0])
@@ -94,7 +98,8 @@ export default {
     components: {
         "picComments": comments,
         "item": Item,
-        "banner": Banner
+        "banner": Banner,
+        "skeleton":Skeleton
     },
     directives: {
         width: widthDirective

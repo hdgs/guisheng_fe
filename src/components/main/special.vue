@@ -1,5 +1,6 @@
 <template>
   <div>
+    <skeleton v-show="showSkeleton"></skeleton>
     <div :class="$style.sidenavPage" v-show="showSide">
       <div :class="$style.sidenav">
         <div :class="$style.greenTitle"></div>
@@ -77,7 +78,7 @@
       <div :class="$style.sideMask" v-on:click="closeSide">
       </div>
     </div>
-    <div :class="$style.main" :style="leftMargin">
+    <div :class="$style.main">
       <div id="route_0">
         <div :class="$style.icon_s">
           <svg viewBox="0 0 200 200" :class="$style.img">
@@ -160,24 +161,27 @@ import FETCH from '../../common/fetch.js'
 import {
   bus
 } from '../../bus.js'
+import Skeleton from './skeleton'
 
 export default {
   data() {
     return {
       list: [],
       arrayList: [],
-      showSide: true
+      showSide: true,
+      showSkeleton: true
     }
   },
-  computed: {
-    leftMargin: function () {
-      return {
-        marginLeft: this.showSide ? '50%' : '0'
-      }
-    }
-  },
+  // computed: {
+  //   leftMargin: function () {
+  //     return {
+  //       marginLeft: this.showSide ? '50%' : '0'
+  //     }
+  //   }
+  // },
   components: {
     "item": Item,
+    "skeleton": Skeleton
   },
   mounted() {
     FETCH.FetchData("/api/v1.0/special/feed/", "POST", {
@@ -190,6 +194,7 @@ export default {
       console.log(this.arrayList, this.list)
     })
     bus.$on('showSpecialPage', this.sideFunc)
+    this.showSkeleton = false
   },
   methods: {
     jsonFilter(item, e) {
@@ -246,7 +251,7 @@ export default {
 .greenTitle{
   width:100%;
   height:54px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   background:$green_title_s;
 }
 
@@ -266,14 +271,14 @@ export default {
 
 .icon{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
-  width: 38px;
+  width: 35px;
 }
 
 .sideTitle{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
-  font-size:24px;
+  font-size:22px;
   color:$black_t;
-  margin-left:29px;
+  margin-left:20px;
 }
 
 .sideTitle:hover{
@@ -286,18 +291,21 @@ export default {
 
 .sidenav{
   z-index:2;
-  width:50%;
-  height:100%;
+  width:40%;
+  min-height:100%; 
+  bottom:0;
   background:#eff5f3;
+  background:$grey;
+  position: fixed;
   composes: horizon from 'sass-loader!../../scss/utility.scss';
 }
 
 .sideMask{
   background-color: rgba(51, 51, 51, 0.3);
-  width:50%;
+  width:60%;
   top:0;
   right:0;
-  left:50%;
+  left:40%;
   bottom:0;
   z-index:2;
   position:fixed;

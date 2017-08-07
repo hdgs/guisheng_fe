@@ -5,7 +5,7 @@
             <img v-bind:src="article.film.film_img_url" alt="电影海报" :class="$style.film_pic">
             <a :href="article.film.film_url">
                 <div :class="$style.scoreMask">
-                    <div :class="$style.score">豆瓣评分：{{article.film.scores}} > </div>
+                    <div :class="$style.score">豆瓣 > </div>
                 </div>
             </a>
         </div>
