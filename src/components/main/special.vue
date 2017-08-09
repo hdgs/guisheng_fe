@@ -181,8 +181,9 @@ export default {
   },
   mounted() {
     FETCH.FetchData("/api/v1.0/special/feed/", "POST", {
-      id: 1
+      id: 4
     }).then(res => {
+      console.log("res",res)
       this.list = res
       for (let i = 1; i <= 7; i++) {
         this.arrayList.push(this.jsonFilter(res, i))
