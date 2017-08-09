@@ -8,43 +8,12 @@
   background-size: 30px 543px, 45%, 96%, 96%, 96%, 96%, 96%, 96%;
   background-repeat: no-repeat;
   background-position: 5% 30px, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  -webkit-animation: shine-mini-form 1s infinite;
-    -khtml-animation: shine-mini-form 1s infinite;
-    -moz-animation: shine-mini-form 1s infinite;
-    -ms-animation: shine-mini-form 1s infinite;
-    -o-animation: shine-mini-form 1s infinite;
-    animation: shine-mini-form 1s infinite;
 }
 .skeleton:empty {
   margin: auto;
   background-color: #fff;
   border: 1px solid #F4F3F2;
   padding: 0 5px;
-}
-@-webkit-keyframes shine-mini-form {
-  to {
-    background-position: 100% 0, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  }
-}
-@-moz-keyframes shine-mini-form {
-  to {
-    background-position: 100% 0, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  }
-}
-@-ms-keyframes shine-mini-form {
-  to {
-    background-position: 100% 0, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  }
-}
-@-o-keyframes shine-mini-form {
-  to {
-    background-position: 100% 0, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  }
-}
-@keyframes shine-mini-form {
-  to {
-    background-position: 100% 0, 4% 20px, 55% 85px, 55% 150px, 55% 360px, 55% 570px, 55% 780px, 55% 990px;
-  }
 }
 </style>
 

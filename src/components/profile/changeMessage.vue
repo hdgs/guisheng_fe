@@ -80,6 +80,7 @@ export default {
                     this.newIntroduction = ""
                     this.newWeibo = ""
                 })
+                Fetch.FetchData('')
             },
             getName(e) {
                 this.changedImg = URL.createObjectURL(e.target.files[0])

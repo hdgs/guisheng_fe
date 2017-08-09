@@ -5,7 +5,7 @@
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backToLast"></use>
             </svg>
             <input type="text" v-bind:placeholder="commentHolder" v-model="message" v-blur="changeHolder" :class="$style.input" v-bind:style="Comment" v-show="!showComment" v-on:click="activeComment">
-            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable id = "doc">{{preMessage}}</div>
+            <div v-iHtml="changeMessage" tabIndex="-1" v-clear="clear" :class="$style.input" v-bind:style="Comment" v-show="showComment" contenteditable Focusable ref = "doc">{{preMessage}}</div>
             <div :class="$style.commitBox" v-show="showComment">
                 <svg viewBox="0 0 200 200" :class="$style.commit" v-bind:style="commit" v-on:click="submit">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#commit"></use>
@@ -144,6 +144,7 @@ export default {
                     this.showShare = true
             },
             focusScroll(){
+                console.log()
                 this.$refs.doc.scrollIntoView(false)
                 // this.$refs.occupyBox.scrollIntoView(false)
                 this.$refs.doc.focus()
