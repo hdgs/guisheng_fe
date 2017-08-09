@@ -175,13 +175,6 @@ export default {
       des:1
     }
   },
-  // computed: {
-  //   leftMargin: function () {
-  //     return {
-  //       marginLeft: this.showSide ? '50%' : '0'
-  //     }
-  //   }
-  // },
   components: {
     "item": Item,
     "skeleton": Skeleton

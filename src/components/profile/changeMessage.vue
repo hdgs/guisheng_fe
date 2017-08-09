@@ -80,7 +80,15 @@ export default {
                     this.newIntroduction = ""
                     this.newWeibo = ""
                 })
-                Fetch.FetchData('')
+                // Fetch.FetchData('https://user.muxixyz.com/api/user/',"PUT",{
+                //     username: this.newName ? this.newName : this.profile.name,
+                //     sid:"",
+                //     qq:"",
+                //     phone:"",
+                //     school:""
+                // }).then(value => {
+                //     console.log("value = ",value)
+                // })
             },
             getName(e) {
                 this.changedImg = URL.createObjectURL(e.target.files[0])
