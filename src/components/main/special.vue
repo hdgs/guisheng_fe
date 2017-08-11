@@ -185,8 +185,10 @@ export default {
     }).then(res => {
       console.log("res",res)
       this.list = res
-      for (let i = 1; i <= 7; i++) {
-        this.arrayList.push(this.jsonFilter(res, i))
+      var ay = [30,34,35,36,37,38,39]
+      for (let i = 0; i < 7; i++) {
+        console.log(ay[i])
+        this.arrayList.push(this.jsonFilter(res, ay[i]))
       }
       console.log(this.arrayList, this.list)
     })
