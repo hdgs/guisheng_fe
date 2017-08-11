@@ -1,6 +1,7 @@
 <template>
     <div :class="$style.go">
-        登录中......</div>
+        登录中......
+    </div>
 </template>
 <script>
 import 'whatwg-fetch'
