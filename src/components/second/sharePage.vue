@@ -1,74 +1,47 @@
 <template>
-    <div :class="$style.sharePage">
-        <div :class="$style.maskShare"></div>
-        <div :class="$style.shareBox">
-            <div class="bdsharebuttonbox" data-tag="share_1">
-                <a class="bds_mshare" data-cmd="mshare" style="margin:12%;"></a>
-                <a class="bds_evernotecn" data-cmd="evernotecn" style="margin:12%;"></a>
-                <a class="bds_qzone" data-cmd="qzone" href="#" style="margin:12%;"></a>
-                <a class="bds_tsina" data-cmd="tsina" style="margin:12%;"></a>
-                <a class="bds_baidu" data-cmd="baidu" style="margin:12%;"></a>
-                <a class="bds_sqq" data-cmd="sqq" style="margin:12%;"></a>
-                <a class="bds_tqq" data-cmd="tqq" style="margin:12%;"></a>
-                <a class="bds_weixin" data-cmd="weixin" style="margin:12%;"></a>
-                <a class="bds_fbook" data-cmd="fbook" style="margin:12%;"></a>
-                <a class="bds_twi" data-cmd="twi" style="margin:12%;"></a>
-            </div>
-            <div :class="$style.occupy"></div>
+    <div class="sharePage">
+        <div class="-mob-share-ui" style="display: none">
+            <ul class="-mob-share-list">
+                <li class="-mob-share-weibo">
+                    <p>新浪微博</p>
+                </li>
+                <li class="-mob-share-weixin">
+                    <p>微信</p>
+                </li>
+                <li class="-mob-share-youdao">
+                    <p>有道云笔记</p>
+                </li>
+                <li class="-mob-share-qzone">
+                    <p>QQ空间</p>
+                </li>
+                <li class="-mob-share-qq">
+                    <p>QQ好友</p>
+                </li>
+                <li class="-mob-share-douban">
+                    <p>豆瓣</p>
+                </li>
+                <li class="-mob-share-facebook">
+                    <p>Facebook</p>
+                </li>
+                <li class="-mob-share-twitter">
+                    <p>Twitter</p>
+                </li>
+            </ul>
         </div>
+        <div class="-mob-share-ui-bg"></div>
     </div>
 </template>
-<script>
-window._bd_share_config = {
-    common: {
-        bdText: '自定义分享内容',
-        bdDesc: '自定义分享摘要',
-        bdUrl: '自定义分享url地址',
-        bdPic: '自定义分享图片'
-    },
-    share: [{
-        "bdSize": 32,
-    }],
-    image: [{
-        viewType: 'collection',
-        viewPos: 'bottom',
-        viewColor: 'white',
-        viewSize: '32',
-        viewList: ['qzone', 'tsina', 'huaban', 'tqq', 'renren', 'evernotecn']
-    }]
-}
-</script>
-<style lang ="sass" module>
+<style lang ="sass" scoped>
 @import '../../scss/color.scss';
 @import '../../scss/zindex.scss';
-
-.maskShare {
-    background: rgba(53, 53, 53, 0.55);
-    z-index: $Zindex2;
-    position: fixed;
-    width: 100%;
-    height: 210px;
-}
 
 .sharePage {
     top: 54px;
     width: 100%;
     bottom: 0;
     left: 0;
+    z-index: $Zindex2;
     position: fixed;
 }
 
-.shareBox {
-    top: 260px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    background: white;
-}
-
-.occupy {
-    height: 50px;
-    width: 100%;
-}
 </style>

@@ -30,9 +30,11 @@
                     </svg>
                 </div>
                 <div :class="$style.imgBox" v-bind:style="BoxWidth">
-                    <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="shShare">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#share"></use>
-                    </svg>
+                      <div class="-mob-share-open">  
+                        <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="shShare">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#share"></use>
+                        </svg>
+                      </div>   
                 </div>
             </div>
         </div>

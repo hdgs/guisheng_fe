@@ -214,6 +214,12 @@ export default {
     font-size: 14px;
     line-height: 18px;
 }
+ .essay img{
+    width: 70% !important;
+    height:auto;
+    margin: 0 auto;
+    display:block;
+} 
 
 .eBox {
     overflow: hidden;
