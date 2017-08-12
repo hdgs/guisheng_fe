@@ -148,7 +148,6 @@ export default {
             focusScroll(){
                 console.log()
                 this.$refs.doc.scrollIntoView(false)
-                // this.$refs.occupyBox.scrollIntoView(false)
                 this.$refs.doc.focus()
             },
             likePicture() {
