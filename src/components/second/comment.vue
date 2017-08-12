@@ -158,7 +158,6 @@ export default {
                     this.articleInfo.likes++
                         this.liked = true
                 })
-
             },
             backToLast(){
                 window.history.back()
