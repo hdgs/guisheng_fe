@@ -165,7 +165,7 @@ export default {
         }
 }
 </script>
-<style lang='sass' module>
+<style lang ='sass' module>
 @import '../../scss/color.scss';
 $topHeight:50px;
 html,

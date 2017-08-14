@@ -8,15 +8,17 @@
     </div>
 </template>
 <script>
+import Cookie from '../../common/cookie.js'
 export default {
     methods: {
         quit() {
             this.$parent.showTips = false
         },
-        login(){
+        login() {
             this.quit()
-            window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
-            // window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
+            Cookie.setCookie('url', window.location.href)
+            // window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
+            window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
         }
     }
 }

@@ -25,89 +25,100 @@
         <div :class="$style.changeInfo" v-on:click="editName">
             <span :class="$style.nameF">昵称：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.name}}</span>
-            <textarea type="text" v-show="editChange" v-on:input = "newName = $event.target.value" v-bind:value = "profile.name" :class="$style.newName" autofocus rows="1" placeholder="请输入您的昵称"></textarea>
+            <textarea type="text" v-show="editChange" v-on:input="newName = $event.target.value" v-bind:value="profile.name" :class="$style.newName" autofocus rows="1" placeholder="请输入您的昵称"></textarea>
         </div>
         <div :class="$style.changeInfo" v-on:click="editName">
             <span :class="$style.nameF">简介：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.introduction}}</span>
-            <textarea type="text" v-show="editChange" :class="$style.newName" autofocus rows="4"  v-on:input="newIntroduction = $event.target.value" v-bind:value = "profile.introduction" placeholder="请输入您的个人介绍"></textarea>
+            <textarea type="text" v-show="editChange" :class="$style.newName" autofocus rows="4" v-on:input="newIntroduction = $event.target.value" v-bind:value="profile.introduction" placeholder="请输入您的个人介绍"></textarea>
         </div>
         <div :class="$style.changeInfo" v-show="profile.user_role" v-on:click="editName">
             <span :class="$style.nameF">微博：</span>
             <span :class="$style.changeName" v-show="!editChange">{{profile.weibo}}</span>
-            <textarea type="text" v-show="editChange" v-on:input = "newWeibo = $event.target.value" :class="$style.newName" autofocus rows="1" v-bind:value="profile.weibo ? profile.weibo:'请输入您的微博名'"
-            placeholder="请输入您的微博名"></textarea>
+            <textarea type="text" v-show="editChange" v-on:input="newWeibo = $event.target.value" :class="$style.newName" autofocus rows="1" v-bind:value="profile.weibo ? profile.weibo:'请输入您的微博名'" placeholder="请输入您的微博名"></textarea>
         </div>
     </div>
 </template>
 <script>
 import Fetch from '../../common/fetch.js'
+import Cookie from '../../common/cookie.js'
 
 export default {
     data() {
-            return {
-                editChange: false,
-                profile: {},
-                newName: "",
-                newIntroduction: "",
-                newWeibo: "",
-                changedImg: "",
-                inputValue: "",
-                avatarData: "",
-                pic_url: ""
+        return {
+            editChange: false,
+            profile: {},
+            newName: "",
+            newIntroduction: "",
+            newWeibo: "",
+            changedImg: "",
+            inputValue: "",
+            avatarData: "",
+            pic_url: ""
+        }
+    },
+    methods: {
+        closeComment() {
+            if (this.$parent.changeMessage) {
+                this.$parent.changeMessage = false
+                this.editChange = false
             }
         },
-        methods: {
-            closeComment() {
-                if (this.$parent.changeMessage) {
-                    this.$parent.changeMessage = false
-                    this.editChange = false
-                }
-            },
-            submitChange() {
-                if (!this.editChange) return
-                let promise1 = Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/edit/', 'PUT', {
-                    name: this.newName ? this.newName : this.profile.name,
-                    introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
-                    weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                    img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
-                }).then(value => {
-                    this.profile = value
-                    this.$parent.profile = value
-                    this.$parent.changeMessage = false
-                    this.editChange = false
-                    this.newName = ""
-                    this.newIntroduction = ""
-                    this.newWeibo = ""
+        submitChange() {
+            if (!this.editChange) return
+            let promise1 = Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/edit/', 'PUT', {
+                name: this.newName ? this.newName : this.profile.name,
+                introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
+                weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
+                img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
+            }).then(value => {
+                this.profile = value
+                this.$parent.profile = value
+                this.$parent.changeMessage = false
+                this.editChange = false
+                this.newName = ""
+                this.newIntroduction = ""
+                this.newWeibo = ""
+            })
+            fetch('https://user.muxixyz.com/api/user/', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': Cookie.getCookie('Mtoken')
+                },
+                body: JSON.stringify({
+                    username: this.newName ? this.newName : this.profile.name,
+                    sid: "",
+                    qq: "",
+                    phone: "",
+                    school: ""
                 })
-                // Fetch.FetchData('https://user.muxixyz.com/api/user/',"PUT",{
-                //     username: this.newName ? this.newName : this.profile.name,
-                //     sid:"",
-                //     qq:"",
-                //     phone:"",
-                //     school:""
-                // }).then(value => {
-                //     console.log("value = ",value)
-                // })
-            },
-            getName(e) {
-                this.changedImg = URL.createObjectURL(e.target.files[0])
-                this.avatarData = new FormData()
-                this.avatarData.append('file', e.target.files[0])
-                fetch('/guisheng/upload_pics/', {
-                    method: 'POST',
-                    body: this.avatarData
-                }).then(res => {
+            })
+                .then(res => {
                     return res.json()
                 }).then(value => {
-                    this.pic_url = value.pic_url
+                    console.log("value = ", value)
                 })
-                this.editChange = true
-            },
-            editName() {
-                this.editChange = true
-            },
-        }
+        },
+        getName(e) {
+            this.changedImg = URL.createObjectURL(e.target.files[0])
+            this.avatarData = new FormData()
+            this.avatarData.append('file', e.target.files[0])
+            fetch('/guisheng/upload_pics/', {
+                method: 'POST',
+                body: this.avatarData
+            }).then(res => {
+                return res.json()
+            }).then(value => {
+                this.pic_url = value.pic_url
+            })
+            this.editChange = true
+        },
+        editName() {
+            this.editChange = true
+        },
+    }
 }
 </script>
 <style lang ="sass" module>

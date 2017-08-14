@@ -12,7 +12,7 @@ module.exports = {
         'second.js': ['./src/second.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'pictures.js': ['./src/pictures.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'profile.js': ['./src/profile.js', 'webpack-hot-middleware/client'],
-        'landing.js': ['./src/landing.js', 'webpack-hot-middleware/client'],
+        'landing.js': ['./src/landing.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'wrong.js': ['./src/wrong.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'search.js': ['./src/search.js', 'webpack-hot-middleware/client', "./src/header.js"],
         'special.js': ['./src/special.js', 'webpack-hot-middleware/client', "./src/header.js"],

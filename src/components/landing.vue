@@ -7,10 +7,19 @@
 import 'whatwg-fetch'
 import Cookie from '../common/cookie.js'
 import FETCH from '../common/fetch.js'
+import {
+    bus
+} from '../bus.js'
 
 export default {
+    data(){
+        return{
+            url:""
+        }
+    },
     mounted() {
         var email = window.location.href.split('?')[1].split('=')[1]
+        Cookie.setCookie('Mtoken',window.location.href.split('?')[1].split('=')[2])
         fetch("/api/v1.0/login/", {
             method: 'POST',
             headers: {
@@ -45,8 +54,10 @@ export default {
             Cookie.setCookie("token", value.token)
             Cookie.setCookie("uid", value.uid)
         })
+
+        this.url = Cookie.getCookie("url")
         setTimeout(() => {
-            window.history.go(-2);
+            window.location = this.url;
         }, 2000)
     }
 }

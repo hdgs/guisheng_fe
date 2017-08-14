@@ -58,8 +58,7 @@ export default {
             this.pic = value
             this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
             this.word = value.climate == 1 ? "晴" : value.climate == 2 ? "阴" : "雨"
-            var d = value.date.substring(0, 10).split("-")
-            this.date = d[1] + '/' + d[2]
+            this.date = value.date
         })
         FETCH.FetchData('/api/v1.0/tea/', 'GET').then(value => {
             this.topic = value
