@@ -17,8 +17,8 @@ export default {
         login() {
             this.quit()
             Cookie.setCookie('url', window.location.href)
-            // window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
-            window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
+            window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
+            // window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
         }
     }
 }
