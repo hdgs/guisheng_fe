@@ -270,12 +270,12 @@ export default {
 
 .icon{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
-  width: 35px;
+  width: 30px;
 }
 
 .sideTitle{
   composes: horizon from 'sass-loader!../../scss/utility.scss';
-  font-size:22px;
+  font-size:20px;
   color:$black_t;
   margin-left:20px;
 }

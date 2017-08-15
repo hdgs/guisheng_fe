@@ -19,7 +19,6 @@ export default {
     },
     mounted() {
         var email = window.location.href.split('?')[1].split('=')[1]
-        console.log("token",window.location.href.split('?')[1].split('=')[2])
         Cookie.setCookie('Mt',window.location.href.split('?')[1].split('=')[2])
         fetch("/api/v1.0/login/", {
             method: 'POST',
