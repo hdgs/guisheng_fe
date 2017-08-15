@@ -1,15 +1,15 @@
 <template>
-    <div id="header" v-hide="onclick||showTips|| headerFixed" >
-        <div :class="$style.top" >
-            <div :class="$style.icon" v-show = "specialPage" v-on:click = "showSpecial">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#classify"></use>
-              </svg>
+    <div id="header" v-hide="onclick||showTips|| headerFixed">
+        <div :class="$style.top">
+            <div :class="$style.icon" v-show="specialPage" v-on:click="showSpecial">
+                <svg viewBox="0 0 200 200" :class="$style.img">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#classify"></use>
+                </svg>
             </div>
-            <div :class="$style.logo" :style = "logoStyle">
+            <div :class="$style.logo" :style="logoStyle">
                 <div :class="$style.logoImg" v-on:click="backToRoot"></div>
             </div>
-            <div :class="$style.profile" v-on:click="showProfile" v-show = "!specialPage">
+            <div :class="$style.profile" v-on:click="showProfile" v-show="!specialPage">
                 <svg viewBox="0 0 200 200" :class="$style.img">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
                 </svg>
@@ -33,7 +33,7 @@
         <div v-show="showTips" :class="$style.suggestMask">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">您还没有登录哦~</div>
-                <div :class="$style.returnButton" v-on:click = "admin">我要登录</div>
+                <div :class="$style.returnButton" v-on:click="admin">我要登录</div>
                 <div :class="$style.returnButton" v-on:click="quit">取消</div>
             </div>
         </div>
@@ -49,106 +49,105 @@ import FETCH from '../common/fetch.js'
 
 export default {
     data() {
+        return {
+            onclick: false,
+            content: "",
+            tagList: [],
+            showTips: false,
+            specialPage: false,
+            headerFixed: true
+        }
+    },
+    directives: {
+        hide: Hidden
+    },
+    mounted() {
+        if (window.location.pathname == '/search') {
+            this.onclick = true
+            FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
+                this.tagList = value.hot_tag
+            })
+        }
+        else if (window.location.pathname == "/special") {
+            this.specialPage = true
+        }
+        bus.$on('headerFix', this.fixHead)
+    },
+    computed: {
+        logoStyle: function () {
             return {
-                onclick: false,
-                content: "",
-                tagList: [],
-                showTips: false,
-                specialPage:false,
-                headerFixed:true
-            }
-        },
-        directives: {
-            hide: Hidden
-        },
-        mounted() {
-            if (window.location.pathname == '/search') {
-                this.onclick = true
-                FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
-                    this.tagList = value.hot_tag
-                })
-            }
-            else if( window.location.pathname == "/special"){
-                this.specialPage = true
-            }
-           bus.$on('headerFix',this.fixHead)
-        },
-        computed:{
-            logoStyle:function(){
-                return{
-                    marginLeft:this.specialPage? '25%':'12.5px'
-                }
-            }
-        },
-        methods: {
-            showSpecial(){
-                bus.$emit('showSpecialPage')
-                this.fixHead()
-            },
-            fixHead(){
-                 if(this.headerFixed)
-                    this.headerFixed = false
-                else{
-                    this.headerFixed = true
-                }
-            },
-            backToRoot() {
-                window.location = "/"
-            },
-            getTag(e) {
-                this.content = e
-            },
-            Search(e) {
-                e.stopPropagation()
-            },
-            quit() {
-                this.showTips = false
-            },
-            admin(){
-                this.quit()
-                Cookie.setCookie('url',window.location.href)
-                window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
-                // window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
-                // window.location = "/landing"
-            },
-            showSearch(e) {
-                if (window.location.pathname !== '/search') {
-                    window.location = '/search'
-                    this.onclick = true
-                } else {
-                    console.log("hah")
-                }
-                FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
-                    this.tagList = value.hot_tag
-                })
-                if (this.onclick) {
-                    if (window.location.pathname == '/search')
-                        window.history.back()
-                    this.onclick = false
-                    this.content = ""
-                } else {
-                    this.onclick = true
-                }
-            },
-            showProfile() {
-                if (!Cookie.getCookie("token")) {
-                    console.log("Cookie.getCookie(token)",Cookie.getCookie("token"))
-                    this.showTips = true
-                } else {
-                    window.location = "/profile/" + Cookie.getCookie("uid")
-                }
-            },
-            postContent() {
-                console.log(this.content)
-                FETCH.FetchData('/api/v1.0/feed/', "POST", {
-                    content: this.content
-                }).then(json => {
-                    this.onclick = false
-                    this.content = ""
-                    bus.$emit('search', json)
-                })
+                marginLeft: this.specialPage ? '25%' : '12.5px'
             }
         }
+    },
+    methods: {
+        showSpecial() {
+            bus.$emit('showSpecialPage')
+            this.fixHead()
+        },
+        fixHead() {
+            if (this.headerFixed)
+                this.headerFixed = false
+            else {
+                this.headerFixed = true
+            }
+        },
+        backToRoot() {
+            window.location = "/"
+        },
+        getTag(e) {
+            this.content = e
+        },
+        Search(e) {
+            e.stopPropagation()
+        },
+        quit() {
+            this.showTips = false
+        },
+        admin() {
+            this.quit()
+            Cookie.setCookie('url', window.location.href)
+            // window.location = "https://user.muxixyz.com?landing=119.23.35.1:8777/landing"
+            window.location = "https://user.muxixyz.com?landing=localhost:3000/landing"
+        },
+        showSearch(e) {
+            if (window.location.pathname !== '/search') {
+                window.location = '/search'
+                this.onclick = true
+            } else {
+                console.log("hah")
+            }
+            FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
+                this.tagList = value.hot_tag
+            })
+            if (this.onclick) {
+                if (window.location.pathname == '/search')
+                    window.history.back()
+                this.onclick = false
+                this.content = ""
+            } else {
+                this.onclick = true
+            }
+        },
+        showProfile() {
+            if (!Cookie.getCookie("token")) {
+                console.log("Cookie.getCookie(token)", Cookie.getCookie("token"))
+                this.showTips = true
+            } else {
+                window.location = "/profile/" + Cookie.getCookie("uid")
+            }
+        },
+        postContent() {
+            console.log(this.content)
+            FETCH.FetchData('/api/v1.0/feed/', "POST", {
+                content: this.content
+            }).then(json => {
+                this.onclick = false
+                this.content = ""
+                bus.$emit('search', json)
+            })
+        }
+    }
 }
 </script>
 <style lang ="sass" module>

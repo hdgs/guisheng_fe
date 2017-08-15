@@ -21,37 +21,37 @@
 import Fetch from '../../common/fetch.js'
 export default {
     data() {
-            return {
-                suggestion: "",
-                suggestInfo: "",
-                showSuccess:false
+        return {
+            suggestion: "",
+            suggestInfo: "",
+            showSuccess: false
+        }
+    },
+    methods: {
+        closeComment() {
+            if (this.$parent.showSuggest) {
+                this.$parent.showSuggest = false
+                this.suggestion = ""
+                this.suggestInfo = ""
             }
         },
-        methods: {
-            closeComment() {
-                if (this.$parent.showSuggest) {
+        submitSuggest() {
+            if (!this.suggestion || !this.suggestInfo) return
+            Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/suggestions/', 'POST', {
+                suggestion: this.suggestion,
+                contact_information: this.suggestInfo
+            }).then(value => {
+                this.showSuccess = true
+                setTimeout(() => {
                     this.$parent.showSuggest = false
+                    this.showSuccess = false
                     this.suggestion = ""
                     this.suggestInfo = ""
-                }
-            },
-            submitSuggest() {
-                if (!this.suggestion || !this.suggestInfo) return
-                    Fetch.FetchData('/api/v1.0/profile/' + this.profile.user_id + '/suggestions/','POST',{
-                    	suggestion: this.suggestion,
-                        contact_information: this.suggestInfo
-                    }).then(value => {
-                        this.showSuccess = true
-                        setTimeout(() => {
-                            this.$parent.showSuggest = false
-                            this.showSuccess = false
-                            this.suggestion = ""
-                            this.suggestInfo = ""
-                        }, 2000)
+                }, 2000)
 
-                    })
-            }
+            })
         }
+    }
 }
 </script>
 <style lang ="sass" module>
@@ -59,11 +59,10 @@ export default {
 @import '../../scss/zindex.scss';
 
 .suggestPage {
-    position: fixed;
+    position: absolute;
     width: 100%;
     top: 0;
-    bottom: 0;
-    right: 0;
+    min-height:100%;
     background-color: $white;
     z-index: $Zindex2;
     font-family: '黑体-简';
@@ -107,10 +106,11 @@ export default {
 
 .input {
     width: 90%;
-    height: 110px;
+    height: 140px;
     font-size: 15px;
     padding: 15px;
     border-bottom: 0.50px solid $grey;
+    background:$white;
 }
 
 .inputInfo {
@@ -127,11 +127,10 @@ export default {
     box-sizing: border-box;
     border: 1px $orange solid;
     background-color: $white;
-    margin: 0 auto;
+    margin: 40px auto;
     border-radius: 3%;
     color: #fbb848;
     font-size: 16px;
-    margin-top: 26px;
     outline: none;
 }
 

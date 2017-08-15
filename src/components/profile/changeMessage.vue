@@ -70,7 +70,7 @@ export default {
                 name: this.newName ? this.newName : this.profile.name,
                 introduction: this.newIntroduction ? this.newIntroduction : this.profile.introduction,
                 weibo: this.newWeibo ? this.newWeibo : this.profile.weibo,
-                img_url: this.pic_url ? this.pic_url : this.profile.weibo.img_url
+                img_url: this.pic_url ? this.pic_url : this.profile.img_url
             }).then(value => {
                 this.profile = value
                 this.$parent.profile = value
@@ -84,8 +84,10 @@ export default {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': Cookie.getCookie('Mtoken')
+                    'Access-Control-Allow-Methods': 'PUT',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'token': Cookie.getCookie('Mt')
                 },
                 body: JSON.stringify({
                     username: this.newName ? this.newName : this.profile.name,
@@ -129,8 +131,7 @@ export default {
     position: absolute;
     width: 100%;
     top: 0;
-    bottom: 0;
-    right: 0;
+    min-height:100%;
     background-color: $white;
     z-index: $Zindex2;
     font-family: '黑体-简';

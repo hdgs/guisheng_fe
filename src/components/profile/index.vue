@@ -11,7 +11,7 @@
             </div>
             <div :class="$style.avatar">
                 <div :class="$style.avatarbox">
-                    <img :class="$style.avatarimg" v-bind:src="profile.img_url">
+                    <img :class="$style.avatarimg" v-bind:src="img_link">
                     <div :class="$style.sign" v-show="profile.role">
                         <span>认证作者</span>
                         <svg viewBox="0 0 200 200" :class="$style.img">
@@ -104,7 +104,8 @@ export default {
                 changeMessage: false,
                 changedImg: "",
                 pic_url: "",
-                my_id: 0
+                my_id: 0,
+                img_link:""
             }
         },
         components: {
@@ -126,9 +127,10 @@ export default {
                     },3000)
             }).then(value => {
                 this.profile = value
+                this.img_link = this.profile.img_url ? this.profile.img_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6njBuPloKUG9uj0e7gr_LMIoSrHtU2GKYc4R6cq0-Yqjoda84A'
                 this.$refs.changeMessage.profile = value
                 this.$refs.suggestPage.profile = value
-                this.$refs.changeMessage.changedImg = this.profile.img_url
+                this.$refs.changeMessage.changedImg = this.profile.img_url ? this.profile.img_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6njBuPloKUG9uj0e7gr_LMIoSrHtU2GKYc4R6cq0-Yqjoda84A'
             })
         },
         methods: {
