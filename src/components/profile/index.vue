@@ -11,7 +11,7 @@
             </div>
             <div :class="$style.avatar">
                 <div :class="$style.avatarbox">
-                    <img :class="$style.avatarimg" v-bind:src="profile.img_url">
+                    <img :class="$style.avatarimg" v-bind:src="profile.img_url?profile.img_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6njBuPloKUG9uj0e7gr_LMIoSrHtU2GKYc4R6cq0-Yqjoda84A'">
                     <div :class="$style.sign" v-show="profile.role">
                         <span>认证作者</span>
                         <svg viewBox="0 0 200 200" :class="$style.img">
@@ -114,6 +114,7 @@ export default {
             "suggestPage":SuggestPage
         },
         mounted() {
+
             var api = window.location.pathname
             this.my_id = Cookie.getCookie("uid")
             Fetch.FetchData('/api/v1.0' + api + '/','POST',{
@@ -128,7 +129,7 @@ export default {
                 this.profile = value
                 this.$refs.changeMessage.profile = value
                 this.$refs.suggestPage.profile = value
-                this.$refs.changeMessage.changedImg = this.profile.img_url
+                this.$refs.changeMessage.changedImg = value.img_url?value.img_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF6njBuPloKUG9uj0e7gr_LMIoSrHtU2GKYc4R6cq0-Yqjoda84A'
             })
         },
         methods: {
