@@ -120,12 +120,12 @@ import Map from '../../common/keymap.js'
   padding-left: 15px;
 }
 .right{
-  margin-left: 13%;
+  margin-left: 7%;
   display: flex;
   align-items: center;
 }
 .tag{
-  margin-right: 17px;
+  margin-right: 10px;
 }
 .views_img{
   margin-right: 4.5px;
