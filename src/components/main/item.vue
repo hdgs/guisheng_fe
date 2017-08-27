@@ -103,11 +103,6 @@ import Map from '../../common/keymap.js'
   width: 100%;
   display: block;
 }
-/*.common{
-  color: #999999;
-  font-size: 12px;
-  composes: horizon from 'sass-loader!../../scss/utility.scss';
-}*/
 .bottom{
   overflow: hidden;
   padding: 10px 0;
