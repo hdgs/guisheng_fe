@@ -1,160 +1,161 @@
 <template>
   <div>
     <skeleton v-show="showSkeleton"></skeleton>
-    <div :class="$style.sidenavPage" v-show="showSide">
-      <div :class="$style.sidenav">
-        <div :class="$style.greenTitle"></div>
-        <div v-on:click = "des = 1">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#route"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">路线</div>
-          </li>
+    <transition name="slide-fade">
+      <div class="sidenavPage" v-show="showSide">
+        <div class="sidenav" v-on:click="closeSide">
+          <div class="greenTitle"></div>
+          <div v-on:click="des = 1">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#route"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">路线</div>
+            </li>
+          </div>
+          <div v-on:click="des = 2">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">超市</div>
+            </li>
+          </div>
+          <div v-on:click="des = 3">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#militory"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">军训</div>
+            </li>
+          </div>
+          <div v-on:click="des = 4">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dormitory"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">宿舍</div>
+            </li>
+          </div>
+          <div v-on:click="des = 5">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#travel"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">游玩</div>
+            </li>
+          </div>
+          <div v-on:click="des = 6">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#eating"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">吃货</div>
+            </li>
+          </div>
+          <div v-on:click="des = 7">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#learning"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">学霸</div>
+            </li>
+          </div>
         </div>
-        <div v-on:click = "des = 2">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">超市</div>
-          </li>
-        </div>
-        <div v-on:click = "des = 3">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#militory"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">军训</div>
-          </li>
-        </div>
-        <div v-on:click = "des = 4">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dormitory"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">宿舍</div>
-          </li>
-        </div>
-        <div v-on:click = "des = 5">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#travel"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">游玩</div>
-          </li>
-        </div>
-        <div v-on:click = "des = 6">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#eating"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">吃货</div>
-          </li>
-        </div>
-        <div v-on:click = "des = 7">
-          <li :class="$style.sideLi">
-            <div :class="$style.icon">
-              <svg viewBox="0 0 200 200" :class="$style.img">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#learning"></use>
-              </svg>
-            </div>
-            <div :class="$style.sideTitle">学霸</div>
-          </li>
+        <div class="sideMask" v-on:click="closeSide">
         </div>
       </div>
-      <div :class="$style.sideMask" v-on:click="closeSide">
-      </div>
-    </div>
-    <div :class="$style.main">
-      <transition name="bounce" mode="out-in">
-        <div v-if = "des === 1" key = "1">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+    </transition>
+    <div class="main">
+      <transition-group name="riseUp" v-on:enter="enter" v-on:leave="leave">
+        <div v-if="(des === 1 || des === 0)" key="1">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#route"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">路线</div>
+          <div class="line"></div>
+          <div class="title_s">路线</div>
           <item :item="item" v-for="item in arrayList[0]"></item>
         </div>
-        <div  v-else-if = "des === 2" key = "2">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 2 || des === 0)" key="2">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">超市</div>
+          <div class="line"></div>
+          <div class="title_s">超市</div>
           <item :item="item" v-for="item in arrayList[1]"></item>
         </div>
-        <div v-else-if = "des === 3" key = "3">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 3 || des === 0)" key="3">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#militory"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">军训</div>
+          <div class="line"></div>
+          <div class="title_s">军训</div>
           <item :item="item" v-for="item in arrayList[2]"></item>
         </div>
-        <div v-else-if = "des === 4" key = "4">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 4 || des === 0)" key="4">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#dormitory"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">宿舍</div>
-  
+          <div class="line"></div>
+          <div class="title_s">宿舍</div>
+
           <item :item="item" v-for="item in arrayList[3]"></item>
         </div>
-        <div v-else-if = "des === 5" key = "5">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 5 || des === 0)" key="5">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#travel"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">游玩</div>
+          <div class="line"></div>
+          <div class="title_s">游玩</div>
           <item :item="item" v-for="item in arrayList[4]"></item>
         </div>
-        <div v-else-if = "des === 6" key = "6">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 6 || des === 0)" key="6">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#eating"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">吃货</div>
+          <div class="line"></div>
+          <div class="title_s">吃货</div>
           <item :item="item" v-for="item in arrayList[5]"></item>
         </div>
-        <div v-else-if = "des === 7" key = "7">
-          <div :class="$style.icon_s">
-            <svg viewBox="0 0 200 200" :class="$style.img">
+        <div v-if="(des === 7 || des === 0)" key="7">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#learning"></use>
             </svg>
           </div>
-          <div :class="$style.line"></div>
-          <div :class="$style.title_s">学霸</div>
+          <div class="line"></div>
+          <div class="title_s">学霸</div>
           <item :item="item" v-for="item in arrayList[6]"></item>
         </div>
-      </transition>
-      <div :class="$style.tip"> Σ( ° △ °|||)已经没有了</div>
+      </transition-group>
+      <div class="tip"> Σ( ° △ °|||)已经没有了</div>
     </div>
-  
   </div>
 </template>
 <script>
@@ -170,9 +171,9 @@ export default {
     return {
       list: [],
       arrayList: [],
-      showSide: true,
+      showSide: false,
       showSkeleton: true,
-      des:1
+      des: 0
     }
   },
   components: {
@@ -183,17 +184,14 @@ export default {
     FETCH.FetchData("/api/v1.0/special/feed/", "POST", {
       id: 4
     }).then(res => {
-      console.log("res",res)
       this.list = res
-      var ay = [30,34,35,36,37,38,39]
+      var ay = [30, 34, 35, 36, 37, 38, 39]
       for (let i = 0; i < 7; i++) {
-        console.log(ay[i])
         this.arrayList.push(this.jsonFilter(res, ay[i]))
       }
-      console.log(this.arrayList, this.list)
+      this.showSkeleton = false
     })
-    bus.$on('showSpecialPage', this.sideFunc)
-    this.showSkeleton = false
+    bus.$on('showSpecialPage', this.sideFunc) 
   },
   methods: {
     jsonFilter(item, e) {
@@ -202,9 +200,9 @@ export default {
       })
     },
     closeSide() {
-      // setTimeout(() => {
-      this.showSide = false
-      // },500)
+      setTimeout(() => {
+        this.showSide = false
+      }, 100)
       bus.$emit('headerFix')
 
     },
@@ -218,7 +216,7 @@ export default {
   }
 }
 </script>
-<style lang ="sass" module>
+<style lang ="sass" scoped>
 @import '../../scss/color.scss';
 
 .icon_s{
@@ -260,21 +258,23 @@ export default {
   bottom: 0;
   padding-bottom:30px;
   width:100%;
-  composes: space from 'sass-loader!../../scss/utility.scss';
+  font-size: 0; 
 }
 
 .sideLi{
-  composes: space from 'sass-loader!../../scss/utility.scss';
+  font-size: 0; 
   padding:16.5px;
 }
 
 .icon{
-  composes: horizon from 'sass-loader!../../scss/utility.scss';
+  vertical-align: middle; 	
+  display: inline-block;
   width: 30px;
 }
 
 .sideTitle{
-  composes: horizon from 'sass-loader!../../scss/utility.scss';
+  vertical-align: middle; 	
+  display: inline-block;
   font-size:20px;
   color:$black_t;
   margin-left:20px;
@@ -296,7 +296,8 @@ export default {
   background:#eff5f3;
   background:$grey;
   position: fixed;
-  composes: horizon from 'sass-loader!../../scss/utility.scss';
+  vertical-align: middle; 	
+  display: inline-block;
 }
 
 .sideMask{
@@ -308,32 +309,27 @@ export default {
   bottom:0;
   z-index:2;
   position:fixed;
-  composes: horizon from 'sass-loader!../../scss/utility.scss';
+  vertical-align: middle; 	display: inline-block;
 }
 
 .main{
   width:100%;
   padding-top:54px;
   margin-top: -54px;
-  /* position:relative; */
 }
 
-.bounce-enter-active {
-    animation: bounce-in 2s;
+.riseUp-enter-active {
+    animation: bounce-in 1s;
 }
 
-.bounce-leave-active {
-    animation: bounce-out 2s;
+.riseUp-leave-active {
+    animation: bounce-out 0.3s;
 }
 
 @keyframes bounce-in {
     0% {
-        transform: translateY(200px);
-        opacity: 0;
-    }
-    50% {
         transform: translateY(100px);
-        opacity: 0.5;
+        opacity: 0;
     }
     100% {
         transform: translateY(0);
@@ -346,14 +342,21 @@ export default {
         transform: translateY(0);
         opacity: 1;
     }
-    50% {
-        transform: translateY(-100px);
-        opacity: 0.5;
-    }
     100% {
-        transform: translateY(-200px);
+        transform: translateY(-100px);
         opacity: 0;
     }
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateX(10px);
+  opacity: 0;
 }
 
 </style>

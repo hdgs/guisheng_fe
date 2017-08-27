@@ -1,5 +1,5 @@
 <template>
-    <div id="header" v-hide="onclick||showTips|| headerFixed">
+    <div id="header" v-hide="onclick||showTips||!headerFixed">
         <div :class="$style.top">
             <div :class="$style.icon" v-show="specialPage" v-on:click="showSpecial">
                 <svg viewBox="0 0 200 200" :class="$style.img">
