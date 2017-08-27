@@ -58,7 +58,7 @@ export default {
         this.url = Cookie.getCookie("url")
         setTimeout(() => {
             window.location = this.url;
-        }, 2000)
+        }, 1000)
     }
 }
 </script>

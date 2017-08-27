@@ -179,7 +179,6 @@ body {
     width: 100%;
     min-height: 100%;
     background-color: $white;
-    /* padding-bottom: 15px; */
 }
 
 .info {
