@@ -18,8 +18,9 @@ export default {
         }
     },
     mounted() {
-        var email = window.location.href.split('?')[1].split('=')[1]
-        Cookie.setCookie('Mt',window.location.href.split('?')[1].split('=')[2])
+        var email = window.location.href.split('?')[1].split('&')[0].split('=')[1]
+        Cookie.setCookie('Mt',window.location.href.split('?')[1].split('&')[1].split('=')[1])
+        console.log("email=",window.location.href.split('?')[1].split('&')[0].split('=')[1],"mt",window.location.href.split('?')[1].split('&')[1].split('=')[1])
         fetch("/api/v1.0/login/", {
             method: 'POST',
             headers: {
