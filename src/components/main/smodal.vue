@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.suggestMask">
+    <div :class="$style.suggestMask" :style = "styleWidth">
         <div :class="$style.returnCard">
             <div :class = "$style.entry"></div>
             <div :class = "$style.bottom">
@@ -17,6 +17,20 @@ export default {
         },
         login(){
              window.location = "/special"
+        }
+    },
+    data(){
+        phone:false
+    },
+    mounted(){
+        if(window.screen.availWidth > 500)
+            this.phone = false
+    },
+    computed:{
+        styleWidth(){
+            return{
+                width: this.phone ? '':'400px'
+            }
         }
     }
 }

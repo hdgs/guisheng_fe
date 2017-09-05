@@ -1,21 +1,33 @@
 <template>
-    <div :class="$style.suggestMask">
-        <div :class="$style.returnCard" >
-            <div v-show = "flag">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
-            <div :class="$style.returnButton" v-on:click="exit" v-show = "flag">退出</div>
-            <div :class="$style.returnButton" v-on:click="quit" v-show = "flag">取消</div>
-            <div :class = "$style.returnContent" v-show = "!flag">您只能访问作者个人中心哦~</div>
+    <div :class="$style.suggestMask" :style="styleWidth">
+        <div :class="$style.returnCard">
+            <div v-show="flag">退出登录后，将不能发表评论和收藏内容。确认退出？</div>
+            <div :class="$style.returnButton" v-on:click="exit" v-show="flag">退出</div>
+            <div :class="$style.returnButton" v-on:click="quit" v-show="flag">取消</div>
+            <div :class="$style.returnContent" v-show="!flag">您只能访问作者个人中心哦~</div>
         </div>
-        
+
     </div>
 </template>
 <script>
 import Cookie from '../../common/cookie.js'
 
 export default {
-    data(){
-        return{
-            flag:false
+    data() {
+        return {
+            flag: false,
+            phone: false
+        }
+    },
+    mounted() {
+        if (window.screen.availWidth > 500)
+            this.phone = false
+    },
+    computed: {
+        styleWidth() {
+            return {
+                width: this.phone ? '' : '400px'
+            }
         }
     },
     methods: {

@@ -12,15 +12,15 @@ import {
 } from '../bus.js'
 
 export default {
-    data(){
-        return{
-            url:""
+    data() {
+        return {
+            url: ""
         }
     },
     mounted() {
         var email = window.location.href.split('?')[1].split('&')[0].split('=')[1]
-        Cookie.setCookie('Mt',window.location.href.split('?')[1].split('&')[1].split('=')[1])
-        console.log("email=",window.location.href.split('?')[1].split('&')[0].split('=')[1],"mt",window.location.href.split('?')[1].split('&')[1].split('=')[1])
+        Cookie.setCookie('Mt', window.location.href.split('?')[1].split('&')[1].split('=')[1])
+        console.log("email=", window.location.href.split('?')[1].split('&')[0].split('=')[1], "mt", window.location.href.split('?')[1].split('&')[1].split('=')[1])
         fetch("/api/v1.0/login/", {
             method: 'POST',
             headers: {
@@ -67,5 +67,6 @@ export default {
     width: 100%;
     text-align: center;
     margin-top: 40px;
+    height:630px;
 }
 </style>

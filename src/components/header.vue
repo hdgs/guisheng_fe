@@ -20,7 +20,7 @@
                 </svg>
             </div>
         </div>
-        <div :class="$style.mask" v-show="onclick" v-on:click="showSearch">
+        <div :class="$style.mask" v-show="onclick" v-on:click="showSearch" :style = "styleWidth">
             <div :class="$style.searchBox" v-on:click="Search">
                 <input type="text" :class="$style.input" v-model="content">
                 <div :class="$style.button" v-on:click="postContent">搜索</div>
@@ -30,7 +30,7 @@
                 <div :class="$style.tag" v-for="tag in tagList" v-on:click="getTag(tag)">#{{tag}}#</div>
             </div>
         </div>
-        <div v-show="showTips" :class="$style.suggestMask">
+        <div v-show="showTips" :class="$style.suggestMask" :style = "styleWidth">
             <div :class="$style.returnCard">
                 <div :class="$style.returnContent">您还没有登录哦~</div>
                 <div :class="$style.returnButton" v-on:click="admin">我要登录</div>
@@ -55,13 +55,16 @@ export default {
             tagList: [],
             showTips: false,
             specialPage: false,
-            headerFixed: true
+            headerFixed: true,
+            phone:false
         }
     },
     directives: {
         hide: Hidden
     },
     mounted() {
+        if(window.screen.availWidth > 500)
+            this.phone = false
         if (window.location.pathname == '/search') {
             this.onclick = true
             FETCH.FetchData("/api/v1.0/hottag/", "GET").then(value => {
@@ -77,6 +80,11 @@ export default {
         logoStyle: function () {
             return {
                 marginLeft: this.specialPage ? '25%' : '12.5px'
+            }
+        },
+        styleWidth:function(){
+            return{
+                width:this.phone? '':'400px'
             }
         }
     },
