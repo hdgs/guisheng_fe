@@ -146,7 +146,6 @@ export default {
             }
         },
         postContent() {
-            console.log(this.content)
             FETCH.FetchData('/api/v1.0/feed/', "POST", {
                 content: this.content
             }).then(json => {
