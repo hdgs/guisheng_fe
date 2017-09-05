@@ -59,6 +59,7 @@ export default {
             that.i++
             that.$parent.i++
             that.x = -that.picWidth * that.i
+            that.isSwitching = true
             that.tappedImgDescription = that.descriptionImg[that.i]
         },5000)
     },
