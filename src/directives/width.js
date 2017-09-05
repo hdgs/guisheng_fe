@@ -1,5 +1,5 @@
 export default {
     bind: function(el, binding, vnode) {
-    	binding.value(window.screen.width,window.screen.height)
+        binding.value(document.body.clientWidth, window.screen.height)
     }
 }

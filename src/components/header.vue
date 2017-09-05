@@ -155,7 +155,7 @@ export default {
 @import '../scss/zindex.scss';
 
 .top {
-    z-index: $Zindex2;
+    z-index: $Zindex3;
     position: relative;  
     background-color: $white;
     height: 54px;

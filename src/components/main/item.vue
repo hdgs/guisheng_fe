@@ -27,7 +27,6 @@ import Map from '../../common/keymap.js'
       }
     },
      mounted() {
-
       this.url = Map.FETCH_URL_MAP[this.item.kind] + "/" + this.item.article_id
      },
     props:['item'],

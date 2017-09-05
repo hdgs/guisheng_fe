@@ -1,5 +1,5 @@
 <template>
-    <div id="xxx" :class="$style.picSecond" v-width="changeWidth" :style = "stopScroll">
+    <div id="xxx" :class="$style.picSecond" v-width="changeWidth" :style="stopScroll">
         <div :class="$style.titleBox">
             <svg viewBox="0 0 200 200" :class="$style.img" v-on:click="goBack()">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#back"></use>
@@ -13,8 +13,8 @@
                 <div :class="$style.totalNum">/{{pics.length}}</div>
             </div>
         </div>
-        <skeleton v-show = "showSkeleton"></skeleton>
-        <banner ref = "bannerPic"></banner>
+        <skeleton v-show="showSkeleton"></skeleton>
+        <banner ref="bannerPic"></banner>
         <div :class="$style.bottom">
             <div :class="$style.author">by {{picInfo.author}}</div>
             <div :class="$style.views">{{picInfo.views}}</div>
@@ -28,7 +28,7 @@
         <div :class="$style.sline"></div>
         <div :class="$style.editor">[责任编辑：{{picInfo.editor}}]</div>
         <picComments ref="picComments"></picComments>
-        <div :class="$style.recommend" v-show = list.length>
+        <div :class="$style.recommend" v-show=l ist.length>
             <div :class="$style.recommendTitle">相关推荐</div>
             <item :item="item" v-for="item in list"></item>
         </div>
@@ -48,27 +48,27 @@ import Skeleton from './skeleton_p'
 export default {
     data() {
         return {
-            i:0,
+            i: 0,
             pics: [],
             picWidth: 500,
             picInfo: {},
             list: [],
-            showComment:false,
-            showSkeleton:true
+            showComment: false,
+            showSkeleton: true
         }
     },
     mounted() {
         var api = window.location.pathname
         var ids = api.split('/')
-        let promise1 = FETCH.FetchData("/api/v1.0" + api + "/", "POST",{
-            my_id: Cookie.getCookie("uid") ? Cookie.getCookie("uid"): -1
+        let promise1 = FETCH.FetchData("/api/v1.0" + api + "/", "POST", {
+            my_id: Cookie.getCookie("uid") ? Cookie.getCookie("uid") : -1
         })
         let promise2 = FETCH.FetchData("/api/v1.0/comments/?article_id=" + ids[2] + "&kind=2", "GET")
         Promise.all([promise1, promise2]).then(values => {
             this.showSkeleton = false
             this.pics = values[0].pics
             this.$refs.bannerPic.pics = values[0].pics
-            console.log("this.$refs.bannerPic.pics",values[0])
+            console.log("this.$refs.bannerPic.pics", values[0])
             this.$refs.bannerPic.descriptionImg = values[0].introduction
             this.picInfo = values[0]
             this.$refs.picComments.obj = values[1]
@@ -78,7 +78,7 @@ export default {
                 kind: values[0].kind,
                 commentCount: values[0].commentCount,
                 likes: values[0].likes,
-                collected:values[0].collected
+                collected: values[0].collected
             }
             FETCH.FetchData("/api/v1.0/" + ids[1] + "/recommend/", "POST", {
                 article_id: this.picInfo.id
@@ -88,10 +88,10 @@ export default {
         })
     },
     computed: {
-        stopScroll: function () {
-            return{
-                overflow: this.showComment ? 'hidden':'auto',
-                height:this.showComment?'90%':''
+        stopScroll: function() {
+            return {
+                overflow: this.showComment ? 'hidden' : 'auto',
+                height: this.showComment ? '90%' : ''
             }
         }
     },
@@ -99,12 +99,15 @@ export default {
         "picComments": comments,
         "item": Item,
         "banner": Banner,
-        "skeleton":Skeleton
+        "skeleton": Skeleton
     },
     directives: {
         width: widthDirective
     },
     methods: {
+        changePC() {
+            this.i++
+        },
         goBack() {
             window.history.back()
         },

@@ -75,6 +75,16 @@
               <div class="sideTitle">学霸</div>
             </li>
           </div>
+          <div v-on:click="des = 8">
+            <li class="sideLi">
+              <div class="icon">
+                <svg viewBox="0 0 200 200" class="img">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
+                </svg>
+              </div>
+              <div class="sideTitle">校园生活</div>
+            </li>
+          </div>
         </div>
         <div class="sideMask" v-on:click="closeSide">
         </div>
@@ -153,6 +163,16 @@
           <div class="title_s">学霸</div>
           <item :item="item" v-for="item in arrayList[6]"></item>
         </div>
+        <div v-if="(des === 8 || des === 0)" key="8">
+          <div class="icon_s">
+            <svg viewBox="0 0 200 200" class="img">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop_0"></use>
+            </svg>
+          </div>
+          <div class="line"></div>
+          <div class="title_s">校园活动</div>
+          <item :item="item" v-for="item in arrayList[7]"></item>
+        </div>
       </transition-group>
       <div class="tip"> Σ( ° △ °|||)已经没有了</div>
     </div>
@@ -185,8 +205,8 @@ export default {
       id: 4
     }).then(res => {
       this.list = res
-      var ay = [30, 34, 35, 36, 37, 38, 39]
-      for (let i = 0; i < 7; i++) {
+      var ay = [30, 34, 35, 36, 37, 38, 39, 40]
+      for (let i = 0; i < 8; i++) {
         this.arrayList.push(this.jsonFilter(res, ay[i]))
       }
       this.showSkeleton = false
@@ -253,7 +273,7 @@ export default {
 }
 
 .sidenavPage{
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   padding-bottom:30px;
@@ -275,7 +295,7 @@ export default {
 .sideTitle{
   vertical-align: middle; 	
   display: inline-block;
-  font-size:20px;
+  font-size:18px;
   color:$black_t;
   margin-left:20px;
 }
@@ -290,25 +310,25 @@ export default {
 
 .sidenav{
   z-index:2;
-  width:40%;
+  width:45%;
   min-height:100%; 
   bottom:0;
   background:#eff5f3;
   background:$grey;
-  position: fixed;
+  position: absolute;
   vertical-align: middle; 	
   display: inline-block;
 }
 
 .sideMask{
   background-color: rgba(51, 51, 51, 0.3);
-  width:60%;
+  width:55%;
   top:0;
   right:0;
-  left:40%;
+  left:45%;
   bottom:0;
   z-index:2;
-  position:fixed;
+  position:absolute;
   vertical-align: middle; 	display: inline-block;
 }
 

@@ -29,153 +29,170 @@ let cssToMatrix = new CssToMatrix
 
 export default {
     data() {
+        return {
+            x: 0,
+            ix: 0,
+            iy: 0,
+            foo: 0,
+            picHeight: 240,
+            pics: [],
+            picWidth: 500,
+            screenHeight: 400,
+            i: 0,
+            isSwitching: false,
+            customscale: 1.0,
+            ifTab: false,
+            imgRadioArr: [],
+            tappedImgSrc: "",
+            tappedImgDescription: "",
+            lastOne: false,
+            descriptionImg: []
+        }
+    },
+    mounted() {
+        var that = this
+        setInterval(() => {
+            if(that.i == that.pics.length - 1){
+                that.i = -1
+                that.$parent.i = -1
+            }    
+            that.i++
+            that.$parent.i++
+            that.x = -that.picWidth * that.i
+            that.tappedImgDescription = that.descriptionImg[that.i]
+        },5000)
+    },
+    computed: {
+        // a computed getter
+        styleObject: function() {
+            // `this` points to the vm instance
             return {
-                x: 0,
-                ix: 0,
-                iy: 0,
-                foo: 0,
-                picHeight: 240,
-                pics: [],
-                picWidth: 500,
-                screenHeight: 400,
-                i: 0,
-                isSwitching: false,
-                customscale: 1.0,
-                ifTab: false,
-                imgRadioArr: [],
-                tappedImgSrc: "",
-                tappedImgDescription: "",
-                lastOne: false,
-                descriptionImg:[]
+                transition: this.isSwitching ? '1s' : 'none',
+                transform: 'translateX(' + this.x + 'px)',
+                width: this.picWidth * this.pics.length + 'px',
+                height: this.picHeight + 'px'
             }
         },
-        computed: {
-            // a computed getter
-            styleObject: function () {
-                // `this` points to the vm instance
-                return {
-                    transition: this.isSwitching ? '1s' : 'none',
-                    transform: 'translateX(' + this.x + 'px)',
-                    width: this.picWidth * this.pics.length + 'px',
-                    height: this.picHeight + 'px'
-                }
-            },
-            imgWidth: function () {
-                return {
-                    width: this.picWidth + 'px',
-                    height: this.picHeight + 'px'
-                }
-            },
-            imgHeight: function () {
-                return {
-                    height: this.picHeight + 'px'
-                }
-            },
-            imgTransform: function () {
-                let matrixStr = cssToMatrix
-                    .scale3d(this.customscale, this.customscale, 1.0)
-                    .translate3d(this.ix, this.iy, 0)
-                    .getMatrixCSS()
-                return {
-                    transform: "perspective(500px) " + matrixStr
-                }
+        imgWidth: function() {
+            return {
+                width: this.picWidth + 'px',
+                height: this.picHeight + 'px'
             }
         },
-        directives: {
-            transitionEnd: transitionEndDirective,
-            radio: radioDirective
+        imgHeight: function() {
+            return {
+                height: this.picHeight + 'px'
+            }
         },
-        methods: {
-            formerPic(d){
-                if(d.direction == 'Right' && this.i == this.pics.length-1)
-                    this.lastOne = false
-            },
-            switchAble(direction) {
-                if (direction == 'Right') {
-                    this.lastOne = false
-                }
-                if ((direction == 'Right' && this.i == 0) || (this.i == (this.pics.length - 1) && direction == 'Left')) {
-                    if (this.i == (this.pics.length - 1) && direction == 'Left') {
-                        this.lastOne = true
-                    }
-                    return false
-                }
-                return true
-            },
-            onSwipe(e) {
-                if (!this.switchAble(e.direction)) {
-                    return
-                }
-                this.x += e.deltaX
-            },
-            imgSwipe(e) {
-                if (this.picWidth / 2 + Math.abs(this.ix + e.deltaX) < (this.picWidth * this.customscale) / 2) {
-                    this.ix += e.deltaX
-                }
-                var picHeight = this.picWidth / this.imgRadioArr[this.i]
-                if ((this.screenHeight < this.customscale * picHeight) && (this.screenHeight / 2 + Math.abs(this.iy + e.deltaY) - 40 * this.customscale < picHeight * this.customscale / 2)) {
-                    this.iy += e.deltaY
-                }
-            },
-            onPintch(e) {
-                if (((this.picWidth / 2 + Math.abs(this.ix)) < (this.picWidth * (this.customscale + e.customscale) / 2)) && (this.customscale + e.customscale) > 0) {
-                    var picHeight = this.picWidth / this.imgRadioArr[this.i]
-                    if (((this.customscale + e.customscale) * picHeight < this.screenHeight) || Math.abs(this.iy) - picHeight * this.customscale / 2 < this.screenHeight / 2)
-                        this.iy = 0
-                    this.customscale += e.customscale
-                }
-            },
-            afterSwipe(e) {
-                if (!this.switchAble(e.direction))
-                    return
-                if (Math.abs(e.distanceX) > this.picWidth / 4) {
-
-                    if (e.direction == 'Left') {
-                        this.i++
-                        this.$parent.i++
-                            this.x = -this.picWidth * this.i
-                    } else {
-                        this.i--
-                        this.$parent.i--
-                            this.x = -this.picWidth * this.i
-                    }
-                } else {
-                    this.x = -this.picWidth * this.i
-                }
-                this.isSwitching = true
-                this.tappedImgDescription = this.descriptionImg[this.i]
-            },
-            changeState() {
-                this.isSwitching = false
-            },
-            showMask(e, index) {
-                this.ifTab = true
-                this.tappedImgSrc = this.pics[index]
-                this.picHight = this.picWidth / this.imgRadioArr[index]
-            },
-            hideMask() {
-                this.customscale = 1.0
-                this.ix = 0
-                this.iy = 0
-                if (this.ifTab)
-                    this.ifTab = false
-            },
-            initImgRadio(radio, index) {
-                this.imgRadioArr[index] = radio
-                this.picHeight = this.picWidth * 0.75
-                this.tappedImgDescription = this.descriptionImg[this.i]
-            },
-            imgScale() {
-                if (this.customscale > 1.0) {
-                    this.customscale = 1.0
-                    this.iy = 0
-                    this.ix = 0
-                    return
-                } else {
-                    this.customscale = 2.0
-                }
+        imgTransform: function() {
+            let matrixStr = cssToMatrix
+                .scale3d(this.customscale, this.customscale, 1.0)
+                .translate3d(this.ix, this.iy, 0)
+                .getMatrixCSS()
+            return {
+                transform: "perspective(500px) " + matrixStr
             }
         }
+    },
+    directives: {
+        transitionEnd: transitionEndDirective,
+        radio: radioDirective
+    },
+    methods: {
+        changePc() {
+            this.i++
+        },
+        formerPic(d) {
+            if (d.direction == 'Right' && this.i == this.pics.length - 1)
+                this.lastOne = false
+        },
+        switchAble(direction) {
+            if (direction == 'Right') {
+                this.lastOne = false
+            }
+            if ((direction == 'Right' && this.i == 0) || (this.i == (this.pics.length - 1) && direction == 'Left')) {
+                if (this.i == (this.pics.length - 1) && direction == 'Left') {
+                    this.lastOne = true
+                }
+                return false
+            }
+            return true
+        },
+        onSwipe(e) {
+            if (!this.switchAble(e.direction)) {
+                return
+            }
+            this.x += e.deltaX
+        },
+        imgSwipe(e) {
+            console.log(this.ix)
+            if (this.picWidth / 2 + Math.abs(this.ix + e.deltaX) < (this.picWidth * this.customscale) / 2) {
+                this.ix += e.deltaX
+            }
+            var picHeight = this.picWidth / this.imgRadioArr[this.i]
+            if ((this.screenHeight < this.customscale * picHeight) && (this.screenHeight / 2 + Math.abs(this.iy + e.deltaY) - 40 * this.customscale < picHeight * this.customscale / 2)) {
+                this.iy += e.deltaY
+            }
+        },
+        onPintch(e) {
+            if (((this.picWidth / 2 + Math.abs(this.ix)) < (this.picWidth * (this.customscale + e.customscale) / 2)) && (this.customscale + e.customscale) > 0) {
+                var picHeight = this.picWidth / this.imgRadioArr[this.i]
+                if (((this.customscale + e.customscale) * picHeight < this.screenHeight) || Math.abs(this.iy) - picHeight * this.customscale / 2 < this.screenHeight / 2)
+                    this.iy = 0
+                this.customscale += e.customscale
+            }
+        },
+        afterSwipe(e) {
+            if (!this.switchAble(e.direction))
+                return
+            if (Math.abs(e.distanceX) > this.picWidth / 4) {
+
+                if (e.direction == 'Left') {
+                    this.i++
+                    this.$parent.i++
+                    this.x = -this.picWidth * this.i
+                } else {
+                    this.i--
+                    this.$parent.i--
+                    this.x = -this.picWidth * this.i
+                }
+            } else {
+                this.x = -this.picWidth * this.i
+            }
+            this.isSwitching = true
+            this.tappedImgDescription = this.descriptionImg[this.i]
+        },
+        changeState() {
+            this.isSwitching = false
+        },
+        showMask(e, index) {
+            this.ifTab = true
+            this.tappedImgSrc = this.pics[index]
+            this.picHight = this.picWidth / this.imgRadioArr[index]
+        },
+        hideMask() {
+            this.customscale = 1.0
+            this.ix = 0
+            this.iy = 0
+            if (this.ifTab)
+                this.ifTab = false
+        },
+        initImgRadio(radio, index) {
+            this.imgRadioArr[index] = radio
+            this.picHeight = this.picWidth * 0.75
+            this.tappedImgDescription = this.descriptionImg[this.i]
+        },
+        imgScale() {
+            if (this.customscale > 1.0) {
+                this.customscale = 1.0
+                this.iy = 0
+                this.ix = 0
+                return
+            } else {
+                this.customscale = 2.0
+            }
+        }
+    }
 }
 </script>
 <style lang ="sass" module>

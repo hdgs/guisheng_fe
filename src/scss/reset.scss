@@ -1,19 +1,33 @@
 @import './color.scss';
-html,body{
-	margin:0;
-	padding:0;
-	background-color: $grey;
-	font-size: 16px;
-	font-family: Source Sans Pro, Helvetica, sans-serif, '黑体-简';
-	height:100%;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $grey;
+    font-size: 16px;
+    font-family: Source Sans Pro, Helvetica, sans-serif, '黑体-简';
+    min-height: 100%;
+    position: relative;
 }
-input{
-	outline: none;
-	display: inline-block;
+
+@media (min-width: 500px) {
+    body {
+        width: 400px;
+        margin: 0 auto;
+    }
+    html {
+        background-color: rgba(233, 217, 207, 0.58);
+    }
 }
-a{
-	text-decoration: none;
-	color:black;
+
+input {
+    outline: none;
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 textarea {

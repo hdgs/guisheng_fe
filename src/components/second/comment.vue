@@ -69,6 +69,7 @@ import Modal from './modal'
 export default {
     data() {
             return {
+                phone:true,
                 showComment: false,
                 show: false,
                 clear: false,
@@ -123,7 +124,8 @@ export default {
                 return {
                     height: this.showComment ? '' : '50px',
                     lineHeight: this.showComment ? '' : '50px',
-                    padding: this.showComment ? '12.5px 0' : ''
+                    padding: this.showComment ? '12.5px 0' : '',
+                    width: this.phone ? '':'400px'
                 }
             },
             commit: function () {
@@ -137,6 +139,11 @@ export default {
             blur: Blur,
             iHtml: IHtml,
             clear: Clear
+        },
+        mounted(){
+            console.log(window.screen.availWidth)
+            if(window.screen.availWidth > 500)
+            this.phone = false
         },
         methods: {
             shShare() {
@@ -268,8 +275,10 @@ export default {
 .commentbox {
     position: fixed;
     bottom: 0;
-    left: 0;
+    /* left: 0; */
     width: 100%;
+    /* width:400px; */
+    margin: 0 auto;
     z-index: $Zindex3;
     background-color: #333;
 }
