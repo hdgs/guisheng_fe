@@ -64,7 +64,6 @@ export default {
         },5000)
     },
     computed: {
-        // a computed getter
         styleObject: function() {
             return {
                 transition: this.isSwitching ? '1s' : 'none',
