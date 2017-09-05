@@ -65,7 +65,6 @@ export default {
     computed: {
         // a computed getter
         styleObject: function() {
-            // `this` points to the vm instance
             return {
                 transition: this.isSwitching ? '1s' : 'none',
                 transform: 'translateX(' + this.x + 'px)',
