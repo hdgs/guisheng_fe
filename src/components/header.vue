@@ -226,8 +226,6 @@ export default {
     float: right; 
     margin-right: 26px;
     composes: common;
-    /* composes: horizon from 'sass-loader!../scss/utility.scss'; */
-
     vertical-align:middle;
 }
 
