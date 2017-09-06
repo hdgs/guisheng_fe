@@ -56,7 +56,6 @@ export default {
                 if(value.length == 0)
                     return
                 this.list = this.list.concat(value)
-                console.log(value)
                 if (this.isScroll)
                     this.isScroll = false
             })
