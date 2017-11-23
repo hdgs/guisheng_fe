@@ -1,5 +1,5 @@
 <template>
-    <div id="xxx" :class="$style.app">
+    <div id="xxx" :class="$style.app" :style = "enableScroll">
         <div :class="$style.top">
             <div :class="$style.tab">
                 <router-link to="/" :class="$style.link">首页</router-link>
@@ -54,6 +54,10 @@ import Smodal from './smodal'
 
 export default {
     mounted() {
+        if(window.screen.availWidth > 500){
+            this.phone = false
+            console.log("this.phone = ",this.phone)
+        }
         FETCH.FetchData('/api/v1.0/everydaypic/', 'GET').then(value => {
             this.pic = value
             this.climate_pic = value.climate == 1 ? "#sunny" : value.climate == 2 ? "#cloudy" : "#rain"
@@ -68,7 +72,15 @@ export default {
             this.onShow = false
     },
     components:{
-        "smodal":Smodal
+        "smodal":Smodal,
+    },
+    computed:{
+        enableScroll:function(){
+            return{
+                position:this.showModal?'fixed':'',
+                width:this.phone?'':'400px'
+            }
+        }
     },
     data() {
         return {
@@ -81,7 +93,8 @@ export default {
             word: "晴",
             date: "",
             climate_pic: "#cloudy",
-            showModal:true
+            showModal:true,
+            phone:true
         }
     }
 }

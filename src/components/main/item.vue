@@ -83,7 +83,7 @@ import Map from '../../common/keymap.js'
   overflow: hidden;*/
 }
 .img{
-  width: 49%;
+  width: 45%;
   height: 100%;
   float: right;
 }

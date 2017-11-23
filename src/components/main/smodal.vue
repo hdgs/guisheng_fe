@@ -20,16 +20,22 @@ export default {
         }
     },
     data(){
-        phone:false
+        return{
+            phone:true
+        }
     },
     mounted(){
-        if(window.screen.availWidth > 500)
+        console.log("this.phone",this.phone)
+        console.log("window.screen.availWidth = ",window.screen.availWidth)
+        if(window.screen.availWidth > 500){
             this.phone = false
+            console.log("this.phone = ",this.phone)
+        }
     },
     computed:{
         styleWidth(){
             return{
-                width: this.phone ? '':'400px'
+                width: this.phone ? '100%':'400px'
             }
         }
     }
